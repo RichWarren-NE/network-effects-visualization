@@ -1,14 +1,548 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>timeline-viz</title>
-    <script type="module" crossorigin src="./assets/index-B0sV_qEd.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-BPMdFWOW.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Network Effects — Film Circulation Timeline</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8f9fb;
+    --surface: #ffffff;
+    --border: #e2e6ec;
+    --text-primary: #1a1f2e;
+    --text-secondary: #5a6275;
+    --text-tertiary: #8b93a5;
+    --uk-blue: #1e40af;
+    --blue-light: #dbeafe;
+    --won: #ca8a04;
+    --nominated: #64748b;
+    --mention: #d97706;
+    --screening: #cbd5e1;
+    --highlight: #f59e0b;
+    --circulation-line: rgba(30, 64, 175, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    background: rgba(248, 249, 251, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 100;
+    flex-shrink: 0;
+  }
+
+  .header-brand h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--uk-blue);
+  }
+  .header-brand span {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+  }
+
+  .mode-buttons {
+    display: flex;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .mode-btn {
+    padding: 5px 12px;
+    font-size: 11px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    border: none;
+    background: var(--surface);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+    border-right: 1px solid var(--border);
+  }
+  .mode-btn:last-child { border-right: none; }
+  .mode-btn.active {
+    background: var(--uk-blue);
+    color: white;
+  }
+
+  .search-box {
+    position: relative;
+    flex: 0 1 220px;
+  }
+  .search-box input {
+    width: 100%;
+    padding: 6px 12px 6px 28px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    background: var(--surface);
+    outline: none;
+  }
+  .search-box input:focus { border-color: var(--uk-blue); }
+  .search-box::before {
+    content: '⌕';
+    position: absolute;
+    left: 9px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 13px;
+    color: var(--text-tertiary);
+  }
+
+  .count-display {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    margin-left: auto;
+  }
+
+  .legend {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    color: var(--text-secondary);
+  }
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+
+  .back-link {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .back-link:hover { color: var(--uk-blue); }
+
+  .main-area {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+  }
+
+  .sidebar {
+    width: 280px;
+    border-right: 1px solid var(--border);
+    background: var(--surface);
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+
+  .film-item {
+    padding: 8px 16px;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .film-item:hover { background: var(--blue-light); }
+  .film-item.active { background: var(--blue-light); border-left: 3px solid var(--uk-blue); }
+
+  .film-title {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+  }
+
+  .film-meta {
+    font-size: 10px;
+    color: var(--text-tertiary);
+  }
+
+  .film-count {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--uk-blue);
+    background: var(--blue-light);
+    padding: 2px 7px;
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
+
+  .chart-container {
+    flex: 1;
+    overflow: auto;
+    position: relative;
+  }
+
+  .tooltip {
+    position: fixed;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 12px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    max-width: 260px;
+    z-index: 200;
+  }
+  .tooltip.active { opacity: 1; }
+  .tooltip h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  .tooltip .detail {
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .loading-screen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    z-index: 500;
+    transition: opacity 0.5s;
+  }
+  .loading-screen.hidden { opacity: 0; pointer-events: none; }
+  .loading-screen h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--uk-blue);
+    margin-bottom: 8px;
+  }
+  .loading-screen p { font-size: 13px; color: var(--text-tertiary); }
+  .loading-spinner {
+    width: 32px; height: 32px;
+    border: 2px solid var(--border);
+    border-top-color: var(--uk-blue);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 16px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<div class="loading-screen" id="loading">
+  <div class="loading-spinner"></div>
+  <h2>Network Effects</h2>
+  <p>Loading timeline data…</p>
+</div>
+
+<header>
+  <a href="../" class="back-link">← Network Effects</a>
+  <div class="header-brand">
+    <h1>Film Circulation Timeline</h1>
+    <span>Film journeys through festival networks</span>
+  </div>
+  <div class="controls">
+    <div class="mode-buttons">
+      <button class="mode-btn active" data-mode="top">Most Travelled</button>
+      <button class="mode-btn" data-mode="search">Search</button>
+      <button class="mode-btn" data-mode="awarded">Most Awarded</button>
+    </div>
+    <div class="search-box">
+      <input type="text" id="search" placeholder="Search films…">
+    </div>
+  </div>
+  <span class="count-display" id="count-display"></span>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background: var(--won)"></div> Won</div>
+    <div class="legend-item"><div class="legend-dot" style="background: var(--nominated)"></div> Nominated</div>
+    <div class="legend-item"><div class="legend-dot" style="background: var(--mention)"></div> Mention</div>
+    <div class="legend-item"><div class="legend-dot" style="background: var(--screening)"></div> Screening</div>
+  </div>
+</header>
+
+<div class="main-area">
+  <div class="sidebar" id="sidebar"></div>
+  <div class="chart-container" id="chart-container"></div>
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+(async function() {
+  const tooltip = document.getElementById('tooltip');
+  const loading = document.getElementById('loading');
+  const sidebar = document.getElementById('sidebar');
+  const chartContainer = document.getElementById('chart-container');
+  const searchInput = document.getElementById('search');
+  const countDisplay = document.getElementById('count-display');
+
+  let data;
+  try {
+    const res = await fetch('timeline_data.json');
+    data = await res.json();
+  } catch(e) {
+    loading.querySelector('p').textContent = 'Error loading data.';
+    console.error(e);
+    return;
+  }
+
+  let currentMode = 'top';
+  let selectedFilm = null;
+
+  const statusColor = {
+    'won': 'var(--won)',
+    'nominated': 'var(--nominated)',
+    'special_mention': 'var(--mention)',
+    'honorable_mention': 'var(--mention)',
+    'second_place': 'var(--nominated)',
+    'third_place': 'var(--nominated)',
+    'screening': 'var(--screening)',
+  };
+
+  function getFilmsForMode(mode, search) {
+    let films = [...data.films];
+    if (mode === 'search' && search) {
+      const term = search.toLowerCase();
+      films = films.filter(f =>
+        f.title.toLowerCase().includes(term) ||
+        (f.directors && f.directors.toLowerCase().includes(term)) ||
+        (f.countries && f.countries.toLowerCase().includes(term))
+      );
+    } else if (mode === 'awarded') {
+      films = films.filter(f =>
+        f.screenings.some(s => s.status === 'won' || s.status === 'nominated' || s.status === 'special_mention')
+      );
+      films.sort((a, b) => {
+        const aWins = a.screenings.filter(s => s.status === 'won').length;
+        const bWins = b.screenings.filter(s => s.status === 'won').length;
+        return bWins - aWins || b.festival_count - a.festival_count;
+      });
+    }
+    return films.slice(0, 100);
+  }
+
+  function renderSidebar(films) {
+    sidebar.innerHTML = '';
+    films.forEach((film, i) => {
+      const item = document.createElement('div');
+      item.className = 'film-item' + (selectedFilm === film.title ? ' active' : '');
+      item.innerHTML = `
+        <div>
+          <div class="film-title" title="${film.title}">${film.title}</div>
+          <div class="film-meta">${film.directors || 'Unknown'} · ${film.production_year || '—'} · ${film.countries || ''}</div>
+        </div>
+        <span class="film-count">${film.festival_count}</span>
+      `;
+      item.onclick = () => {
+        selectedFilm = selectedFilm === film.title ? null : film.title;
+        renderSidebar(films);
+        renderChart(films);
+      };
+      sidebar.appendChild(item);
+    });
+    countDisplay.textContent = `${films.length} films`;
+  }
+
+  function renderChart(films) {
+    chartContainer.innerHTML = '';
+
+    const displayFilms = selectedFilm
+      ? films.filter(f => f.title === selectedFilm)
+      : films.slice(0, 50);
+
+    const margin = { top: 40, right: 30, bottom: 40, left: 10 };
+    const rowHeight = selectedFilm ? 60 : 28;
+    const chartWidth = Math.max(chartContainer.clientWidth, 800);
+    const chartHeight = margin.top + margin.bottom + displayFilms.length * rowHeight;
+
+    const svg = d3.select(chartContainer)
+      .append('svg')
+      .attr('width', chartWidth)
+      .attr('height', chartHeight);
+
+    // Year scale
+    const yearExtent = [1998, 2026];
+    const x = d3.scaleLinear()
+      .domain(yearExtent)
+      .range([280, chartWidth - margin.right]);
+
+    // Year axis
+    const years = d3.range(yearExtent[0], yearExtent[1] + 1, 2);
+    const axisG = svg.append('g').attr('transform', `translate(0, ${margin.top - 10})`);
+    axisG.selectAll('text')
+      .data(years)
+      .join('text')
+      .attr('x', d => x(d))
+      .attr('y', 0)
+      .attr('text-anchor', 'middle')
+      .attr('font-size', '9px')
+      .attr('fill', 'var(--text-tertiary)')
+      .attr('font-family', 'DM Sans, sans-serif')
+      .text(d => d);
+
+    // Grid lines
+    svg.append('g')
+      .selectAll('line')
+      .data(years)
+      .join('line')
+      .attr('x1', d => x(d))
+      .attr('x2', d => x(d))
+      .attr('y1', margin.top)
+      .attr('y2', chartHeight - margin.bottom)
+      .attr('stroke', 'var(--border)')
+      .attr('stroke-dasharray', '2,4');
+
+    // Film rows
+    displayFilms.forEach((film, i) => {
+      const y = margin.top + i * rowHeight + rowHeight / 2;
+
+      // Film title label
+      svg.append('text')
+        .attr('x', 16)
+        .attr('y', y + 1)
+        .attr('dominant-baseline', 'middle')
+        .attr('font-size', selectedFilm ? '13px' : '10px')
+        .attr('font-weight', '500')
+        .attr('fill', 'var(--text-primary)')
+        .attr('font-family', 'DM Sans, sans-serif')
+        .text(film.title.length > 35 ? film.title.substring(0, 33) + '…' : film.title);
+
+      // Circulation line (first to last)
+      if (film.screenings.length > 1 && film.first_screening_year && film.last_screening_year) {
+        svg.append('line')
+          .attr('x1', x(film.first_screening_year))
+          .attr('x2', x(film.last_screening_year))
+          .attr('y1', y)
+          .attr('y2', y)
+          .attr('stroke', 'var(--circulation-line)')
+          .attr('stroke-width', selectedFilm ? 3 : 1.5);
+      }
+
+      // Screening markers
+      film.screenings.forEach(s => {
+        if (!s.year) return;
+        const cx = x(s.year);
+        const r = selectedFilm ? 7 : (s.status === 'won' ? 5 : s.status === 'screening' ? 3 : 4);
+
+        const marker = svg.append('circle')
+          .attr('cx', cx)
+          .attr('cy', y)
+          .attr('r', r)
+          .attr('fill', statusColor[s.status] || 'var(--screening)')
+          .attr('stroke', s.status === 'won' ? '#fff' : 'none')
+          .attr('stroke-width', s.status === 'won' ? 1.5 : 0)
+          .attr('opacity', s.status === 'screening' ? 0.6 : 0.9)
+          .style('cursor', 'pointer');
+
+        marker.on('mouseenter', (event) => {
+          marker.transition().duration(100).attr('r', r + 3);
+          tooltip.innerHTML = `
+            <h3>${film.title}</h3>
+            <div class="detail">
+              <strong>${s.festival}</strong><br>
+              ${s.year} · ${s.status}${s.category ? ' · ' + s.category : ''}
+            </div>
+          `;
+          tooltip.classList.add('active');
+        })
+        .on('mousemove', (event) => {
+          tooltip.style.left = (event.clientX + 14) + 'px';
+          tooltip.style.top = (event.clientY - 10) + 'px';
+        })
+        .on('mouseleave', () => {
+          marker.transition().duration(100).attr('r', r);
+          tooltip.classList.remove('active');
+        });
+      });
+
+      // Row separator
+      if (i < displayFilms.length - 1) {
+        svg.append('line')
+          .attr('x1', 0)
+          .attr('x2', chartWidth)
+          .attr('y1', y + rowHeight / 2)
+          .attr('y2', y + rowHeight / 2)
+          .attr('stroke', 'var(--border)')
+          .attr('stroke-width', 0.5)
+          .attr('opacity', 0.5);
+      }
+    });
+  }
+
+  function update() {
+    const films = getFilmsForMode(currentMode, searchInput.value);
+    renderSidebar(films);
+    renderChart(films);
+  }
+
+  // Mode buttons
+  document.querySelectorAll('.mode-btn').forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentMode = btn.dataset.mode;
+      selectedFilm = null;
+      update();
+    };
+  });
+
+  searchInput.oninput = () => {
+    if (searchInput.value) {
+      currentMode = 'search';
+      document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+      document.querySelector('[data-mode="search"]').classList.add('active');
+    }
+    selectedFilm = null;
+    update();
+  };
+
+  // Initial render
+  update();
+
+  // Handle resize
+  window.addEventListener('resize', () => {
+    const films = getFilmsForMode(currentMode, searchInput.value);
+    renderChart(films);
+  });
+
+  setTimeout(() => loading.classList.add('hidden'), 500);
+})();
+</script>
+</body>
 </html>

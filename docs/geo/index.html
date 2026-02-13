@@ -1,14 +1,548 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="./vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>geo-viz</title>
-    <script type="module" crossorigin src="./assets/index-CjHmZAHd.js"></script>
-    <link rel="stylesheet" crossorigin href="./assets/index-O8Mqgg_V.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Network Effects — Geographic Mobility</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8f9fb;
+    --surface: #ffffff;
+    --border: #e2e6ec;
+    --text-primary: #1a1f2e;
+    --text-secondary: #5a6275;
+    --text-tertiary: #8b93a5;
+    --uk-blue: #1e40af;
+    --blue-1: #dbeafe;
+    --blue-2: #93c5fd;
+    --blue-3: #3b82f6;
+    --blue-4: #1e40af;
+    --land-default: #f0f2f5;
+    --land-stroke: #dde1e8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    background: rgba(248,249,251,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 100;
+    flex-shrink: 0;
+  }
+
+  .header-brand h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--uk-blue);
+  }
+  .header-brand span {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .mode-buttons {
+    display: flex;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .mode-btn {
+    padding: 5px 12px;
+    font-size: 11px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    border: none;
+    background: var(--surface);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+    border-right: 1px solid var(--border);
+  }
+  .mode-btn:last-child { border-right: none; }
+  .mode-btn.active { background: var(--uk-blue); color: white; }
+
+  .back-link {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .back-link:hover { color: var(--uk-blue); }
+
+  .legend-bar {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+    font-size: 10px;
+    color: var(--text-tertiary);
+  }
+  .legend-bar .swatch {
+    width: 16px;
+    height: 10px;
+    border-radius: 2px;
+  }
+
+  #map-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+
+  svg { width: 100%; height: 100%; }
+
+  .tooltip {
+    position: fixed;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 12px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    max-width: 280px;
+    z-index: 200;
+  }
+  .tooltip.active { opacity: 1; }
+  .tooltip h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  .tooltip .stat {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 0;
+    color: var(--text-secondary);
+  }
+  .tooltip .stat strong { color: var(--text-primary); font-weight: 500; }
+
+  .stats-panel {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    z-index: 100;
+    min-width: 220px;
+  }
+  .stats-panel h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 13px;
+    color: var(--uk-blue);
+    margin-bottom: 8px;
+  }
+  .stats-panel .stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 3px 0;
+    font-size: 11px;
+    color: var(--text-secondary);
+  }
+  .stats-panel .stat-row strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .top-countries {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    z-index: 100;
+    min-width: 240px;
+  }
+  .top-countries h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 13px;
+    color: var(--uk-blue);
+    margin-bottom: 8px;
+  }
+  .country-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+    font-size: 11px;
+  }
+  .country-bar .name {
+    width: 120px;
+    color: var(--text-secondary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .country-bar .bar {
+    flex: 1;
+    height: 6px;
+    background: var(--blue-1);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .country-bar .bar-fill {
+    height: 100%;
+    background: var(--uk-blue);
+    border-radius: 3px;
+    transition: width 0.4s;
+  }
+  .country-bar .value {
+    font-weight: 600;
+    color: var(--text-primary);
+    min-width: 28px;
+    text-align: right;
+  }
+
+  .loading-screen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg);
+    z-index: 500;
+    transition: opacity 0.5s;
+  }
+  .loading-screen.hidden { opacity: 0; pointer-events: none; }
+  .loading-screen h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: var(--uk-blue);
+    margin-bottom: 8px;
+  }
+  .loading-screen p { font-size: 13px; color: var(--text-tertiary); }
+  .loading-spinner {
+    width: 32px; height: 32px;
+    border: 2px solid var(--border);
+    border-top-color: var(--uk-blue);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 16px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<div class="loading-screen" id="loading">
+  <div class="loading-spinner"></div>
+  <h2>Network Effects</h2>
+  <p>Loading geographic data…</p>
+</div>
+
+<header>
+  <a href="../" class="back-link">← Network Effects</a>
+  <div class="header-brand">
+    <h1>Geographic Mobility</h1>
+    <span>Film production & screening across 80 countries</span>
+  </div>
+  <div class="mode-buttons">
+    <button class="mode-btn active" data-mode="production">Production</button>
+    <button class="mode-btn" data-mode="screening">Screening</button>
+    <button class="mode-btn" data-mode="flows">Mobility Flows</button>
+  </div>
+  <div class="legend-bar">
+    <span>Low</span>
+    <div class="swatch" style="background: var(--blue-1)"></div>
+    <div class="swatch" style="background: var(--blue-2)"></div>
+    <div class="swatch" style="background: var(--blue-3)"></div>
+    <div class="swatch" style="background: var(--blue-4)"></div>
+    <span>High</span>
+  </div>
+</header>
+
+<div id="map-container"></div>
+<div class="tooltip" id="tooltip"></div>
+<div class="stats-panel" id="stats-panel"></div>
+<div class="top-countries" id="top-countries"></div>
+
+<script>
+(async function() {
+  const tooltip = document.getElementById('tooltip');
+  const loading = document.getElementById('loading');
+  const statsPanel = document.getElementById('stats-panel');
+  const topCountries = document.getElementById('top-countries');
+
+  // Load data
+  let geoData, world;
+  try {
+    const [geoRes, worldRes] = await Promise.all([
+      fetch('geo_data.json'),
+      fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+    ]);
+    geoData = await geoRes.json();
+    world = await worldRes.json();
+  } catch(e) {
+    loading.querySelector('p').textContent = 'Error loading data.';
+    console.error(e);
+    return;
+  }
+
+  const countries = topojson.feature(world, world.objects.countries);
+
+  // Country name mapping (from Natural Earth IDs)
+  // We'll use a reverse lookup from the TopoJSON
+  const countryNameById = {};
+  const countryIdByName = {};
+
+  // Common name mappings for matching our data to TopoJSON
+  const nameAliases = {
+    'United States': ['United States of America'],
+    'United Kingdom': ['England', 'Scotland', 'Wales', 'Northern Ireland'],
+    'South Korea': ['Korea, Republic of', 'Republic of Korea'],
+    'Czech Republic': ['Czechia'],
+    'Russia': ['Russian Federation'],
+    'Taiwan': ['Chinese Taipei'],
+    'Iran': ['Iran, Islamic Republic of'],
+    'Syria': ['Syrian Arab Republic'],
+    'Vietnam': ['Viet Nam'],
+    'Bosnia and Herzegovina': ['Bosnia & Herzegovina'],
+  };
+
+  const width = window.innerWidth;
+  const height = window.innerHeight - 60;
+
+  const svg = d3.select('#map-container')
+    .append('svg')
+    .attr('width', width)
+    .attr('height', height);
+
+  const g = svg.append('g');
+
+  // Projection centered on Europe (UK-centric)
+  const projection = d3.geoNaturalEarth1()
+    .scale(width / 5.5)
+    .translate([width / 2.2, height / 1.8]);
+
+  const path = d3.geoPath(projection);
+
+  // Zoom
+  const zoom = d3.zoom()
+    .scaleExtent([0.5, 12])
+    .on('zoom', (e) => g.attr('transform', e.transform));
+  svg.call(zoom);
+
+  // Color scales
+  const colorScale = d3.scaleThreshold()
+    .domain([1, 6, 21, 51])
+    .range(['var(--land-default)', '#dbeafe', '#93c5fd', '#3b82f6', '#1e40af']);
+
+  let currentMode = 'production';
+
+  function getCountryValue(name) {
+    if (currentMode === 'production') {
+      return geoData.production[name] || 0;
+    } else if (currentMode === 'screening') {
+      return geoData.screening[name] || 0;
+    }
+    return 0;
+  }
+
+  function matchCountryName(topoName) {
+    // Direct match
+    if (geoData.production[topoName] !== undefined || geoData.screening[topoName] !== undefined) {
+      return topoName;
+    }
+    // Check aliases
+    for (const [ourName, aliases] of Object.entries(nameAliases)) {
+      if (aliases.includes(topoName) || topoName === ourName) return ourName;
+    }
+    // Fuzzy match
+    const allNames = [...Object.keys(geoData.production), ...Object.keys(geoData.screening)];
+    for (const name of allNames) {
+      if (topoName.includes(name) || name.includes(topoName)) return name;
+    }
+    return topoName;
+  }
+
+  function render() {
+    g.selectAll('*').remove();
+
+    // Draw countries
+    const countryPaths = g.append('g')
+      .selectAll('path')
+      .data(countries.features)
+      .join('path')
+      .attr('d', path)
+      .attr('stroke', 'var(--land-stroke)')
+      .attr('stroke-width', 0.5)
+      .each(function(d) {
+        const name = matchCountryName(d.properties.name);
+        d._matchedName = name;
+        d._value = getCountryValue(name);
+      })
+      .attr('fill', d => {
+        if (d._value === 0) return 'var(--land-default)';
+        if (d._value <= 5) return '#dbeafe';
+        if (d._value <= 20) return '#93c5fd';
+        if (d._value <= 50) return '#3b82f6';
+        return '#1e40af';
+      })
+      .style('cursor', 'pointer')
+      .on('mouseenter', function(event, d) {
+        d3.select(this).attr('stroke', 'var(--uk-blue)').attr('stroke-width', 2);
+        if (d._value > 0) {
+          const label = currentMode === 'production' ? 'Films produced' : 'Screenings';
+          tooltip.innerHTML = `
+            <h3>${d._matchedName}</h3>
+            <div class="stat"><span>${label}</span><strong>${d._value}</strong></div>
+          `;
+          tooltip.classList.add('active');
+        }
+      })
+      .on('mousemove', (event) => {
+        tooltip.style.left = (event.clientX + 14) + 'px';
+        tooltip.style.top = (event.clientY - 10) + 'px';
+      })
+      .on('mouseleave', function() {
+        d3.select(this).attr('stroke', 'var(--land-stroke)').attr('stroke-width', 0.5);
+        tooltip.classList.remove('active');
+      });
+
+    // Flow arcs (for flows mode)
+    if (currentMode === 'flows') {
+      const topFlows = geoData.flows.slice(0, 50);
+      const maxFlow = d3.max(topFlows, d => d.film_count) || 1;
+
+      // We need country centroids - approximate from data
+      const countryCentroids = {};
+      countries.features.forEach(f => {
+        const centroid = path.centroid(f);
+        if (centroid[0] && centroid[1]) {
+          const name = matchCountryName(f.properties.name);
+          countryCentroids[name] = centroid;
+        }
+      });
+
+      const flowG = g.append('g');
+      topFlows.forEach(flow => {
+        const src = countryCentroids[flow.source_country];
+        const tgt = countryCentroids[flow.target_country];
+        if (!src || !tgt) return;
+
+        const midX = (src[0] + tgt[0]) / 2;
+        const midY = (src[1] + tgt[1]) / 2 - 30;
+
+        flowG.append('path')
+          .attr('d', `M ${src[0]} ${src[1]} Q ${midX} ${midY} ${tgt[0]} ${tgt[1]}`)
+          .attr('fill', 'none')
+          .attr('stroke', 'rgba(30, 64, 175, 0.25)')
+          .attr('stroke-width', Math.max(1, (flow.film_count / maxFlow) * 4))
+          .attr('opacity', 0.6)
+          .style('cursor', 'pointer')
+          .on('mouseenter', function(event) {
+            d3.select(this).attr('stroke', 'rgba(30, 64, 175, 0.7)').attr('opacity', 1);
+            tooltip.innerHTML = `
+              <h3>${flow.source_country} → ${flow.target_country}</h3>
+              <div class="stat"><span>Films travelling</span><strong>${flow.film_count}</strong></div>
+            `;
+            tooltip.classList.add('active');
+          })
+          .on('mousemove', (event) => {
+            tooltip.style.left = (event.clientX + 14) + 'px';
+            tooltip.style.top = (event.clientY - 10) + 'px';
+          })
+          .on('mouseleave', function() {
+            d3.select(this).attr('stroke', 'rgba(30, 64, 175, 0.25)').attr('opacity', 0.6);
+            tooltip.classList.remove('active');
+          });
+      });
+    }
+
+    // Update stats
+    updateStats();
+    updateTopCountries();
+  }
+
+  function updateStats() {
+    const meta = geoData.metadata;
+    const label = currentMode === 'flows' ? 'Mobility Flows' :
+                  currentMode === 'production' ? 'Film Production' : 'Festival Screenings';
+
+    statsPanel.innerHTML = `
+      <h3>${label}</h3>
+      <div class="stat-row"><span>Production countries</span><strong>${meta.production_countries}</strong></div>
+      <div class="stat-row"><span>Screening countries</span><strong>${meta.screening_countries}</strong></div>
+      <div class="stat-row"><span>Festivals mapped</span><strong>${meta.mapped_festivals} / ${meta.mapped_festivals + meta.unmapped_festivals}</strong></div>
+      <div class="stat-row"><span>Mobility routes</span><strong>${meta.total_flows}</strong></div>
+    `;
+  }
+
+  function updateTopCountries() {
+    const source = currentMode === 'screening' ? geoData.screening : geoData.production;
+    const sorted = Object.entries(source).sort((a, b) => b[1] - a[1]).slice(0, 10);
+    const max = sorted[0] ? sorted[0][1] : 1;
+    const label = currentMode === 'screening' ? 'Top Screening Countries' : 'Top Production Countries';
+
+    if (currentMode === 'flows') {
+      // Show top flows instead
+      const topFlows = geoData.flows.slice(0, 8);
+      const fMax = topFlows[0] ? topFlows[0].film_count : 1;
+      topCountries.innerHTML = `<h3>Top Mobility Routes</h3>` +
+        topFlows.map(f => `
+          <div class="country-bar">
+            <span class="name">${f.source_country} → ${f.target_country}</span>
+            <div class="bar"><div class="bar-fill" style="width: ${(f.film_count / fMax) * 100}%"></div></div>
+            <span class="value">${f.film_count}</span>
+          </div>
+        `).join('');
+      return;
+    }
+
+    topCountries.innerHTML = `<h3>${label}</h3>` +
+      sorted.map(([name, count]) => `
+        <div class="country-bar">
+          <span class="name">${name}</span>
+          <div class="bar"><div class="bar-fill" style="width: ${(count / max) * 100}%"></div></div>
+          <span class="value">${count}</span>
+        </div>
+      `).join('');
+  }
+
+  // Mode buttons
+  document.querySelectorAll('.mode-btn').forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentMode = btn.dataset.mode;
+      render();
+    };
+  });
+
+  render();
+  setTimeout(() => loading.classList.add('hidden'), 500);
+})();
+</script>
+</body>
 </html>

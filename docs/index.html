@@ -1,242 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Network Effects: Film Mobility Visualization Tool</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Network Effects — Film Mobility Visualization Tool</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8f9fb;
+    --surface: #ffffff;
+    --border: #e2e6ec;
+    --text-primary: #1a1f2e;
+    --text-secondary: #5a6275;
+    --text-tertiary: #8b93a5;
+    --uk-blue: #1e40af;
+    --blue-light: #dbeafe;
+    --blue-mid: #60a5fa;
+  }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: #f8f9fa;
-            color: #2c3e50;
-            line-height: 1.6;
-        }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        .container {
-            max-width: 960px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+  }
 
-        header {
-            text-align: center;
-            padding: 3rem 0 2rem;
-            border-bottom: 2px solid #e9ecef;
-            margin-bottom: 2rem;
-        }
+  .container {
+    max-width: 720px;
+    width: 100%;
+  }
 
-        h1 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #1a1a2e;
-            margin-bottom: 0.75rem;
-        }
+  .brand {
+    text-align: center;
+    margin-bottom: 48px;
+  }
 
-        .subtitle {
-            font-size: 1.1rem;
-            color: #6c757d;
-            max-width: 640px;
-            margin: 0 auto;
-        }
+  .brand h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: var(--uk-blue);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
 
-        .viz-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
+  .brand .subtitle {
+    font-size: 15px;
+    color: var(--text-secondary);
+    font-weight: 300;
+    line-height: 1.6;
+  }
 
-        .viz-card {
-            background: #fff;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 1.75rem;
-            transition: box-shadow 0.2s, transform 0.2s;
-        }
+  .stats-row {
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    margin: 24px 0 40px;
+  }
 
-        .viz-card:hover {
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transform: translateY(-2px);
-        }
+  .stat-item {
+    text-align: center;
+  }
 
-        .viz-card h2 {
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-            color: #1a1a2e;
-        }
+  .stat-item .number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--uk-blue);
+  }
 
-        .viz-card p {
-            font-size: 0.95rem;
-            color: #6c757d;
-            margin-bottom: 1.25rem;
-        }
+  .stat-item .label {
+    font-size: 11px;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
 
-        .viz-card .tech {
-            font-size: 0.8rem;
-            color: #adb5bd;
-            margin-bottom: 1rem;
-        }
+  .viz-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 48px;
+  }
 
-        .viz-link {
-            display: inline-block;
-            padding: 0.5rem 1.25rem;
-            background: #2c3e50;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            transition: background 0.2s;
-        }
+  .viz-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 24px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.25s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 
-        .viz-link:hover {
-            background: #1a252f;
-        }
+  .viz-card:hover {
+    border-color: var(--uk-blue);
+    box-shadow: 0 8px 30px rgba(30, 64, 175, 0.08);
+    transform: translateY(-2px);
+  }
 
-        .viz-link.disabled {
-            background: #adb5bd;
-            cursor: default;
-        }
+  .viz-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    background: var(--blue-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    font-size: 24px;
+  }
 
-        .stats {
-            background: #fff;
-            border: 1px solid #e9ecef;
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-        }
+  .viz-card h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+  }
 
-        .stats h3 {
-            font-size: 1rem;
-            margin-bottom: 1rem;
-            color: #1a1a2e;
-        }
+  .viz-card p {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
 
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 1rem;
-            text-align: center;
-        }
+  .viz-card .arrow {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--uk-blue);
+    font-weight: 500;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
 
-        .stat-item .number {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #2c3e50;
-        }
+  .viz-card:hover .arrow { opacity: 1; }
 
-        .stat-item .label {
-            font-size: 0.8rem;
-            color: #6c757d;
-        }
+  footer {
+    text-align: center;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+    width: 100%;
+    max-width: 720px;
+  }
 
-        footer {
-            text-align: center;
-            padding: 2rem 0;
-            border-top: 2px solid #e9ecef;
-            margin-top: 2rem;
-            color: #6c757d;
-            font-size: 0.85rem;
-        }
+  footer p {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    line-height: 1.8;
+  }
 
-        footer a {
-            color: #2c3e50;
-            text-decoration: none;
-        }
+  footer a {
+    color: var(--uk-blue);
+    text-decoration: none;
+  }
+  footer a:hover { text-decoration: underline; }
 
-        footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
+  .methodology-note {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .methodology-note strong {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  @media (max-width: 640px) {
+    .viz-cards { grid-template-columns: 1fr; }
+    .stats-row { gap: 20px; }
+    .brand h1 { font-size: 28px; }
+  }
+</style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Network Effects: Film Mobility Visualization Tool</h1>
-            <p class="subtitle">
-                Mapping how short films circulate through international festival networks.
-                An interactive research tool for understanding festival programming patterns,
-                geographic mobility, and community structures.
-            </p>
-        </header>
 
-        <div class="viz-grid">
-            <div class="viz-card">
-                <h2>Network Graph</h2>
-                <p>
-                    Interactive force-directed graph showing connections between 271 festivals
-                    based on shared programming. Explore community clusters, festival tiers,
-                    and genre circuits.
-                </p>
-                <div class="tech">React + D3.js</div>
-                <a href="./network/" class="viz-link">Open Network Graph</a>
-            </div>
+<div class="container">
+  <div class="brand">
+    <h1>Network Effects</h1>
+    <p class="subtitle">Mapping how short films circulate through international festival networks</p>
+  </div>
 
-            <div class="viz-card">
-                <h2>Film Circulation Timeline</h2>
-                <p>
-                    Track how individual films move through the festival circuit over time.
-                    Filter by genre, year, and production country to reveal circulation
-                    patterns and duration trends.
-                </p>
-                <div class="tech">React + D3.js</div>
-                <a href="./timeline/" class="viz-link">Open Timeline</a>
-            </div>
-
-            <div class="viz-card">
-                <h2>Geographic Mobility</h2>
-                <p>
-                    Heat maps and flow diagrams showing how films travel between production
-                    countries and screening locations. Visualise international reach and
-                    regional circulation patterns.
-                </p>
-                <div class="tech">React + Plotly.js</div>
-                <a href="./geo/" class="viz-link">Open Geographic Map</a>
-            </div>
-        </div>
-
-        <div class="stats">
-            <h3>Dataset Overview</h3>
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="number">754</div>
-                    <div class="label">Films</div>
-                </div>
-                <div class="stat-item">
-                    <div class="number">393</div>
-                    <div class="label">Festivals</div>
-                </div>
-                <div class="stat-item">
-                    <div class="number">4,445</div>
-                    <div class="label">Screenings</div>
-                </div>
-                <div class="stat-item">
-                    <div class="number">80</div>
-                    <div class="label">Countries</div>
-                </div>
-                <div class="stat-item">
-                    <div class="number">813</div>
-                    <div class="label">Directors</div>
-                </div>
-                <div class="stat-item">
-                    <div class="number">1998&ndash;2026</div>
-                    <div class="label">Date Range</div>
-                </div>
-            </div>
-        </div>
-
-        <footer>
-            <p>
-                Network Effects Research Project |
-                <a href="mailto:r.warren@bathspa.ac.uk">Rich Warren</a> |
-                Bath Spa University | 2025
-            </p>
-        </footer>
+  <div class="stats-row">
+    <div class="stat-item">
+      <div class="number">749</div>
+      <div class="label">Films</div>
     </div>
+    <div class="stat-item">
+      <div class="number">393</div>
+      <div class="label">Festivals</div>
+    </div>
+    <div class="stat-item">
+      <div class="number">4,445</div>
+      <div class="label">Screenings</div>
+    </div>
+    <div class="stat-item">
+      <div class="number">80</div>
+      <div class="label">Countries</div>
+    </div>
+  </div>
+
+  <div class="viz-cards">
+    <a href="network/" class="viz-card">
+      <div class="viz-icon">⬡</div>
+      <h2>Festival Network</h2>
+      <p>Force-directed graph showing how festivals connect through shared programming. Explore subcircuits and clustering patterns.</p>
+      <span class="arrow">Explore →</span>
+    </a>
+    <a href="timeline/" class="viz-card">
+      <div class="viz-icon">⏤</div>
+      <h2>Film Timelines</h2>
+      <p>Track individual films as they travel through festival circuits over time. See circulation duration and award patterns.</p>
+      <span class="arrow">Explore →</span>
+    </a>
+    <a href="geo/" class="viz-card">
+      <div class="viz-icon">◉</div>
+      <h2>Geographic Mobility</h2>
+      <p>Visualise where films are produced and screened, with mobility flow maps showing international circulation routes.</p>
+      <span class="arrow">Explore →</span>
+    </a>
+  </div>
+
+  <div class="methodology-note">
+    <strong>About this tool:</strong> Built as part of the Network Effects research project examining film festival networks as talent development pathways. Data sourced from Encounters Film Festival (Bristol) via Miralot, spanning 1998–2026. Analysis follows the subcircuit methodology developed by Loist &amp; Samoilova (2023).
+  </div>
+
+  <footer>
+    <p>
+      Network Effects Research Project<br>
+      <a href="https://www.bathspa.ac.uk" target="_blank">Bath Spa University</a> · School of Art, Film and Media<br>
+      Rich Warren · 2025–2026<br>
+      <br>
+      <em>Work in progress — feedback welcome</em>
+    </p>
+  </footer>
+</div>
+
 </body>
 </html>
