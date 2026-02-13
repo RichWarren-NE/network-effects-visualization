@@ -1,0 +1,755 @@
+film_id,title,production_year,directors,countries,country_codes,genres,total_festivals,total_screenings,awards_won,nominations,mentions,first_screening_year,last_screening_year,circulation_span_years
+f91f63fd-1c16-4e30-9301-67d3b36ee734,The Favourite,2018,Yorgos Lanthimos,"Ireland, United Kingdom","GB, IE","Biography, Drama, History, LGBTQ+",47,135,51,59,0,2018,2020,2
+773e9016-4c93-43ec-9744-1e8b9a530057,Ice Merchants,2022,João Gonzalez,"France, United Kingdom","FR, GB","Animation, Short",36,39,9,2,3,2022,2024,2
+e996fe27-a54e-4fb6-941f-590b19064298,Neon Phantom,2021,Leonardo Martinelli,Brazil,BR,"Musical, Short",34,36,5,0,0,2021,2025,4
+10f46246-589e-4474-8262-c0d0ccd60a1c,Hardly Working,2022,"Leonhard Müllner, Michael Stumpf, Robin Klengel, Susanna Flock",Austria,AT,Short,31,35,1,0,0,2022,2026,4
+8b6e9f05-797a-4d76-a3d4-527019c92dcb,Warsha,2022,Dania Bdeir,"France, Lebanon","FR, LB","Drama, LGBTQ+, Short",31,33,5,0,1,2022,2025,3
+7368416a-3a3f-4818-8287-163a288ed976,Lesbian Space Princess,2025,"Emma Hough Hobbs, Leela Varghese",Australia,AU,"Animation, Comedy, Fantasy, LGBTQ+, Romance, Sci-Fi",30,31,4,0,1,2025,2026,1
+67795a6d-7e73-4113-95c5-7488dfe13fa9,Razeh-del,2024,Maryam Tafakory,"Iran, United Kingdom","GB, IR",Short,30,30,6,0,0,2024,2026,2
+7a451b72-c33e-4606-aedd-f254cc9a8770,Dustin,2020,Naïla Guiguet,France,FR,"Drama, LGBTQ+, Short",29,30,3,0,0,2020,2022,2
+46d638cc-28e6-4ff6-bbfe-01b324f3f5ac,Flores del otro patio,2022,Jorge Cadena,"Colombia, Switzerland","CH, CO","LGBTQ+, Short",28,30,0,1,0,2022,2025,3
+e65b71e7-9205-4b60-bae2-5ce8c695fbfb,Mast-Del,2023,Maryam Tafakory,"Iran, United Kingdom","GB, IR",Short,27,29,2,2,1,2023,2025,2
+7822e3da-4af3-465d-90d5-2cdcdd45f278,Nimic,2019,Yorgos Lanthimos,"Germany, United States","DE, US","Drama, Short",27,27,0,0,0,2019,2024,5
+b482da52-eafa-41ae-9b5f-4f12872d11ed,Percebes,2024,"Alexandra Ramires, Laura Gonçalves","France, Portugal","FR, PT","Animation, Short",27,28,2,0,1,2024,2025,1
+f746f9e1-2739-400c-84de-2d7aa410a343,"Love, Dad",2021,Diana Cam Van Nguyen,"Czechia, Slovakia","CZ, SK","Animation, Documentary, Short",26,28,6,1,0,2021,2024,3
+6449ff53-ce50-4deb-b51a-504933ecea28,Hurikán,2024,Jan Saska,"Czechia, France","CZ, FR","Animation, Short",24,24,1,0,0,2024,2026,2
+e3f65e51-db8a-4af6-b68a-762dd0285cb9,I Promise You Paradise,2023,Mostafa Morad,"France, Qatar","FR, QA","Drama, Short",24,24,1,1,0,2023,2024,1
+edef7d5c-2fbf-4fce-a5c7-e589ae2ede4a,Anxious Body,2021,Yoriko Mizushiri,"France, Japan","FR, JP","Animation, Short",23,23,2,0,1,2021,2025,4
+fa96324e-735c-417a-a2e3-2e4f846c4941,Train Again,2021,Peter Tscherkassky,Austria,AT,"Avant-Garde, Documentary, Short",23,23,1,0,0,2021,2023,2
+03becf3b-128a-4187-b780-9af1e3861be7,Zoon,2022,Jonatan Schwenk,Germany,DE,"Animation, Short",23,24,2,0,1,2022,2024,2
+940d9351-58f0-4811-9d9d-17069353c989,Backflip,2022,Nikita Diakur,"France, Germany","DE, FR","Animation, Short",22,25,3,0,0,2022,2026,4
+a0489a80-262a-44e7-be84-7655c95db788,Steakhouse,2021,Špela Čadež,"Germany, Slovenia","DE, SI","Animation, Short",22,23,2,0,4,2021,2024,3
+ca6c16c6-8065-4cfe-a369-f6be1ee6ab04,The Orphan,2018,Carolina Markowicz,Brazil,BR,"Drama, LGBTQ+, Short",22,23,5,0,2,2018,2019,1
+0f241cb2-2d43-4a19-bc17-bdbaa6c1d4b8,Two Black Boys in Paradise,2025,Baz Sells,United Kingdom,GB,"Animation, LGBTQ+, Short",22,22,1,2,1,2025,2026,1
+82b552a9-543c-49e3-b42b-5212c185080a,"The Flowers Stand, Silently Witnessing",2024,Theo Panagopoulos,United Kingdom,GB,"Documentary, Short",21,21,2,2,0,2024,2026,2
+bd00996b-300d-4a29-810d-1923b0a49c8f,Watermelon Juice,2019,Irene Moray,Spain,ES,Short,21,21,3,1,0,2019,2020,1
+2dce79a3-8699-4be9-a849-97e07056276f,45th Parallel,2022,Lawrence Abu Hamdan,United Kingdom,GB,Short,20,21,0,0,0,2022,2025,3
+4f27dc26-f334-44f1-ab81-ca86d3dd4fd0,Being John Smith,2024,John Smith,United Kingdom,GB,"Avant-Garde, Short",20,20,1,1,0,2024,2026,2
+c6198f75-aaa3-4c71-847b-fd8ed97cc489,I Am Afraid to Forget Your Face,2020,Sameh Alaa,"Belgium, Qatar","BE, QA","Drama, Short",20,20,2,0,1,2020,2025,5
+853dc27f-1794-4d47-ad63-8638b833bdcb,Maalbeek,2020,Ismaël Joffroy-Chandoutis,France,FR,"Animation, Documentary, Short",20,22,6,0,0,2020,2023,3
+e974e464-9c17-4a35-b8bb-fd47749a0699,Nazarbazi,2022,Maryam Tafakory,"Iran, United Kingdom","GB, IR","Avant-Garde, Short",20,20,2,0,0,2022,2025,3
+8d6348b5-857a-4bee-bcbb-3a46d4504e7f,Affairs of the Art,2021,Joanna Quinn,"Canada, United Kingdom","CA, GB","Animation, Short",19,25,5,3,1,2021,2025,4
+6b6bff80-9103-4dd4-8cac-78997ccb6928,Dildotectonics,2023,Paula Tomás Marques,Portugal,PT,Short,19,19,1,0,1,2023,2024,1
+fe642aa9-a00c-4774-97a9-256044054646,God is Shy,2025,Jocelyn Charles,France,FR,"Animation, Short",19,19,0,0,0,2025,2026,1
+4a23dc51-2613-496e-8b8d-b6c2d069b303,Granny's Sexual Life,2021,"Emilie Pigeard, Urška Djukic","France, Slovenia","FR, SI","Animation, Short",19,21,3,0,0,2021,2026,5
+5984f117-3410-4c4d-82da-1cfbda836870,Majonezë,2024,Giulia Grandinetti,Italy,IT,"Drama, Short",19,19,4,2,0,2024,2025,1
+15812353-46c8-43f0-83ab-ece93d88616e,Cherries,2022,Vytautas Katkus,Lithuania,LT,"Drama, Short",18,19,0,0,0,2022,2025,3
+67c62334-244c-4175-b7bb-4c5b0acfc801,Retirement Plan,2024,John Kelly,Ireland,IE,"Animation, Short",18,19,3,2,1,2024,2026,2
+c3e00363-1de2-4d59-9738-dc6c35611709,Sierra,2022,Sander Joon,Estonia,EE,"Animation, Short",18,19,3,0,0,2022,2024,2
+80760e45-ff15-4c39-b565-59d16f7c81d0,Al-Sit,2020,Suzannah Mirghani,"Qatar, Sudan","QA, SD",Short,17,17,2,1,1,2021,2024,3
+e65b3c7d-37fd-46c4-b84a-32f665740c18,David,2020,Zach Woods,United States,US,Short,17,17,0,0,0,2020,2021,1
+1140475c-fd9f-45a3-be6a-2e69a04bcd52,Hideous,2022,Yann Gonzalez,United Kingdom,GB,"Avant-Garde, Drama, Horror, LGBTQ+, Music, Short",17,18,1,1,0,2022,2025,3
+b2cbf93c-b30d-4e7a-8590-d54bd8a266a7,Sixty-Seven Milliseconds,2025,"Antoine Fontaine, Galdric Fleury",France,FR,Short,17,17,0,0,0,2025,2025,0
+d37c6fec-0f5c-4e4f-ac30-3c9355ab695b,Soft Animals,2021,Renee Zhan,United Kingdom,GB,"Animation, Short",17,18,0,0,0,2021,2022,1
+842cb024-a139-4969-87ac-4602cb05b254,"Souvenir, souvenir",2020,Bastien Dubois,France,FR,"Animation, Short",17,17,3,0,0,2020,2022,2
+db3912c0-330b-4d21-a10a-a2678ad6a37d,Swatted,2018,Ismaël Joffroy-Chandoutis,France,FR,"Animation, Documentary, Short",17,17,2,0,1,2018,2022,4
+76af6533-3dcf-4b85-8691-1162206a8c52,The Christmas Gift,2018,Bogdan Muresanu,Romania,RO,"Drama, Short",17,17,5,0,0,2018,2025,7
+904f28bf-393e-4219-b4c9-a6c4371e5612,"Brutalia, Days of Labour",2021,Manolis Mavris,"Belgium, Greece","BE, GR",Short,16,17,5,0,0,2021,2022,1
+b0f9b6df-7b57-4166-87a1-165dcec03b6c,Curupira and the Machine of the Destiny,2021,Janaina Wagner,"Brazil, France","BR, FR","Documentary, Short",16,17,3,0,0,2022,2025,3
+7b81cb9d-fc7f-4217-bfdc-de2ee50ce093,Daughter,2019,Daria Kashcheeva,Czechia,CZ,"Animation, Short",16,16,8,1,0,2019,2025,6
+56f5ae6f-ccc7-4136-ad2c-b1fe08c12c0f,Genealogy of Violence,2024,Mohamed Bourouissa,France,FR,Short,16,16,0,0,0,2024,2025,1
+6b5d69ce-1224-42ca-b99c-35b0cc927b06,Knives and Skin,2019,Jennifer Reeder,United States,US,"Drama, Horror, Mystery",16,16,0,0,1,2019,2020,1
+12b41e24-bcc6-4ad2-9af3-4005be43ef2e,Like the Ones I Used to Know,2021,Annie St-Pierre,Canada,CA,Short,16,18,5,1,2,2021,2022,1
+8250265d-96c4-45e7-a4fb-2b83b1713f7d,Patision Avenue,2018,Thanasis Neofotistos,Greece,GR,"Drama, Short",16,18,2,0,0,2018,2022,4
+8d830892-de64-4107-b2f5-c27ebba2743c,Pipes,2022,"Jessica Meier, Kilian Feusi, Sujanth Ravichandran",Switzerland,CH,"Animation, LGBTQ+, Short",16,16,0,0,0,2022,2024,2
+113ab917-0d8b-4802-900d-77f8a24bd5ff,Snow Bear,2025,Aaron Blaise,United States,US,"Animation, Short",16,18,5,0,0,2025,2025,0
+f485381c-493f-46be-a067-367a973c7aa5,Stomach Bug,2024,Matty Crawford,United Kingdom,GB,Short,16,16,3,2,0,2024,2025,1
+6d53fcb1-0f03-40b3-97e9-314146b3b49c,Will My Parents Come to See Me,2022,Mo Harawe,"Austria, Somalia","AT, SO",Short,16,18,3,1,0,2022,2025,3
+2eb97afd-34d1-4f7d-8080-ae893635c6be,As If the Earth Had Swallowed Them Up,2025,Natalia León,France,FR,"Animation, Short",15,15,1,0,0,2025,2025,0
+0efb7cdd-e7f0-46ee-9dbd-8b4d5203ee80,Baigal Nuur - Lake Baikal,2023,Alisi Telengut,"Canada, Germany","CA, DE","Animation, Short",15,15,1,1,0,2023,2024,1
+36859f0e-cc63-45a1-8ec1-5a75341435f8,Dummy,2020,Laurynas Bareiša,Lithuania,LT,Short,15,15,1,0,0,2020,2025,5
+d1c2e458-f8fa-41e4-96b4-0d748803e519,It's Raining Frogs Outside,2021,Maria Estela Paiso,Philippines,PH,Short,15,16,0,0,1,2022,2024,2
+7557c555-7417-4022-928f-2791765e7cdc,"Maya, Give Me a Title",2024,Michel Gondry,France,FR,Animation,15,15,1,1,0,2024,2025,1
+f787914d-e097-413c-85c1-85edff0583e3,"Paradiso, XXXI, 108",2022,Kamal Aljafari,"Germany, Palestine","DE, PS",Short,15,16,0,0,1,2022,2025,3
+4b85aa67-008f-4817-a19d-3e96168febfe,Push This Button If You Begin to Panic,2020,Gabriel Böhmer,"Switzerland, United Kingdom","CH, GB","Animation, Short",15,17,0,0,0,2020,2022,2
+cc9f436e-2a25-4291-8a7b-3ef65b3e95d6,"Stay Awake, Be Ready",2019,Pham Thien An,"South Korea, Vietnam","KR, VN","Drama, Short",15,15,2,0,1,2019,2021,2
+6d4bfe5e-5b48-443f-a734-8971e6a66b89,The Golden Legend,2019,"Chema García Ibarra, Ion de Sosa",Spain,ES,"Drama, Short",15,16,1,0,0,2019,2025,6
+eb4e25c5-fc75-475c-84f5-27c78247a2cf,"Well Wishes My Love, Your Love",2021,Gabriel Gabriel Garble,"Malaysia, Sweden","MY, SE","Animation, Short",15,15,0,0,0,2022,2025,3
+c5f06cbe-93c2-4e8c-af71-731a6abd5523,A Cambodian Spring,2016,Christopher Kelly,"Cambodia, United Kingdom","GB, KH",Documentary,14,14,3,2,1,2017,2019,2
+491f4592-9a30-4a48-b574-5e210cd66c34,All My Scars Vanish in the Wind,2022,"Carlos Velandia, María Angélica Restrepo Guzmán",Colombia,CO,"Animation, Short",14,14,2,0,1,2022,2024,2
+4482480b-f020-415f-93b8-f7856ac1336f,Amok,2022,Balazs Turai,"Hungary, Romania","HU, RO","Animation, Short",14,16,2,0,0,2022,2025,3
+21850f55-c73b-47fe-abd4-8f84e1d216d6,Frater,2024,Valentin Guiod,France,FR,"Drama, Family, Short",14,14,2,0,0,2024,2025,1
+905e1337-7ec9-47a6-bdb2-f806e37b3ab7,Il burattino e la balena,2024,Roberto Catani,"France, Italy","FR, IT","Animation, Short",14,14,0,0,0,2024,2025,1
+1b9548c8-b13e-4620-8f7c-93c57d86edea,Juice,2022,Mona Keil,Germany,DE,"Animation, Short",14,14,0,0,1,2022,2023,1
+1a409198-08e6-4ad3-9402-539fb93553dc,Kids,2019,Michael Frei,Switzerland,CH,"Animation, Short",14,16,1,0,0,2019,2025,6
+bdfc2404-4608-48e2-b347-975f8f3eeeb5,On Weary Wings Go By,2024,Anu-Laura Tuttelberg,"Estonia, Lithuania","EE, LT","Animation, Short",14,14,1,0,0,2024,2025,1
+8c77164b-4707-4b59-9ad6-13a0cfd4f3d4,Porcupine,2023,"Minh Quý Trương, Nicolas Graux","Singapore, Vietnam","SG, VN",Short,14,14,1,0,0,2023,2025,2
+44c843b6-56cb-4788-8335-738ba8e7abaa,Sensitive Content,2023,Narges Kalhor,Germany,DE,"Documentary, Short",14,14,1,0,0,2023,2024,1
+01c0866e-449d-4e7a-a1de-b39c01ae8b3b,Somni,2023,Sonja Rohleder,Germany,DE,"Animation, Short",14,15,0,0,0,2023,2025,2
+beaf7582-f9b1-4d72-9484-2ca6a6e3229b,The Physics of Sorrow,2019,Theodore Ushev,Canada,CA,"Animation, Short",14,15,5,0,2,2019,2021,2
+d7bdeaa3-d3ff-444a-8062-6b7ae5101e18,White Eye,2019,Tomer Shushan,Israel,IL,"Drama, Short",14,16,4,1,0,2020,2021,1
+a7d54e1f-a448-4a1d-8773-9f2c8b57345d,3 Logical Exits,2020,Mahdi Fleifel,"Denmark, Lebanon","DK, LB","Documentary, Short",13,13,0,0,0,2020,2025,5
+043409c7-76fd-4684-9452-ddeef17491a7,Chomp It!,2023,"Lam Li Shuen, Mark Chua",Singapore,SG,Short,13,13,0,0,0,2023,2026,3
+d21fe6ea-2a8c-418b-b0c6-c0ed919fa5f2,"Jill, Uncredited",2022,Anthony Ing,"Canada, United Kingdom","CA, GB","Avant-Garde, Documentary, Short",13,13,2,0,0,2022,2023,1
+b1de06dc-e5ee-4eb1-8058-a5ba436d869e,Marlon Brando,2020,Vincent Tilanus,Netherlands,NL,"Comedy, Drama, Short",13,13,0,0,1,2020,2022,2
+588e1a0b-f239-4df5-9af4-26dc4e9da00a,Night of the Living Dread,2021,Ida Melum,United Kingdom,GB,"Animation, Short",13,15,1,3,0,2021,2023,2
+7d8f686f-b3c8-44a4-bf8a-69794c62b279,Nuevo Rico,2020,Kristian Mercado,United States,US,"Animation, Short",13,13,2,0,0,2021,2022,1
+636deac8-3376-49d1-ac72-e083aa3763b6,NYC RGB,2023,Viktoria Schmid,Austria,AT,"Avant-Garde, Short",13,13,0,0,0,2023,2025,2
+0630e217-30c4-4fb4-b62e-4fa54f90c348,Pause,2018,Tonia Mishiali,"Cyprus, Greece","CY, GR",Drama,13,14,2,0,0,2018,2021,3
+cb8e636d-b557-41e1-98ed-5f870309c3f3,Sweet Like Lemons,2023,Jenny Jokela,"Finland, United Kingdom","FI, GB","Animation, Short",13,13,0,0,0,2023,2025,2
+2f5c3102-f8ac-4166-9792-7aa7bf2e24d7,Symbiosis,2019,Nádja Andrasev,"France, Hungary","FR, HU","Animation, Short",13,14,1,0,0,2019,2025,6
+1ccf5971-293c-42c8-86e8-680215db866e,Take Me Somewhere Nice,2019,Ena Sendijarević,"Bosnia and Herzegovina, Netherlands","BA, NL",Drama,13,13,3,0,0,2019,2019,0
+abf22fea-def9-447c-942d-9b8a2289c2dc,The Hangman at Home,2020,"Michelle Kranot, Uri Kranot","Canada, Denmark","CA, DK","Animation, Short",13,14,1,1,0,2020,2022,2
+97b850b3-8583-4516-975c-afdbc8afce17,The Mud Under My Window,2025,Violette Delvoye,"Belgium, France","BE, FR","Animation, Short",13,13,1,0,0,2025,2025,0
+cf152a2b-226e-497f-95a8-0b442dac91a9,Becoming Male in the Middle Ages,2022,Isadora Neves Marques,Portugal,PT,"Drama, LGBTQ+, Short",12,14,1,0,0,2022,2025,3
+3b69046e-59e6-4fb9-b93c-d77172e2fc46,Boobs,2021,Marie Valade,Canada,CA,"Animation, Short",12,12,1,1,0,2021,2022,1
+7d18b045-9323-4381-b050-a7594cbe916b,Da yie,2019,Anthony Nti,"Belgium, Ghana","BE, GH","Drama, Short",12,13,3,0,0,2019,2021,2
+a151fff3-8bf8-4fae-bce4-63a9b5a14c85,From.Beyond,2022,Fredrik Sundsteigen Hana,Norway,NO,"Fantasy, Horror, Short",12,12,1,0,0,2022,2024,2
+16551171-b605-48cf-8c16-7f7840fc702f,Helsinki Mansplaining Massacre,2018,Ilja Rautsi,Finland,FI,"Comedy, Horror, Short",12,12,0,0,0,2018,2023,5
+9f3256ab-687c-4c8f-b40e-3c90ffd6203a,Hippopotami,2025,Lin Jianjie,"China, Hong Kong","CN, HK",Short,12,12,0,0,0,2025,2025,0
+5c7d3aaf-ab38-4d68-9e6e-6111c9d2632b,Mulika,2022,Maisha Maene,Democratic Republic of the Congo,CD,"Sci-Fi, Short",12,12,0,0,0,2022,2023,1
+7e6eb1ad-a580-4bde-8c7c-fe9c10f46c6c,On Xerxes' Throne,2022,Evi Kalogiropoulou,Greece,GR,"Drama, Short",12,12,0,0,1,2022,2024,2
+05a0d869-30bd-47af-8ef6-ffa22ab944dc,Sh_t Happens,2019,"David Štumpf, Michaela Mihályi","Czechia, Slovakia","CZ, SK","Animation, Short",12,13,0,0,1,2019,2025,6
+897380ec-cdf8-42ad-b408-b1c2f5cccf6a,Wade,2019,"Kalp Sanghvi, Upamanyu Bhattacharyya",India,IN,"Animation, Short",12,13,4,0,0,2020,2021,1
+70c24489-760b-475a-87db-34abd9f2e09b,A Lynx in the Town,2019,Nina Bisyarina,"France, Switzerland","CH, FR","Animation, Short",11,11,0,0,0,2020,2021,1
+61e55d8a-c52a-4148-9919-befce46bf260,Empty Rooms,2023,Zhenia Kazankina,Russia,RU,"Documentary, Short",11,11,0,0,0,2023,2024,1
+a2b906f2-7385-4da9-a1ff-7da79e68b322,"Happy New Year, Jim",2022,Andrea Gatopoulos,Italy,IT,Short,11,11,0,0,1,2022,2024,2
+4b81d824-bca1-42e7-90db-30d45e16d312,Kiko and the Animals,2020,Zheng Yawen,"France, Switzerland","CH, FR","Animation, Short",11,11,1,0,0,2021,2025,4
+034c5d34-0cc9-47d0-b29a-bdecb73c900f,Pria,2017,Yudho Aditya,"Indonesia, United States","ID, US","Drama, LGBTQ+, Short",11,11,3,0,0,2016,2017,1
+d3b0867e-7c08-4ead-b4eb-31418c435fb4,Rain,2019,Piotr Milczarek,Poland,PL,"Animation, Short",11,12,0,0,0,2019,2021,2
+8780f4e1-1c85-49c9-bc1e-b49906322ab4,"Red Aninsri; Or, Tiptoeing on the Still Trembling Berlin Wall",2020,Ratchapoom Boonbunchachoke,Thailand,TH,"Drama, Fantasy, Romance, Short, Thriller",11,11,1,0,2,2020,2026,6
+2bb5f59b-da89-4630-8211-d88b17f1485a,Sunrise in My Mind,2020,Danech San,Cambodia,KH,"Drama, Romance, Short",11,11,1,0,1,2020,2022,2
+f312a880-b811-408b-a89b-7395118fc0b6,The Devil's Harmony,2019,Dylan Holmes Williams,United Kingdom,GB,"Horror, Short",11,11,3,1,0,2019,2024,5
+b736677e-a4a8-46d0-9026-d8810c455f6a,The Last Ferry from Grass Island,2020,Zhang Linhan,"Hong Kong, United States","HK, US",Short,11,11,0,0,1,2020,2022,2
+e0b6c18e-cef9-4b2c-b945-fc88e0e7410f,The Saboteur﻿,2022,Anssi Kasitonni,Finland,FI,"Action, Avant-Garde, Short",11,11,1,0,0,2022,2024,2
+63bc7e0c-8c76-44c9-a82d-1865e4f55147,"Uncle Thomas, Accounting for the Days",2019,Regina Pessoa,"Canada, Portugal","CA, PT","Animation, Short",11,12,2,2,0,2019,2025,6
+534a8c12-8258-4d6a-9e7d-df15ea24dc4e,Urban Solutions,2022,"Arne Hector, Luciana Mazeto, Minze Tummescheit, Vinícius Lopes","Brazil, Germany","BR, DE",Short,11,12,3,0,0,2022,2023,1
+6ea16677-1d71-4e90-9fe0-88d0d07b8cc7,Virtual Voice,2021,Suzannah Mirghani,"Qatar, Sudan","QA, SD","Documentary, Short",11,11,0,0,0,2021,2023,2
+07c8986b-85a4-4526-966f-581cd8286fe8,Volcelest,2024,Eric Briche,France,FR,"Animation, Short",11,11,0,0,0,2024,2025,1
+d20bfb03-dbda-443c-a570-0ddffd1813ea,Adiós,2024,José Prats,United Kingdom,GB,"Animation, Short",10,10,1,1,0,2024,2025,1
+7c0047ff-02c4-4ef2-b23a-c96a8acadafc,All Inclusive,2019,Teemu Nikki,Finland,FI,Short,10,10,0,0,0,2019,2020,1
+c5417edc-8861-4166-8eed-bf045f97c314,All the Crows in the World,2021,Tang Yi,Hong Kong,HK,"Comedy, Drama, Short",10,10,3,0,0,2021,2025,4
+e415f8c0-36f3-4c38-8723-d9e453b8d6c0,Bad Mood,2020,Loris Giuseppe Nese,Italy,IT,"Animation, Short",10,10,1,0,0,2020,2021,1
+e35713dd-b0cf-4ab1-b81c-2f5d3f014f5a,Bad Seeds,2020,Claude Cloutier,Canada,CA,"Animation, Short",10,10,1,0,0,2021,2022,1
+c54a2346-01b5-4213-b754-136149c826ae,Beyond Noh,2020,Patrick Smith,"Japan, United States","JP, US","Animation, Short",10,10,0,0,0,2020,2021,1
+4e129529-58cf-430a-95a8-f4375adf4688,Erlking,2015,Georges Schwizgebel,Switzerland,CH,"Animation, Short",10,12,1,0,0,2015,2024,9
+574dd160-da15-4fe3-b0b0-512f704109b6,Filipiñana,2020,Rafael Manuel,"Philippines, United Kingdom","GB, PH",Short,10,10,2,2,0,2020,2021,1
+fc366cf9-a026-4afa-a70a-52163298cd1b,Hide,2020,Daniel Gray,"France, Hungary","FR, HU","Animation, Short",10,11,0,0,0,2021,2022,1
+97252087-2276-4ad6-86b6-6741851212e3,Hunting,2025,Lea Favre,Switzerland,CH,"Animation, Short",10,10,0,0,0,2025,2026,1
+04a1cb87-b797-4837-b94e-7ec220029f45,Hysteresis,2022,Robert Seidel,Germany,DE,"Animation, LGBTQ+, Short",10,11,0,0,0,2022,2025,3
+d41c249b-3988-405e-88df-3163fc2a71c9,Lemongrass Girl,2021,Pom Bunsermvicha,Thailand,TH,Short,10,11,0,0,0,2021,2026,5
+97f5f0c0-e4f6-4b95-901b-33140cb51721,"No, I Don't Want to Dance",2019,Andrea Vinciguerra,United Kingdom,GB,"Animation, Short",10,10,1,0,0,2019,2025,6
+e9b680d6-f572-4bc5-975b-650e0bfb31cc,Pacific Club,2023,Valentin Noujaïm,"France, Qatar","FR, QA","Documentary, Short",10,12,0,0,1,2023,2025,2
+92f0dc4b-721e-4b2f-a88e-a1cdc6311993,Pahokee,2019,"Ivete Lucas, Patrick Bresnan",United States,US,Documentary,10,10,1,0,0,2019,2019,0
+0c09ea46-897c-4446-aabb-8f24ee9be754,Porcelain,2024,Annika Birgel,Germany,DE,Short,10,10,0,0,0,2024,2025,1
+11b627cb-d5aa-4079-8cc9-c0c5ea737826,Pussy Love,2023,Linda Krauss,Germany,DE,"Animation, Short",10,10,0,0,0,2023,2024,1
+e378dc79-9151-4ceb-853e-fa59d50855c9,Scars We Love,2024,Raphaël Jouzeau,France,FR,"Animation, Short",10,10,0,0,0,2024,2025,1
+a2eb61e8-0d61-4cf5-bb55-6698c2ef293a,Serial Parallels,2019,Max Hattler,"Germany, Hong Kong","DE, HK","Animation, Avant-Garde, Short",10,10,1,0,1,2019,2020,1
+35cde5e7-2b39-406f-b32a-a9cbce44f578,She Runs,2019,Yang Qiu,"China, France","CN, FR",Short,10,10,1,0,0,2019,2020,1
+d320ac9c-ad30-46cd-a467-489d804c85c5,Squish,2020,Xavier Seron,Belgium,BE,Short,10,10,2,0,0,2021,2022,1
+2e505e30-e330-4514-9a98-183e7c18fa28,The Bite,2019,Isadora Neves Marques,"Brazil, Portugal","BR, PT","Avant-Garde, Short",10,10,0,0,0,2019,2025,6
+89c4629c-e5a6-4c43-9320-934cbaa09a86,There Were Four of Us,2019,Cassie Shao,United States,US,"Animation, Short",10,10,0,0,0,2019,2020,1
+445a3288-8b87-496c-89ad-f6860e4fde07,Tie,2020,Alexandra Ramires,"France, Portugal","FR, PT","Animation, Short",10,10,0,0,0,2020,2022,2
+717775b2-5501-49cf-a6a0-0e8aee064400,To the Dusty Sea,2020,Héloïse Ferlay,France,FR,"Animation, Short",10,10,1,0,0,2020,2021,1
+0d3dffdb-86c4-4ccf-b559-b3f5c841c6b8,Tulip,2020,"Andrea Love, Phoebe Wahl",United States,US,"Animation, Short",10,10,0,0,1,2021,2021,0
+787513be-1f9f-43fe-a632-a30fd2b6f679,White Ant,2023,Shalini Adnani,"India, United Kingdom","GB, IN",Short,10,10,1,0,0,2023,2025,2
+73a5fe18-2a80-4aab-9626-ea95d4fb2156,Yellow,2023,Elham Ehsas,"Afghanistan, United Kingdom","AF, GB","Drama, Short",10,10,0,1,0,2023,2024,1
+aa086fba-d399-478d-be59-93078895f276,A Human Certainty,2021,Morgan Quaintance,United Kingdom,GB,"Avant-Garde, Short",9,10,0,0,0,2021,2024,3
+ec980e65-3e57-4200-9935-4392e68bca2b,Cat and Bird,2021,Franka Sachse,Germany,DE,"Animation, Short",9,9,0,0,0,2021,2024,3
+66ab6d89-1acc-4193-873a-dd6e9bf67038,Cats & Dogs,2015,"Gerd Gockell, Jesús Pérez","Germany, Switzerland","CH, DE","Animation, Short",9,9,0,0,0,2016,2024,8
+a5bbbe8c-72e0-465f-9877-a123ff4f842f,"Good Thanks, You?",2020,Molly Manning Walker,United Kingdom,GB,"Drama, Short",9,9,0,0,0,2020,2024,4
+a013f7be-779d-4d9c-9d45-282af4a56e2e,Homebird,2021,Ewa Smyk,United Kingdom,GB,"Animation, Short",9,10,2,1,1,2021,2025,4
+9f76fca5-030e-4539-8760-9970c66bb3fb,Hot Dog Hands,2017,Matt Reynolds,United States,US,"Animation, Short",9,9,1,0,0,2017,2017,0
+cbd03e7d-79aa-4cf5-8ed8-a580958946b9,Impossible Figures and Other Stories I,2021,Marta Pajek,"Canada, Poland","CA, PL","Animation, Short",9,9,1,1,0,2021,2024,3
+52011efc-3c01-4d5e-b391-511380f6b3dc,Impossible Figures and Other Stories II,2016,Marta Pajek,Poland,PL,"Animation, Short",9,9,0,0,0,2016,2025,9
+14c7c801-f433-4043-b67d-0aaf2679ce17,Ivan's Need,2015,"Lukas Suter, Manuela Leuenberger, Veronica L. Montaño",Switzerland,CH,"Animation, Short",9,9,0,0,0,2016,2016,0
+6e4f8f14-2efe-4a9d-a6f7-bb5b757847cf,Rainboy,2023,Barbara Brunner,Switzerland,CH,"Animation, Short",9,9,0,0,0,2023,2024,1
+346b9b4c-4317-43af-95f7-0e5bd167b75c,The Battle of San Romano,2017,Georges Schwizgebel,Switzerland,CH,"Animation, Short",9,10,0,0,0,2017,2024,7
+043ab2c8-43fa-4018-8353-668ceabeb4c0,The Fourth,2022,Johnny D. Kirk,United States,US,"Drama, Fantasy, Sci-Fi, Short",9,9,0,0,0,2022,2023,1
+12312d00-2762-42c5-8e3d-eb357333b791,TV or The Disturbance on Forest Hill Road,2025,Frederic Siegel,Switzerland,CH,"Animation, Short",9,9,0,0,0,2025,2026,1
+d529b6e1-2f2e-42a0-b700-11a97349301b,Under the Lake,2022,Thanasis Trouboukis,"Finland, Greece","FI, GR","Documentary, Short",9,9,1,0,1,2022,2022,0
+cc0f6823-ffbf-42ff-a917-baa8a45e46eb,You're Not Home,2022,Derek Ugochukwu,Ireland,IE,"Horror, Short",9,9,1,1,0,2022,2023,1
+4ca59a41-9925-4693-adae-9808b690bd9d,4:3,2019,Ross Hogg,United Kingdom,GB,"Animation, Short",8,10,0,1,0,2019,2025,6
+7a9844ed-ed37-44f4-bfaf-ac158fad7f2c,Bubble,2020,Wang Haonan,China,CN,Short,8,8,0,0,0,2020,2021,1
+be820271-67b3-4447-b713-964e58d6e8a5,Drive,2019,Pedro Casavecchia,"Argentina, France","AR, FR","Animation, Short",8,9,1,0,0,2019,2022,3
+226b9640-ddaa-41cc-a3e3-0801a76e8987,Exam,2019,Sonia K. Hadad,Iran,IR,Short,8,8,3,0,0,2019,2021,2
+abd6273f-3e9c-4c75-aae1-c0983d6d8b14,Four Pills at Night,2021,Leart Rama,"Republic of Kosovo, Switzerland","CH, XK","Drama, LGBTQ+, Short",8,8,0,0,0,2021,2024,3
+d04cdb68-e786-491c-b274-6d94f477e699,Garrano,2022,"David Doutel, Vasco Sá","Lithuania, Portugal","LT, PT","Animation, Short",8,8,0,1,1,2022,2024,2
+cfcec245-e0a2-4920-a575-6887e89a94b4,Hard On,2019,Joanna Rytel,Sweden,SE,Short,8,8,0,0,0,2019,2020,1
+64056fcd-8a1b-4f49-a1b8-7cce84b4e6f4,Have a Nice Dog!,2020,Jalal Maghout,"Germany, Syrian Arab Republic","DE, SY","Animation, Short",8,8,0,0,0,2021,2025,4
+d1b2ddb5-5548-41b2-935c-7d29d9647953,Heatwave,2019,Fokion Xenos,United Kingdom,GB,"Animation, Short",8,10,1,0,1,2019,2025,6
+52b8abf2-e516-4d2b-b461-c2a9fbe9fa5e,I Saw the Face of God in the Jet Wash,2025,Mark Jenkin,United Kingdom,GB,"Avant-Garde, Short",8,8,0,0,0,2025,2025,0
+7f9584d6-c28c-4261-803b-75f141d248ab,Laika & Nemo,2022,"Jan Gadermann, Sebastian Gadow",Germany,DE,"Animation, Short",8,8,0,0,0,2022,2023,1
+b1a3f5e1-7735-46f8-946d-c7052fb931cf,Mind My Mind,2019,Floor Adams,Netherlands,NL,"Animation, Short",8,9,1,0,0,2019,2024,5
+eed4d1ae-ce65-4c7e-b823-5a9bc8deb59d,On the Surface,2021,Fan Sissoko,"Iceland, United States","IS, US","Animation, Short",8,8,0,1,1,2021,2022,1
+76378c56-47f6-4f29-92e5-8a6c68bb8c24,Our Pain,2023,Shunsaku Hayashi,Japan,JP,"Animation, Short",8,8,0,0,0,2023,2023,0
+3860fdff-9c99-4009-b3d5-a913de28bf31,Perfect City: The Bravest Kid,2023,Zhou Shengwei,"China, United States","CN, US","Animation, Short",8,8,0,0,0,2023,2024,1
+e1e72172-cc05-4e26-b804-518fdfc33aae,Portrait of Suzanne,2019,Izabela Plucinska,"France, Germany","DE, FR","Animation, Short",8,8,1,0,0,2019,2021,2
+ad1366c3-94e5-4b0c-894d-8106fcd89512,So What If the Goats Die,2020,Sofia Alaoui,"France, Morocco","FR, MA","Drama, Short",8,8,2,0,0,2020,2022,2
+9c084888-d226-4ab9-a8ee-de3100bda97c,Squish!,2021,Tulapop Saenjaroen,"Singapore, Thailand","SG, TH","Animation, Avant-Garde, Short",8,8,0,0,0,2021,2022,1
+6b0d4057-7a09-46b9-81ec-b74fb65716bd,Still Working,2019,Julietta Korbel,Switzerland,CH,Short,8,8,0,0,0,2019,2020,1
+ff94fb04-be13-4a8b-ade9-7985e6d0eec7,Story,2019,Jolanta Bańkowska,Poland,PL,"Animation, Short",8,8,0,0,0,2019,2019,0
+d09f3379-f426-438f-b292-1c0340906e91,Terror Nullius,2018,Soda Jerk,Australia,AU,"Avant-Garde, History, Horror",8,8,0,0,0,2018,2019,1
+b1ebd6a1-10ac-4b7f-a284-3b81046c5360,The Man That I Wave At,2025,Ben S. Hyland,United Kingdom,GB,"Comedy, Horror, Sci-Fi, Short",8,8,0,0,0,2025,2025,0
+8362c091-9b57-4a6c-a94a-c30d5ea795e0,Thrive,2019,Jamie Dispirito,United Kingdom,GB,"Drama, LGBTQ+, Short",8,8,1,0,0,2019,2020,1
+e15da600-d184-4ffa-9b3a-36d8f59aed77,Ties,2019,Dina Velikovskaya,"Germany, Russia","DE, RU","Animation, Short",8,8,1,0,0,2019,2024,5
+77c72d31-f785-48a5-9141-1cdb569c10e8,What Do You Know About the Water and the Moon,2019,Layla Jian Luo,China,CN,"Fantasy, Short",8,8,0,0,1,2019,2019,0
+4cffdb1e-7a90-482d-97b8-c0100c766f10,Zonder meer,2020,Meltse van Coillie,Belgium,BE,Short,8,8,0,0,0,2021,2022,1
+72fbea38-fe41-4b65-8340-8a7149ae61c5,#21XOXO,2019,"Imge Özbilge, Sine Özbilge",Belgium,BE,"Animation, Short",7,7,0,0,0,2019,2021,2
+35999994-2d0c-4047-9e0b-60cb190fd121,A Sister,2018,Delphine Girard,Belgium,BE,"Drama, Short, Thriller",7,8,0,2,0,2019,2025,6
+608c2f3b-ea8e-48c8-a798-33664f5267b4,Anita,2020,Sushma Khadepaun-Parmar,"India, United States","IN, US",Short,7,7,1,0,0,2020,2021,1
+69c06e5d-d31b-48a0-94ae-c73762dd9ca2,Café froid,2015,"François Leroy, Stéphanie Lansaque",France,FR,"Animation, Short",7,7,0,1,0,2015,2017,2
+d3c1cb68-4c8e-4716-aaf2-e91895a7db1a,Crab Day,2023,Ross Stringer,United Kingdom,GB,"Animation, Short",7,7,1,0,0,2023,2025,2
+1e748a55-0f7d-463d-bfb9-5e37df6c158d,In the Big Yard Inside the Teeny-Weeny Pocket,2022,Yoko Yuki,Japan,JP,"Animation, Short",7,7,0,0,0,2022,2023,1
+c0d9481e-5abd-4ecc-a347-9acd9728d8c7,Inside Me,2019,Maria Trigo Teixeira,Germany,DE,"Animation, Documentary, Short",7,7,0,0,0,2019,2025,6
+36316b6b-9124-4e9b-8e14-ef5a239ef607,Issues with My Other Half,2023,Anna Vasof,Austria,AT,"Animation, Short",7,8,0,0,0,2023,2025,2
+959acbeb-dc81-455b-b28b-70351413a6a3,Jellyfish and Lobster,2023,Yasmin Afifi,United Kingdom,GB,"Comedy, Drama, Short",7,7,2,0,1,2023,2024,1
+b0d829dc-02c7-43ed-946b-577640dd55bd,Lamento,2025,"Demian Wohler, Jannik Giger",Switzerland,CH,"Avant-Garde, Short",7,7,0,0,0,2025,2025,0
+871bd28e-bd24-4dcf-900f-83aec2c2640b,Love is Just a Death Away,2020,Bára Anna Stejskalová,Czechia,CZ,"Animation, Short",7,8,3,0,0,2021,2025,4
+1a9da198-0b08-4abc-ba71-b2b84ba36b4c,Matilda and the Spare Head,2020,Ignas Meilūnas,Lithuania,LT,"Animation, Short",7,7,0,0,0,2020,2025,5
+94fb4c99-0409-4925-b8ca-9b7e1b41263d,Migrants,2020,"Antoine Dupriez, Aubin Kubiak, Hugo Caby, Lucas Lermytte, Zoé Devise",France,FR,"Animation, Short",7,7,0,0,0,2021,2022,1
+f4fe2139-f128-4e99-b42a-dbe5e94a8702,Monsieur Le Butch,2022,Jude Dry,United States,US,"Comedy, Drama, LGBTQ+, Short",7,7,0,0,1,2022,2022,0
+91b0255b-54da-42f4-808c-a6c37ad0ab0f,Mthunzi,2019,Tebogo Malebogo,South Africa,ZA,Short,7,7,1,0,0,2019,2020,1
+e0addc47-52f4-4663-b4ca-b0759f971783,My Fat Arse and I,2021,Yelyzaveta Pysmak,Poland,PL,"Animation, Short",7,7,0,0,0,2020,2021,1
+bb54044f-f2cb-4469-aaa3-9c01b7170070,My Father's Room,2016,Nari Jang,South Korea,KR,"Animation, Short",7,7,0,0,0,2017,2025,8
+6d9346d4-197e-4ce7-97a5-d8420abb84d1,Night of Passage,2025,Reza Rasouli,Austria,AT,Short,7,8,3,0,0,2025,2025,0
+01494c84-d84d-4adf-ad3d-37074c77c7ed,Nutag-Homeland,2016,Alisi Telengut,Canada,CA,"Animation, Short",7,7,0,0,0,2016,2021,5
+80a5cfe5-8ccd-4e03-994e-e3463b69280b,Purpleboy,2019,Alexandre Siqueira,"Belgium, France","BE, FR","Animation, Short",7,7,0,0,0,2019,2020,1
+14c67691-def1-406f-9f99-6a596dff1162,Sleepless,1998,Ursula Meier,"Belgium, Switzerland","BE, CH",Short,7,7,0,0,0,1998,2025,27
+2ea0a955-afe5-4ef0-88e3-688995cf18b1,The Last People,2025,Nicolas Pindeus,Austria,AT,Short,7,7,0,0,0,2025,2025,0
+3bae7b84-47a3-4826-a28f-cfff83da6181,The Lonely Orbit,2019,"Benjamin Morard, Frederic Siegel",Switzerland,CH,"Animation, Short",7,7,0,0,0,2019,2020,1
+045cf7fd-011a-4f62-a101-7bb5a80ef2d5,The Möbius Trip,2023,Simone Smith,United Kingdom,GB,Short,7,7,0,0,0,2023,2023,0
+1e1fb44b-9618-4689-87d8-c44deaaeb51d,There Will Come Soft Rains,2025,Elham Ehsas,United Kingdom,GB,Short,7,7,0,0,0,2025,2026,1
+aeae73b8-e4f3-43be-b884-f381e857e563,Three Songs for Benazir,2021,"Elissa Sylvia Mirzaei, Gulistan Mirzaei",Afghanistan,AF,"Documentary, Short",7,7,2,1,0,2021,2022,1
+73f119f6-d84e-44eb-8204-70b46f65d855,Tongue,2022,Kaho Yoshida,"Canada, Japan","CA, JP","Animation, Short",7,8,1,0,0,2022,2025,3
+1341b3c5-4387-476d-8d4f-c35e9970d40b,A Tiny Tale,2020,"Chloé Bourdic, Maylis Mosny, Noémie Halberstam, Sylvain Cuvillier, Théophile Coursimault, Ye Zijing",France,FR,"Animation, Short",6,6,0,0,0,2021,2021,0
+ee1ebedd-098c-4923-9956-662871a3b958,An Invitation,2021,"Hao Zhao, Yeung Tung",China,CN,"Drama, Short",6,6,0,0,0,2021,2022,1
+520ccc10-ff77-4162-920e-4288c32c89d5,Any Instant Whatever,2019,Michelle Brand,United Kingdom,GB,"Animation, Short",6,7,1,0,0,2020,2023,3
+75ce72e5-1508-4ecd-9b14-247db93dfd53,Any Virgin Left Alive?,2015,Bertrand Mandico,France,FR,"Avant-Garde, Fantasy, Short",6,6,0,0,0,2016,2024,8
+0e04987d-9b95-4f0c-adc8-d8fb12661952,Applesauce,2019,Alexander Gratzer,Austria,AT,"Animation, Short",6,6,0,0,0,2019,2020,1
+7456fd22-f03d-439e-8626-5cd705f7a6b8,Aubade,2014,Mauro Carraro,Switzerland,CH,"Animation, Short",6,6,0,0,0,2014,2015,1
+4451b5d3-bdb8-4d8e-80f2-5e27ddfaf9c4,Blind Spots,2021,Luis Schubert,Germany,DE,Short,6,6,0,0,0,2021,2023,2
+65906f4b-bb6b-4404-909b-ad6fa1773cab,Cat Days,2018,Jon Frickey,Germany,DE,"Animation, Short",6,6,0,0,0,2018,2024,6
+6bfd8b79-375c-436d-b026-e9e95c5dd0d1,Crumbs of Life,2020,Katarzyna Miechowicz,Poland,PL,"Animation, Short",6,6,1,0,0,2021,2022,1
+58a222fa-0d27-421f-8fc1-c4ed1b70189b,Darwin's Notebook,2020,Georges Schwizgebel,Switzerland,CH,"Animation, Short",6,7,1,0,0,2021,2024,3
+bd9bec24-05e7-4560-9b58-5360887d8431,Dear Passengers,2022,Madli Lääne,Estonia,EE,Short,6,6,0,0,0,2022,2024,2
+5fc03945-25dc-48a7-8b6a-f91278be6e78,Ender's Line,2023,Gabriele Biasi,Italy,IT,"Documentary, Short",6,6,0,0,0,2023,2024,1
+205ad32b-f9a0-414a-bfe7-7a7148ad4e26,Goodbye Golovin,2020,Mathieu Grimard,Canada,CA,"Drama, Short",6,6,0,1,1,2020,2021,1
+5733e71f-2fe1-4256-b67f-8e4d36084325,Gravedad,2019,Matisse Gonzalez,Germany,DE,"Animation, Short",6,7,1,0,0,2019,2021,2
+b7f7d388-334b-4d9d-8455-430c2c8e7158,Hanging On,2021,Alfie Barker,United Kingdom,GB,"Documentary, Short",6,7,0,0,0,2021,2022,1
+3baba369-6efc-4153-b44c-892088711ead,Hypersensitive,2025,Martine Frossard,Canada,CA,"Animation, Short",6,6,0,0,0,2025,2025,0
+d3398ed8-413e-4eae-8858-403dd080809c,Jupiter,2019,Benjamin Pfohl,Germany,DE,Short,6,6,0,0,0,2019,2021,2
+2bcc93b2-1dd1-4c3e-a7e0-a5ee28957f3c,Lake of Fire,2022,Neozoon,Germany,DE,"Avant-Garde, Short",6,6,0,0,0,2022,2023,1
+d4fa0828-997f-4814-bfd3-b4b7f714ffa0,Live Forever,2020,Gustav Egerstedt,Sweden,SE,"Horror, Short",6,6,0,0,0,2020,2023,3
+2b8b476b-d298-4a4d-825b-81ee8e1bf7ac,Man or Tree,2021,"Tom Hancock, Varun Raman",United Kingdom,GB,"Comedy, Fantasy, Short",6,7,0,0,0,2021,2025,4
+08fefdae-e6e1-4b4c-bc8c-f654e5382e88,My Home,2022,Azar Saiyar,Finland,FI,"Avant-Garde, Short",6,6,0,0,0,2022,2023,1
+c81e4040-6f11-4082-8979-7ba3355341b7,Only a Child,2020,Simone Giampaolo,Switzerland,CH,"Animation, Documentary, Short",6,6,0,1,1,2020,2025,5
+dbf65ea0-0682-4bda-b616-7160e7546988,Ovary-Acting,2025,Ida Melum,"Norway, Sweden","NO, SE","Animation, Short",6,6,0,0,0,2025,2025,0
+1d3b9937-3c73-4c5b-ae00-6534b30e9f5b,Per Aspera Ad Astra,2019,Franck Dion,France,FR,"Animation, Short",6,6,0,0,0,2019,2020,1
+5159197d-5ef3-4c38-bb07-4a0676bc4de3,Places We'll Breathe,2022,Davor Sanvincenti,Croatia,HR,"Avant-Garde, Documentary, Short",6,6,0,0,0,2022,2022,0
+f90aab29-97df-4b08-9c41-d19e201bf8b9,Precious,2020,Paul Mas,France,FR,"Animation, Short",6,6,0,1,0,2020,2024,4
+aacc0bda-da34-4d03-9c24-72708dd622c6,Rouge,2019,Kostis Theodosopoulos,Greece,GR,Short,6,6,0,0,0,2019,2021,2
+271c3759-83a9-43ec-b71f-3ea101393cc0,Salvation Has No Name,2022,Joseph Wallace,United Kingdom,GB,"Animation, Short",6,6,0,0,0,2022,2023,1
+15d20d1e-facb-4ba4-89aa-98dca215332d,Silent Chirping of Invisible Digits,2023,Vera Sebert,"Austria, Germany","AT, DE","Avant-Garde, Short",6,6,0,0,0,2023,2024,1
+6b6222ff-6f8e-4f12-be53-71edb29e000b,Snowfall,2014,Conor Whelan,Ireland,IE,"Animation, Short",6,6,0,0,0,2015,2016,1
+62033b06-1122-4d00-8116-9c6d81dd9fda,Store Policy,2020,Sarah Arnold,"France, Switzerland","CH, FR","Comedy, Drama, Short",6,6,0,0,1,2020,2022,2
+7bb4588f-0e82-4924-ab20-e6b9c0f45f4c,Sudden Light,2020,Sophie Littman,United Kingdom,GB,Short,6,7,0,1,0,2020,2022,2
+661fd968-15b2-480c-a302-6cf17eb5d2ab,Survivers,2020,Carlos Gómez-Trigo,Spain,ES,"Comedy, Sci-Fi, Short",6,6,0,0,0,2020,2022,2
+8b62e19c-8534-4320-9a7c-d992b6e90cb4,Surviving Earth,2025,Thea Gajić,United Kingdom,GB,Drama,6,6,0,0,0,2025,2025,0
+07f86e10-21ca-4474-a0a7-6e78742be5ee,Sweet Nothing,2021,"Joana Fischer, Marie Kenov",Switzerland,CH,"Animation, Short",6,6,0,0,0,2021,2022,1
+a9f641a5-53e3-48f2-9a27-0b53a57ffa83,The Archive: Queer Nigerians,2023,Simisolaoluwa Akande,United Kingdom,GB,"Documentary, LGBTQ+, Short",6,6,1,0,0,2023,2024,1
+ae4cf80d-7c5a-4927-b3c0-c424fd358172,The Best Orchestra in the World,2019,Henning Backhaus,Austria,AT,"Comedy, Fantasy, Short",6,6,0,1,0,2020,2021,1
+03cbad3e-6c20-4f45-a15d-9d4f65893867,The Tough,2019,Marcin Polar,Poland,PL,"Documentary, Short",6,6,0,0,0,2019,2019,0
+47a6e09d-8b02-4c12-b15c-5a5fa3490119,Trona Pinnacles,2020,Mathilde Parquet,France,FR,"Animation, Drama, Short",6,6,0,0,0,2021,2021,0
+d1192415-753e-4449-bf0b-274605f3f21a,What Resonates in Silence,2020,Marine Blin,France,FR,"Animation, Short",6,6,0,0,0,2021,2021,0
+e1392731-4cf3-441a-b298-7cb12ed5f02f,World to Roam,2023,Stephen Irwin,United Kingdom,GB,"Animation, Short",6,6,0,0,0,2023,2024,1
+23f5ee4f-1260-41a8-807a-771cdce24be3,A Little Bit of Paradise,2020,Andrzej Cichocki,Poland,PL,"Documentary, Short",5,5,0,0,0,2020,2021,1
+eb1a89e6-7090-478e-9a6f-f28f390179bd,A Simple Fucking Gesture,2020,Jesse Shamata,Canada,CA,"Comedy, Short",5,5,0,0,0,2020,2023,3
+a5d4c466-3ac7-4b5f-b9b2-6a3584886272,Ablaze,2019,"Alexander Lahl, Jan Koester",Germany,DE,"Animation, Short",5,6,0,0,0,2019,2023,4
+fccb9a58-659a-4e7d-a200-25524146626e,Acid Green,2023,Yuan Li Elizabeth Xu,"Singapore, United States","SG, US","Animation, Short",5,6,0,0,0,2023,2025,2
+41df1160-2f57-4989-8242-35abd4a75cec,"An Ongoing List of Things Found in the Library Book Drop, Usually Being Used as Bookmarks",2025,Kayla Galang,United States,US,"Comedy, Short",5,5,0,0,0,2025,2025,0
+9fb13bf9-68c8-49e6-a9fb-d81670dcf953,Annah the Javanese Girl,2020,Fatimah Rony,Indonesia,ID,"Animation, Short",5,5,0,0,1,2020,2022,2
+3f755be7-fcbd-4ac0-b601-02f97f3e9032,Arka,2020,Natko Stipaničev,Croatia,HR,"Animation, Short",5,5,0,0,0,2020,2020,0
+7abb059e-10be-4c16-9b2a-33531581e4a8,Battlefield,2020,Jannis Lenz,"Austria, Germany","AT, DE","Documentary, Short",5,5,0,0,0,2020,2020,0
+2c2100f4-1e03-4b9c-9288-b51ebde88d91,Blieschow,2019,Christoph Sarow,Germany,DE,"Animation, Short",5,5,0,0,0,2019,2021,2
+7a65d5e3-a9b2-4ac8-9eb0-0989e861f5b0,Blocks,2022,Adrian Jaffé,Germany,DE,"Animation, Short",5,5,0,0,0,2022,2023,1
+ad0fbe88-4c7b-4992-91bd-95af1c2e2870,Cabbage,2023,Holly Márie Parnell,"Ireland, United Kingdom","GB, IE","Documentary, Short",5,5,0,0,0,2023,2023,0
+e7dd865e-e1a0-49c3-b418-650b15e18db7,Carrousel,2020,Jasmine Elsen,"Belgium, Czechia","BE, CZ","Animation, Short",5,5,0,0,0,2020,2020,0
+805968e5-e8a7-4f71-a2a7-7fc42f75d500,Coffin,2020,"Cai Yuanqing, Huang Houzhi, Mandimby Lebon, Mikolaj Janiw, Nathan Crabot, Théo Tran Ngoc",France,FR,"Animation, Short",5,5,1,0,0,2021,2021,0
+ef1a0b3a-c2d6-4d42-8480-7274b21074e8,Dick Pics! (A Documentary),2019,"Hannah McSwiggen, Russell Sheaffer",United States,US,"Animation, Documentary, Short",5,5,0,0,0,2019,2021,2
+c44b4870-f683-40ff-b517-129bdf2a3fae,Don vs Lightning,2021,Big Red Button,United Kingdom,GB,Short,5,6,0,0,0,2021,2022,1
+eac51f5c-a5a0-4a05-8187-ece9ad2c9c19,Fantasy in a Concrete Jungle,2023,Mehedi Mostafa,Bangladesh,BD,"Documentary, Short",5,5,1,0,0,2023,2024,1
+39e2828e-3b63-4f68-adc8-ee1b87abdbc2,Filip,2015,Nathalie Álvarez Mesén,Sweden,SE,"Drama, LGBTQ+, Short",5,5,1,0,0,2016,2016,0
+5b0d6b2d-ab5c-4809-aff8-456e4593afd7,Flick,2020,Ariel Zengotita,United States,US,"Horror, Short",5,5,0,0,0,2020,2021,1
+f23692c9-2189-485d-925f-a96dcd915ce8,For People in Trouble,2023,Alex Lawther,United Kingdom,GB,Short,5,5,0,1,0,2023,2024,1
+a4fdae2c-0460-4222-bf22-216bd67e3204,Grandad Was a Romantic,2019,Maryam Mohajer,United Kingdom,GB,"Animation, Short",5,5,0,0,0,2019,2021,2
+e0b2c65a-7b90-4d74-ab3a-1169930b33e6,"Hard, Cracked the Wind",2019,Mark Jenkin,United Kingdom,GB,"Horror, Short",5,5,0,0,0,2019,2020,1
+84ea8df3-438c-4f23-94ea-bbf192bd7da5,How to Shoot a Ghost,2025,Charlie Kaufman,"Greece, United States","GR, US","Comedy, Drama, Short",5,5,0,0,0,2025,2025,0
+54151ac2-cc03-4835-8036-d8af7afa67fb,Ieva,2021,"Domas Petronis, Vytautas Plukas",Lithuania,LT,Short,5,5,0,0,0,2021,2025,4
+3ca05cf3-229a-4d0c-90c7-49f874f0e47f,In the Woods,2020,Sara Grgurić,Croatia,HR,"Drama, Short",5,5,1,0,0,2021,2022,1
+37ca0ef4-96d0-463f-ae32-24218599a364,Lickalike,2019,Rebecca Blöcher,Germany,DE,"Animation, Short",5,5,0,0,0,2019,2020,1
+04185f18-e630-4c42-9578-008231f8371f,Lucens,2015,Marcel Barelli,Switzerland,CH,"Animation, Short",5,5,0,0,0,2015,2016,1
+8d79417f-dabf-4249-9d83-778b0f905f6d,Material Bodies,2020,Dorothy Allen-Pickard,United Kingdom,GB,"Documentary, Short",5,6,0,0,0,2020,2022,2
+0f0b076f-5ea4-4c30-8267-3ba46425471c,My Grandmother Is an Egg,2021,Chang Wu-Ching,"Taiwan, United Kingdom","GB, TW","Animation, Documentary, Short",5,6,0,0,0,2021,2022,1
+7ca04f30-24f1-4f66-8929-9bf2d415199c,Nestor,2019,João Gonzalez,United Kingdom,GB,"Animation, Drama, Short",5,5,0,0,0,2020,2023,3
+44c77c81-839e-4ef6-8e98-84ccbde51395,No Ill Will,2019,Andrias Høgenni,"Denmark, Faroe Islands","DK, FO","Drama, Short",5,5,0,0,0,2019,2020,1
+8e5a7865-b397-4cb1-8fc2-bdf2e3bcfad0,Notes from Planet Three,2025,Simon Ellis,United Kingdom,GB,Short,5,5,0,0,0,2025,2025,0
+b57353c0-f52d-4c7c-9417-0ec45de83635,Nude and Crude,2014,Mario Addis,Italy,IT,"Animation, Short",5,5,0,0,0,2015,2015,0
+16fc2419-b5d6-4816-8491-317f18ee47a3,Outlets,2022,Duncan Cowles,United Kingdom,GB,Short,5,5,0,1,0,2023,2024,1
+0bba6599-4c45-4c6a-a6fd-d70832ee4f02,Pearl Diver,2020,Margrethe Danielsen,Norway,NO,"Animation, Short",5,5,0,0,0,2020,2021,1
+072ca6bd-59a6-47ff-9719-d5227ecd6ea3,Perfect City: The Mother,2022,Zhou Shengwei,"China, United States","CN, US","Animation, Short",5,5,0,0,0,2022,2023,1
+136017fe-fb92-4ef4-869f-1c0450ceac2c,Rehearsal,2021,Michael Omonua,Nigeria,NG,Short,5,5,0,0,0,2021,2023,2
+e384b1ba-b07f-4f2d-a837-6f3a8728fcb8,Roadkill,2019,Leszek Mozga,United Kingdom,GB,"Animation, Short",5,5,0,0,0,2019,2019,0
+d13597e5-07b3-4248-baec-45dcccd610c3,Ruben Leaves,2015,Frederic Siegel,Switzerland,CH,"Animation, Short",5,5,0,0,0,2015,2016,1
+1b2334af-c157-423c-bca2-936ccf39ae41,Sad Beauty,2020,Arjan Brentjes,Netherlands,NL,"Animation, Short",5,5,0,0,0,2020,2021,1
+b3a158a1-1b31-4b3e-8859-e17cac3e31cc,Satan,2017,Carlos Tapia,Switzerland,CH,Short,5,5,0,0,0,2018,2019,1
+07249b95-de68-4fcd-b7a1-af6a5f961d1e,Schoolyard Blues,2017,Maria Eriksson-Hecht,Sweden,SE,Short,5,5,0,0,0,2017,2021,4
+a8c98fce-0ec1-4632-82bc-ff59785941ff,Self Scratch,2020,Yang Chenghua,France,FR,"Animation, Short",5,5,0,0,0,2021,2021,0
+8a722fec-966e-4444-ac99-ff360c9046db,Skyscraper Film,2022,Federica Foglia,Canada,CA,"Avant-Garde, Short",5,5,0,0,0,2023,2023,0
+41c66bd5-9cc1-4f57-b38d-48c9b2b6d973,Soup,2020,Inga Sukhorukova,Russia,RU,"Drama, LGBTQ+, Short",5,5,0,0,1,2020,2021,1
+7704e897-2e81-45ee-a211-adc99e473ffc,Spotted Yellow,2020,Baran Sarmad,Iran,IR,"Drama, Fantasy, Short",5,5,0,0,0,2020,2021,1
+d73b8bc2-4140-46b8-88b0-3289ca7e484d,Sushi Noh,2021,Jayden Rathsam Hüa,Australia,AU,"Comedy, Drama, Short",5,5,0,0,0,2021,2022,1
+2757c226-e773-4fd1-9807-6191aaab3ee7,The Eyeball Person,2023,Yuri Muraoka,Japan,JP,"Avant-Garde, Documentary, Short",5,5,0,0,0,2023,2024,1
+09fb033c-b922-42eb-a7a4-984e7c2484e9,The Grave of St. Oran,2019,Jim Batt,Australia,AU,"Animation, Short",5,5,0,0,0,2019,2022,3
+eff6d6d3-dc01-48e9-99f0-c2d090611e13,The Tent,2019,Rebecca Figenschau,Norway,NO,"Drama, Short",5,5,0,0,0,2019,2020,1
+da1704c2-31b9-4fd5-a1c1-d28a4b4a4a51,Thing,2021,Malte Stein,Germany,DE,"Animation, Short",5,6,0,0,0,2021,2022,1
+5390fc21-1279-4286-82eb-2b1d6a0228ae,"Under the Skin, the Bark",2021,Franck Dion,France,FR,"Animation, Short",5,5,0,0,0,2021,2022,1
+cd161aa4-82f5-4f6c-be87-ac72226eb575,Ward's Henna Party,2020,Mostafa Morad,Egypt,EG,Short,5,6,0,0,0,2020,2021,1
+754cedf7-091a-42d7-929f-86ee4ad53da6,We Had Fun,2025,Linda Lô,France,FR,Short,5,5,0,0,0,2025,2025,0
+b1d983d7-22d1-4e10-966b-43b1bdacb5cb,Wildebeest,2018,"Matthias Phlips, Nicolas Keppens",Belgium,BE,"Animation, Short",5,5,0,1,0,2018,2021,3
+e5cabcbc-c247-4aaf-bbd0-0c8a7b72249e,A Period Piece,2020,Shuchi Talati,"France, United States","FR, US",Short,4,4,0,0,0,2020,2021,1
+0009ae15-afeb-45d7-8376-158b6fa5a1fa,A Quiet Man,2021,Nyima Cartier,France,FR,Short,4,4,0,0,0,2021,2025,4
+9e15b64c-4294-45eb-8892-22a826988a05,A Strange Trial,2018,Marcel Barelli,Switzerland,CH,"Animation, Documentary, Short",4,4,0,0,0,2018,2022,4
+8b69ff4a-ae0b-493c-acc0-03d226457b75,Abada,2020,Jean-Benoît Ugeux,"Belgium, France","BE, FR",Short,4,4,0,0,0,2021,2021,0
+652f5841-264e-43c8-bc3d-31e2cdb9b0d5,At Little Wheelie Three Days Ago,2022,Andrew Stephen Lee,United States,US,Short,4,4,0,0,0,2022,2023,1
+c3315769-e06f-468c-a733-ad9a458dcef7,Blackout,2024,Chris Urch,United Kingdom,GB,"Drama, LGBTQ+, Short",4,4,1,0,0,2025,2025,0
+dfda5c3b-af5e-48a4-a756-215b1e05c7d6,Born in Damascus,2021,Laura Wadha,United Kingdom,GB,"Documentary, Short",4,4,1,0,0,2021,2022,1
+291e786d-2ecd-4054-9d49-e8f5317e09e8,Dad,2019,"Atle Solberg Blakseth, Einar Dunsæd",Norway,NO,"Animation, Short",4,4,0,0,1,2019,2019,0
+c844e491-a437-4139-9b8a-e001b4da0795,Dizzy Cavalry,2025,Patrick Doyon,Canada,CA,"Animation, Avant-Garde, Short",4,4,0,0,0,2025,2025,0
+8384c870-fe15-4f64-969d-c951e1b5c58c,Don't Lose Your Head,2015,Karolina Specht,Poland,PL,"Animation, Short",4,4,0,0,0,2015,2015,0
+bae41d4d-38b5-40a9-aab6-e661de625827,Eating in the Dark,2021,Inari Sirola,United Kingdom,GB,"Animation, Short",4,5,0,0,0,2021,2025,4
+657f7ab5-086c-4274-bf99-88879a13602a,Flow,2019,Adriaan Lokman,"France, Netherlands","FR, NL","Animation, Short",4,4,0,0,0,2019,2023,4
+05aff467-ddc5-4672-be96-91fabea50831,Hungry Joe,2020,"Paul Holbrook, Samuel Dawe",United Kingdom,GB,"Horror, Short",4,5,0,1,0,2020,2022,2
+706b3e05-ef0b-47d0-a4ee-be20019f396f,I Want,2019,Anne Isensee,Germany,DE,"Animation, Short",4,5,0,0,0,2019,2023,4
+4ed34d74-4b82-4e72-942d-3ef2a4fbe9f1,Into Light,2021,Sheona McDonald,Canada,CA,"Documentary, LGBTQ+, Short",4,4,0,0,0,2021,2021,0
+98713285-6ef2-40a2-abd9-eaab3a89560e,It's Alright,2020,Jorūnė Greičiūtė,Lithuania,LT,"Drama, Short",4,4,0,0,0,2021,2025,4
+03453689-174f-4a15-8baf-7274a3abe4a0,Killing Boris Johnson,2023,Musa Alderson-Clarke,United Kingdom,GB,Short,4,4,0,0,0,2023,2023,0
+49652ae9-e275-46ef-8b9c-baa31b2b7026,Learning Tagalog with Kayla,2021,Kayla Galang,United States,US,Short,4,4,0,0,0,2021,2021,0
+54a415f6-a33c-440d-910a-75393e86aeea,Miss Fortunate,2020,Ella Jones,United Kingdom,GB,"Comedy, Short",4,4,0,0,0,2021,2022,1
+3486af16-578f-4c90-b7e4-8e1f994f8d5a,Mushka,2023,Andreas Deja,United States,US,"Animation, Short",4,4,2,0,0,2023,2024,1
+c98327da-5f11-4357-ae97-2c01395d78de,My Brother Luca,2019,"Carlos Algara, Catalina Serna",Mexico,MX,"Animation, Short",4,4,0,0,0,2019,2019,0
+5961957f-0769-4bf4-bc9d-4d3495649db2,Plantarium,2020,Tomek Ducki,"Hungary, Poland","HU, PL","Animation, Short",4,4,0,0,0,2020,2022,2
+3221b6d5-16f2-4bef-b728-ef1b632cec64,Portrait of a Woman,2020,Natalia Dutkiewicz,Poland,PL,"Animation, Short",4,4,0,0,0,2020,2020,0
+08f12131-0c96-4228-942d-9a6495326b4a,Postpartum,2020,Henriette Rietz,Germany,DE,"Animation, Short",4,4,1,0,0,2020,2021,1
+78e145bb-ad95-4465-88bd-5589d49b2592,Radix,2025,Anne Breymann,Germany,DE,"Animation, Short",4,4,0,0,0,2025,2025,0
+e5fda731-a107-4a0e-9dd8-949c0041ce07,Strangers in the Dark,2023,"Jenni Pystynen, Perttu Inkilä",Finland,FI,"Avant-Garde, Documentary, Short",4,4,0,0,0,2023,2023,0
+144dde97-d000-4419-af9d-06fb0403543c,Suruaika,2022,"Radu Pop, Vlad Ilicevici",Romania,RO,"Animation, Short",4,4,0,0,0,2022,2024,2
+8514d1c6-1724-43d2-b6ff-fe88bf6dca17,The Bayview,2021,Daniel Cook,United Kingdom,GB,"Documentary, Short",4,4,0,1,0,2022,2025,3
+f0379f83-42f6-4790-9720-9062cfa146fc,The Boyg,2016,Kristian Pedersen,Norway,NO,"Animation, Short",4,4,0,0,0,2016,2016,0
+dd573fc5-1788-4b94-8aca-be3f4527d71e,The Dawn of Ape,2019,Mirai Mizue,Japan,JP,"Animation, Short",4,4,0,0,0,2019,2019,0
+ec3d5246-b717-4dd6-8574-f994d3058b5d,The Edge,2020,"Géraldine Cammisar, Zaide Kutay",Switzerland,CH,"Animation, Short",4,4,0,0,0,2020,2021,1
+5d01f73d-5a14-4639-a3d0-6213aa76d369,The Frolic,2021,Jhao Yi-Han,Taiwan,TW,"Animation, Short",4,4,0,0,0,2021,2021,0
+51b1a5b2-6b1a-4988-82b5-807fd2fe9389,The Ghost from Mariupol,2023,Marie Chemin,Switzerland,CH,"Documentary, Short",4,4,0,0,0,2023,2023,0
+c4189f9c-4c9f-437b-9a7e-ca4c65a48a7a,The Tiger Who Came to Tea,2019,Robin Shaw,United Kingdom,GB,"Animation, Short",4,5,1,0,0,2020,2022,2
+3c66ba7f-fa7c-4863-8ddd-0327e91442a7,The Vibrant Village,2019,Weronika Jurkiewicz,Poland,PL,"Documentary, Short",4,4,0,0,0,2019,2020,1
+9a0c58b8-d9d0-4870-93dc-a105f8558371,They,2019,Louisa Rechenbach,United Kingdom,GB,"Documentary, Short",4,4,1,0,0,2019,2020,1
+7d61792e-6afd-478a-9412-5b6067a9485e,You're a Shadow,2025,Rajee Samarasinghe,Sri Lanka,LK,"Avant-Garde, Documentary, Short",4,4,0,0,0,2025,2025,0
+8146bd79-a5d6-487a-ac28-d4102390bade,A Little More Action,2025,Alexis Beaumont,France,FR,"Animation, Short",3,3,0,0,0,2025,2025,0
+d5fc73f2-8ffa-4067-a11b-8a656f3af34c,A Unique Opportunity,2020,Joël Curtz,"Belgium, France","BE, FR","Comedy, Drama, Short",3,3,0,0,0,2020,2020,0
+1e9e810e-b403-49e3-8512-eae470585edd,Almost There,2019,Nelly Michenaud,United Kingdom,GB,"Animation, Short",3,3,0,0,0,2019,2019,0
+59a7128c-edf4-4ee7-9919-574fee2b5143,Altötting,2020,Andreas Hykade,"Canada, Portugal","CA, PT","Animation, Short",3,3,0,0,0,2020,2020,0
+cd01f7f0-d053-46ae-aaa6-b91e8ea1724a,An Island,2017,Rory Byrne,Ireland,IE,"Animation, Short",3,3,0,0,0,2018,2018,0
+e11d3d90-c2ee-4633-b89d-c3bcdd389f2f,Animals,2019,Tue Sanggaard,Denmark,DK,"Animation, Comedy, Short",3,3,0,0,0,2019,2019,0
+d8856aee-c54f-4d21-b70a-85fe95f30ef9,BabyThump,2021,Ian Killick,United Kingdom,GB,Short,3,3,0,0,0,2022,2024,2
+3b569ea8-bc44-4f62-afeb-47bda9562811,Bench,2020,Rich Webber,United Kingdom,GB,"Animation, Short",3,4,0,0,0,2020,2022,2
+cc0bd2da-d9b4-489d-b8ea-eb03f505d488,Bloomers,2019,Samantha Moore,"Austria, United Kingdom","AT, GB","Animation, Documentary, Short",3,3,0,0,0,2019,2019,0
+e5ca49af-ecb0-4f35-84ee-33d36a7209a0,Boddyssey,2022,Jonas Bienz,Switzerland,CH,"Animation, Short",3,3,0,0,0,2022,2023,1
+68cf3460-d0f7-4820-bc3d-b4d682124f35,Ceremony Night,2019,Behnam Abedi,Iran,IR,Short,3,3,0,0,0,2019,2020,1
+65d88f0e-fcb9-4745-8084-399e090ec28c,Christy,2019,Brendan Canty,Ireland,IE,"Drama, Short",3,3,0,0,0,2020,2020,0
+7b7023ea-41a1-432e-8fd9-b7e0da695559,Cock,2023,Robin Jensen,Norway,NO,"Comedy, Short",3,3,0,0,0,2023,2024,1
+2f6fdd46-a461-41dc-9465-01a7d266b55a,Creepy Pasta Salad,2019,Lauren Orme,United Kingdom,GB,"Animation, Short",3,3,0,0,0,2019,2019,0
+b54ef687-1b2d-44c6-a057-a04b75533157,Culling,2020,Matty Crawford,United Kingdom,GB,Short,3,4,1,0,0,2021,2022,1
+98d3ed1a-0f1c-4575-8a23-479921296d40,Currents / Perpendicolare Avanti,2021,Federica Foglia,Canada,CA,"Avant-Garde, Short",3,3,0,0,0,2022,2023,1
+27ab7afd-d265-42a1-bdc6-2bb33b4dcceb,Depart at 22,2015,Wiep Teeuwisse,Netherlands,NL,"Animation, Short",3,3,0,0,0,2016,2016,0
+0d9e53f8-85d3-4d4b-9d15-60506c14def3,Dinner's Ready,2021,Yuan Li Elizabeth Xu,United States,US,"Animation, Short",3,3,0,0,0,2022,2024,2
+70d0bc35-c5c1-4ea9-b30c-c2e5da73bf22,Family Bonds,2019,Maria Schmidt,Germany,DE,"Animation, Short",3,4,0,0,0,2019,2024,5
+fefb84bd-110f-4c09-926b-e8bc3f634cbc,Family Life,2017,Anna-Karin Örander,Sweden,SE,"Drama, Short",3,3,0,0,0,2017,2018,1
+88d015e6-f54a-4beb-aeac-2b55c56d511a,Father,2019,Isabel Lamberti,Netherlands,NL,Short,3,3,0,0,0,2019,2020,1
+113d26f0-c4ae-49bb-a662-bd386a1041d2,Father of the Bride,2020,Rhys Marc Jones,United Kingdom,GB,"Drama, Short",3,4,0,0,0,2020,2022,2
+af086a32-d8b9-4c1f-b213-f4285054ed98,Follow Me Wherever I Go,2025,Max DeFalco,United States,US,Short,3,3,0,0,0,2025,2025,0
+26559e4d-b4d7-4243-b74f-be30e77ac3c1,Footsteps on the Wind,2021,"Faga Melo, Gustavo Leal, Maya Sanbar","Brazil, United States","BR, US","Animation, Short",3,4,0,0,0,2021,2022,1
+d91ae1d7-4e71-4246-9034-9e82d81e2f81,"Gon, The Little Fox",2019,Takeshi Yashiro,Japan,JP,"Animation, Short",3,3,0,0,0,2019,2020,1
+4cf369fe-7041-4a4b-9d2d-a16d691dfbe2,Hand,2021,Ho Tsz Wing,"China, Hong Kong","CN, HK","Animation, Short",3,3,0,0,0,2021,2022,1
+39592327-8f78-4b28-88d9-2012a30c107c,Happiness Machine,2019,"Ana Nedeljkovic, Andrea Schneider, Elizabeth Hobbs, Eni Brandner, Joanna Kożuch, Michelle Kranot, Rebecca Blöcher, Samantha Moore, Susanne Jirkuff, Vessela Dantcheva","Bulgaria, Serbia","BG, RS",Animation,3,3,0,0,0,2019,2019,0
+6f48bcc7-18f4-43ac-a74e-f5b15b873dd2,How Does It Start,2019,Amber Sealey,United States,US,Short,3,3,1,0,0,2019,2019,0
+2a727a76-2c87-49db-b4f5-38ebf2c540d6,Hugo & Holger,2019,Teddy Kristiansen,Denmark,DK,"Animation, Short",3,3,0,0,0,2019,2020,1
+e66dae78-b7e3-4d26-a332-79d3712126c5,I'll Fly Higher,2015,Isabel Lamberti,"Netherlands, Spain","ES, NL","Documentary, Short",3,3,0,0,0,2015,2016,1
+cefb7adc-0e93-4982-a9ae-63c6d222d646,If You Knew,2019,Stroma Cairns,United Kingdom,GB,"Documentary, Short",3,3,0,0,1,2019,2019,0
+1d18ad91-ce5f-499f-ad5b-5ba2913aebbb,In Curve Notes _ Stream,2023,Flavia Regaldo,Portugal,PT,"Animation, Short",3,3,0,0,0,2023,2023,0
+36590cd4-2ad6-4067-8b2e-a973600b926f,In Other Words,2016,Tal Kantor,Israel,IL,"Animation, Short",3,3,0,0,0,2016,2016,0
+60a319d4-aac5-41a3-ac8d-f859816684a7,In the Company of Insects,2020,Duncan Cowles,United Kingdom,GB,Short,3,4,0,0,0,2020,2022,2
+0679bebc-9c42-4e6a-886d-7cc949316ee7,Jeijay,2021,"Maren Wiese, Petra Stipetić",Germany,DE,"Animation, Short",3,3,0,0,0,2021,2021,0
+2a4a5a98-91b4-4da8-98a3-eaa6f7afbcdb,Know the Grass,2021,Sophie Littman,United Kingdom,GB,Short,3,4,0,1,0,2021,2022,1
+ce284780-c72a-4bd2-8ecc-5a8c1665dc9d,Lilith & Eve,2022,Samuel de Ceccatty,United Kingdom,GB,"Animation, Short",3,3,0,0,0,2022,2023,1
+251066c5-3604-453b-84cc-7fbf43abd8de,Lost & Found,2025,Wiktoria Kwoka,Poland,PL,"Comedy, Drama, Short",3,3,0,0,1,2025,2025,0
+b1141f69-b2f5-469e-b68d-8224ac51d03d,Lunch on the Grass,2019,"Jocelyn Charles, Jules Bourgès, Nathan Harbonn Viaud, Pierre Rougemont",France,FR,"Animation, Short",3,3,0,0,0,2020,2020,0
+b5a6bda8-cb92-4ac3-8446-f12045682323,Metamorphosis,2020,Wang Xi,United States,US,"Animation, Short",3,3,0,0,0,2020,2021,1
+760b2339-27d0-4cbd-95da-7bd238d569e0,Modern Babel,2019,Lin Zhao,China,CN,"Animation, Short",3,3,0,0,0,2019,2019,0
+10e61a50-1cf8-430d-a2f4-0bb415cb69d7,Mondo Domino,2021,Suki,France,FR,"Animation, Short",3,3,0,0,0,2021,2022,1
+3d466a4e-1198-4f1c-af5d-06f9c1f1a39a,Mother Didn't Know,2020,Anita Killi,Norway,NO,"Animation, Short",3,3,0,0,0,2020,2021,1
+7171210a-de2e-4d8d-a6c0-0fb0a0266727,Nora Can’t Score,2025,Joséfa Celestin,United Kingdom,GB,Short,3,3,0,0,0,2025,2025,0
+35aeeff4-0047-4b20-9044-f25c1cf77f7b,Origin of Man,2019,Pjotr Sapegin,"Norway, Sweden","NO, SE",Short,3,4,0,1,0,2019,2021,2
+b007e730-cc5c-41d5-bd2f-00832511f487,Ostrich Theory,2020,Simon Ellis,United Kingdom,GB,Short,3,4,0,0,0,2020,2022,2
+ccde3491-8438-457a-bf9f-a4657f2d20c3,Pen Mari,2025,Sion Marshall-Waters,United Kingdom,GB,"Comedy, Short",3,3,0,0,0,2025,2025,0
+94a08ba2-4a2d-4e96-ba4a-e8d1d4bdf2ac,Peter the Penguin,2020,Andrew Rutter,United Kingdom,GB,"Comedy, Short",3,4,0,0,0,2020,2022,2
+efc34871-30c4-45f8-a637-cbbda18c17ae,Red,2025,Zoé Arène,"Belgium, France","BE, FR",Short,3,3,0,0,0,2025,2025,0
+93aa20ca-62a7-4e85-b93a-2c84fb03e8b5,Reflection,2020,Juan Carlos Mostaza,Spain,ES,"Animation, Short",3,3,0,0,0,2020,2021,1
+c343016d-606a-4677-a1ed-352dbdbb39c2,Rehearsal,2019,Courtney Hope Therond,United States,US,"Drama, Short",3,3,0,0,0,2019,2019,0
+f10d0b89-c54f-4e6b-836b-bff86b85c38a,Signs,2020,Dustin Rees,Switzerland,CH,"Animation, Short",3,3,0,0,1,2020,2021,1
+35d65095-2ac8-4584-8289-5666dbe5dd5c,Silence,2019,Tristan Heanue,Ireland,IE,Short,3,4,1,2,0,2019,2022,3
+37297e69-a1de-4d90-83a6-b694c1206662,Silence,2020,Brwa Vahabpour,Norway,NO,Short,3,3,0,0,0,2020,2021,1
+73baeb34-c7e4-4d21-befa-69365df903d3,Some Manifestations of the South,2020,Wang Zhiyi,"China, United Kingdom","CN, GB",Short,3,3,0,0,0,2021,2021,0
+d77a2cc7-7f61-4cf4-8041-c0c092de8aec,Something Like the End of the World,2025,Emma Doxiadi,Greece,GR,Short,3,3,0,0,0,2025,2025,0
+252032c5-cfa0-4542-b1f7-d1d40ebe24df,Soviet Fantasia,2024,Penn Bálint,"Hungary, United Kingdom","GB, HU",Short,3,3,0,0,0,2024,2025,1
+ccc9759e-c4ba-4618-9c4f-3b544f04127e,Speed,2019,Ben Mitchell,United Kingdom,GB,"Animation, Short",3,4,0,0,0,2020,2023,3
+b71fdc18-f2cd-4922-a736-f6bbad1f6f26,The Afghanistans,2019,Adrian Silisteanu,Romania,RO,Short,3,3,0,0,0,2019,2019,0
+194ab2ee-af90-4946-915a-a3f990c3cfcd,The Circle,2019,Lanre Malaolu,United Kingdom,GB,"Documentary, Short",3,3,0,0,0,2019,2019,0
+513e371a-c806-4b96-9bc4-4b566dbd704f,The Dog,2025,Kaspar Jancis,Estonia,EE,"Animation, Short",3,3,0,0,0,2025,2025,0
+97bf410d-d47e-4e6c-a9cb-10f2765f1781,The Heavy Burden,2019,Yılmaz Özdil,Turkey,TR,Short,3,3,0,0,0,2019,2020,1
+b93ca4f1-dd15-4281-be94-96bfe047f8a6,The Immortality of the Crab,2019,Giacomo Manzotti,Italy,IT,"Animation, Avant-Garde, Short",3,3,0,0,0,2019,2025,6
+96429deb-b9b7-459a-938a-a0af443a7883,The Last Train,2019,Ross Hogg,United Kingdom,GB,"Animation, Short",3,4,0,0,0,2020,2022,2
+ca578f28-a22d-49a2-9484-b00b963f2104,The Lighting,2021,Chihying Musquiqui,"Taiwan, Togo","TG, TW",Short,3,3,0,0,0,2022,2022,0
+c20ef148-5675-40c4-8c50-2dc2f2217706,The Opposites Game,2019,"Anna “Samo” Bergmann, Lisa LaBracio",United States,US,"Animation, Short",3,3,1,0,0,2019,2019,0
+81f848c5-e7b5-408c-bc15-638aa7738fa4,The Passerby,2020,Pieter Coudyzer,Belgium,BE,"Animation, Short",3,3,0,0,0,2020,2021,1
+55891042-d4d9-4719-9cac-80a4bd6d843c,The Song of a Lost Boy,2020,Daniel Quirke,United Kingdom,GB,"Animation, Short",3,4,0,1,0,2020,2022,2
+7dfa42a6-4b74-495f-ad9c-9d23cd69fb2c,The Thing That Ate the Birds,2021,"Dan Gitsham, Sophie Mair",United Kingdom,GB,Short,3,4,0,0,0,2021,2022,1
+3aff3013-ee39-4662-8353-2be70b2d9318,The Town,2020,Lindiwe Makgalemele,South Africa,ZA,Short,3,3,0,0,0,2021,2022,1
+983032fb-0b90-4ce9-ac2f-9edab73337bf,The Visit,2021,Morrie Tan,Singapore,SG,"Animation, Short",3,3,0,0,0,2021,2022,1
+a64b4ac7-1881-4060-af5f-45bac3bdc983,The Walk,2020,Yoakim Bélanger,Canada,CA,"Animation, Short",3,3,0,0,0,2020,2021,1
+f2dfa7b8-8134-41dc-9f50-761a86c0a0df,Transit,2020,Ariq Anam Khan,Bangladesh,BD,Short,3,3,0,0,0,2020,2021,1
+ea1382ba-999c-4a2f-9ca3-fd1a5eb8a3b8,Umbilical,2020,Elpida Stathatou,"Greece, United Kingdom","GB, GR",Short,3,4,0,0,0,2021,2022,1
+2b494cf7-f867-4b47-8df0-83f6ed5ac2ec,Unfolded,2019,Cristina Picchi,"Italy, Lithuania","IT, LT","Drama, Short",3,3,0,1,0,2019,2020,1
+df69fd43-909e-476f-bdc2-3628bf6ea108,Upload to Story,2019,Emma Pål Brunzell,Sweden,SE,Short,3,3,0,0,0,2019,2019,0
+c8b9a9ad-8b8a-4b99-bd98-d5b2d3d35ea5,Verisimilitude,2020,David Proud,United Kingdom,GB,Short,3,4,0,0,0,2020,2022,2
+8f3abb6e-aba9-4c0f-9090-c206a24276c6,Walk with Kings,2020,Guillaume Senez,Belgium,BE,"Drama, Short",3,3,0,0,0,2020,2021,1
+14e10a1c-423b-49da-a058-54963a6d54d5,We Hope You Won't Need to Come Back,2020,Anastazja Naumenko,Poland,PL,"Animation, Short",3,3,0,0,0,2020,2021,1
+b2f966d4-a060-401e-9f2f-96051d0babde,Welcome to the Ball,2019,Adam Vincent Wright,United States,US,Short,3,3,0,0,0,2019,2019,0
+af3ac4ae-959d-4f9a-927d-7275dc94e61e,Where Do We Go?,2021,Barbara Lervig,"Faroe Islands, United Kingdom","FO, GB",Short,3,4,0,0,0,2021,2022,1
+dd436ce0-d8e4-403f-8431-c1560f42cf37,Where to Land,2020,Sawandi Groskind,Finland,FI,Short,3,3,0,0,0,2020,2020,0
+0356360b-7fb4-48fe-aa5e-ff3e20971b14,Wild Dog,2024,Chelsea Ingram,Australia,AU,Short,3,3,0,0,0,2025,2025,0
+032f5cc4-1dd9-4dd7-a02b-e9d4eafbcdbc,Yummy Mummy,2022,Gabriela Staniszewska,United Kingdom,GB,"Horror, Short",3,3,0,0,0,2022,2023,1
+8885183d-2d9a-4328-afe1-9e6ef73f5451,A Country of Two,2016,Neritan Zinxhiria,"Albania, Greece","AL, GR","Drama, Short",2,2,0,0,0,2016,2016,0
+0dbdf890-c5e3-400c-83e8-5d712de8e351,A Love/Hate Relationship,2020,Anna Ginsburg,United Kingdom,GB,"Animation, Short",2,2,0,0,0,2021,2021,0
+39639f6a-103a-4851-8008-44aba135fdf4,A White-White Day,2022,Vasiliy Chirkov,Russia,RU,"Animation, Short",2,2,0,0,0,2022,2024,2
+9e046f27-0516-4097-beac-1fe14d584f42,AM CU CE - Pride,2019,Hannah Weissenborn,Germany,DE,"Drama, Short",2,2,0,0,0,2019,2019,0
+fbc9f3fe-237e-4e9a-ba1a-3aaa87fd6e0b,Andros,2019,Doris Tääker,United Kingdom,GB,Short,2,2,0,0,0,2019,2019,0
+671c8627-8ee3-4e2c-8137-de3c3f9a6ca9,Are You Listening Mother?,2019,Tuna Kaptan,"Germany, Turkey","DE, TR","Drama, Short",2,2,0,0,0,2019,2019,0
+5fafae38-953b-45ac-b112-d5d08fd11370,Are You Ok,2021,Mattis Adar Ohana Goksøyr,Norway,NO,Short,2,2,0,0,0,2021,2022,1
+d9c7c6ce-ed0e-4db0-b871-06a082324db5,Asian Brass,2021,Ma Guyuan,"China, United Kingdom","CN, GB",Short,2,2,0,0,0,2021,2021,0
+281d4e34-6cef-4e7c-a962-78eb7aafd324,Asparagus Tips,2019,Sam Bailey,United Kingdom,GB,Short,2,2,0,0,0,2019,2019,0
+15572900-9573-458e-a2a0-881daa08598f,Azaar,2019,Myriam Raja,United Kingdom,GB,"Drama, Short",2,2,0,0,0,2019,2019,0
+1c5f7464-2142-44c4-9fee-0b3859468bd1,Backwards,2020,Marco Augelli,United Kingdom,GB,Short,2,3,0,0,0,2020,2022,2
+b5e6b24b-c028-45df-9427-b4819b003179,Bend,2020,Georgia Goggin,United Kingdom,GB,Short,2,3,0,0,0,2021,2022,1
+823d23a9-9cab-4a50-ace3-18562c267a66,Blockhead,2025,Matt Harlock,United Kingdom,GB,Thriller,2,2,0,0,0,2025,2025,0
+3ef78b2f-2801-47cc-9270-07827919c678,Boiling Point,2019,Philip Barantini,United Kingdom,GB,"Drama, Short",2,2,0,1,0,2019,2019,0
+61b718f9-b2d6-4d4d-8eb3-aaf31896754b,Breadline,2020,Carol Salter,United Kingdom,GB,"Documentary, Short",2,3,0,0,0,2020,2022,2
+bb419c3c-edfb-47f3-824a-21b3cd363a43,Co-ognition,2020,Przemysław Świda,Poland,PL,"Animation, Short",2,2,0,0,0,2020,2021,1
+42686336-f571-4d0d-a5d9-3f32fa80e4d5,Coldsore,2019,Caitlin McCarthy,United Kingdom,GB,"Animation, Short",2,2,0,0,0,2019,2020,1
+158d3420-3b13-46c5-b67a-bdc2ce648e33,Colour!,2021,Britt Bailey,"Ireland, United Kingdom","GB, IE","Animation, Short",2,2,0,0,0,2022,2022,0
+f2bf92bc-d996-4d6d-849a-2d935dc32c17,Dawta,2021,Jessica Ashman,United Kingdom,GB,"Animation, Short",2,2,0,0,0,2022,2023,1
+d1e88b5a-1218-4bc6-bb79-6b4ef15a98f6,Dragged Up,2021,Laura Jayne Tunbridge,United Kingdom,GB,Short,2,3,0,0,0,2021,2022,1
+fc2d830e-24bd-47bb-bd5a-d70e15e03ccc,Edmund the Magnificent,2017,Ben Ockrent,United Kingdom,GB,"Comedy, Drama, Family, Short",2,2,0,0,0,2017,2017,0
+96317139-e506-4e10-863e-3fa929f01bc0,Exam,2025,Jan Naszewski,"France, Poland","FR, PL",Short,2,2,0,0,0,2025,2025,0
+ecb89ea4-f3ce-408d-a7a3-380a696c2063,Exit To Stage,2019,"Daphne Schmon, Emily Carlton",United Kingdom,GB,Short,2,2,0,0,0,2019,2019,0
+6f94492a-8179-4569-b69e-219fdafe3850,Familiar Stranger,2025,Ace Mahbaz,United Kingdom,GB,Short,2,2,0,0,0,2025,2025,0
+dc202f6d-5fe3-4ef1-a295-b0e2977adfca,Fata Morgana,2025,Aasne Vaa Greibrokk,Norway,NO,Short,2,2,0,0,0,2025,2026,1
+eede65d7-8559-4b45-97a5-01b8e0ea1f37,Flying Potato and Other Misunderstandings,2021,Elina Oikari,Finland,FI,Short,2,2,0,0,0,2022,2022,0
+f0cfbbfc-a551-44bb-a3b5-5053e464521b,Four Cups of Coffee or Three,2020,Sebastian Lach,Poland,PL,Short,2,2,0,0,0,2021,2021,0
+007c9a98-aa9b-4f09-b060-1bda3e7a6d87,Fuar: A Counter-Memory,2022,Ezgi Özbakkaloğlu,United Kingdom,GB,"Animation, Short",2,2,0,0,0,2023,2023,0
+257626b7-c60e-4aa8-be27-8bedec2c1388,Fussel,2019,Alex Berweck,Germany,DE,"Animation, Short",2,2,0,0,0,2019,2020,1
+2d5ff175-aae3-4528-ace5-ede13d06e703,Getting Started,2019,William Crook,"Switzerland, United Kingdom","CH, GB",Short,2,2,0,0,0,2019,2020,1
+84fd549c-f521-4fa4-9d73-7b67e59a9eb2,Goldfish,2019,Hector Dockrill,United Kingdom,GB,"Drama, Short",2,2,0,1,0,2019,2019,0
+c9943417-14d4-457f-a6d6-e98918ab8db7,Goldie,2019,Emily Brundige,United States,US,"Animation, Short",2,2,0,0,1,2019,2019,0
+d36f9c45-8abc-42f3-8073-03cfe7f0edfd,Günter Falls in Love,2020,Josephine Lohoar Self,Ireland,IE,"Animation, Short",2,2,0,0,0,2021,2021,0
+b61b88a4-2f0c-46fe-817b-ee02b617a742,Heart to Heart,2020,Lilah Vandenburgh,United Kingdom,GB,Short,2,3,0,0,0,2020,2022,2
+337567ba-e126-4ef0-b597-16407113dd30,Hibiscus Season,2020,Éléonore Goldberg,Canada,CA,"Animation, Short",2,2,0,0,0,2020,2020,0
+b325b264-56bb-437e-b3b7-a02d143c7d3a,I'm Not a Robot,2019,Sean Buckelew,United States,US,"Animation, Short",2,2,1,0,0,2019,2020,1
+1eedd102-1a90-4958-878d-585dbe7e3d62,Idols Never Die,2019,Jerome Yoo,Canada,CA,Short,2,2,0,0,0,2019,2019,0
+2930e754-ab3b-4089-a810-e6bc650c066b,In Our Skin,2017,Rosa Beiroa,United Kingdom,GB,"Animation, Short",2,2,0,0,0,2018,2018,0
+9244cf10-4239-4872-9c8c-7c1a2ea2e728,In The Space You Left,2021,Christine Saab,United Kingdom,GB,"Documentary, Short",2,3,0,0,0,2021,2022,1
+7a854951-111c-476b-ad65-1e3d4ebbb2dd,Kelly,2019,Joseph Roberts,"Netherlands, United Kingdom","GB, NL",Short,2,3,0,0,0,2020,2022,2
+96b5a7f9-966c-4814-bd30-77c70e5612d1,Kiddo,2022,Brett Chapman,United Kingdom,GB,"Horror, Short",2,2,0,0,0,2023,2023,0
+2141b026-8778-4f32-bfe4-931a02ed7816,Kill Your Darlings,2023,Thirza Ingold,Switzerland,CH,"Animation, Short",2,2,0,0,0,2023,2024,1
+52a1ba24-227a-4f5a-9daf-932f6f92c95a,Kitty,2019,Maria Pawlikowska,United Kingdom,GB,Short,2,3,0,0,0,2020,2022,2
+423e6cfa-9d99-4e8e-8084-9c70653cfb9c,Koko Suzanne,2025,Zach Bandler,"Democratic Republic of the Congo, United States","CD, US",Short,2,2,0,0,0,2025,2025,0
+4a78a808-495a-4e1d-9405-34fc993c05c7,Luger,2019,Freddie Waters,United Kingdom,GB,Short,2,2,0,0,0,2019,2019,0
+e6e5bcc3-5404-4c66-8ab7-d99fee961a55,Mab Hudel,2022,Edward Rowe,United Kingdom,GB,Short,2,2,0,0,0,2022,2022,0
+721d2b41-d167-4845-82ce-6368a8767093,Machines of Loving Grace,2022,Viktor Schimpf,Germany,DE,"Sci-Fi, Short",2,2,0,0,0,2022,2023,1
+c6c762de-422e-4b13-9852-47e1cafc7102,Mad in Xpain,2020,Coke Riobóo,Spain,ES,"Animation, Short",2,2,0,0,0,2021,2021,0
+07f064eb-9b13-4d16-8386-b372d39abba5,Man on the hill,2016,Daisy Dickinson,United Kingdom,GB,"Avant-Garde, Music, Short",2,2,0,0,0,2016,2016,0
+37fc76e2-b6e8-47b2-9998-2e2f83a53e64,Memoirs of a Geeza,2019,Theo James Krekis,United Kingdom,GB,Short,2,2,0,0,0,2019,2019,0
+4db31954-ef74-4358-97ca-56648d976d0f,Mercury's Retrograde,2020,Zohar Dvir,United Kingdom,GB,"Animation, Short",2,3,0,0,0,2020,2022,2
+84f239df-a80a-4bfd-b895-e85f41f71a87,Mom's Hair,2021,Aleksey Evstigneev,Russia,RU,"Animation, Documentary, Short",2,2,0,0,0,2021,2021,0
+de06d884-0570-4b90-a958-9d386003468d,Monachopsis,2020,Liesbet van Loon,Belgium,BE,"Animation, Short",2,2,0,0,0,2020,2021,1
+36f920d4-217b-4666-834b-858cc59607d8,Mosaic,2020,"Imge Özbilge, Sine Özbilge",Belgium,BE,"Animation, Short",2,2,0,0,0,2020,2020,0
+6db31a39-8cef-4ac5-8730-9afc4609b64f,Motherclucker,2022,Greg McLeod,United Kingdom,GB,"Animation, Short",2,2,0,0,0,2022,2022,0
+823e6deb-a732-4c62-839c-2c016c07405c,My Hero,2020,Logan Jackson,United States,US,Short,2,2,0,0,0,2020,2020,0
+3e9bcf11-d017-4258-bb87-54731016fc0e,My Own Kind,2019,Mirjam Khera,"Germany, United States","DE, US",Short,2,2,0,0,0,2019,2019,0
+a4ce1452-3970-4512-abc8-991b50bac192,My Own Personal Lebanon,2020,Theo Panagopoulos,"Greece, United Kingdom","GB, GR","Documentary, Short",2,3,0,0,0,2020,2022,2
+3ff130ef-60c4-4f15-8c21-75b5b4b0213a,Neo Nahda,2023,May Ziadé,United Kingdom,GB,"Drama, LGBTQ+, Short",2,2,0,0,0,2023,2024,1
+b3ad949f-96a2-4e7e-8304-2fe22f89556f,Night Bus,2020,"Henrietta Ashworth, Jessica Ashworth",United Kingdom,GB,"Horror, Short",2,3,0,0,0,2020,2022,2
+7dcd0be3-ba9d-4903-bac4-ebc774de91ba,Nox Insomnia,2019,Guy Charnaux,Brazil,BR,"Animation, Short",2,2,0,0,0,2019,2020,1
+df81f7f4-6654-410e-8e25-fc1de45c1882,Once Familiar,2020,Rubén González,United Kingdom,GB,"Horror, Short, Thriller",2,3,0,0,0,2021,2022,1
+19d61450-7ee6-4fc6-af49-d0f616a77481,Our Perpetual Now,2019,Jorge Aguilar Rojo,"Mexico, United Kingdom","GB, MX","Animation, Short",2,3,0,0,0,2020,2022,2
+cd4759bf-504e-42cb-9446-e4375ae49593,Pagans,2019,Lucy Luscombe,United Kingdom,GB,Short,2,2,0,0,0,2019,2020,1
+3828787f-36ee-4548-aa5f-a635d2607b83,Pandora,2020,Matthias Lerch,Germany,DE,"Animation, Short",2,2,0,0,0,2021,2021,0
+35cfb4d6-f3ca-4048-8765-ef7c27c65909,Parched Return,2019,Roberto Veiga,Brazil,BR,Short,2,2,0,0,0,2019,2019,0
+13a71cc9-46da-4c2f-b8ce-d5f48d458c2c,Precious Bundle,2020,Kim Head,United Kingdom,GB,"Animation, Documentary, Short",2,3,0,0,0,2021,2022,1
+e4c48f8c-6cbf-400e-b9e4-94fb9ba7c499,Prince in a Pastry Shop,2020,Katarzyna Agopsowicz,Poland,PL,"Animation, Short",2,2,0,0,0,2021,2021,0
+19564db5-ae74-44fe-99a1-b9617a8cf71d,Returning,2020,Lucy Bridger,United Kingdom,GB,Short,2,3,0,0,0,2020,2022,2
+d1873a15-9085-4462-aead-c951c2df8114,Revert,2025,Miranda Stern,United Kingdom,GB,Short,2,2,0,0,0,2025,2025,0
+35a5fa6c-fe0d-4589-8bb0-15f90cbbf13a,Rootless,2022,Gabriella A. Moses,United States,US,Short,2,2,0,0,0,2022,2023,1
+5c466e5b-b29c-45f5-9b52-06852021c683,Sauna Security,2021,Nils Knoblich,Germany,DE,"Animation, Short",2,2,0,0,0,2021,2022,1
+3ee118e7-9a14-4403-9766-541b9182bed9,Señor,2019,Masha Clark,"Serbia, United Kingdom","GB, RS","Drama, Short",2,2,0,0,0,2019,2019,0
+76fd4702-0e87-462c-ae30-666fcc03f7b3,She,2020,Matt Greenhalgh,United Kingdom,GB,Short,2,3,0,0,0,2020,2022,2
+ac3d3c53-a4dc-4110-b959-8bd90d116050,Signs,2019,Yero Timi-Biu,United Kingdom,GB,Short,2,2,0,0,0,2019,2020,1
+6c5c685e-3286-42f6-9d6c-d2821f88425a,Silvering,2021,Eilidh Nicoll,United Kingdom,GB,"Animation, Short",2,3,0,0,0,2021,2022,1
+c6b9b259-2a98-4ab1-bef6-bcf02a5b97ba,Sports Day,2019,Lin Tu,China,CN,"Horror, Short",2,2,0,0,0,2019,2019,0
+6db405d1-62b4-4454-bc2c-161db2b6ea3f,Stay,2022,Yu Sun,United Kingdom,GB,"Animation, Short",2,2,1,0,0,2022,2022,0
+ee6fb9d7-0966-47aa-b992-2d6b183311b9,Staying,2020,Zillah Bowes,United Kingdom,GB,Short,2,3,0,0,0,2021,2022,1
+2ba1c96a-3a74-40c2-b854-83569c6488f2,Stumm,2020,Anna Theil,Germany,DE,"Animation, Documentary, Short",2,2,0,0,0,2020,2021,1
+49d51128-5cfe-4342-95f8-a4d000432ff3,Supper,2022,Dániel Bárány,Hungary,HU,"Animation, Short",2,2,0,0,0,2022,2022,0
+f2008c57-a7ac-4cd9-a338-a66680ab571b,Sweet Little Despair,2022,Carolina Petro,United Kingdom,GB,Short,2,2,0,0,0,2022,2022,0
+410a4e91-8b91-4b91-80a2-744126df3045,Swiped,2019,Steve Whiteley,United Kingdom,GB,Short,2,2,0,0,0,2019,2019,0
+b72af9f2-7484-4149-8944-07258cc7dd35,The Alphabeticians,2025,Ross Harrison,United Kingdom,GB,"Documentary, Short",2,2,0,0,0,2025,2025,0
+55e9cfa8-c2de-49eb-a7ad-18a1d8f63a2a,The Amazing Adventures of Awesome,2020,Allison Brownmoore,United Kingdom,GB,"Animation, Short",2,3,0,0,0,2020,2022,2
+a0f99a24-17b5-4c8d-b81c-659c9d187ba9,The Angler,2019,Chung Yu-lin,"Taiwan, United Kingdom","GB, TW",Short,2,2,0,0,0,2019,2019,0
+257e0738-fd7e-4927-9c02-70b9a1f20e8d,The Better Angels,2021,Michael Cusack,Australia,AU,"Animation, Short",2,2,0,0,0,2021,2021,0
+34965bc2-1a6b-47f2-aa7b-7239aae76f1b,The Crowd,2022,Pelin Kırca,Turkey,TR,"Animation, Short",2,2,0,0,0,2023,2023,0
+2b8aaa73-757d-412f-a524-d29066edd403,The Devil's Footprints,2023,Dean Puckett,United Kingdom,GB,"Horror, Short",2,2,0,0,0,2023,2023,0
+674ec115-4bfa-4fa0-b0b5-3527ff991d51,The Dragon Head Tree,2020,Wang Jiaqi,"China, United Kingdom","CN, GB","Animation, Short",2,2,0,0,0,2021,2021,0
+0e6a17ea-12fa-486d-a3f1-71016f11fc2e,The Evening Her Mind Jumped Out of Her Head,2015,"Kim Noce, Shaun Clark",United Kingdom,GB,"Animation, Comedy, Drama, Family, Fantasy, Short",2,2,0,0,0,2015,2015,0
+7d3a4b45-b7f6-4227-bcbc-d46bad078eab,The Fear Of Drawing,2019,Hugo Morel,France,FR,"Animation, Short",2,2,0,0,0,2019,2019,0
+69984bd2-2e04-43cd-bf23-cff85e192181,The First Days,2019,Nina Knag,Norway,NO,Short,2,2,1,0,0,2019,2019,0
+9d5ba4ad-3272-454a-b709-f0993c0b5244,The Foreigner,2019,Ben Allen,United Kingdom,GB,Short,2,2,0,0,0,2019,2019,0
+e57da650-6ff3-4b2e-9a89-2307c0dde2cc,The Invisible Boy,2020,James Fitzgerald,Ireland,IE,Short,2,3,0,0,0,2020,2022,2
+a7d9bca9-e9c8-4918-9ee0-370c3c976d46,The One Who Crossed the Sea,2020,Jonas Riemer,Germany,DE,"Animation, Documentary, Short",2,2,0,0,0,2021,2021,0
+d461a001-35e0-4f84-82e1-47f2d4fe985b,The Pastor's Wife,2020,Arttu Kapulainen,Finland,FI,"Comedy, Drama, Short",2,2,0,0,0,2021,2022,1
+1533fd9a-316b-4900-b953-7f71245e2057,The Piss Witch,2022,Jason Barker,United Kingdom,GB,Short,2,2,0,0,0,2022,2022,0
+a8ee0896-be10-4ee7-a6d2-4fc9694958a3,The Quest for Freedom and the Longing for Belonging,2020,Noam Paul,Israel,IL,"Animation, Short",2,2,0,0,0,2021,2022,1
+723bd9f3-6dac-4e15-9226-4498391511a0,The Scarecrows,2020,Dan Hodgson,United Kingdom,GB,"Documentary, Short",2,3,0,0,0,2020,2022,2
+d4755480-774e-4972-9df1-a55d33a465aa,The Tornado Outside,2023,Maria Tomazou,United Kingdom,GB,"Animation, Short",2,2,0,0,0,2023,2024,1
+b024eba4-d5e0-4807-ac98-9d71eb77125c,The Undying Pain of Existence,2025,Oscar Jacobson,Germany,DE,"Animation, Short",2,2,0,0,0,2025,2025,0
+fb07dc68-1797-46e2-a434-b89b93213eb7,The Unusual Bath of Mr. Otmar,2019,Niko Radas,Croatia,HR,"Animation, Crime, Short",2,2,0,0,0,2019,2019,0
+6795f2c5-dbda-4c72-b8b7-87a6007ca565,Time Trip Time,2022,"Kim Taewan, Shunny Kim",United Kingdom,GB,"Animation, Short",2,2,0,0,0,2022,2023,1
+c74e90e7-bbd3-4b7e-998c-c84b749bb0c4,Vert,2019,Kate Cox,United Kingdom,GB,Short,2,2,1,0,0,2019,2020,1
+2ca98fd9-ee34-4587-b882-d826d00aa00e,Visible,2019,Liv Mari Mortensen,Norway,NO,Short,2,2,0,0,0,2019,2020,1
+0b5605d0-b3c3-4815-9cf1-e3ac3234320c,When the Tide Comes,2025,Fêt-Nat Bailly,United Kingdom,GB,"Animation, Short",2,2,0,0,0,2025,2025,0
+a1940f9b-0e6b-494b-b15d-32ee319187ee,Whiteboy,2022,Matty Crawford,United Kingdom,GB,Short,2,2,0,0,0,2022,2023,1
+91373eb1-9fc1-4cbb-b263-441142aec6e7,...is the thing with feathers,2019,Jeneffa Soldatic,United States,US,Short,1,1,0,0,0,2019,2019,0
+a863336d-6856-4eaa-87e4-a6f441c34f6f,A Band Apart,2023,Ruth Hunduma,United Kingdom,GB,Short,1,1,0,0,0,2023,2023,0
+0f7718cd-ce50-40d7-a54e-81cae1f67465,A Better Situation,2016,Francisca Villela,Chile,CL,"Animation, Short",1,1,0,0,0,2016,2016,0
+f3180104-680b-4bdd-a6b2-f42356a7ce09,A Bullet Wasted,2019,George Milton,United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+c799bbc2-4df3-4c0b-aef3-62388ccda093,A Creature in the Night,2020,"Jonathan Stimac, R.J. Shields",United States,US,Short,1,1,0,0,0,2020,2020,0
+3ba3d58d-7de8-4f0d-a8d4-47884aa490f1,A Dead Canary,2019,James Davis,United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+005eba6f-4b41-497e-9db0-59d4a8fa7b58,A Kiss (Is Just a Kiss),2019,Jean Hogg,United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+a943cbba-1022-4583-8c8b-e13aeff49cb2,A Midwinter Night's Dream,2019,Martin Gooch,United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+c23b899c-5020-472c-ab23-75f3dca28f0a,A Noble Truth,2020,Tia Salisbury,United Kingdom,GB,Short,1,2,0,0,0,2020,2022,2
+9f4cdef9-f47f-46db-ac3b-8dac7dd4caaf,A Valentine's Story,2019,Peter Oti Asamoah,Ghana,GH,"Animation, Short",1,1,0,0,0,2019,2019,0
+cb73b07b-1264-4bcf-8627-0602be253219,Abstraction,2020,Michael Salkeld,United Kingdom,GB,"Animation, Short",1,1,0,0,0,2021,2021,0
+5863e5d0-d0bc-4fb2-96df-90cd6251176a,AfterLives,2019,Cameron Cook,United Kingdom,GB,"Animation, Short",1,1,0,0,0,2019,2019,0
+35f8ba91-763f-49e6-9a01-667319347156,All of Our Shadows,2020,"Daniel Greaves, Ruth Beni",United Kingdom,GB,"Animation, Short",1,2,0,0,0,2020,2022,2
+c3a4039b-343a-4563-8182-5f489718b3c9,Alula Chicken,2019,Pious Nyenyewa,Zimbabwe,ZW,"Animation, Short",1,1,0,0,0,2019,2019,0
+84adec95-fbba-448d-8bfe-8e4a74c4ce5b,An Inorganic Love Story,2019,Lizzy Mansfield,United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+e03ca796-b903-4f4e-b3d1-5a7124110b41,Animals,2025,Modiyar Abdukadyr,Kazakhstan,KZ,Short,1,1,0,0,0,2025,2025,0
+9b80225a-9059-4438-926f-e9fedddc9ff2,Armstrong,2020,Russ Etheridge,United Kingdom,GB,"Animation, Short",1,2,0,0,0,2020,2022,2
+e6915b78-1741-4bca-ae5e-2de26fbd638a,Atomic Love,2020,Imogen McCluskey,Australia,AU,"Drama, LGBTQ+, Short",1,1,0,0,0,2020,2020,0
+01168f93-2acc-48cc-9500-4e384fffa58c,Aura,2020,Chun Chun Chang,United States,US,"Animation, Short",1,1,0,0,0,2020,2020,0
+adcf44e3-ff4d-410c-9f67-86609c3d043f,Autonomat,2019,"Anne Fidler, Declan Hurley",Germany,DE,Short,1,1,0,0,0,2019,2019,0
+7f543b6a-dfaf-405b-aee1-e86b3c90b8bb,Babli,2019,Aneel Ahmad,"Pakistan, United Kingdom","GB, PK","Documentary, Short",1,1,0,0,0,2019,2019,0
+01cf7de2-5ea9-41c9-b46d-503ba4e15245,Bald,2021,Luke Bather,United Kingdom,GB,"Comedy, Short",1,1,0,0,0,2022,2022,0
+9f99d7e5-9b17-405d-a790-59d4ff791632,Bare Roots,2025,Ellen McDougall,United Kingdom,GB,Short,1,1,0,0,0,2025,2025,0
+e396492e-d914-4700-8a72-129703055c81,Bed,2020,Lucy Campbell,United Kingdom,GB,Short,1,2,0,0,0,2020,2022,2
+1c7c7e9a-1a5c-4f2c-aae5-77f3fd724f40,Being Seen,2023,Ren Faulkner,United Kingdom,GB,"Documentary, LGBTQ+, Short",1,1,0,0,0,2023,2023,0
+5c822320-a39d-4d7b-b26c-15f820a464fb,Beneath the Surface,2021,Musa Alderson-Clarke,United Kingdom,GB,Short,1,1,0,0,0,2022,2022,0
+0db956ca-0583-45cf-b189-95977027ec0f,Best Friend,2018,"David Feliu, Juliana de Lucca, Nicholas Olivieri, Shen YI, Varun Nair",France,FR,"Animation, Sci-Fi, Short",1,1,0,0,0,2019,2019,0
+457ceec9-b5c4-485c-a713-a67eb1030a74,Bill,2019,"Dan Gitsham, Sophie Mair",United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+142b5e4d-e55b-4c22-82ea-9b68ff187975,Bintimaji,2019,Stephanie Okeyo,Kenya,KE,"Animation, Short",1,1,0,0,0,2019,2019,0
+25ffe51b-9000-4af7-a004-1e592a6e610b,Blighty,2021,Theo Watkins,United Kingdom,GB,Short,1,2,0,0,0,2021,2022,1
+075f98a9-9339-4bf3-83f8-5ce465b6e38b,Blue Murder,2019,Alex Sultoon,United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+d725faed-8120-4dff-944f-0f5de505de60,Brain Space,2025,Laura Tofarides,United Kingdom,GB,"Animation, Short",1,1,0,0,0,2025,2025,0
+13b11923-f221-4e77-a16c-b3d18308fc42,Breaking Bread,2020,Yuan Li Elizabeth Xu,United States,US,"Animation, Short",1,1,0,0,0,2021,2021,0
+68cab2a5-ce69-4934-97a2-adf5d31e4cbe,Brunch,2021,Marnik Loysen,United Kingdom,GB,"Animation, Short",1,2,0,0,0,2021,2022,1
+44b30786-1f74-4fbd-85a7-c5e0cb803ab6,Bus Film,2022,Chris Childs,United Kingdom,GB,"Animation, Short",1,1,0,0,0,2022,2022,0
+a768f49a-32ef-44fa-8a5c-f564bbfd5fa4,Caged,2019,Stanslaus Manthi,Kenya,KE,"Animation, Short",1,1,0,0,0,2019,2019,0
+3ee20674-7c63-47be-8845-26ae20de9113,Callisto,2019,Eleanor James,United Kingdom,GB,"Animation, Short",1,1,0,0,0,2019,2019,0
+fffc8e9e-a01e-4d4d-bccf-cbde69308df3,Calloused,2022,Lara Angelina,United Kingdom,GB,Short,1,1,0,0,0,2022,2022,0
+455bb905-cff8-4cec-962a-5720dfeaea4a,Carbon Copy,2021,Jade Ayino,United Kingdom,GB,Short,1,1,0,0,0,2022,2022,0
+37db0a51-4a18-4747-81e6-4be507bb7a8d,Casual Terms,2020,Tommy Chavannes,United Kingdom,GB,"Animation, Avant-Garde, Short",1,2,0,0,0,2020,2022,2
+c72518fa-b3fe-4a7b-9a07-ecc3959d587e,Cha,2020,Gagandeep Kalirai,United Kingdom,GB,"Animation, Short",1,2,0,0,0,2020,2022,2
+e16a98fa-6187-4516-8577-a3529ca0f21d,Chthonios,2021,Maria Steinmetz,Germany,DE,"Animation, Short",1,1,0,0,0,2022,2022,0
+0e97bdff-7d83-4237-a0a7-d21cbe9ff332,Cinema Now,2022,Louis Holder,United Kingdom,GB,"Documentary, Short",1,1,0,0,0,2022,2022,0
+ab50e83c-7567-4cef-b45c-e8538ec921b3,Cities of Ladies,2020,Kim Noce,United Kingdom,GB,"Animation, Documentary, Short",1,2,0,0,0,2021,2022,1
+5e2935be-bf51-442a-8c40-b81c173f95d7,Clay Pit,2025,Edward Rowe,United Kingdom,GB,Short,1,1,0,0,0,2025,2025,0
+b356b177-ee8c-461e-a379-1ed64e7eaac8,CODA,2019,Erika Davis-Marsh,United States,US,Short,1,1,0,0,0,2019,2019,0
+1127271c-3b33-4dd1-bb22-e44fe7d27387,Coffee with Friends,2020,Phoebe Bourke,United Kingdom,GB,Short,1,1,0,0,0,2020,2020,0
+37548ca3-5c0f-4216-911b-be3b2eb1b0e1,Coming Up for Air,2019,"Anouk van Kalmthout, Jeroen Hoogaars, Willem Stapel",Netherlands,NL,Short,1,1,0,0,0,2019,2019,0
+2c965b47-5d2f-4106-a879-322f8f9c1d09,Common Molly,2020,Georgie Monica,United Kingdom,GB,"Animation, Short",1,2,0,0,0,2020,2022,2
+6efbab9f-889c-4daf-ab57-99768c1283da,Confessions of an English Ant-Eater,2021,Alex Crumbie,United Kingdom,GB,"Animation, Short",1,1,0,0,0,2022,2022,0
+6d840d45-8ca8-4c23-aa25-68509fa2b5af,Crafty Witch,2021,Laura-Beth Cowley,United Kingdom,GB,"Animation, Short",1,2,0,0,0,2021,2022,1
+9c642d71-aac5-458b-a82f-f0a1e3b915ba,Creation,2019,Emmanuel Dankyi,Ghana,GH,"Animation, Short",1,1,0,0,0,2019,2019,0
+9b923e16-dc9e-4dae-accb-b13f366c768d,Cubicle,2019,Chloe Wicks,United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+4c27f757-7a9f-4cc4-8ea1-2b534ad7e9be,Cui Wen Zi Training for Immortality,2022,Wang Jiaqi,China,CN,"Animation, Short",1,1,0,0,0,2022,2022,0
+5812b1a6-2a75-4348-9d8f-ccb02ba95db5,Cycling with Molly,2021,"Antonis Papamichael, Sara Chia-Jewell",United Kingdom,GB,"Animation, Comedy, Short",1,1,0,0,1,2021,2021,0
+3e71e447-2cc6-4e8b-bdd2-58a7340d3a32,Day After Day,2016,Anthony Ing,United Kingdom,GB,"Avant-Garde, Short",1,1,0,0,0,2016,2016,0
+a17e9d25-d85f-4c6a-b418-4f113f6b8f43,Disco Dynamite,2019,Tom Clover,United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+69eff35e-2699-464b-ae0a-4839b5de2f26,Distressing Images,2023,Samuel Dawe,United Kingdom,GB,"Short, Thriller",1,1,0,0,0,2023,2023,0
+749b91c6-cd1b-4cd7-ad9c-1db754d61637,Dowr Tamar / Great Water,2023,Samuel Bestwick,United Kingdom,GB,"Documentary, Short",1,1,0,0,0,2023,2023,0
+f10efaab-0b57-4c90-9676-8f820bece536,Dzifa,2022,Savannah Acquah,United Kingdom,GB,Short,1,1,0,0,0,2022,2022,0
+544c7edf-2edd-49b8-9be1-65e6deb2e77e,Embraces & the Touch of Skin,2019,Sara Koppel,Denmark,DK,"Animation, Short",1,1,0,0,0,2019,2019,0
+e670729a-6f49-4265-bda3-6e2ec21a9d0a,Excerpt,2020,Martin McNally,United Kingdom,GB,"Animation, Avant-Garde, Short",1,2,0,0,0,2021,2022,1
+1ba710dc-e927-44d5-972c-cf82fd9a1dfd,F for Fermentation,2019,Anna Volosnik,United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+5226038c-079d-49d6-b333-d9371f3cbbc8,Featherweight,2019,Kayleigh Gibbons,United Kingdom,GB,"Animation, Short",1,1,0,0,0,2019,2019,0
+1a293f3e-a9ef-4c46-bc8a-2761e107e121,Feed the Ghosted,2020,Pia Graf,Germany,DE,"Animation, Short",1,1,0,0,0,2021,2021,0
+13018af6-06dd-4406-9ec0-b6b18de72453,Filfla,2019,Fabrizio Ellul,Malta,MT,"Animation, Short",1,1,0,0,0,2019,2019,0
+4a3a3a94-35a3-41df-9cf6-47d79add4f73,For Baby's Sake,2020,Emma Lazenby,United Kingdom,GB,"Animation, Short",1,2,0,0,0,2020,2022,2
+f2bb006b-1e63-41f3-a731-a7583ccc4a0e,Fragments,2020,Adekemi Roluga,United Kingdom,GB,"Animation, Short",1,2,0,0,0,2020,2022,2
+94f69b30-d0d2-4d3a-911d-e95e6aa78641,From Over Here,2020,Patrick Buhr,Germany,DE,"Animation, Short",1,1,0,0,0,2020,2020,0
+35f42547-7bfe-45b2-92c8-3f558a695656,Fuck,2019,Vern Hass,United States,US,Short,1,1,0,0,0,2019,2019,0
+421425c3-8fe5-434d-8edc-b6785cd3d0e8,Full of Sh*t,2025,Clarissa Kumala,United Kingdom,GB,"Animation, Comedy, Short",1,1,0,0,0,2025,2025,0
+d5101ae1-6b9e-4564-b200-05c3e320ee4b,Future Perfect,2019,Sean Mckenna,United Kingdom,GB,"Sci-Fi, Short",1,1,0,0,0,2019,2019,0
+087aeb84-1678-4d55-a5c6-97db92add674,Golden Goddess,2020,Michael Jenkins,United Kingdom,GB,Short,1,2,0,0,0,2020,2022,2
+da335219-5af7-4fda-a1d8-134e45ba815e,Goodbye Python,2023,Frankie Fox,United Kingdom,GB,Short,1,1,0,0,0,2023,2023,0
+13ce1513-5990-4489-9053-dc190ea42a65,Grey to Green,2020,Marcos Sánchez,"Chile, South Korea","CL, KR","Animation, Short",1,1,0,0,0,2021,2021,0
+4918de49-4046-479a-99f1-74857b5b57a6,Gyroscope,2021,Gabriel Böhmer,"Sweden, United Kingdom","GB, SE","Animation, Short",1,2,0,0,0,2021,2022,1
+9b93f040-4fe9-4d87-abf4-a07dd63d8415,Harrier,2022,Ciara Flint,United Kingdom,GB,"Documentary, Short",1,1,0,0,0,2022,2022,0
+a1a51ac7-ecac-473d-87c0-cc611de8adc6,Holiday!,2019,Toby Matthews,United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+beb8d5f3-87d2-4938-97b2-750b42716340,Home,2020,Joe Cocklin,United Kingdom,GB,"Sci-Fi, Short",1,2,0,0,0,2020,2022,2
+01b62da5-60d8-451c-937a-7f7c8b856560,Homegrown,2023,Corinne Walker,United Kingdom,GB,Short,1,1,0,0,0,2023,2023,0
+3c3d57eb-9892-4f7e-8afa-b696f7fc1d74,Horse Play,2019,Hansel Rodrigues,United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+80ea728a-02c2-4364-a2c1-c2382e62206e,House Party,2023,William Alexander Boyd,United Kingdom,GB,"Comedy, Horror, Short",1,1,0,0,0,2023,2023,0
+5b20ab62-4c30-4e91-9591-c027bca12992,Human Again,2019,Roxana Vilk,United Kingdom,GB,"Documentary, Short",1,1,0,0,0,2019,2019,0
+5a64a1c8-dc49-46be-9eca-ee12b7c46f2a,I'm Fine!,2020,Emma Doxiadi,"Greece, United States","GR, US","Comedy, Drama, Short",1,1,0,0,0,2021,2021,0
+022d63d7-c423-4123-8a65-b316ca408e98,Insecurity Questions,2019,"Behnam Taheri, Gideon Beresford",United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+4a0ceeb0-4a6a-484f-8dd4-3b5799076618,Iris,2021,Sam Anghelides,United Kingdom,GB,Short,1,1,0,0,0,2022,2022,0
+49f56bb2-aa15-42d0-afb7-1374b90ad805,Isle of Chair,2020,Ivyy Chen,"Taiwan, United Kingdom","GB, TW","Animation, Short",1,2,0,0,0,2020,2022,2
+f7eaf672-f1e5-42bf-8d45-5ad6080b70ed,Jam,2022,Tasou Palisidou,United Kingdom,GB,"Drama, LGBTQ+, Short",1,1,0,0,0,2022,2022,0
+4b8f87e1-e703-4fa2-9b67-e4ef45cce779,Keratin,2020,"Andrew Butler, James Wilson",United Kingdom,GB,Short,1,1,0,0,0,2020,2020,0
+f4c49245-bee2-4939-8a27-d0acad24b3a8,Killing Time,2019,"Aleksandra Krechman, Camille Guillot, Fanny Hagdahl Sörebo, Morgane Ravelonary, Sarah Naciri, Valentine Zhang",France,FR,"Animation, Short",1,1,0,0,0,2020,2020,0
+4409eced-ad2b-4b47-acf3-08fe10e9e0b1,Kitchen Sink Fantasy,2023,Heath Virgoe,United Kingdom,GB,"Comedy, Fantasy, LGBTQ+, Short",1,1,0,0,0,2023,2023,0
+4b7db16b-1343-4214-879f-811329f866db,Knot,2020,Marie Lechevallier,United Kingdom,GB,"Animation, Short",1,2,0,0,0,2021,2022,1
+b664d47e-440d-47e2-a4ba-94a99eaa5d3d,La Princesa de Woking,2019,Big Red Button,United Kingdom,GB,"Comedy, Short",1,1,0,0,0,2020,2020,0
+b4be84f3-e769-45f7-9f00-d4992bcff1f8,Last Exit On Bethnal,2025,Lydia Garnett,United Kingdom,GB,"Music, Short",1,1,0,0,0,2025,2025,0
+4ea3eb2e-f3d8-4480-b9de-6b2f15e77e47,Letter to Anne,2019,"Annette Schneider, Marc Holtbecker",Germany,DE,Short,1,1,0,0,0,2019,2019,0
+5f3a3198-1ec4-4611-a7b1-e4a10fa0e77c,Life on the Rocks,2020,George Pretty,United Kingdom,GB,"Documentary, Short",1,2,0,0,0,2020,2022,2
+28217f38-3f8c-4ca4-b883-420c99db6303,Liquid Solid,2020,Amanda Aiken,United Kingdom,GB,"Animation, Short",1,2,0,0,0,2020,2022,2
+4bda1cd3-e694-4c76-9337-087c4c87a1b9,Lonely Laura and Her Sister Niamh,2019,Florence Hyde,United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+16c0c81c-edb2-4a4f-9f41-417ff035f5d7,Lovemaker,2019,Boris Kpadenou,Togo,TG,"Animation, Short",1,1,0,0,0,2019,2019,0
+58f6dd86-d0fb-45e0-b24b-a1efc99ddd22,Makun (Don't Cry),2019,Emilio Martí López,Spain,ES,"Animation, Documentary, Short",1,1,0,0,0,2019,2019,0
+76df3fa8-56d5-49e9-bdf9-7bb0089a51f1,Man Up in Lockdown,2021,Liang Ruicheng,United Kingdom,GB,"Documentary, Short",1,2,0,0,0,2021,2022,1
+bae10210-6d0b-4464-a39a-6140ede81921,Me by You,2016,David Buob,Germany,DE,"Animation, Short",1,1,0,0,0,2016,2016,0
+bcb2a10f-cedd-41e4-be10-e75157bd3b32,"Me, My Germs and James",2019,Anastasiia Vorotniuk,United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+4880dcf0-80f3-4391-b83a-15018566a662,Mercurio,2018,Michele Bernardi,Italy,IT,"Animation, Short",1,1,0,0,0,2019,2019,0
+7d37f5e0-4cc0-402e-95fc-df656858ab6a,Method,2020,Polly Holland,Ireland,IE,"Animation, Short",1,1,0,0,0,2020,2020,0
+fefc303e-100e-42bd-b972-a79c0d278beb,Mėxed,2021,Lissi Simpson,United Kingdom,GB,Short,1,1,0,0,0,2021,2021,0
+011c1c13-00a1-4fff-aa93-314a0d829118,Microwave,2023,Anastasia Bruce-Jones,United Kingdom,GB,"Horror, Sci-Fi, Short",1,1,0,0,0,2023,2023,0
+c273cfe4-ac30-4960-91b5-fa8337bf3de9,Milk,2025,Angel van Cuijlenborg,Netherlands,NL,Short,1,1,0,0,0,2025,2025,0
+bfc9b5ed-f22e-4c85-98ac-44cbdbe2950e,Missing Migrants,2021,"Kris Genjin, Raj Yagnik",United Kingdom,GB,"Animation, Short",1,2,0,0,0,2021,2022,1
+20554c94-af62-447a-9cf1-27ba7c21c327,Moist,2019,Greg Doble,Canada,CA,"Animation, Short",1,1,0,0,0,2019,2019,0
+734a1d98-8b72-479a-b291-74c15a3add4f,Molar,2021,Tiago Teixeira,United Kingdom,GB,"Horror, Short",1,1,0,0,0,2022,2022,0
+a7abf2c5-cd06-45b9-9fad-53b884f8b6b0,Moth,2020,Wai Ying Tiffany Tong,"Norway, United Kingdom","GB, NO","Animation, Short",1,1,0,0,0,2020,2020,0
+aba06f64-f05d-46f3-b93b-3ca809d3cc1c,Mother,2019,Emmanuel Dankyi,Ghana,GH,"Animation, Short",1,1,0,0,0,2019,2019,0
+c2473a3e-09bc-48b7-bbcf-fb9b98297f69,Muntjac,2023,Finn Darrell,United Kingdom,GB,"Adventure, Avant-Garde, Fantasy, Short, Silent",1,1,0,0,0,2023,2023,0
+5f3901f3-8ca3-4617-9213-d623b35eca03,"My Dad Is I, My Mother Is My Bride and My Life oh Well, I Cried",2020,Kilhan Wittock,United Kingdom,GB,Short,1,2,0,0,0,2020,2022,2
+e279eb67-838d-4061-9b60-6a6c5b4eabfd,My Name Is Yours,2022,Clarenz Gutierrez Badlis,United Kingdom,GB,Short,1,1,0,0,0,2022,2022,0
+631ed791-5b18-4a07-abaa-06c3704c6a38,Nanodoctor: Iterations 1 to 3,2020,"Filipe Cardoso, Tim Grabham","United Kingdom, United States","GB, US","Animation, Short",1,2,0,0,0,2021,2022,1
+74bbebc9-8adc-4f60-bb56-6cf11671c536,Natural Paul,2019,Sam Tibi,United Kingdom,GB,"Comedy, Drama, Short",1,1,0,0,0,2020,2020,0
+721f2e5c-ca14-492b-84aa-ba7195018b46,Nature Hunter,2019,Roger Batteault,France,FR,"Documentary, Short",1,1,0,0,0,2019,2019,0
+22ea646f-0961-46bb-8805-4605d6f639c7,New Hat,2019,James Ruse,Australia,AU,Short,1,1,0,0,0,2019,2019,0
+5afcfde1-87d3-4f0e-a4cc-eb5708876a40,Noisy Animals in Isolation,2020,Kid Carpet,United Kingdom,GB,Short,1,2,0,0,0,2020,2022,2
+8f1f3bbe-1aa8-4605-86c5-893c20001344,Nomvula,2019,"Advik Beni, Jason Maselle",South Africa,ZA,Short,1,1,0,0,0,2019,2019,0
+1db7b61d-ed11-4f56-b30c-78b623eac0f4,O Land of Wrath,2019,Adrian Camilleri,Malta,MT,"Documentary, Short",1,1,0,0,0,2019,2019,0
+a09821e9-4dec-4328-bcf9-60f25e519134,Old Windows,2022,Paul Holbrook,United Kingdom,GB,Short,1,1,0,0,0,2022,2022,0
+572a6177-b866-4609-8d28-d893a5fc8940,One Pair Coat,2019,Luo Yi,Germany,DE,"Animation, Short",1,1,0,0,0,2019,2019,0
+1bd146a1-ffe7-4e91-bbaa-bc25e0f71852,Orange City,2019,Somto Ajuluchukwu,Nigeria,NG,"Animation, Short",1,1,0,0,0,2019,2019,0
+8851c8c2-456a-4112-86f0-6d0732dffeda,Out with the Old,2020,George Summers,United Kingdom,GB,"Animation, Short",1,2,0,0,0,2020,2022,2
+07d70434-e186-483a-ad12-65a1d6d19dac,Owen,2020,Arlo O'Callaghan,United Kingdom,GB,"Documentary, LGBTQ+, Short",1,2,0,0,0,2021,2022,1
+c26172dd-7ea9-44f3-84e6-085878a5a389,Pale Saint,2019,Rhys Marc Jones,United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+ff42e48b-dfce-48b3-bd6d-ef6d2e55b9aa,Patchwork Clam,2019,Angela Steffen,Germany,DE,"Animation, Short",1,1,0,0,0,2020,2020,0
+9e29716a-ae6d-4a08-88c3-c4ae2dbbb8ba,People Person,2020,Rymalena,United States,US,"Animation, Short",1,1,0,0,0,2021,2021,0
+340550db-5a4e-4554-a847-a402846871e4,People's Pond,2022,Liao Chiahui,"China, United Kingdom","CN, GB",Short,1,1,0,0,0,2022,2022,0
+e3b2a429-4e69-46d2-bd76-d8a56127971d,Peregrine,2020,Daniela Sherer,"Israel, United Kingdom","GB, IL","Animation, Short",1,1,0,0,0,2021,2021,0
+29d276f1-6d80-4997-b5c4-48d6e27909d0,Pink Yoga Mat,2019,Rose Hendry,United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+552870ae-d7e7-4b67-84e8-42212d62e9d5,Pop!,2025,Kyle Borg,United Kingdom,GB,Short,1,1,0,0,0,2025,2025,0
+ccfedccc-dc98-4eeb-97f9-c8c4a5d351d4,Portugal 2000,2025,George Hampshire,United Kingdom,GB,"Animation, Short",1,1,0,0,0,2025,2025,0
+d345df56-fe8d-49d4-a931-78749e92aa6a,Press(ed),2022,Senne Driesen,Belgium,BE,"Animation, Short",1,1,0,0,0,2022,2022,0
+2e1251f3-0b2a-4e70-96de-9377f649fa6a,Protocole Sandwich,2019,"Antoine Vignon, Benjamin Warnitz, Côme Roy, Joséphine Meis, Valérie Bousquie",France,FR,"Animation, Short",1,1,0,0,0,2020,2020,0
+9e9d3c48-c40e-4c6e-a665-fa6721c3b1a2,Rachel,2019,Caroline Bartleet,United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+dbb89873-eed5-41a8-88d8-c3acfa91b734,Red Room,2021,Bryan M. Ferguson,United Kingdom,GB,Short,1,1,0,0,0,2022,2022,0
+0f24b1de-2ff3-4bbf-8d31-7ea9b04dbe09,Repent,2019,Candice Nachman,United States,US,Short,1,1,0,0,0,2019,2019,0
+c040f76a-b20a-46c5-a636-7f8531d96f24,Rex Song,2020,Andrew Brand,United Kingdom,GB,"Animation, Short",1,2,0,0,0,2020,2022,2
+e0b6841a-9726-482b-82c8-fc7159a9b1e9,Rhizome,2023,Daniel Camargo-Grosso,United Kingdom,GB,"Avant-Garde, Documentary, LGBTQ+, Short",1,1,0,0,0,2023,2023,0
+9c016299-8860-41e2-8808-b59ea99f0fa5,Ripple Home,2019,Laura Reedy,United States,US,"Animation, Short",1,1,0,0,0,2019,2019,0
+bc2fefa8-1f7d-4f54-9ca3-074166203374,Ropey,2021,Giles Ripley,United Kingdom,GB,"Comedy, Drama, Short",1,1,0,0,0,2021,2021,0
+cc520fae-2ee3-4952-9392-6ecbb0ac7153,Rules,2021,Jeanette Jeanenne,"Panama, United States","PA, US","Animation, Short",1,1,0,0,0,2022,2022,0
+1f049ab9-f22b-4331-9652-6c1985431eb0,Rumours,2019,Ollie Birt,Australia,AU,Short,1,1,0,0,0,2019,2019,0
+ac5d32a4-e14d-42e7-8769-56a19abf862a,Run,2020,Ruth Greenberg,United Kingdom,GB,Short,1,2,0,0,0,2021,2022,1
+c45f3d7a-a09b-4b99-97dc-b0ad420095c4,Ruth,2019,Jonathan Choo,United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+5e98ebe6-736f-482e-80ab-9b5a746cdd34,Seeds of Love,2020,"Behnam Taheri, Gideon Beresford",United Kingdom,GB,"Comedy, Short",1,2,0,0,0,2021,2022,1
+22445084-ac5f-4a57-b8ee-341a9ebaecc8,Sex Moves,2020,Alex Bernas,United States,US,"Animation, Short",1,2,0,0,0,2020,2022,2
+9fe823bc-070e-4ec5-b2a7-2fccb9b867ee,Shattered Peace,2022,Jakub Dvořák,"Czechia, United Kingdom","CZ, GB",Short,1,1,0,0,0,2022,2022,0
+bd83287d-c291-4746-a8cd-9dc20f413c9a,Shoegazing,2020,Servane d'Alverny,"France, United Kingdom","FR, GB",Short,1,2,0,0,0,2020,2022,2
+8454e45a-f511-4ac7-8b7a-729b720cf09f,Silver and Gold,2021,Jack Pulford,United Kingdom,GB,Short,1,1,0,0,0,2021,2021,0
+4c40eaa4-4543-4b7b-85b4-5829ae27717e,Sink or Swim,2020,Alisa Tritenko,United Kingdom,GB,Short,1,1,0,0,0,2020,2020,0
+807ad704-3b30-445b-a94e-fd929cd376d8,Slow,2020,"Daniele Nozzi, Giovanni Boscolo",Italy,IT,"Comedy, Drama, Short",1,1,0,0,0,2021,2021,0
+46a705ae-0f4d-408b-9ae6-befbd5a16507,Smile for the Camera,2019,Lucy Graham,United Kingdom,GB,"Documentary, Short",1,1,0,0,0,2019,2019,0
+42a098b6-ef1a-49d6-a155-83a66d17a29f,Something More Than Masquerade,2022,Shamica Ruddock,United Kingdom,GB,Short,1,1,0,0,0,2023,2023,0
+3f2408e4-304c-4538-a907-f25a69eee4c6,Spare Part,2025,"Ada Player, Bron Waugh",United Kingdom,GB,"Comedy, Short",1,1,0,0,0,2025,2025,0
+518dc9b7-7b96-4182-a028-acb6a03b5e9c,Spines,2023,Joseph Inman,United Kingdom,GB,Short,1,1,0,0,0,2023,2023,0
+9f986e6b-dffe-4c82-a36d-8fb126b61735,Sui Generis,2019,Lucia Maňáková,United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+8e5fd3b1-f450-44b5-895a-baed977ba7bb,Switch,2019,"Desiree Faust, Stefana Brancastle",United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+9f65b0fc-e742-45d9-bb9b-ddac067273df,Take Me with You,2019,Chloe Ladds,United Kingdom,GB,"Animation, Short",1,2,0,0,0,2020,2022,2
+ba552165-400b-4227-89ac-a92f80a1326a,Talk Radio,2020,Ben S. Hyland,United Kingdom,GB,Short,1,2,0,0,0,2020,2022,2
+2bc1295b-e95c-44e9-9b74-e1e41fc2d0c3,The Big Apple,2020,Igor Bastidas,United States,US,"Animation, Short",1,1,0,0,0,2020,2020,0
+b03b8438-cc3f-452a-8fea-4f4a72fc8f66,The Bike,2020,Diana Gong,United States,US,"Animation, Short",1,1,0,0,0,2021,2021,0
+9cbb6eee-0ed4-4a13-b3fe-cc83e98d231b,The Box,2019,Marie-Pierre Hauwelle,France,FR,"Animation, Short",1,1,0,0,0,2020,2020,0
+2b77cdcd-199d-47dd-accd-7525c3d4234c,The Bridge,2020,Catherine Fauteux,France,FR,"Animation, Short",1,1,0,0,0,2020,2020,0
+4f3c20b2-c77d-4b23-b924-52f1b12dfc9c,The Camderina Diner,2022,Luke Willis,United States,US,Short,1,1,0,0,0,2022,2022,0
+a960682f-714d-41f7-9960-375b7ef3f346,The Cook,2022,Vincent Bossel,Switzerland,CH,"Animation, Short",1,1,0,0,0,2022,2022,0
+99dfcfb5-5262-402d-82d6-22b0d4744515,The Dreamer,2019,Kenneth Karlstad,Norway,NO,Short,1,1,0,0,0,2019,2019,0
+cba2c899-2644-4417-a83c-42ade010be68,The Final Cut,2025,Scott Wilson,United Kingdom,GB,Short,1,1,0,0,0,2025,2025,0
+09f9a003-87d8-4d03-8171-e0fce91b4259,The Flying Gold of Arabuko,2020,John Davies,United Kingdom,GB,"Documentary, Short",1,2,0,0,0,2020,2022,2
+82cae4aa-e958-414d-89d0-266e2174db5d,The Gift,2019,Laura-Beth Cowley,United Kingdom,GB,"Animation, Short",1,2,0,0,0,2020,2022,2
+f9ea1cb6-6e2e-4594-8933-6150976f5ff1,The Honey Bee,2019,"Archie Blue, Conor O'Hagan, WIill Skelton",United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+fd928e95-ba47-48ca-9581-69cda2439d03,The Last Episode,2019,nuQ,Japan,JP,"Animation, Short",1,1,0,0,0,2020,2020,0
+4b7246b3-7214-44d2-9d5d-731d3e5ac725,The Magic Boat,2019,Naaman Azhari,Lebanon,LB,"Animation, Short",1,1,0,0,0,2019,2019,0
+a63a50e0-04bf-4e18-9925-b70712229494,The Orgy,2018,Sam Baron,United Kingdom,GB,"Comedy, Short",1,1,0,0,0,2018,2018,0
+5ee83e2e-c933-40dc-bcb8-a918b5311f7b,The Perception of Time,2019,Casey Hennessy,United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+1816a585-b005-41d8-8ba6-b4cab3a0a36e,The Postman,2025,Gavin Irvine,United Kingdom,GB,Short,1,1,0,0,0,2025,2025,0
+db654e4e-99e1-484b-9a76-1025653c38e5,The Sound of Falling,2019,Lin Chien-Yu,"Colombia, United Kingdom","CO, GB","Drama, Short",1,1,0,0,0,2019,2019,0
+677cccca-4b19-48f1-9224-d6fe1a53f964,The Squircle,2019,Rouge Touati-Evans,United Kingdom,GB,"Animation, Short",1,1,0,0,0,2019,2019,0
+07c9287a-3028-4c45-a001-74b61f360129,The Stick,2019,Teppo Airaksinen,Finland,FI,Short,1,1,0,0,0,2020,2020,0
+84f9a27f-77be-4475-ab7b-08ca6252c25b,The Two Tales,2020,Isaac Knights-Washbourn,"Estonia, United Kingdom","EE, GB","Documentary, Short",1,2,0,0,0,2020,2022,2
+c08cc943-097b-4d57-a191-1ff2ee1e72f3,There Can Only Be One,2019,Max r Lincoln,United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+422e5233-2dd8-4b5f-baee-49c43a2bcf91,Three Young Men on a Bench,2019,Dan Guthrie,United Kingdom,GB,"Avant-Garde, Short",1,1,0,0,0,2019,2019,0
+d2d2d29f-cb79-4fdb-b6ce-79a9e9316799,Too Late,2020,Roy Stein,Canada,CA,"Animation, Short",1,1,0,0,0,2020,2020,0
+5608f3a1-3c61-45ad-9fed-aaf96c7951b6,Tot,2020,"Aimée Kirkham Priester, Fiona McLaughlin, Tom Getty",Ireland,IE,"Animation, Short",1,1,0,0,0,2020,2020,0
+7b00b8fb-7c29-4bb1-9f58-7c85ae569c4f,Towels,2019,Prawta Annez,United Kingdom,GB,"Animation, Short",1,1,0,0,0,2019,2019,0
+ba545a9f-763a-40b6-b6c5-eb0c361ffe46,Trengellick Rising,2023,Guy Potter,United Kingdom,GB,Short,1,1,0,0,0,2023,2023,0
+0527a293-9c0a-437c-b869-38ae4ff3f729,Two Girls and a Boat,2021,Aleksi Delikouras,Finland,FI,"Comedy, Short",1,1,0,0,0,2021,2021,0
+a51f23ce-8591-46f7-9680-fdf3d6bdda92,Uamh-Binn,2022,Ben Anstruther,United Kingdom,GB,Short,1,1,0,0,0,2022,2022,0
+5f1074ce-6c77-4ebb-92fe-868e82b07c50,Ufo,2020,Harvey Gardner,United Kingdom,GB,Short,1,2,0,0,0,2020,2022,2
+1a556342-962b-460b-b8d2-c64035cf2cd6,Underneath,2019,Calif Chong,"Hong Kong, United Kingdom","GB, HK",Short,1,2,0,0,0,2020,2022,2
+54457077-8f23-4113-8bfe-59d40e9ba14f,Venus,2019,Rachel Ramsay,United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+15480216-d08d-41a2-8019-cc8a45ed6d54,"Virágom, Virágom",2022,Anna Jarai,United Kingdom,GB,"Avant-Garde, Short",1,1,0,0,0,2022,2022,0
+c87d7fe9-fad8-43e9-8b33-6fefe358a24e,Waiting Working Hours,2019,Ben De Raes,Belgium,BE,"Documentary, Short",1,1,0,0,0,2019,2019,0
+ef5fe2ed-e2a3-4ba6-ab89-3c51809f795e,Walking a Fine Line,2019,Meti Oker,Switzerland,CH,Short,1,2,0,0,0,2020,2022,2
+6b157d33-726a-4621-b15b-a6a99178648b,Walnuts,2019,Jere Kittle,United States,US,Short,1,1,0,0,0,2019,2019,0
+51fb584b-5ce1-49f6-a9e4-e6eb3d72920c,Walter the Dog,2019,William Haigh,United Kingdom,GB,"Horror, Short",1,1,0,0,0,2020,2020,0
+af121e7a-9fd1-4e54-9909-54c0a0c57b1c,Watch Me Vanish,2022,Georgia Bardi,United Kingdom,GB,"Animation, Short",1,1,0,0,0,2022,2022,0
+e71e7bb0-e0a8-4ab5-8b0b-1b253d9310d2,Way Out Assistance,2019,Stef Smith,Australia,AU,Short,1,1,0,0,0,2019,2019,0
+5dc8a849-7fa9-44ce-9ece-1b9256802b79,We All Just Want to Be Mad,2020,Flora Tennant,United Kingdom,GB,Short,1,2,0,0,0,2020,2022,2
+2ef8cb1d-28c5-43d3-86e0-a431905c692d,Welcome Home,2019,Nick Kovacic,United States,US,Short,1,1,0,0,0,2019,2019,0
+6c72fbf1-f482-4683-b0d8-68b6f907c04f,Wet and Soppy,2020,Cliona Noonan,Ireland,IE,"Animation, Short",1,1,0,0,0,2021,2021,0
+1f8f12dc-24a3-4427-82c9-4c6a97a366a2,What a Cab,2019,Jake Kuhn,United Kingdom,GB,Short,1,1,0,0,0,2019,2019,0
+da17eefc-9162-44ca-a769-2c37ebc95061,What Will Survive of Us is Love,2020,Kakia Konstantinaki,Greece,GR,"Animation, Avant-Garde, Short",1,1,0,0,0,2021,2021,0
+c4ee2e54-c866-4b8e-bbe2-e2fdd4266474,Where is My Friend,2019,"Emilio Muniz Martinez, Nick Nason, Tian Chen",Canada,CA,Short,1,1,0,0,0,2019,2019,0
+9dcc4142-a016-4603-b331-f2cba25a63a3,Where Was I?,2022,Kae Bahar,United Kingdom,GB,Short,1,1,0,0,0,2022,2022,0
+0a576b43-dee8-48a4-9d37-a236cac9f707,Wicked & Bad,2023,Toni Lotta Groner,United Kingdom,GB,"Documentary, Short",1,1,1,0,0,2023,2023,0
+bf76eaa5-ba5b-4a8f-8c48-5e519cb110d0,Wild Geese,2025,Sonia Wargacka,United Kingdom,GB,Short,1,1,0,0,0,2025,2025,0
+c0d23b1c-7d0d-4b43-a58b-6d49d6ce42bc,Winter Coat,2020,Werner Vivier,United Kingdom,GB,Short,1,1,0,0,0,2020,2020,0
+afc1eb68-5a37-4877-bc95-fd3439a85d22,Women Who Do Not Sleep,2020,Jakub Dvořák,Czechia,CZ,Short,1,1,0,0,0,2020,2020,0
+d1bc6a04-14dd-4bbf-898a-69a6f480facb,Yellow Gingham,2019,Camille Gibut,United Kingdom,GB,"Animation, Short",1,2,0,0,0,2020,2022,2
+1e9619ff-b3e8-4023-9b1c-f6c0630ace5b,You and Me,2020,"Karni Arieli, Saul Freed",United Kingdom,GB,Short,1,2,0,0,0,2020,2022,2
+fc2c51c6-6bec-46a7-98db-9a67d570027f,You're Fit,2019,Lydia Reid,United Kingdom,GB,"Animation, Short",1,1,0,0,0,2019,2019,0
+02c34089-4aba-4ee8-bdff-84b7a4405a46,Zong,2021,Hope Robinson,United Kingdom,GB,"Sci-Fi, Short",1,1,0,0,0,2022,2022,0

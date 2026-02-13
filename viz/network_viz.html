@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Network Effects — Festival Network Graph</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: #0a0e17;
+    color: #c8cdd3;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  /* ---------- header ---------- */
+  #header {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(10,14,23,0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid #1e2738;
+    padding: 10px 24px;
+    display: flex; align-items: center; gap: 20px;
+  }
+  #header h1 {
+    font-size: 16px; font-weight: 600; color: #e4e8ec;
+    white-space: nowrap;
+  }
+  #header .subtitle {
+    font-size: 11px; color: #6b7a8d; margin-left: -12px;
+  }
+
+  /* ---------- controls ---------- */
+  #controls {
+    display: flex; align-items: center; gap: 16px;
+    flex-wrap: wrap;
+  }
+  .control-group {
+    display: flex; align-items: center; gap: 6px;
+  }
+  .control-group label {
+    font-size: 11px; color: #6b7a8d; text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .control-group input[type=range] {
+    width: 100px; accent-color: #4a9eff;
+  }
+  .control-group select {
+    background: #151b28; color: #c8cdd3; border: 1px solid #2a3548;
+    border-radius: 4px; padding: 3px 8px; font-size: 12px;
+  }
+  .control-group .val {
+    font-size: 12px; color: #4a9eff; min-width: 24px; text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  #btn-export {
+    background: #1a2438; color: #8ba4c0; border: 1px solid #2a3548;
+    border-radius: 4px; padding: 4px 12px; font-size: 11px; cursor: pointer;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  #btn-export:hover { background: #243350; color: #b0c8e8; }
+  #btn-reset {
+    background: transparent; color: #6b7a8d; border: 1px solid #2a3548;
+    border-radius: 4px; padding: 4px 10px; font-size: 11px; cursor: pointer;
+  }
+  #btn-reset:hover { color: #c8cdd3; }
+
+  /* ---------- graph ---------- */
+  #graph-container {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  }
+  svg { width: 100%; height: 100%; }
+
+  /* ---------- tooltip ---------- */
+  #tooltip {
+    position: fixed;
+    pointer-events: none;
+    background: rgba(15,20,32,0.96);
+    border: 1px solid #2a3a52;
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 12px;
+    line-height: 1.6;
+    max-width: 360px;
+    z-index: 200;
+    display: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  }
+  #tooltip .tt-name {
+    font-size: 14px; font-weight: 600; color: #e4e8ec;
+    margin-bottom: 6px;
+  }
+  #tooltip .tt-row {
+    display: flex; justify-content: space-between; gap: 16px;
+  }
+  #tooltip .tt-label { color: #6b7a8d; }
+  #tooltip .tt-value { color: #b0c8e8; text-align: right; }
+  #tooltip .tt-bar {
+    margin-top: 8px; padding-top: 8px; border-top: 1px solid #1e2738;
+    color: #6b7a8d; font-size: 11px;
+  }
+
+  /* ---------- info panel ---------- */
+  #info-panel {
+    position: fixed; bottom: 16px; left: 16px;
+    background: rgba(15,20,32,0.92);
+    backdrop-filter: blur(8px);
+    border: 1px solid #1e2738;
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 11px;
+    line-height: 1.8;
+    z-index: 100;
+    min-width: 200px;
+  }
+  #info-panel .stat-label { color: #6b7a8d; }
+  #info-panel .stat-value { color: #4a9eff; font-weight: 600; }
+
+  /* ---------- legend ---------- */
+  #legend {
+    position: fixed; bottom: 16px; right: 16px;
+    background: rgba(15,20,32,0.92);
+    backdrop-filter: blur(8px);
+    border: 1px solid #1e2738;
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 11px;
+    z-index: 100;
+  }
+  #legend h3 {
+    font-size: 11px; color: #6b7a8d; margin-bottom: 8px;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .legend-item {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 4px;
+  }
+  .legend-swatch {
+    width: 10px; height: 10px; border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .legend-label { color: #c8cdd3; }
+  .legend-count { color: #6b7a8d; margin-left: auto; }
+
+  /* ---------- search ---------- */
+  #search-box {
+    background: #151b28; color: #c8cdd3; border: 1px solid #2a3548;
+    border-radius: 4px; padding: 4px 10px; font-size: 12px; width: 180px;
+  }
+  #search-box::placeholder { color: #4a5568; }
+</style>
+</head>
+<body>
+
+<div id="header">
+  <h1>Network Effects</h1>
+  <span class="subtitle">Festival Circulation Network</span>
+  <div id="controls">
+    <div class="control-group">
+      <label>Min shared films</label>
+      <input type="range" id="slider-weight" min="2" max="30" value="2">
+      <span class="val" id="val-weight">2</span>
+    </div>
+    <div class="control-group">
+      <label>Colour by</label>
+      <select id="select-colour">
+        <option value="community">Community</option>
+        <option value="type">Event type</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label>Search</label>
+      <input type="text" id="search-box" placeholder="Festival name...">
+    </div>
+    <button id="btn-reset">Reset view</button>
+    <button id="btn-export">Export SVG</button>
+  </div>
+</div>
+
+<div id="graph-container">
+  <svg id="svg"></svg>
+</div>
+
+<div id="tooltip"></div>
+
+<div id="info-panel">
+  <div><span class="stat-label">Nodes: </span><span class="stat-value" id="stat-nodes">—</span></div>
+  <div><span class="stat-label">Edges: </span><span class="stat-value" id="stat-edges">—</span></div>
+  <div><span class="stat-label">Density: </span><span class="stat-value" id="stat-density">—</span></div>
+  <div><span class="stat-label">Communities: </span><span class="stat-value" id="stat-communities">—</span></div>
+  <div><span class="stat-label">Avg path: </span><span class="stat-value" id="stat-path">—</span></div>
+</div>
+
+<div id="legend"></div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+(async function() {
+  // -------------------------------------------------------------------
+  // Load data
+  // -------------------------------------------------------------------
+  const raw = await d3.json('network_data.json');
+  const allNodes = raw.nodes;
+  const allEdges = raw.edges;
+  const meta = raw.metadata;
+
+  // Index for fast lookup
+  const nodeMap = new Map(allNodes.map(n => [n.id, n]));
+
+  // Pre-compute adjacency for click highlighting
+  const adjacency = new Map();
+  allNodes.forEach(n => adjacency.set(n.id, new Set()));
+  allEdges.forEach(e => {
+    const s = typeof e.source === 'object' ? e.source.id : e.source;
+    const t = typeof e.target === 'object' ? e.target.id : e.target;
+    adjacency.get(s).add(t);
+    adjacency.get(t).add(s);
+  });
+
+  // -------------------------------------------------------------------
+  // Layout setup
+  // -------------------------------------------------------------------
+  const svg = d3.select('#svg');
+  const width = window.innerWidth;
+  const height = window.innerHeight;
+
+  const g = svg.append('g');
+
+  // Zoom
+  const zoom = d3.zoom()
+    .scaleExtent([0.1, 8])
+    .on('zoom', e => g.attr('transform', e.transform));
+  svg.call(zoom);
+
+  // Edge and node groups
+  const edgeG = g.append('g').attr('class', 'edges');
+  const nodeG = g.append('g').attr('class', 'nodes');
+  const labelG = g.append('g').attr('class', 'labels');
+
+  // Scales
+  const nodeScale = d3.scaleSqrt().domain([0, 1]).range([3, 28]);
+  const edgeScale = d3.scaleLinear().domain([2, 150]).range([0.3, 4]).clamp(true);
+  const edgeOpacity = d3.scaleLinear().domain([2, 80]).range([0.08, 0.35]).clamp(true);
+
+  const typeColours = { festival: '#4a9eff', award: '#ff7a4a' };
+
+  // -------------------------------------------------------------------
+  // State
+  // -------------------------------------------------------------------
+  let minWeight = 2;
+  let colourMode = 'community';
+  let selectedNode = null;
+  let searchTerm = '';
+
+  // -------------------------------------------------------------------
+  // Filter & render
+  // -------------------------------------------------------------------
+  function getFilteredData() {
+    const edges = allEdges.filter(e => e.weight >= minWeight);
+    const activeIds = new Set();
+    edges.forEach(e => {
+      activeIds.add(typeof e.source === 'object' ? e.source.id : e.source);
+      activeIds.add(typeof e.target === 'object' ? e.target.id : e.target);
+    });
+    const nodes = allNodes.filter(n => activeIds.has(n.id));
+    return { nodes, edges };
+  }
+
+  function nodeColour(d) {
+    if (colourMode === 'type') return typeColours[d.event_type] || '#888';
+    return d.colour;
+  }
+
+  function nodeRadius(d) {
+    return nodeScale(d.degree_centrality);
+  }
+
+  let simulation;
+
+  function render() {
+    const { nodes, edges } = getFilteredData();
+
+    // Stats
+    document.getElementById('stat-nodes').textContent = nodes.length;
+    document.getElementById('stat-edges').textContent = edges.length;
+    document.getElementById('stat-density').textContent = meta.density;
+    document.getElementById('stat-communities').textContent = meta.n_communities;
+    document.getElementById('stat-path').textContent = meta.avg_path_length;
+
+    // Stop old simulation
+    if (simulation) simulation.stop();
+
+    // Links
+    const link = edgeG.selectAll('line').data(edges, d => {
+      const s = typeof d.source === 'object' ? d.source.id : d.source;
+      const t = typeof d.target === 'object' ? d.target.id : d.target;
+      return s + '|' + t;
+    });
+    link.exit().remove();
+    const linkEnter = link.enter().append('line');
+    const linkAll = linkEnter.merge(link)
+      .attr('stroke', '#1e3a5f')
+      .attr('stroke-width', d => edgeScale(d.weight))
+      .attr('stroke-opacity', d => edgeOpacity(d.weight));
+
+    // Nodes
+    const node = nodeG.selectAll('circle').data(nodes, d => d.id);
+    node.exit().remove();
+    const nodeEnter = node.enter().append('circle');
+    const nodeAll = nodeEnter.merge(node)
+      .attr('r', nodeRadius)
+      .attr('fill', nodeColour)
+      .attr('stroke', '#0a0e17')
+      .attr('stroke-width', 0.5)
+      .attr('cursor', 'pointer');
+
+    // Labels (only for larger nodes)
+    const labelData = nodes.filter(d => d.degree_centrality > 0.25);
+    const label = labelG.selectAll('text').data(labelData, d => d.id);
+    label.exit().remove();
+    const labelEnter = label.enter().append('text');
+    const labelAll = labelEnter.merge(label)
+      .text(d => {
+        const name = d.id;
+        return name.length > 30 ? name.slice(0, 28) + '...' : name;
+      })
+      .attr('font-size', d => Math.max(8, nodeRadius(d) * 0.7))
+      .attr('fill', '#8ba4c0')
+      .attr('text-anchor', 'middle')
+      .attr('dy', d => nodeRadius(d) + 12)
+      .attr('pointer-events', 'none');
+
+    // Simulation
+    simulation = d3.forceSimulation(nodes)
+      .force('link', d3.forceLink(edges).id(d => d.id)
+        .distance(d => Math.max(40, 200 - d.weight * 2))
+        .strength(d => Math.min(0.8, 0.02 + d.weight * 0.005)))
+      .force('charge', d3.forceManyBody()
+        .strength(d => -30 - d.degree_centrality * 400))
+      .force('center', d3.forceCenter(width / 2, height / 2))
+      .force('collide', d3.forceCollide().radius(d => nodeRadius(d) + 4))
+      .force('x', d3.forceX(width / 2).strength(0.03))
+      .force('y', d3.forceY(height / 2).strength(0.03))
+      .alphaDecay(0.02)
+      .on('tick', () => {
+        linkAll
+          .attr('x1', d => d.source.x)
+          .attr('y1', d => d.source.y)
+          .attr('x2', d => d.target.x)
+          .attr('y2', d => d.target.y);
+        nodeAll
+          .attr('cx', d => d.x)
+          .attr('cy', d => d.y);
+        labelAll
+          .attr('x', d => d.x)
+          .attr('y', d => d.y);
+      });
+
+    // Drag
+    const drag = d3.drag()
+      .on('start', (event, d) => {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x; d.fy = d.y;
+      })
+      .on('drag', (event, d) => {
+        d.fx = event.x; d.fy = event.y;
+      })
+      .on('end', (event, d) => {
+        if (!event.active) simulation.alphaTarget(0);
+        d.fx = null; d.fy = null;
+      });
+    nodeAll.call(drag);
+
+    // ------- Interactions -------
+    const tooltip = document.getElementById('tooltip');
+
+    nodeAll.on('mouseover', function(event, d) {
+      const neighbours = adjacency.get(d.id);
+      const connCount = neighbours ? neighbours.size : 0;
+
+      // Find shared films with hovered node's top connections
+      const topEdges = edges
+        .filter(e => {
+          const s = typeof e.source === 'object' ? e.source.id : e.source;
+          const t = typeof e.target === 'object' ? e.target.id : e.target;
+          return s === d.id || t === d.id;
+        })
+        .sort((a, b) => b.weight - a.weight)
+        .slice(0, 5);
+
+      let topConnHTML = topEdges.map(e => {
+        const s = typeof e.source === 'object' ? e.source.id : e.source;
+        const t = typeof e.target === 'object' ? e.target.id : e.target;
+        const other = s === d.id ? t : s;
+        const shortName = other.length > 35 ? other.slice(0, 33) + '...' : other;
+        return `${shortName}: ${e.weight} films`;
+      }).join('<br>');
+
+      tooltip.innerHTML = `
+        <div class="tt-name">${d.id}</div>
+        <div class="tt-row"><span class="tt-label">Type</span><span class="tt-value">${d.event_type}</span></div>
+        <div class="tt-row"><span class="tt-label">Films</span><span class="tt-value">${d.film_count}</span></div>
+        <div class="tt-row"><span class="tt-label">Connections</span><span class="tt-value">${connCount}</span></div>
+        <div class="tt-row"><span class="tt-label">Countries</span><span class="tt-value">${d.countries_represented}</span></div>
+        <div class="tt-row"><span class="tt-label">Active</span><span class="tt-value">${d.first_year}–${d.last_year}</span></div>
+        <div class="tt-row"><span class="tt-label">Degree C.</span><span class="tt-value">${d.degree_centrality.toFixed(3)}</span></div>
+        <div class="tt-row"><span class="tt-label">Betweenness</span><span class="tt-value">${d.betweenness_centrality.toFixed(4)}</span></div>
+        <div class="tt-row"><span class="tt-label">Community</span><span class="tt-value">${d.community}</span></div>
+        <div class="tt-bar">Top connections:<br>${topConnHTML}</div>
+      `;
+      tooltip.style.display = 'block';
+
+      // Highlight
+      if (!selectedNode) {
+        dimAll(nodeAll, linkAll);
+        highlightNeighbours(d, nodeAll, linkAll);
+      }
+    })
+    .on('mousemove', function(event) {
+      const x = event.clientX + 16;
+      const y = event.clientY - 10;
+      const ttW = tooltip.offsetWidth;
+      const ttH = tooltip.offsetHeight;
+      tooltip.style.left = (x + ttW > window.innerWidth ? event.clientX - ttW - 16 : x) + 'px';
+      tooltip.style.top = (y + ttH > window.innerHeight ? event.clientY - ttH - 10 : y) + 'px';
+    })
+    .on('mouseout', function() {
+      tooltip.style.display = 'none';
+      if (!selectedNode) resetHighlight(nodeAll, linkAll);
+    })
+    .on('click', function(event, d) {
+      event.stopPropagation();
+      if (selectedNode === d.id) {
+        selectedNode = null;
+        resetHighlight(nodeAll, linkAll);
+      } else {
+        selectedNode = d.id;
+        dimAll(nodeAll, linkAll);
+        highlightNeighbours(d, nodeAll, linkAll);
+      }
+    });
+
+    svg.on('click', () => {
+      selectedNode = null;
+      resetHighlight(nodeAll, linkAll);
+      tooltip.style.display = 'none';
+    });
+
+    // Search highlighting
+    applySearch(nodeAll);
+  }
+
+  function dimAll(nodeAll, linkAll) {
+    nodeAll.attr('opacity', 0.08);
+    linkAll.attr('stroke-opacity', 0.02);
+  }
+
+  function highlightNeighbours(d, nodeAll, linkAll) {
+    const neighbours = adjacency.get(d.id) || new Set();
+    nodeAll
+      .attr('opacity', n => n.id === d.id || neighbours.has(n.id) ? 1 : 0.08)
+      .attr('stroke', n => n.id === d.id ? '#fff' : '#0a0e17')
+      .attr('stroke-width', n => n.id === d.id ? 2 : 0.5);
+    linkAll.attr('stroke-opacity', e => {
+      const s = typeof e.source === 'object' ? e.source.id : e.source;
+      const t = typeof e.target === 'object' ? e.target.id : e.target;
+      return (s === d.id || t === d.id) ? 0.6 : 0.02;
+    }).attr('stroke', e => {
+      const s = typeof e.source === 'object' ? e.source.id : e.source;
+      const t = typeof e.target === 'object' ? e.target.id : e.target;
+      return (s === d.id || t === d.id) ? '#4a9eff' : '#1e3a5f';
+    });
+  }
+
+  function resetHighlight(nodeAll, linkAll) {
+    nodeAll.attr('opacity', 1)
+      .attr('stroke', '#0a0e17')
+      .attr('stroke-width', 0.5);
+    linkAll
+      .attr('stroke', '#1e3a5f')
+      .attr('stroke-opacity', d => edgeOpacity(d.weight));
+    applySearch(nodeAll);
+  }
+
+  function applySearch(nodeAll) {
+    if (!searchTerm) return;
+    const term = searchTerm.toLowerCase();
+    nodeAll
+      .attr('stroke', d => d.id.toLowerCase().includes(term) ? '#ffcc00' : '#0a0e17')
+      .attr('stroke-width', d => d.id.toLowerCase().includes(term) ? 2.5 : 0.5);
+  }
+
+  // -------------------------------------------------------------------
+  // Build legend
+  // -------------------------------------------------------------------
+  function buildLegend() {
+    const el = document.getElementById('legend');
+    if (colourMode === 'community') {
+      const items = meta.community_colours.map((c, i) => {
+        const count = allNodes.filter(n => n.community === i).length;
+        return `<div class="legend-item">
+          <div class="legend-swatch" style="background:${c}"></div>
+          <span class="legend-label">Community ${i}</span>
+          <span class="legend-count">${count}</span>
+        </div>`;
+      }).join('');
+      el.innerHTML = `<h3>Communities</h3>${items}`;
+    } else {
+      el.innerHTML = `<h3>Event Type</h3>
+        <div class="legend-item">
+          <div class="legend-swatch" style="background:${typeColours.festival}"></div>
+          <span class="legend-label">Festival</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-swatch" style="background:${typeColours.award}"></div>
+          <span class="legend-label">Award</span>
+        </div>`;
+    }
+  }
+
+  // -------------------------------------------------------------------
+  // Controls
+  // -------------------------------------------------------------------
+  const sliderWeight = document.getElementById('slider-weight');
+  const valWeight = document.getElementById('val-weight');
+  sliderWeight.addEventListener('input', () => {
+    minWeight = +sliderWeight.value;
+    valWeight.textContent = minWeight;
+    render();
+  });
+
+  document.getElementById('select-colour').addEventListener('change', function() {
+    colourMode = this.value;
+    buildLegend();
+    render();
+  });
+
+  document.getElementById('search-box').addEventListener('input', function() {
+    searchTerm = this.value;
+    const nodeAll = nodeG.selectAll('circle');
+    if (!searchTerm) {
+      nodeAll.attr('stroke', '#0a0e17').attr('stroke-width', 0.5);
+    } else {
+      applySearch(nodeAll);
+    }
+  });
+
+  document.getElementById('btn-reset').addEventListener('click', () => {
+    selectedNode = null;
+    searchTerm = '';
+    document.getElementById('search-box').value = '';
+    sliderWeight.value = 2;
+    valWeight.textContent = '2';
+    minWeight = 2;
+    svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity);
+    render();
+  });
+
+  document.getElementById('btn-export').addEventListener('click', () => {
+    const svgEl = document.getElementById('svg');
+    const clone = svgEl.cloneNode(true);
+    // Add white background for publication
+    const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    bg.setAttribute('width', '100%');
+    bg.setAttribute('height', '100%');
+    bg.setAttribute('fill', '#0a0e17');
+    clone.insertBefore(bg, clone.firstChild);
+    clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    const data = new XMLSerializer().serializeToString(clone);
+    const blob = new Blob([data], { type: 'image/svg+xml' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'network_effects_graph.svg';
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  // -------------------------------------------------------------------
+  // Init
+  // -------------------------------------------------------------------
+  buildLegend();
+  render();
+
+  // Fit on resize
+  window.addEventListener('resize', () => {
+    // just let svg stretch, no re-render needed
+  });
+})();
+</script>
+</body>
+</html>

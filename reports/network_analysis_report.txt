@@ -1,0 +1,192 @@
+NETWORK EFFECTS - FESTIVAL NETWORK ANALYSIS REPORT
+Following Loist & Samoilova (2023) methodology
+
+
+======================================================================
+1. NETWORK OVERVIEW
+======================================================================
+  Festivals (nodes): 271
+  Connections (edges): 3650 (pairs with 2+ shared films)
+  Network density: 0.0998
+  Average clustering coefficient: 0.6987
+  Connected components: 1
+  Largest component: 271 nodes (100%)
+  Average shortest path (largest component): 1.90
+
+  Interpretation:
+    - Density 0.0998 indicates a sparse network.
+    - High clustering (0.70) suggests festivals form tightly-knit groups.
+    - Short average path (1.9) means most festivals are reachable in few steps.
+    - The network is fully connected: every festival is reachable from every other.
+
+======================================================================
+2. MOST CENTRAL FESTIVALS (Hub Identification)
+======================================================================
+
+  By DEGREE CENTRALITY (number of connections):
+     1. Encounters Short Film and Animation Festival
+        DC=1.000  BC=0.273  EC=0.528  Films=754  Community=0
+     2. Palm Springs International ShortFest
+        DC=0.574  BC=0.050  EC=0.293  Films=142  Community=0
+     3. Tallinn Black Nights Film Festival
+        DC=0.567  BC=0.041  EC=0.303  Films=140  Community=0
+     4. Clermont-Ferrand International Short Film Festival
+        DC=0.500  BC=0.026  EC=0.219  Films=85  Community=0
+     5. Guanajuato International Film Festival
+        DC=0.456  BC=0.024  EC=0.195  Films=78  Community=0
+     6. Curtas Vila do Conde International Film Festival
+        DC=0.437  BC=0.024  EC=0.127  Films=42  Community=1
+     7. Melbourne International Film Festival
+        DC=0.430  BC=0.016  EC=0.128  Films=44  Community=1
+     8. Internationale Kurzfilmtage Winterthur
+        DC=0.426  BC=0.018  EC=0.143  Films=46  Community=3
+     9. Athens International Film and Video Festival
+        DC=0.419  BC=0.030  EC=0.127  Films=50  Community=3
+    10. Helsinki International Film Festival - Love & Anarchy
+        DC=0.393  BC=0.024  EC=0.139  Films=50  Community=1
+    11. Annecy International Animation Festival
+        DC=0.389  BC=0.017  EC=0.199  Films=89  Community=0
+    12. Festival du Nouveau Cinéma
+        DC=0.356  BC=0.018  EC=0.144  Films=57  Community=3
+    13. Seattle International Film Festival
+        DC=0.348  BC=0.024  EC=0.108  Films=38  Community=0
+    14. Dokufest International Documentary and Short Film Festival
+        DC=0.344  BC=0.005  EC=0.097  Films=35  Community=3
+    15. Vancouver International Film Festival
+        DC=0.337  BC=0.019  EC=0.086  Films=29  Community=3
+
+  By BETWEENNESS CENTRALITY (bridge/gatekeeper role):
+     1. Encounters Short Film and Animation Festival (BC=0.2729)
+     2. Palm Springs International ShortFest (BC=0.0499)
+     3. Tallinn Black Nights Film Festival (BC=0.0410)
+     4. Athens International Film and Video Festival (BC=0.0295)
+     5. BFI London Film Festival (BC=0.0282)
+     6. Clermont-Ferrand International Short Film Festival (BC=0.0261)
+     7. Guanajuato International Film Festival (BC=0.0244)
+     8. Curtas Vila do Conde International Film Festival (BC=0.0243)
+     9. Helsinki International Film Festival - Love & Anarchy (BC=0.0242)
+    10. Seattle International Film Festival (BC=0.0236)
+
+  By EIGENVECTOR CENTRALITY (influence through well-connected neighbours):
+     1. Encounters Short Film and Animation Festival (EC=0.5281)
+     2. Tallinn Black Nights Film Festival (EC=0.3034)
+     3. Palm Springs International ShortFest (EC=0.2929)
+     4. Clermont-Ferrand International Short Film Festival (EC=0.2191)
+     5. Annecy International Animation Festival (EC=0.1995)
+     6. Guanajuato International Film Festival (EC=0.1951)
+     7. Festival du Nouveau Cinéma (EC=0.1438)
+     8. Internationale Kurzfilmtage Winterthur (EC=0.1433)
+     9. Helsinki International Film Festival - Love & Anarchy (EC=0.1389)
+    10. Melbourne International Film Festival (EC=0.1280)
+
+======================================================================
+3. COMMUNITY STRUCTURE (Sub-circuits)
+======================================================================
+  4 communities detected using Louvain method.
+  Modularity score: 0.1157
+
+  COMMUNITY 0 (131 festivals):
+    Type breakdown: {'festival': 119, 'award': 12}
+    Key members:
+      - Encounters Short Film and Animation Festival (754 films, 80 countries)
+      - Palm Springs International ShortFest (142 films, 53 countries)
+      - Tallinn Black Nights Film Festival (140 films, 41 countries)
+      - Clermont-Ferrand International Short Film Festival (85 films, 41 countries)
+      - Guanajuato International Film Festival (78 films, 36 countries)
+
+  COMMUNITY 1 (45 festivals):
+    Type breakdown: {'festival': 43, 'award': 2}
+    Key members:
+      - Curtas Vila do Conde International Film Festival (42 films, 25 countries)
+      - Melbourne International Film Festival (44 films, 31 countries)
+      - Helsinki International Film Festival - Love & Anarchy (50 films, 28 countries)
+      - BFI London Film Festival (43 films, 20 countries)
+      - Toronto International Film Festival (29 films, 16 countries)
+
+  COMMUNITY 2 (20 festivals):
+    Type breakdown: {'festival': 20}
+    Key members:
+      - Queer Lisboa (15 films, 12 countries)
+      - Berlin International Film Festival (24 films, 19 countries)
+      - Frameline: San Francisco International LGBTQ Film Festival (11 films, 10 countries)
+      - Chéries-Chéris (10 films, 9 countries)
+      - Outfest: Los Angeles Gay & Lesbian Film Festival (12 films, 11 countries)
+
+  COMMUNITY 3 (75 festivals):
+    Type breakdown: {'festival': 73, 'award': 2}
+    Key members:
+      - Internationale Kurzfilmtage Winterthur (46 films, 26 countries)
+      - Athens International Film and Video Festival (50 films, 32 countries)
+      - Festival du Nouveau Cinéma (57 films, 25 countries)
+      - Dokufest International Documentary and Short Film Festival (35 films, 20 countries)
+      - Vancouver International Film Festival (29 films, 18 countries)
+
+
+======================================================================
+4. TEMPORAL DYNAMICS
+======================================================================
+
+  Network growth by year:
+    2015:    3 edges,    8 shared films, ~  5 active festivals 
+    2016:   13 edges,   34 shared films, ~ 12 active festivals ##
+    2017:    4 edges,   10 shared films, ~  6 active festivals 
+    2018:   10 edges,   20 shared films, ~ 12 active festivals ##
+    2019:  210 edges,  612 shared films, ~107 active festivals ##########################################
+    2020:  174 edges,  529 shared films, ~ 80 active festivals ##################################
+    2021:  289 edges,  935 shared films, ~121 active festivals #########################################################
+    2022:  404 edges, 1142 shared films, ~139 active festivals ################################################################################
+    2023:  242 edges,  653 shared films, ~107 active festivals ################################################
+    2024:   38 edges,   80 shared films, ~ 37 active festivals #######
+    2025:  360 edges,  925 shared films, ~152 active festivals ########################################################################
+
+  Interpretation:
+    - Peak connectivity in 2022: 404 edges
+    - Network has grown over time.
+
+======================================================================
+5. PERIPHERAL FESTIVALS
+======================================================================
+
+  Festivals with lowest connectivity (degree centrality < 0.02):
+    - Boston Independent Film Festival (DC=0.0037, 2 films)
+    - Bolton International Film Festival (DC=0.0037, 2 films)
+    - Clermont-Ferrand Short Film Market Picks (DC=0.0037, 2 films)
+    - FIDMarseille (DC=0.0037, 2 films)
+    - BAFTA Awards (Scotland) (DC=0.0037, 2 films)
+    - Torino Film Festival (DC=0.0037, 3 films)
+    - Olhar de Cinema - Curitiba International Film Festival (DC=0.0037, 3 films)
+    - DocPoint – Helsinki Documentary Film Festival (DC=0.0037, 3 films)
+    - Lübeck Nordic Film Days (DC=0.0037, 2 films)
+    - Crossroads - San Francisco Cinematheque (DC=0.0037, 2 films)
+    - London Short Film Festival (DC=0.0037, 2 films)
+    - Cinemania (DC=0.0037, 2 films)
+    - Frightfest (DC=0.0037, 4 films)
+    - San Francisco IndieFest (DC=0.0037, 2 films)
+    - ShorTS International Film Festival (DC=0.0037, 2 films)
+    ... 88 peripheral festivals total
+
+======================================================================
+6. KEY FINDINGS
+======================================================================
+
+  1. ENCOUNTERS AS HUB: Ranked #1 by degree centrality.
+     As the anchor festival (all 754 films), it connects to virtually every
+     other festival in the network, making it the primary hub.
+
+  2. SUB-CIRCUIT PATTERNS:
+     Community 0: Encounters Short Film and Animation Festival, Palm Springs International ShortFest, Tallinn Black Nights Film Festival
+     Community 1: Curtas Vila do Conde International Film Festival, Melbourne International Film Festival, Helsinki International Film Festival - Love & Anarchy
+     Community 2: Queer Lisboa, Berlin International Film Festival, Frameline: San Francisco International LGBTQ Film Festival
+     Community 3: Internationale Kurzfilmtage Winterthur, Athens International Film and Video Festival, Festival du Nouveau Cinéma
+
+  3. GATEKEEPERS: Festivals with high betweenness but moderate degree
+     act as bridges between sub-circuits:
+     - Encounters Short Film and Animation Festival (BC/DC ratio: 0.27)
+     - Palm Springs International ShortFest (BC/DC ratio: 0.09)
+     - Tallinn Black Nights Film Festival (BC/DC ratio: 0.07)
+     - Athens International Film and Video Festival (BC/DC ratio: 0.07)
+     - BFI London Film Festival (BC/DC ratio: 0.09)
+
+======================================================================
+END OF REPORT
+======================================================================

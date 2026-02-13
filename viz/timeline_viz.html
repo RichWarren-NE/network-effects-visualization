@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Network Effects — Film Circulation Timeline</title>
+<style>
+:root {
+  --bg: #ffffff; --surface: #f8f9fa; --border: #e5e7eb;
+  --text: #1f2937; --text-dim: #6b7280; --text-bright: #111827; --accent: #2563eb;
+  --screening: #9ca3af; --won: #eab308; --nominated: #94a3b8; --mention: #d97706;
+  --hover-bg: #f0f4ff; --selected-bg: #e0e7ff;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Segoe UI',system-ui,-apple-system,sans-serif; background:var(--bg); color:var(--text); height:100vh; overflow:hidden; }
+
+/* ---- HEADER ---- */
+#header {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  background:var(--surface); border-bottom:1px solid var(--border);
+  padding:10px 20px; display:flex; align-items:center; gap:16px; height:50px;
+}
+#header h1 { font-size:15px; font-weight:700; color:var(--text-bright); white-space:nowrap; }
+.sep { width:1px; height:24px; background:var(--border); flex-shrink:0; }
+.tab-btn {
+  background:none; color:var(--text-dim); border:1px solid transparent;
+  border-radius:4px; padding:4px 12px; font-size:12px; cursor:pointer;
+  font-weight:500; transition:all .15s;
+}
+.tab-btn:hover { background:var(--hover-bg); color:var(--text); }
+.tab-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+
+/* ---- FILTERS ---- */
+#filter-bar {
+  position:fixed; top:50px; left:0; right:0; z-index:99;
+  background:var(--surface); border-bottom:1px solid var(--border);
+  padding:6px 20px; display:flex; align-items:center; gap:14px; height:40px;
+  flex-wrap:nowrap; overflow-x:auto;
+}
+.ctrl { display:flex; align-items:center; gap:5px; }
+.ctrl label { font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.6px; white-space:nowrap; }
+.ctrl select, .ctrl input[type=text], .ctrl input[type=number] {
+  background:#fff; color:var(--text); border:1px solid var(--border);
+  border-radius:4px; padding:2px 8px; font-size:11px; height:26px;
+}
+.ctrl input[type=number] { width:60px; }
+.ctrl select { max-width:160px; }
+
+/* ---- MAIN LAYOUT ---- */
+#main {
+  position:fixed; top:90px; bottom:40px; left:0; right:0;
+  display:flex; overflow:hidden;
+}
+#timeline-area {
+  flex:1; overflow-y:auto; overflow-x:hidden; position:relative;
+}
+#insights-panel {
+  width:220px; flex-shrink:0; background:var(--surface); border-left:1px solid var(--border);
+  padding:12px; overflow-y:auto; font-size:11px;
+}
+#insights-panel h3 { font-size:12px; font-weight:700; margin-bottom:8px; color:var(--text-bright); text-transform:uppercase; letter-spacing:.5px; }
+.insight-row { display:flex; justify-content:space-between; padding:3px 0; border-bottom:1px solid var(--border); }
+.insight-label { color:var(--text-dim); }
+.insight-value { font-weight:600; color:var(--text-bright); font-variant-numeric:tabular-nums; }
+
+/* ---- STICKY X-AXIS ---- */
+#x-axis-header {
+  position:sticky; top:0; z-index:10; background:var(--bg);
+  border-bottom:1px solid var(--border); height:28px;
+}
+
+/* ---- FILM ROWS ---- */
+.film-row { display:flex; height:26px; align-items:center; cursor:pointer; border-bottom:1px solid #f3f4f6; transition:background .1s; }
+.film-row:hover { background:var(--hover-bg); }
+.film-row.expanded { background:var(--selected-bg); height:auto; min-height:26px; }
+.film-label {
+  width:240px; min-width:240px; padding:0 8px; font-size:11px; white-space:nowrap;
+  overflow:hidden; text-overflow:ellipsis; color:var(--text); flex-shrink:0;
+  border-right:1px solid var(--border);
+}
+.film-label .rank { color:var(--text-dim); font-size:10px; margin-right:4px; }
+.film-label .award-badge { color:var(--won); font-size:9px; margin-left:3px; }
+.film-timeline-area { flex:1; position:relative; height:100%; }
+
+/* ---- TOOLTIP ---- */
+#tooltip {
+  position:fixed; z-index:200; background:#fff; border:1px solid var(--border);
+  border-radius:6px; padding:8px 12px; font-size:11px; pointer-events:none;
+  box-shadow:0 4px 12px rgba(0,0,0,.1); max-width:300px; display:none;
+  line-height:1.5;
+}
+#tooltip .tt-festival { font-weight:600; color:var(--text-bright); }
+#tooltip .tt-dim { color:var(--text-dim); }
+
+/* ---- EXPANDED DETAIL ---- */
+.expanded-detail {
+  padding:8px 8px 8px 248px; font-size:11px; line-height:1.6;
+  border-bottom:1px solid var(--border); background:var(--selected-bg);
+}
+.expanded-detail .meta-line { color:var(--text-dim); }
+.expanded-detail .fest-list { margin-top:4px; }
+.expanded-detail .fest-item { display:inline-block; margin:1px 4px 1px 0; padding:1px 6px; background:#fff; border:1px solid var(--border); border-radius:3px; font-size:10px; }
+.fest-item.won { border-color:var(--won); background:#fefce8; }
+.fest-item.nominated { border-color:#94a3b8; background:#f8fafc; }
+.fest-item.mention { border-color:var(--mention); background:#fffbeb; }
+
+/* ---- SEARCH TAB ---- */
+#search-tab { display:none; padding:16px 20px; overflow-y:auto; height:100%; }
+#search-input-main { width:400px; padding:8px 12px; font-size:14px; border:1px solid var(--border); border-radius:6px; }
+#search-results { margin-top:8px; }
+.search-result { padding:6px 12px; cursor:pointer; border-radius:4px; font-size:13px; }
+.search-result:hover { background:var(--hover-bg); }
+#search-detail { margin-top:16px; }
+#search-detail-timeline { width:100%; overflow-x:auto; }
+
+/* ---- COMPARE TAB ---- */
+#compare-tab { display:none; padding:16px 20px; overflow-y:auto; height:100%; }
+#compare-input { width:400px; padding:8px 12px; font-size:14px; border:1px solid var(--border); border-radius:6px; }
+#compare-list { margin-top:8px; display:flex; flex-wrap:wrap; gap:6px; }
+.compare-chip { display:inline-flex; align-items:center; gap:4px; padding:3px 10px; background:var(--selected-bg); border:1px solid var(--accent); border-radius:20px; font-size:11px; }
+.compare-chip .remove { cursor:pointer; color:var(--text-dim); font-size:14px; line-height:1; }
+.compare-chip .remove:hover { color:#ef4444; }
+#compare-timeline { margin-top:16px; }
+
+/* ---- AGGREGATE TAB ---- */
+#aggregate-tab { display:none; padding:16px 20px; overflow-y:auto; height:100%; }
+.agg-section { margin-bottom:24px; }
+.agg-section h3 { font-size:13px; font-weight:700; margin-bottom:8px; color:var(--text-bright); }
+
+/* ---- BOTTOM BAR ---- */
+#bottom-bar {
+  position:fixed; bottom:0; left:0; right:0; z-index:100;
+  background:var(--surface); border-top:1px solid var(--border);
+  padding:6px 20px; display:flex; align-items:center; gap:12px; height:40px;
+  font-size:11px; color:var(--text-dim);
+}
+.export-btn {
+  background:#fff; color:var(--text); border:1px solid var(--border);
+  border-radius:4px; padding:3px 10px; font-size:11px; cursor:pointer;
+}
+.export-btn:hover { background:var(--hover-bg); border-color:var(--accent); color:var(--accent); }
+#page-info { margin-left:auto; font-variant-numeric:tabular-nums; }
+
+/* ---- LEGEND ---- */
+.legend { display:flex; gap:12px; align-items:center; }
+.legend-item { display:flex; align-items:center; gap:4px; font-size:10px; color:var(--text-dim); }
+.legend-dot { width:8px; height:8px; border-radius:50%; }
+
+/* Pagination */
+.page-btn { background:#fff; color:var(--text); border:1px solid var(--border); border-radius:4px; padding:2px 8px; font-size:11px; cursor:pointer; }
+.page-btn:hover { border-color:var(--accent); color:var(--accent); }
+.page-btn:disabled { opacity:.4; cursor:default; }
+</style>
+</head>
+<body>
+
+<div id="header">
+  <h1>Film Circulation Timeline</h1>
+  <div class="sep"></div>
+  <button class="tab-btn active" data-tab="most-traveled">Most Traveled</button>
+  <button class="tab-btn" data-tab="search">Search Film</button>
+  <button class="tab-btn" data-tab="compare">Compare</button>
+  <button class="tab-btn" data-tab="aggregate">Aggregate</button>
+  <div class="sep"></div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:var(--screening)"></div>Screening</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--won)"></div>Won</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--nominated)"></div>Nominated</div>
+    <div class="legend-item"><div class="legend-dot" style="background:var(--mention)"></div>Mention</div>
+  </div>
+</div>
+
+<div id="filter-bar">
+  <div class="ctrl"><label>Country</label><select id="f-country"><option value="">All</option></select></div>
+  <div class="ctrl"><label>Genre</label><select id="f-genre"><option value="">All</option></select></div>
+  <div class="ctrl"><label>Year</label><input type="number" id="f-year-min" placeholder="min"> – <input type="number" id="f-year-max" placeholder="max"></div>
+  <div class="ctrl"><label>Min festivals</label><input type="number" id="f-min-fest" value="1" min="1" style="width:50px"></div>
+  <div class="ctrl"><label>Awards only</label><input type="checkbox" id="f-awards"></div>
+  <div class="ctrl"><label>UK only</label><input type="checkbox" id="f-uk"></div>
+  <div class="ctrl"><label>Sort</label><select id="f-sort">
+    <option value="festivals-desc">Festivals (most)</option>
+    <option value="festivals-asc">Festivals (least)</option>
+    <option value="span-desc">Span (longest)</option>
+    <option value="span-asc">Span (shortest)</option>
+    <option value="year-asc">First screening (earliest)</option>
+    <option value="year-desc">First screening (latest)</option>
+    <option value="title-asc">Title (A–Z)</option>
+  </select></div>
+</div>
+
+<div id="main">
+  <!-- Most Traveled tab -->
+  <div id="timeline-area">
+    <div id="x-axis-header"></div>
+    <div id="film-rows"></div>
+  </div>
+  <div id="insights-panel">
+    <h3>Insights</h3>
+    <div id="insights-content"></div>
+  </div>
+
+  <!-- Search tab -->
+  <div id="search-tab">
+    <input type="text" id="search-input-main" placeholder="Search by title, director, or original title...">
+    <div id="search-results"></div>
+    <div id="search-detail"></div>
+    <div id="search-detail-timeline"></div>
+  </div>
+
+  <!-- Compare tab -->
+  <div id="compare-tab">
+    <input type="text" id="compare-input" placeholder="Search films to compare (max 10)...">
+    <div id="compare-suggestions"></div>
+    <div id="compare-list"></div>
+    <div id="compare-timeline"></div>
+    <div id="compare-table"></div>
+  </div>
+
+  <!-- Aggregate tab -->
+  <div id="aggregate-tab">
+    <div class="agg-section">
+      <h3>Screening Heatmap: Production Year × Screening Year</h3>
+      <div id="heatmap-container"></div>
+    </div>
+    <div class="agg-section">
+      <h3>Circulation Duration Distribution</h3>
+      <div id="duration-chart"></div>
+    </div>
+  </div>
+</div>
+
+<div id="bottom-bar">
+  <button class="export-btn" id="btn-export-png">Export PNG</button>
+  <button class="export-btn" id="btn-export-svg">Export SVG</button>
+  <div class="sep" style="height:20px"></div>
+  <span>Note: Only event_year available (no month). All 754 films screened at Encounters.</span>
+  <span id="page-info"></span>
+  <button class="page-btn" id="btn-prev" disabled>← Prev</button>
+  <button class="page-btn" id="btn-next">Next →</button>
+</div>
+
+<div id="tooltip"></div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+// ===========================================================================
+// GLOBALS
+// ===========================================================================
+let DATA = null;
+let filteredFilms = [];
+let currentPage = 0;
+const PAGE_SIZE = 50;
+const ROW_HEIGHT = 26;
+const LABEL_WIDTH = 240;
+const MARGIN = { top: 0, right: 20, bottom: 0, left: LABEL_WIDTH };
+let expandedFilmId = null;
+let compareFilms = [];
+
+// Status → colour mapping
+const STATUS_COLOR = {
+  screening: '#9ca3af',
+  won: '#eab308',
+  nominated: '#94a3b8',
+  special_mention: '#d97706',
+  honorable_mention: '#d97706',
+  second_place: '#eab308',
+  third_place: '#eab308',
+};
+
+function statusGroup(s) {
+  if (s === 'won' || s === 'second_place' || s === 'third_place') return 'won';
+  if (s === 'nominated') return 'nominated';
+  if (s === 'special_mention' || s === 'honorable_mention') return 'mention';
+  return 'screening';
+}
+
+// ===========================================================================
+// DATA LOADING
+// ===========================================================================
+d3.json('timeline_data.json').then(data => {
+  DATA = data;
+  initFilters();
+  applyFilters();
+  setupTabs();
+  setupSearch();
+  setupCompare();
+  setupExport();
+}).catch(err => {
+  document.getElementById('film-rows').innerHTML = `<div style="padding:40px;color:#ef4444">Error loading data: ${err.message}<br>Make sure timeline_data.json is in the same directory and you're serving via HTTP.</div>`;
+});
+
+// ===========================================================================
+// FILTERS
+// ===========================================================================
+function initFilters() {
+  // Countries
+  const countries = new Set();
+  DATA.films.forEach(f => {
+    if (f.country_codes) f.country_codes.split(', ').forEach(c => countries.add(c));
+  });
+  const countrySelect = document.getElementById('f-country');
+  [...countries].sort().forEach(c => {
+    countrySelect.innerHTML += `<option value="${c}">${c}</option>`;
+  });
+
+  // Genres
+  const genres = new Set();
+  DATA.films.forEach(f => {
+    if (f.genres) f.genres.split(', ').forEach(g => genres.add(g));
+  });
+  const genreSelect = document.getElementById('f-genre');
+  [...genres].sort().forEach(g => {
+    genreSelect.innerHTML += `<option value="${g}">${g}</option>`;
+  });
+
+  // Year range hints
+  document.getElementById('f-year-min').placeholder = DATA.metadata.year_range[0];
+  document.getElementById('f-year-max').placeholder = DATA.metadata.year_range[1];
+
+  // Attach listeners
+  ['f-country','f-genre','f-year-min','f-year-max','f-min-fest','f-awards','f-uk','f-sort'].forEach(id => {
+    document.getElementById(id).addEventListener('change', () => { currentPage = 0; applyFilters(); });
+    document.getElementById(id).addEventListener('input', () => { currentPage = 0; applyFilters(); });
+  });
+
+  // Pagination
+  document.getElementById('btn-prev').addEventListener('click', () => { currentPage--; renderTimeline(); });
+  document.getElementById('btn-next').addEventListener('click', () => { currentPage++; renderTimeline(); });
+}
+
+function applyFilters() {
+  const country = document.getElementById('f-country').value;
+  const genre = document.getElementById('f-genre').value;
+  const yearMin = parseInt(document.getElementById('f-year-min').value) || 0;
+  const yearMax = parseInt(document.getElementById('f-year-max').value) || 9999;
+  const minFest = parseInt(document.getElementById('f-min-fest').value) || 1;
+  const awardsOnly = document.getElementById('f-awards').checked;
+  const ukOnly = document.getElementById('f-uk').checked;
+  const sort = document.getElementById('f-sort').value;
+
+  filteredFilms = DATA.films.filter(f => {
+    if (country && (!f.country_codes || !f.country_codes.split(', ').includes(country))) return false;
+    if (genre && (!f.genres || !f.genres.split(', ').includes(genre))) return false;
+    if (f.first_screening_year < yearMin || f.first_screening_year > yearMax) return false;
+    if (f.total_festivals < minFest) return false;
+    if (awardsOnly && !f.has_awards) return false;
+    if (ukOnly && !f.is_uk) return false;
+    return true;
+  });
+
+  // Sort
+  const [field, dir] = sort.split('-');
+  filteredFilms.sort((a, b) => {
+    let va, vb;
+    if (field === 'festivals') { va = a.total_festivals; vb = b.total_festivals; }
+    else if (field === 'span') { va = a.circulation_span_years; vb = b.circulation_span_years; }
+    else if (field === 'year') { va = a.first_screening_year; vb = b.first_screening_year; }
+    else if (field === 'title') { va = a.title.toLowerCase(); vb = b.title.toLowerCase(); }
+    if (dir === 'desc') return vb > va ? 1 : vb < va ? -1 : 0;
+    return va > vb ? 1 : va < vb ? -1 : 0;
+  });
+
+  renderTimeline();
+  renderInsights();
+}
+
+// ===========================================================================
+// TIMELINE RENDERING (Most Traveled tab)
+// ===========================================================================
+function renderTimeline() {
+  const container = document.getElementById('timeline-area');
+  const rowsEl = document.getElementById('film-rows');
+  const headerEl = document.getElementById('x-axis-header');
+
+  const totalPages = Math.ceil(filteredFilms.length / PAGE_SIZE);
+  currentPage = Math.max(0, Math.min(currentPage, totalPages - 1));
+  const start = currentPage * PAGE_SIZE;
+  const pageFilms = filteredFilms.slice(start, start + PAGE_SIZE);
+
+  // Update pagination
+  document.getElementById('btn-prev').disabled = currentPage <= 0;
+  document.getElementById('btn-next').disabled = currentPage >= totalPages - 1;
+  document.getElementById('page-info').textContent = `${filteredFilms.length} films | Page ${currentPage + 1} of ${Math.max(1, totalPages)}`;
+
+  // Compute x scale from ALL filtered films
+  let yearMin = Infinity, yearMax = -Infinity;
+  filteredFilms.forEach(f => {
+    if (f.first_screening_year < yearMin) yearMin = f.first_screening_year;
+    if (f.last_screening_year > yearMax) yearMax = f.last_screening_year;
+  });
+  if (!isFinite(yearMin)) { yearMin = 2000; yearMax = 2025; }
+  yearMin = Math.max(yearMin - 1, 1995);
+  yearMax = yearMax + 1;
+
+  const timelineWidth = container.clientWidth - LABEL_WIDTH - 20;
+  const xScale = d3.scaleLinear().domain([yearMin, yearMax]).range([10, timelineWidth - 10]);
+
+  // Render x-axis header
+  headerEl.innerHTML = '';
+  const axisSvg = d3.select(headerEl).append('svg')
+    .attr('width', container.clientWidth).attr('height', 28);
+  const axisG = axisSvg.append('g').attr('transform', `translate(${LABEL_WIDTH}, 0)`);
+
+  const ticks = [];
+  for (let y = Math.ceil(yearMin); y <= yearMax; y += 2) ticks.push(y);
+  axisG.selectAll('text').data(ticks).enter().append('text')
+    .attr('x', d => xScale(d)).attr('y', 18).attr('text-anchor', 'middle')
+    .attr('fill', '#6b7280').attr('font-size', 10).text(d => `'${String(d).slice(2)}`);
+  axisG.selectAll('line').data(ticks).enter().append('line')
+    .attr('x1', d => xScale(d)).attr('x2', d => xScale(d))
+    .attr('y1', 22).attr('y2', 28).attr('stroke', '#e5e7eb');
+
+  // Render rows
+  rowsEl.innerHTML = '';
+  pageFilms.forEach((film, i) => {
+    const globalIdx = start + i + 1;
+    const row = document.createElement('div');
+    row.className = 'film-row';
+    row.dataset.filmId = film.film_id;
+
+    // Label
+    const label = document.createElement('div');
+    label.className = 'film-label';
+    label.title = film.title;
+    label.innerHTML = `<span class="rank">${globalIdx}.</span>${escHtml(film.title)}${film.has_awards ? '<span class="award-badge">★</span>' : ''}`;
+    row.appendChild(label);
+
+    // Timeline SVG
+    const timelineDiv = document.createElement('div');
+    timelineDiv.className = 'film-timeline-area';
+    row.appendChild(timelineDiv);
+
+    const svg = d3.select(timelineDiv).append('svg')
+      .attr('width', timelineWidth).attr('height', ROW_HEIGHT);
+
+    renderFilmRow(svg, film, ROW_HEIGHT / 2, xScale, timelineWidth);
+
+    row.addEventListener('click', () => toggleExpand(film, row));
+    rowsEl.appendChild(row);
+  });
+}
+
+function renderFilmRow(svg, film, cy, xScale, width) {
+  const events = film.screening_timeline;
+  if (!events || events.length === 0) return;
+
+  const firstX = xScale(events[0].event_year);
+  const lastX = xScale(events[events.length - 1].event_year);
+
+  // Connecting line
+  svg.append('line')
+    .attr('x1', firstX).attr('y1', cy).attr('x2', lastX).attr('y2', cy)
+    .attr('stroke', '#d1d5db').attr('stroke-width', 1.5);
+
+  // Group events by year for collision handling
+  const byYear = {};
+  events.forEach(e => {
+    const y = e.event_year;
+    if (!byYear[y]) byYear[y] = [];
+    byYear[y].push(e);
+  });
+
+  Object.entries(byYear).forEach(([year, yearEvents]) => {
+    const x = xScale(+year);
+    yearEvents.forEach((e, j) => {
+      const n = yearEvents.length;
+      const offset = n > 1 ? (j - (n - 1) / 2) * 5 : 0;
+      const cx = x + offset;
+      const sg = statusGroup(e.status);
+      const color = sg === 'won' ? '#eab308' : sg === 'nominated' ? '#94a3b8' : sg === 'mention' ? '#d97706' : '#9ca3af';
+      const r = sg === 'won' ? 4.5 : sg === 'mention' ? 3.5 : 3;
+
+      const circle = svg.append('circle')
+        .attr('cx', cx).attr('cy', cy).attr('r', r)
+        .attr('fill', color).attr('stroke', sg === 'won' ? '#a16207' : 'none')
+        .attr('stroke-width', sg === 'won' ? 1 : 0)
+        .style('cursor', 'pointer');
+
+      // Tooltip
+      const pos = events.indexOf(e) + 1;
+      circle.on('mouseenter', (evt) => showTooltip(evt, e, pos, events.length, film))
+            .on('mouseleave', hideTooltip);
+    });
+  });
+}
+
+// ===========================================================================
+// EXPAND / COLLAPSE
+// ===========================================================================
+function toggleExpand(film, rowEl) {
+  const existing = rowEl.nextElementSibling;
+  if (existing && existing.classList.contains('expanded-detail')) {
+    existing.remove();
+    expandedFilmId = null;
+    return;
+  }
+  // Remove any other expanded
+  document.querySelectorAll('.expanded-detail').forEach(el => el.remove());
+
+  expandedFilmId = film.film_id;
+  const detail = document.createElement('div');
+  detail.className = 'expanded-detail';
+
+  let html = `<div class="meta-line"><strong>${escHtml(film.title)}</strong>`;
+  if (film.original_title && film.original_title !== film.title) html += ` <em>(${escHtml(film.original_title)})</em>`;
+  html += `</div>`;
+  html += `<div class="meta-line">Director(s): ${escHtml(film.directors || 'Unknown')} | ${film.countries || '?'} | ${film.production_year || '?'} | ${film.duration ? film.duration + ' min' : '?'}</div>`;
+  html += `<div class="meta-line">Genres: ${escHtml(film.genres || 'None')} | ${film.total_festivals} festivals, ${film.total_screenings} screenings, span ${film.circulation_span_years}y</div>`;
+  html += `<div class="meta-line">Awards: ${film.awards_won} wins, ${film.nominations} nominations, ${film.mentions} mentions</div>`;
+  html += `<div class="fest-list">`;
+  film.screening_timeline.forEach(e => {
+    const sg = statusGroup(e.status);
+    html += `<span class="fest-item ${sg}">${escHtml(e.festival)} (${e.event_year})${sg !== 'screening' ? ' ' + e.status : ''}</span>`;
+  });
+  html += `</div>`;
+  detail.innerHTML = html;
+  rowEl.after(detail);
+}
+
+// ===========================================================================
+// TOOLTIP
+// ===========================================================================
+function showTooltip(evt, event, pos, total, film) {
+  const tt = document.getElementById('tooltip');
+  tt.style.display = 'block';
+  tt.innerHTML = `<div class="tt-festival">${escHtml(event.festival)}</div>`
+    + `<div>${event.event_year} · ${event.status}${event.category ? ' (' + escHtml(event.category) + ')' : ''}</div>`
+    + `<div class="tt-dim">${pos} of ${total} festivals for this film</div>`
+    + `<div class="tt-dim">${escHtml(film.title)}</div>`;
+  const x = Math.min(evt.clientX + 12, window.innerWidth - 320);
+  const y = Math.min(evt.clientY - 10, window.innerHeight - 100);
+  tt.style.left = x + 'px';
+  tt.style.top = y + 'px';
+}
+
+function hideTooltip() {
+  document.getElementById('tooltip').style.display = 'none';
+}
+
+// ===========================================================================
+// INSIGHTS PANEL
+// ===========================================================================
+function renderInsights() {
+  const el = document.getElementById('insights-content');
+  if (filteredFilms.length === 0) { el.innerHTML = '<div style="color:var(--text-dim)">No films match filters</div>'; return; }
+
+  const spans = filteredFilms.map(f => f.circulation_span_years);
+  const fests = filteredFilms.map(f => f.total_festivals);
+  const avgSpan = (spans.reduce((a, b) => a + b, 0) / spans.length).toFixed(1);
+  const avgFest = (fests.reduce((a, b) => a + b, 0) / fests.length).toFixed(1);
+  const medFest = median(fests);
+  const awarded = filteredFilms.filter(f => f.has_awards).length;
+  const awardRate = ((awarded / filteredFilms.length) * 100).toFixed(0);
+
+  // Most common first festival
+  const firstFests = {};
+  filteredFilms.forEach(f => {
+    if (f.screening_timeline && f.screening_timeline.length) {
+      const fy = f.screening_timeline[0].event_year;
+      f.screening_timeline.filter(e => e.event_year === fy).forEach(e => {
+        firstFests[e.festival] = (firstFests[e.festival] || 0) + 1;
+      });
+    }
+  });
+  const topFirst = Object.entries(firstFests).sort((a, b) => b[1] - a[1])[0];
+
+  // Most traveled in filter
+  const top = filteredFilms[0];
+
+  el.innerHTML = [
+    row('Films shown', filteredFilms.length),
+    row('Avg festivals/film', avgFest),
+    row('Median festivals', medFest),
+    row('Avg circulation', avgSpan + ' yr'),
+    row('Award rate', awardRate + '%'),
+    row('Most common 1st', topFirst ? truncate(topFirst[0], 20) + ` (${topFirst[1]})` : '—'),
+    row('Most traveled', top ? truncate(top.title, 18) + ` (${top.total_festivals})` : '—'),
+  ].join('');
+}
+
+function row(label, value) {
+  return `<div class="insight-row"><span class="insight-label">${label}</span><span class="insight-value">${value}</span></div>`;
+}
+
+function median(arr) {
+  const s = [...arr].sort((a, b) => a - b);
+  const m = Math.floor(s.length / 2);
+  return s.length % 2 ? s[m] : ((s[m - 1] + s[m]) / 2).toFixed(1);
+}
+
+function truncate(s, n) { return s.length > n ? s.slice(0, n) + '…' : s; }
+function escHtml(s) { if (!s) return ''; const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+// ===========================================================================
+// TABS
+// ===========================================================================
+function setupTabs() {
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tab = btn.dataset.tab;
+      showTab(tab);
+    });
+  });
+}
+
+function showTab(tab) {
+  const tl = document.getElementById('timeline-area');
+  const ip = document.getElementById('insights-panel');
+  const st = document.getElementById('search-tab');
+  const ct = document.getElementById('compare-tab');
+  const at = document.getElementById('aggregate-tab');
+  const fb = document.getElementById('filter-bar');
+
+  tl.style.display = 'none'; ip.style.display = 'none';
+  st.style.display = 'none'; ct.style.display = 'none'; at.style.display = 'none';
+  fb.style.display = 'none';
+
+  if (tab === 'most-traveled') {
+    tl.style.display = ''; ip.style.display = ''; fb.style.display = '';
+    renderTimeline();
+  } else if (tab === 'search') {
+    st.style.display = 'block';
+  } else if (tab === 'compare') {
+    ct.style.display = 'block';
+  } else if (tab === 'aggregate') {
+    at.style.display = 'block';
+    renderAggregate();
+  }
+}
+
+// ===========================================================================
+// SEARCH TAB
+// ===========================================================================
+function setupSearch() {
+  const input = document.getElementById('search-input-main');
+  let debounce = null;
+  input.addEventListener('input', () => {
+    clearTimeout(debounce);
+    debounce = setTimeout(() => searchFilms(input.value), 200);
+  });
+}
+
+function searchFilms(query) {
+  const resultsEl = document.getElementById('search-results');
+  const detailEl = document.getElementById('search-detail');
+  const timelineEl = document.getElementById('search-detail-timeline');
+  if (!query || query.length < 2) { resultsEl.innerHTML = ''; detailEl.innerHTML = ''; timelineEl.innerHTML = ''; return; }
+
+  const q = query.toLowerCase();
+  const matches = DATA.films.filter(f =>
+    (f.title && f.title.toLowerCase().includes(q)) ||
+    (f.original_title && f.original_title.toLowerCase().includes(q)) ||
+    (f.directors && f.directors.toLowerCase().includes(q))
+  ).slice(0, 20);
+
+  resultsEl.innerHTML = matches.map(f =>
+    `<div class="search-result" data-fid="${f.film_id}">${escHtml(f.title)} <span style="color:var(--text-dim)">(${f.directors || 'Unknown'}, ${f.production_year || '?'}) — ${f.total_festivals} festivals</span></div>`
+  ).join('');
+
+  resultsEl.querySelectorAll('.search-result').forEach(el => {
+    el.addEventListener('click', () => {
+      const film = DATA.films.find(f => f.film_id === el.dataset.fid);
+      if (film) showSearchDetail(film);
+    });
+  });
+}
+
+function showSearchDetail(film) {
+  const detailEl = document.getElementById('search-detail');
+  const timelineEl = document.getElementById('search-detail-timeline');
+
+  let html = `<h3 style="margin:12px 0 6px;font-size:16px">${escHtml(film.title)}</h3>`;
+  if (film.original_title && film.original_title !== film.title) html += `<div style="color:var(--text-dim);font-style:italic;margin-bottom:4px">${escHtml(film.original_title)}</div>`;
+  html += `<div>Director(s): ${escHtml(film.directors || 'Unknown')}</div>`;
+  html += `<div>Countries: ${escHtml(film.countries || '?')} | Year: ${film.production_year || '?'} | Duration: ${film.duration ? film.duration + ' min' : '?'}</div>`;
+  html += `<div>Genres: ${escHtml(film.genres || 'None')}</div>`;
+  html += `<div style="margin-top:4px">${film.total_festivals} festivals, ${film.total_screenings} screenings, span ${film.circulation_span_years} years (${film.first_screening_year}–${film.last_screening_year})</div>`;
+  html += `<div>Awards: ${film.awards_won} wins, ${film.nominations} nominations, ${film.mentions} mentions</div>`;
+  detailEl.innerHTML = html;
+
+  // Render expanded timeline
+  timelineEl.innerHTML = '';
+  const events = film.screening_timeline;
+  if (!events || events.length === 0) return;
+
+  const yearMin = events[0].event_year - 1;
+  const yearMax = events[events.length - 1].event_year + 1;
+  const width = Math.max(800, (yearMax - yearMin) * 80);
+  const height = 120;
+  const xScale = d3.scaleLinear().domain([yearMin, yearMax]).range([40, width - 40]);
+
+  const svg = d3.select(timelineEl).append('svg').attr('width', width).attr('height', height);
+
+  // X-axis
+  const ticks = [];
+  for (let y = yearMin; y <= yearMax; y++) ticks.push(y);
+  svg.selectAll('.tick-line').data(ticks).enter().append('line')
+    .attr('x1', d => xScale(d)).attr('x2', d => xScale(d))
+    .attr('y1', 30).attr('y2', 50).attr('stroke', '#e5e7eb');
+  svg.selectAll('.tick-label').data(ticks).enter().append('text')
+    .attr('x', d => xScale(d)).attr('y', 24).attr('text-anchor', 'middle')
+    .attr('fill', '#6b7280').attr('font-size', 10).text(d => d);
+
+  // Connecting line
+  const firstX = xScale(events[0].event_year);
+  const lastX = xScale(events[events.length - 1].event_year);
+  svg.append('line').attr('x1', firstX).attr('y1', 40).attr('x2', lastX).attr('y2', 40)
+    .attr('stroke', '#d1d5db').attr('stroke-width', 2);
+
+  // Events with labels
+  const byYear = {};
+  events.forEach(e => { if (!byYear[e.event_year]) byYear[e.event_year] = []; byYear[e.event_year].push(e); });
+
+  let labelIdx = 0;
+  Object.entries(byYear).forEach(([year, yearEvents]) => {
+    const x = xScale(+year);
+    yearEvents.forEach((e, j) => {
+      const n = yearEvents.length;
+      const offset = n > 1 ? (j - (n - 1) / 2) * 14 : 0;
+      const cx = x + offset;
+      const sg = statusGroup(e.status);
+      const color = sg === 'won' ? '#eab308' : sg === 'nominated' ? '#94a3b8' : sg === 'mention' ? '#d97706' : '#9ca3af';
+
+      svg.append('circle').attr('cx', cx).attr('cy', 40).attr('r', sg === 'won' ? 5 : 4)
+        .attr('fill', color).attr('stroke', sg === 'won' ? '#a16207' : 'none').attr('stroke-width', 1);
+
+      // Angled label
+      svg.append('text')
+        .attr('x', cx).attr('y', 52)
+        .attr('transform', `rotate(35, ${cx}, 52)`)
+        .attr('font-size', 9).attr('fill', '#4b5563')
+        .text(truncate(e.festival, 30) + (sg !== 'screening' ? ' ★' : ''));
+      labelIdx++;
+    });
+  });
+}
+
+// ===========================================================================
+// COMPARE TAB
+// ===========================================================================
+function setupCompare() {
+  const input = document.getElementById('compare-input');
+  let debounce = null;
+  input.addEventListener('input', () => {
+    clearTimeout(debounce);
+    debounce = setTimeout(() => compareSearch(input.value), 200);
+  });
+}
+
+function compareSearch(query) {
+  const sugEl = document.getElementById('compare-suggestions');
+  if (!query || query.length < 2) { sugEl.innerHTML = ''; return; }
+  const q = query.toLowerCase();
+  const matches = DATA.films.filter(f =>
+    !compareFilms.find(cf => cf.film_id === f.film_id) &&
+    ((f.title && f.title.toLowerCase().includes(q)) ||
+     (f.directors && f.directors.toLowerCase().includes(q)))
+  ).slice(0, 10);
+
+  sugEl.innerHTML = matches.map(f =>
+    `<div class="search-result" data-fid="${f.film_id}">${escHtml(f.title)} <span style="color:var(--text-dim)">(${f.total_festivals} fest.)</span></div>`
+  ).join('');
+
+  sugEl.querySelectorAll('.search-result').forEach(el => {
+    el.addEventListener('click', () => {
+      if (compareFilms.length >= 10) return;
+      const film = DATA.films.find(f => f.film_id === el.dataset.fid);
+      if (film) {
+        compareFilms.push(film);
+        document.getElementById('compare-input').value = '';
+        sugEl.innerHTML = '';
+        renderCompare();
+      }
+    });
+  });
+}
+
+function renderCompare() {
+  // Chips
+  const listEl = document.getElementById('compare-list');
+  listEl.innerHTML = compareFilms.map((f, i) =>
+    `<span class="compare-chip">${escHtml(truncate(f.title, 30))} <span class="remove" data-idx="${i}">×</span></span>`
+  ).join('');
+  listEl.querySelectorAll('.remove').forEach(el => {
+    el.addEventListener('click', () => {
+      compareFilms.splice(+el.dataset.idx, 1);
+      renderCompare();
+    });
+  });
+
+  // Timeline
+  const timelineEl = document.getElementById('compare-timeline');
+  timelineEl.innerHTML = '';
+  if (compareFilms.length === 0) return;
+
+  let yearMin = Infinity, yearMax = -Infinity;
+  compareFilms.forEach(f => {
+    if (f.first_screening_year < yearMin) yearMin = f.first_screening_year;
+    if (f.last_screening_year > yearMax) yearMax = f.last_screening_year;
+  });
+  yearMin -= 1; yearMax += 1;
+
+  const width = 800;
+  const rowH = 50;
+  const height = compareFilms.length * rowH + 40;
+  const xScale = d3.scaleLinear().domain([yearMin, yearMax]).range([250, width - 20]);
+
+  const svg = d3.select(timelineEl).append('svg').attr('width', width).attr('height', height);
+
+  // X-axis
+  const ticks = [];
+  for (let y = Math.ceil(yearMin); y <= yearMax; y++) ticks.push(y);
+  svg.selectAll('.tick-label').data(ticks).enter().append('text')
+    .attr('x', d => xScale(d)).attr('y', 16).attr('text-anchor', 'middle')
+    .attr('fill', '#6b7280').attr('font-size', 10).text(d => d);
+
+  compareFilms.forEach((film, i) => {
+    const cy = 30 + i * rowH + rowH / 2;
+
+    // Label
+    svg.append('text').attr('x', 8).attr('y', cy + 4).attr('font-size', 11)
+      .attr('fill', '#1f2937').text(truncate(film.title, 35));
+
+    // Row background
+    if (i % 2 === 1) {
+      svg.append('rect').attr('x', 240).attr('y', cy - rowH / 2 + 5)
+        .attr('width', width - 240).attr('height', rowH)
+        .attr('fill', '#f8f9fa');
+    }
+
+    renderFilmRow(svg, film, cy, xScale, width - 250);
+  });
+
+  // Comparison table
+  const tableEl = document.getElementById('compare-table');
+  let tHtml = '<table style="margin-top:16px;border-collapse:collapse;font-size:12px;width:100%"><tr style="background:var(--surface)"><th style="padding:4px 8px;text-align:left;border:1px solid var(--border)">Film</th><th style="padding:4px 8px;border:1px solid var(--border)">Festivals</th><th style="padding:4px 8px;border:1px solid var(--border)">Screenings</th><th style="padding:4px 8px;border:1px solid var(--border)">Span</th><th style="padding:4px 8px;border:1px solid var(--border)">Awards</th><th style="padding:4px 8px;border:1px solid var(--border)">First Year</th></tr>';
+  compareFilms.forEach(f => {
+    tHtml += `<tr><td style="padding:4px 8px;border:1px solid var(--border)">${escHtml(f.title)}</td><td style="padding:4px 8px;text-align:center;border:1px solid var(--border)">${f.total_festivals}</td><td style="padding:4px 8px;text-align:center;border:1px solid var(--border)">${f.total_screenings}</td><td style="padding:4px 8px;text-align:center;border:1px solid var(--border)">${f.circulation_span_years}y</td><td style="padding:4px 8px;text-align:center;border:1px solid var(--border)">${f.awards_won}</td><td style="padding:4px 8px;text-align:center;border:1px solid var(--border)">${f.first_screening_year}</td></tr>`;
+  });
+  tHtml += '</table>';
+  tableEl.innerHTML = tHtml;
+}
+
+// ===========================================================================
+// AGGREGATE TAB
+// ===========================================================================
+function renderAggregate() {
+  renderHeatmap();
+  renderDurationChart();
+}
+
+function renderHeatmap() {
+  const el = document.getElementById('heatmap-container');
+  el.innerHTML = '';
+  const heatmap = DATA.aggregate.heatmap_data;
+  if (!heatmap || heatmap.length === 0) return;
+
+  const prodYears = [...new Set(heatmap.map(d => d.production_year))].sort((a, b) => a - b);
+  const screenYears = [...new Set(heatmap.map(d => d.screening_year))].sort((a, b) => a - b);
+  const maxCount = d3.max(heatmap, d => d.count);
+
+  const cellSize = 18;
+  const marginLeft = 50;
+  const marginTop = 40;
+  const width = marginLeft + screenYears.length * cellSize + 20;
+  const height = marginTop + prodYears.length * cellSize + 20;
+
+  const svg = d3.select(el).append('svg').attr('width', width).attr('height', height);
+  const color = d3.scaleSequential(d3.interpolateBlues).domain([0, maxCount]);
+
+  // Index for fast lookup
+  const lookup = {};
+  heatmap.forEach(d => { lookup[`${d.production_year}-${d.screening_year}`] = d.count; });
+
+  // Y-axis labels
+  svg.selectAll('.py-label').data(prodYears).enter().append('text')
+    .attr('x', marginLeft - 4).attr('y', (d, i) => marginTop + i * cellSize + cellSize / 2 + 3)
+    .attr('text-anchor', 'end').attr('font-size', 9).attr('fill', '#6b7280')
+    .text(d => d);
+
+  // X-axis labels
+  svg.selectAll('.sy-label').data(screenYears).enter().append('text')
+    .attr('x', (d, i) => marginLeft + i * cellSize + cellSize / 2)
+    .attr('y', marginTop - 6).attr('text-anchor', 'middle')
+    .attr('font-size', 9).attr('fill', '#6b7280')
+    .attr('transform', (d, i) => `rotate(-45, ${marginLeft + i * cellSize + cellSize / 2}, ${marginTop - 6})`)
+    .text(d => `'${String(d).slice(2)}`);
+
+  // Cells
+  prodYears.forEach((py, yi) => {
+    screenYears.forEach((sy, xi) => {
+      const count = lookup[`${py}-${sy}`] || 0;
+      if (count === 0) return;
+      const rect = svg.append('rect')
+        .attr('x', marginLeft + xi * cellSize).attr('y', marginTop + yi * cellSize)
+        .attr('width', cellSize - 1).attr('height', cellSize - 1)
+        .attr('fill', color(count)).attr('rx', 2);
+      rect.on('mouseenter', (evt) => {
+        const tt = document.getElementById('tooltip');
+        tt.style.display = 'block';
+        tt.innerHTML = `<strong>Production: ${py}, Screening: ${sy}</strong><br>${count} screening(s)`;
+        tt.style.left = (evt.clientX + 12) + 'px';
+        tt.style.top = (evt.clientY - 10) + 'px';
+      }).on('mouseleave', hideTooltip);
+    });
+  });
+}
+
+function renderDurationChart() {
+  const el = document.getElementById('duration-chart');
+  el.innerHTML = '';
+
+  const spanDist = DATA.aggregate.span_distribution;
+  const spans = Object.entries(spanDist).map(([k, v]) => ({ span: +k, count: v })).sort((a, b) => a.span - b.span);
+
+  // Also compute awarded / UK distributions
+  const awardedSpans = {};
+  const ukSpans = {};
+  DATA.films.forEach(f => {
+    const s = f.circulation_span_years;
+    if (f.has_awards) awardedSpans[s] = (awardedSpans[s] || 0) + 1;
+    if (f.is_uk) ukSpans[s] = (ukSpans[s] || 0) + 1;
+  });
+
+  const allSpanValues = [...new Set(spans.map(d => d.span))].sort((a, b) => a - b);
+  // Cap display at span 10 for readability
+  const displaySpans = allSpanValues.filter(s => s <= 10);
+
+  const barWidth = 40;
+  const groupWidth = barWidth * 3 + 10;
+  const marginLeft = 50;
+  const marginBottom = 40;
+  const marginTop = 20;
+  const chartWidth = marginLeft + displaySpans.length * groupWidth + 20;
+  const chartHeight = 250;
+
+  const maxVal = d3.max(spans.filter(d => d.span <= 10), d => d.count) || 1;
+  const yScale = d3.scaleLinear().domain([0, maxVal]).range([chartHeight - marginBottom, marginTop]);
+
+  const svg = d3.select(el).append('svg').attr('width', chartWidth).attr('height', chartHeight);
+
+  // Y-axis
+  const yTicks = yScale.ticks(5);
+  yTicks.forEach(t => {
+    svg.append('line').attr('x1', marginLeft).attr('x2', chartWidth - 20)
+      .attr('y1', yScale(t)).attr('y2', yScale(t)).attr('stroke', '#f3f4f6');
+    svg.append('text').attr('x', marginLeft - 6).attr('y', yScale(t) + 3)
+      .attr('text-anchor', 'end').attr('font-size', 10).attr('fill', '#6b7280').text(t);
+  });
+
+  displaySpans.forEach((span, i) => {
+    const gx = marginLeft + i * groupWidth + 5;
+    const allCount = spanDist[String(span)] || 0;
+    const awardCount = awardedSpans[span] || 0;
+    const ukCount = ukSpans[span] || 0;
+
+    // All films bar
+    svg.append('rect').attr('x', gx).attr('y', yScale(allCount))
+      .attr('width', barWidth - 2).attr('height', yScale(0) - yScale(allCount))
+      .attr('fill', '#93c5fd').attr('rx', 2);
+
+    // Awarded bar
+    svg.append('rect').attr('x', gx + barWidth).attr('y', yScale(awardCount))
+      .attr('width', barWidth - 2).attr('height', yScale(0) - yScale(awardCount))
+      .attr('fill', '#eab308').attr('rx', 2);
+
+    // UK bar
+    svg.append('rect').attr('x', gx + barWidth * 2).attr('y', yScale(ukCount))
+      .attr('width', barWidth - 2).attr('height', yScale(0) - yScale(ukCount))
+      .attr('fill', '#60a5fa').attr('rx', 2);
+
+    // X label
+    svg.append('text').attr('x', gx + barWidth * 1.5).attr('y', chartHeight - marginBottom + 16)
+      .attr('text-anchor', 'middle').attr('font-size', 10).attr('fill', '#6b7280')
+      .text(span + 'y');
+  });
+
+  // Legend
+  const legendY = marginTop - 5;
+  [{ label: 'All', color: '#93c5fd' }, { label: 'Awarded', color: '#eab308' }, { label: 'UK', color: '#60a5fa' }].forEach((l, i) => {
+    svg.append('rect').attr('x', marginLeft + i * 80).attr('y', legendY - 8).attr('width', 12).attr('height', 12).attr('fill', l.color).attr('rx', 2);
+    svg.append('text').attr('x', marginLeft + i * 80 + 16).attr('y', legendY + 2).attr('font-size', 10).attr('fill', '#6b7280').text(l.label);
+  });
+}
+
+// ===========================================================================
+// EXPORT
+// ===========================================================================
+function setupExport() {
+  document.getElementById('btn-export-png').addEventListener('click', exportPNG);
+  document.getElementById('btn-export-svg').addEventListener('click', exportSVG);
+}
+
+function exportSVG() {
+  // Collect all SVGs in the current view
+  const svgs = document.querySelectorAll('#timeline-area svg, #search-detail-timeline svg, #compare-timeline svg, #aggregate-tab svg');
+  if (svgs.length === 0) return;
+
+  // Clone the first significant SVG
+  const svgEl = svgs[0];
+  const clone = svgEl.cloneNode(true);
+  clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+  const blob = new Blob([clone.outerHTML], { type: 'image/svg+xml' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'film_circulation_timeline.svg'; a.click();
+  URL.revokeObjectURL(url);
+}
+
+function exportPNG() {
+  const svgs = document.querySelectorAll('#timeline-area svg, #search-detail-timeline svg, #compare-timeline svg, #aggregate-tab svg');
+  if (svgs.length === 0) return;
+
+  // Gather all SVGs from the timeline rows
+  const rowSvgs = document.querySelectorAll('#film-rows svg');
+  const headerSvg = document.querySelector('#x-axis-header svg');
+
+  // Build a composite SVG
+  const totalHeight = 28 + rowSvgs.length * ROW_HEIGHT + 40;
+  const totalWidth = 2400;
+  const scale = totalWidth / (headerSvg ? +headerSvg.getAttribute('width') : 900);
+
+  const canvas = document.createElement('canvas');
+  canvas.width = totalWidth;
+  canvas.height = totalHeight * scale;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  // Render SVGs onto canvas using Image
+  const allSvgEls = [headerSvg, ...rowSvgs].filter(Boolean);
+  let yOff = 0;
+  let loaded = 0;
+
+  if (allSvgEls.length === 0) return;
+
+  allSvgEls.forEach((svgEl, idx) => {
+    const clone = svgEl.cloneNode(true);
+    clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    const svgStr = new XMLSerializer().serializeToString(clone);
+    const img = new Image();
+    const blob = new Blob([svgStr], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    img.onload = () => {
+      ctx.drawImage(img, 0, yOff, canvas.width, img.height * scale);
+      URL.revokeObjectURL(url);
+      loaded++;
+      if (loaded === allSvgEls.length) {
+        canvas.toBlob(b => {
+          const a = document.createElement('a');
+          a.href = URL.createObjectURL(b);
+          a.download = 'film_circulation_timeline.png';
+          a.click();
+        });
+      }
+    };
+    img.src = url;
+    yOff += (+svgEl.getAttribute('height') || ROW_HEIGHT) * scale;
+  });
+}
+
+// ===========================================================================
+// WINDOW RESIZE
+// ===========================================================================
+window.addEventListener('resize', () => {
+  if (document.querySelector('.tab-btn.active').dataset.tab === 'most-traveled') {
+    renderTimeline();
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Network Effects — Festival Circulation Network</title>
+<style>
+:root {
+  --bg: #080c14;
+  --surface: rgba(12,17,28,0.94);
+  --border: #1a2236;
+  --text: #c0c8d4;
+  --text-dim: #5a6a7e;
+  --text-bright: #e2e8f0;
+  --accent: #4a9eff;
+  --accent-dim: #1e3a5f;
+  --uk: #4a9eff;
+  --europe: #e9a84c;
+  --other: #6b7a8d;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Segoe UI',system-ui,sans-serif; background:var(--bg); color:var(--text); overflow:hidden; height:100vh; }
+
+/* ---- HEADER ---- */
+#header {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  background:var(--surface); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+  padding:8px 20px; display:flex; align-items:center; gap:14px;
+  height:44px;
+}
+#header h1 { font-size:14px; font-weight:600; color:var(--text-bright); white-space:nowrap; }
+.sep { width:1px; height:20px; background:var(--border); flex-shrink:0; }
+.ctrl { display:flex; align-items:center; gap:5px; }
+.ctrl label { font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.6px; }
+.ctrl select, .ctrl input[type=text] {
+  background:#111827; color:var(--text); border:1px solid var(--border);
+  border-radius:3px; padding:2px 8px; font-size:11px; height:24px;
+}
+.ctrl input[type=range] { width:80px; accent-color:var(--accent); height:14px; }
+.ctrl .val { font-size:11px; color:var(--accent); min-width:20px; text-align:center; font-variant-numeric:tabular-nums; }
+#search-input { width:150px; }
+#search-input::placeholder { color:#3a4a5e; }
+.btn {
+  background:#111827; color:var(--text-dim); border:1px solid var(--border);
+  border-radius:3px; padding:2px 10px; font-size:10px; cursor:pointer;
+  text-transform:uppercase; letter-spacing:.5px; height:24px; white-space:nowrap;
+}
+.btn:hover { background:#1a2744; color:var(--text); }
+.btn.active { background:#1a3a5f; color:var(--accent); border-color:var(--accent); }
+
+/* ---- TIMELINE ---- */
+#timeline-bar {
+  position:fixed; top:44px; left:0; right:0; z-index:99;
+  background:var(--surface); backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--border);
+  padding:6px 20px; display:flex; align-items:center; gap:12px;
+  height:36px;
+}
+#play-btn {
+  width:28px; height:28px; border-radius:50%; border:1px solid var(--border);
+  background:#111827; color:var(--text); cursor:pointer; font-size:13px;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+#play-btn:hover { background:#1a2744; }
+#year-label {
+  font-size:13px; font-weight:600; color:var(--accent); min-width:90px;
+  font-variant-numeric:tabular-nums; white-space:nowrap;
+}
+
+/* ---- DUAL RANGE SLIDER ---- */
+.range-slider {
+  position:relative; flex:1; height:20px; display:flex; align-items:center;
+}
+.range-track {
+  position:absolute; top:50%; transform:translateY(-50%);
+  width:100%; height:4px; background:var(--border); border-radius:2px;
+}
+.range-fill {
+  position:absolute; top:50%; transform:translateY(-50%);
+  height:4px; background:var(--accent); border-radius:2px; opacity:0.5;
+}
+.range-input {
+  position:absolute; top:0; width:100%; height:100%;
+  -webkit-appearance:none; appearance:none;
+  background:transparent; pointer-events:none; margin:0;
+}
+.range-input::-webkit-slider-runnable-track {
+  height:4px; background:transparent;
+}
+.range-input::-webkit-slider-thumb {
+  -webkit-appearance:none; appearance:none;
+  width:14px; height:14px; background:var(--accent); border-radius:50%;
+  cursor:pointer; pointer-events:auto; margin-top:-5px;
+  border:2px solid var(--bg);
+}
+.range-input::-moz-range-track {
+  height:4px; background:transparent; border:none;
+}
+.range-input::-moz-range-thumb {
+  width:14px; height:14px; background:var(--accent); border-radius:50%;
+  border:2px solid var(--bg); cursor:pointer; pointer-events:auto;
+}
+#range-min { z-index:2; }
+#range-max { z-index:3; }
+.year-ticks {
+  position:absolute; top:100%; left:0; right:0; display:flex;
+  justify-content:space-between; padding:2px 6px 0;
+}
+.year-ticks span { font-size:8px; color:var(--text-dim); }
+
+/* ---- GRAPH ---- */
+#graph-container { position:fixed; top:80px; left:0; right:0; bottom:0; }
+#edge-canvas {
+  position:absolute; top:0; left:0; width:100%; height:100%;
+  pointer-events:none; display:none;
+}
+#svg { width:100%; height:100%; display:block; }
+#load-error {
+  position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+  background:#1a1a2e; color:#ff6b6b; border:1px solid #ff4444; border-radius:8px;
+  padding:20px 30px; font-size:14px; z-index:500; display:none; max-width:500px; text-align:center;
+}
+#loading-msg {
+  position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+  color:var(--text-dim); font-size:14px; z-index:500;
+}
+
+/* ---- TOOLTIP ---- */
+#tooltip {
+  position:fixed; pointer-events:none;
+  background:rgba(8,12,20,0.97); border:1px solid #2a3a52;
+  border-radius:6px; padding:12px 16px; font-size:11px;
+  line-height:1.7; max-width:380px; z-index:200; display:none;
+  box-shadow:0 6px 24px rgba(0,0,0,0.6);
+}
+.tt-name { font-size:13px; font-weight:600; color:var(--text-bright); margin-bottom:2px; }
+.tt-tier { font-size:10px; text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
+.tt-row { display:flex; justify-content:space-between; gap:12px; }
+.tt-label { color:var(--text-dim); }
+.tt-value { color:#90b0d0; text-align:right; }
+.tt-bar { margin-top:6px; padding-top:6px; border-top:1px solid var(--border); }
+.tt-connections { color:var(--text-dim); font-size:10px; line-height:1.5; }
+
+/* ---- STATS PANEL ---- */
+#stats-panel {
+  position:fixed; bottom:14px; left:14px; z-index:100;
+  background:var(--surface); backdrop-filter:blur(10px);
+  border:1px solid var(--border); border-radius:6px;
+  padding:10px 14px; font-size:10px; line-height:2;
+  min-width:180px;
+}
+#stats-panel h3 {
+  font-size:10px; color:var(--text-dim); text-transform:uppercase;
+  letter-spacing:.6px; margin-bottom:4px; font-weight:500;
+}
+.stat-row { display:flex; justify-content:space-between; }
+.stat-label { color:var(--text-dim); }
+.stat-val { color:var(--accent); font-weight:600; font-variant-numeric:tabular-nums; }
+.stat-top { color:var(--text-bright); font-size:10px; font-weight:500; margin-top:2px; }
+
+/* ---- LEGEND PANEL ---- */
+#legend-panel {
+  position:fixed; bottom:14px; right:14px; z-index:100;
+  background:var(--surface); backdrop-filter:blur(10px);
+  border:1px solid var(--border); border-radius:6px;
+  padding:10px 14px; font-size:10px;
+  max-height:50vh; overflow-y:auto; min-width:155px;
+}
+#legend-panel h3 {
+  font-size:10px; color:var(--text-dim); text-transform:uppercase;
+  letter-spacing:.6px; margin-bottom:6px; font-weight:500;
+}
+.leg-item { display:flex; align-items:center; gap:6px; margin-bottom:3px; cursor:pointer; }
+.leg-item:hover .leg-label { color:var(--text-bright); }
+.leg-swatch { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+.leg-swatch.diamond { border-radius:0; transform:rotate(45deg); width:8px; height:8px; }
+.leg-swatch.square { border-radius:1px; }
+.leg-label { color:var(--text); }
+.leg-count { color:var(--text-dim); margin-left:auto; }
+.leg-divider { height:1px; background:var(--border); margin:6px 0; }
+.leg-size-row { display:flex; align-items:center; gap:6px; margin-bottom:4px; }
+.leg-size-circle {
+  border-radius:50%; border:1px solid var(--text-dim); flex-shrink:0;
+  display:inline-block;
+}
+.leg-edge-row { display:flex; align-items:center; gap:6px; margin-bottom:4px; }
+.leg-edge-line { height:0; border-top-style:solid; border-top-color:var(--accent-dim); }
+
+/* ---- EXPORT BAR ---- */
+#export-bar {
+  position:fixed; bottom:14px; left:50%; transform:translateX(-50%); z-index:100;
+  background:var(--surface); backdrop-filter:blur(10px);
+  border:1px solid var(--border); border-radius:6px;
+  padding:6px 10px; display:flex; gap:6px; align-items:center;
+}
+#export-bar .btn { font-size:9px; padding:2px 8px; height:22px; }
+#export-bar label { font-size:9px; color:var(--text-dim); text-transform:uppercase; letter-spacing:.5px; }
+
+/* ---- SEARCH RESULTS ---- */
+#search-dropdown {
+  position:fixed; z-index:300;
+  background:rgba(8,12,20,0.98); border:1px solid #2a3a52;
+  border-radius:4px; max-height:250px; overflow-y:auto;
+  display:none; font-size:11px; min-width:280px;
+  box-shadow:0 4px 16px rgba(0,0,0,0.5);
+}
+#search-dropdown .sr { padding:6px 12px; cursor:pointer; border-bottom:1px solid #141e2e; }
+#search-dropdown .sr:hover { background:#1a2744; }
+#search-dropdown .sr-title { color:var(--text-bright); }
+#search-dropdown .sr-sub { color:var(--text-dim); font-size:10px; }
+#search-dropdown .sr-type { font-size:9px; text-transform:uppercase; letter-spacing:.5px; padding:1px 5px; border-radius:2px; margin-right:6px; }
+.sr-type-festival { background:#1a3050; color:var(--accent); }
+.sr-type-film { background:#2a1a30; color:#c77dff; }
+
+/* ---- NODE COUNT BADGE ---- */
+.node-badge {
+  font-size:9px; color:var(--text-dim); padding:1px 6px;
+  background:rgba(74,158,255,0.1); border-radius:8px;
+  font-variant-numeric:tabular-nums;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div id="header">
+  <h1>Network Effects</h1>
+  <div class="sep"></div>
+  <div class="ctrl">
+    <label>Min shared</label>
+    <input type="range" id="slider-weight" min="2" max="40" value="2">
+    <span class="val" id="val-weight">2</span>
+  </div>
+  <div class="ctrl">
+    <label>Colour</label>
+    <select id="select-colour">
+      <option value="region" selected>Region</option>
+      <option value="community">Community</option>
+      <option value="genre_circuit">Genre circuit</option>
+      <option value="tier">Festival tier</option>
+    </select>
+  </div>
+  <div class="ctrl">
+    <input type="text" id="search-input" placeholder="Search festivals or films...">
+  </div>
+  <div id="search-dropdown"></div>
+  <button class="btn" id="btn-show-all">Show all</button>
+  <button class="btn" id="btn-reset">Reset</button>
+</div>
+
+<!-- TIMELINE -->
+<div id="timeline-bar">
+  <button id="play-btn">&#9654;</button>
+  <span id="year-label">2015 &mdash; 2025</span>
+  <div class="range-slider">
+    <div class="range-track"></div>
+    <div class="range-fill" id="range-fill"></div>
+    <input type="range" class="range-input" id="range-min" min="2015" max="2025" value="2015" step="1">
+    <input type="range" class="range-input" id="range-max" min="2015" max="2025" value="2025" step="1">
+  </div>
+</div>
+
+<!-- GRAPH -->
+<div id="graph-container">
+  <canvas id="edge-canvas"></canvas>
+  <svg id="svg"></svg>
+</div>
+<div id="tooltip"></div>
+
+<!-- STATS PANEL -->
+<div id="stats-panel">
+  <h3>Network statistics</h3>
+  <div class="stat-row"><span class="stat-label">Festivals</span><span class="stat-val" id="s-nodes">&mdash;</span></div>
+  <div class="stat-row"><span class="stat-label">Connections</span><span class="stat-val" id="s-edges">&mdash;</span></div>
+  <div class="stat-row"><span class="stat-label">Avg films</span><span class="stat-val" id="s-avg-films">&mdash;</span></div>
+  <div class="stat-row"><span class="stat-label">Most connected</span></div>
+  <div class="stat-top" id="s-top-festival">&mdash;</div>
+</div>
+
+<!-- LEGEND PANEL -->
+<div id="legend-panel"></div>
+
+<!-- EXPORT BAR -->
+<div id="export-bar">
+  <label>Export</label>
+  <button class="btn" id="btn-export-png">PNG</button>
+  <button class="btn" id="btn-export-svg">SVG</button>
+  <button class="btn" id="btn-export-json">JSON</button>
+</div>
+
+<div id="loading-msg">Loading network data...</div>
+<div id="load-error"></div>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script>
+(async function(){
+try {
+
+if(typeof d3 === 'undefined') throw new Error('D3.js failed to load. Check your internet connection.');
+
+// ====================================================================
+// DATA
+// ====================================================================
+// Try multiple paths to find the JSON file
+let raw;
+const paths = [
+  'network_data_enhanced.json',
+  './network_data_enhanced.json',
+  'viz/network_data_enhanced.json',
+  '../viz/network_data_enhanced.json'
+];
+let loadErr = null;
+for(const p of paths){
+  try { raw = await d3.json(p); if(raw) break; }
+  catch(e){ loadErr = e; }
+}
+if(!raw){
+  throw new Error('Failed to load network_data_enhanced.json (tried: ' + paths.join(', ') + '). '
+    + (loadErr ? loadErr.message + '. ' : '')
+    + 'Current URL: ' + location.href + '. '
+    + 'Serve via: python -m http.server 8000 --directory viz');
+}
+if(!raw.nodes) throw new Error('JSON loaded but has no "nodes" key. File may be corrupt.');
+
+document.getElementById('loading-msg').style.display='none';
+console.log('Data loaded:', raw.nodes.length, 'nodes,', raw.edges.length, 'edges');
+
+const allNodes = raw.nodes;
+const allEdges = raw.edges;
+const meta = raw.metadata;
+const snapshots = raw.year_snapshots || {};
+const filmIndex = raw.film_index || [];
+const nodeMap = new Map(allNodes.map(n=>[n.id,n]));
+
+// Adjacency (full network)
+const adjacency = new Map();
+allNodes.forEach(n=>adjacency.set(n.id,new Set()));
+allEdges.forEach(e=>{
+  const s=typeof e.source==='object'?e.source.id:e.source;
+  const t=typeof e.target==='object'?e.target.id:e.target;
+  adjacency.get(s).add(t); adjacency.get(t).add(s);
+});
+
+const MIN_YEAR = 2015, MAX_YEAR = 2025;
+
+// ====================================================================
+// COLOUR SCHEMES
+// ====================================================================
+const regionColours = { uk:'#4a9eff', europe:'#e9a84c', other:'#6b7a8d' };
+const regionLabels = { uk:'UK', europe:'European', other:'International' };
+const communityColours = meta.community_colours || ['#1f77b4','#ff7f0e','#2ca02c','#d62728','#9467bd','#8c564b'];
+const genreCircuitColours = meta.genre_circuit_colours;
+const tierColours = { 'a-list':'#f0c040','regional':'#4a9eff','specialist':'#c77dff','emerging':'#3a4a5e' };
+
+function getColour(d){
+  if(colourMode==='region') return regionColours[d.region]||'#6b7a8d';
+  if(colourMode==='community') return communityColours[d.community % communityColours.length];
+  if(colourMode==='genre_circuit') return genreCircuitColours[d.genre_circuit]||'#6b7a8d';
+  if(colourMode==='tier') return tierColours[d.tier]||'#3a4a5e';
+  return '#4a9eff';
+}
+
+// ====================================================================
+// SCALES
+// ====================================================================
+const sizeScale = d3.scaleSqrt().domain([0, d3.max(allNodes, d=>d.film_count)||760]).range([3,28]);
+const edgeWidthScale = d3.scaleLinear().domain([2,150]).range([0.3,5]).clamp(true);
+const edgeOpacityScale = d3.scaleLinear().domain([2,80]).range([0.06,0.35]).clamp(true);
+
+function getRadius(d){
+  const films = d._rangeFilms != null ? d._rangeFilms : d.film_count;
+  return sizeScale(films);
+}
+
+// ====================================================================
+// SVG + CANVAS SETUP
+// ====================================================================
+const svg = d3.select('#svg');
+const W = window.innerWidth, H = window.innerHeight - 80;
+const g = svg.append('g');
+
+const graphContainer = document.getElementById('graph-container');
+const edgeCanvas = document.getElementById('edge-canvas');
+const edgeCtx = edgeCanvas.getContext('2d');
+const dpr = window.devicePixelRatio||1;
+edgeCanvas.width = W * dpr;
+edgeCanvas.height = H * dpr;
+edgeCanvas.style.width = W+'px';
+edgeCanvas.style.height = H+'px';
+edgeCtx.scale(dpr, dpr);
+
+let currentTransform = d3.zoomIdentity;
+const zoom = d3.zoom().scaleExtent([0.05,12]).on('zoom',e=>{
+  currentTransform = e.transform;
+  g.attr('transform',e.transform);
+  if(useCanvas) drawCanvasEdges();
+});
+svg.call(zoom);
+
+const edgeG = g.append('g');
+const nodeG = g.append('g');
+const labelG = g.append('g');
+
+// ====================================================================
+// STATE
+// ====================================================================
+let minWeight = 2;
+let colourMode = 'region';
+let selectedNode = null;
+let highlightedFilmFestivals = null;
+let yearRange = [MIN_YEAR, MAX_YEAR];
+let showAll = false;
+let playing = false;
+let playTimer = null;
+let useCanvas = false;
+let currentEdges = [];
+let simulation;
+
+// ====================================================================
+// NODE SHAPES (tier-based)
+// ====================================================================
+function drawNodeShape(sel){
+  sel.each(function(d){
+    const el = d3.select(this);
+    el.selectAll('*').remove();
+    const r = getRadius(d);
+    const col = getColour(d);
+    if(d.tier==='a-list'){
+      const s=r*1.1;
+      el.append('path')
+        .attr('d',`M0,${-s} L${s},0 L0,${s} L${-s},0 Z`)
+        .attr('fill',col).attr('stroke','#080c14').attr('stroke-width',0.6);
+    } else if(d.tier==='specialist'){
+      const s=r*0.85;
+      el.append('rect')
+        .attr('x',-s).attr('y',-s).attr('width',s*2).attr('height',s*2)
+        .attr('rx',2).attr('fill',col).attr('stroke','#080c14').attr('stroke-width',0.5);
+    } else if(d.tier==='emerging'){
+      el.append('circle')
+        .attr('r',r*0.7).attr('fill',col).attr('opacity',0.6)
+        .attr('stroke','#080c14').attr('stroke-width',0.3);
+    } else {
+      el.append('circle')
+        .attr('r',r).attr('fill',col)
+        .attr('stroke','#080c14').attr('stroke-width',0.5);
+    }
+  });
+}
+
+// ====================================================================
+// GET VISIBLE DATA
+// ====================================================================
+function getVisibleData(){
+  const [yFrom, yTo] = yearRange;
+  const isFullRange = yFrom <= MIN_YEAR && yTo >= MAX_YEAR;
+
+  let candidateNodes, candidateEdges;
+
+  if(isFullRange){
+    candidateNodes = allNodes.map(n=>{ n._rangeFilms = n.film_count; return n; });
+    candidateEdges = allEdges;
+  } else {
+    // Use the 'to' year snapshot for edges if available
+    const snap = snapshots[String(yTo)];
+
+    // Filter nodes by active year range
+    candidateNodes = allNodes.filter(n=> n.first_year <= yTo && n.last_year >= yFrom);
+
+    // Calculate range-specific film counts
+    candidateNodes.forEach(n=>{
+      let films = 0;
+      for(let y=Math.max(yFrom,MIN_YEAR); y<=Math.min(yTo,MAX_YEAR); y++){
+        const s = snapshots[String(y)];
+        if(s && s.node_films[n.id]) films += s.node_films[n.id];
+      }
+      n._rangeFilms = Math.max(films, 1);
+    });
+
+    // Use snapshot edges if available, otherwise filter full edges
+    if(snap){
+      candidateEdges = snap.edges;
+    } else {
+      const nodeIds = new Set(candidateNodes.map(n=>n.id));
+      candidateEdges = allEdges.filter(e=>{
+        const s=typeof e.source==='object'?e.source.id:e.source;
+        const t=typeof e.target==='object'?e.target.id:e.target;
+        return nodeIds.has(s) && nodeIds.has(t);
+      });
+    }
+  }
+
+  // Apply weight filter
+  let edges = candidateEdges.filter(e=> e.weight >= minWeight);
+
+  // Get connected node IDs
+  const edgeNodeIds = new Set();
+  edges.forEach(e=>{
+    edgeNodeIds.add(typeof e.source==='object'?e.source.id:e.source);
+    edgeNodeIds.add(typeof e.target==='object'?e.target.id:e.target);
+  });
+
+  let nodes = candidateNodes.filter(n=> edgeNodeIds.has(n.id));
+
+  // Film highlight filter
+  if(highlightedFilmFestivals){
+    return { nodes, edges, highlightSet: highlightedFilmFestivals };
+  }
+
+  // Top-50 filter if >100 and not showing all
+  if(!showAll && nodes.length > 100){
+    const sorted = [...nodes].sort((a,b)=> b.degree_centrality - a.degree_centrality);
+    const top = sorted.slice(0, 50);
+    const topIds = new Set(top.map(n=>n.id));
+    nodes = top;
+    edges = edges.filter(e=>{
+      const s=typeof e.source==='object'?e.source.id:e.source;
+      const t=typeof e.target==='object'?e.target.id:e.target;
+      return topIds.has(s) && topIds.has(t);
+    });
+  }
+
+  return { nodes, edges, highlightSet: null };
+}
+
+// ====================================================================
+// CANVAS EDGE RENDERING
+// ====================================================================
+function drawCanvasEdges(){
+  const dpr = window.devicePixelRatio||1;
+  edgeCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  edgeCtx.clearRect(0, 0, edgeCanvas.width, edgeCanvas.height);
+  edgeCtx.save();
+  edgeCtx.translate(currentTransform.x, currentTransform.y);
+  edgeCtx.scale(currentTransform.k, currentTransform.k);
+
+  currentEdges.forEach(e=>{
+    if(!e.source.x) return;
+    edgeCtx.beginPath();
+    edgeCtx.moveTo(e.source.x, e.source.y);
+    edgeCtx.lineTo(e.target.x, e.target.y);
+    const alpha = edgeOpacityScale(e.weight);
+    edgeCtx.strokeStyle = `rgba(30,58,95,${alpha})`;
+    edgeCtx.lineWidth = edgeWidthScale(e.weight);
+    edgeCtx.stroke();
+  });
+  edgeCtx.restore();
+}
+
+// ====================================================================
+// RENDER
+// ====================================================================
+function render(preservePositions){
+  const { nodes, edges, highlightSet } = getVisibleData();
+
+  // Determine rendering mode
+  useCanvas = nodes.length > 200;
+  edgeCanvas.style.display = useCanvas ? 'block' : 'none';
+
+  // Update size scale domain based on visible data
+  const maxFilms = d3.max(nodes, d=>d._rangeFilms)||1;
+  sizeScale.domain([0, maxFilms]);
+
+  // -- STATS --
+  updateStats(nodes, edges);
+
+  if(simulation) simulation.stop();
+
+  // Preserve positions
+  const posMap = new Map();
+  if(preservePositions){
+    nodeG.selectAll('g.node').each(function(d){ posMap.set(d.id,{x:d.x,y:d.y}); });
+  }
+
+  // Deep-copy edges
+  const edgesCopy = edges.map(e=>({
+    source: typeof e.source==='object'?e.source.id:e.source,
+    target: typeof e.target==='object'?e.target.id:e.target,
+    weight: e.weight
+  }));
+  currentEdges = edgesCopy; // for canvas rendering
+
+  // -- EDGES (SVG mode) --
+  let linkSel;
+  if(!useCanvas){
+    const link = edgeG.selectAll('line').data(edgesCopy, d=>d.source+'|'+d.target);
+    link.exit().transition().duration(300).attr('stroke-opacity',0).remove();
+    const linkEnter = link.enter().append('line').attr('stroke-opacity',0);
+    linkEnter.merge(link)
+      .transition().duration(400)
+      .attr('stroke', highlightSet ? '#0d1a2a' : '#1e3a5f')
+      .attr('stroke-width', d=>edgeWidthScale(d.weight))
+      .attr('stroke-opacity', d=> highlightSet ? 0.02 : edgeOpacityScale(d.weight));
+    linkSel = edgeG.selectAll('line');
+  } else {
+    edgeG.selectAll('line').remove();
+    linkSel = d3.selectAll(); // empty selection
+  }
+
+  // -- NODES --
+  const node = nodeG.selectAll('g.node').data(nodes, d=>d.id);
+  node.exit().transition().duration(300).attr('opacity',0).remove();
+  const nodeEnter = node.enter().append('g').attr('class','node').attr('cursor','pointer')
+    .attr('opacity',0);
+  const nodeAll = nodeEnter.merge(node);
+
+  nodeAll.each(function(d){
+    if(preservePositions && posMap.has(d.id)){
+      d.x = posMap.get(d.id).x;
+      d.y = posMap.get(d.id).y;
+    }
+  });
+
+  nodeAll.call(drawNodeShape);
+  nodeAll.transition().duration(400)
+    .attr('opacity', d=> highlightSet ? (highlightSet.has(d.id)?1:0.08) : 1);
+
+  // -- LABELS --
+  const labelThreshold = nodes.length > 100 ? 0.25 : nodes.length > 40 ? 0.15 : 0.06;
+  const labelData = nodes.filter(d=>d.degree_centrality > labelThreshold);
+  const label = labelG.selectAll('text').data(labelData, d=>d.id);
+  label.exit().remove();
+  const labelEnter = label.enter().append('text');
+  const labelAll = labelEnter.merge(label)
+    .text(d=>d.id.length>28 ? d.id.slice(0,26)+'...' : d.id)
+    .attr('font-size', d=>Math.max(7, getRadius(d)*0.6))
+    .attr('fill','#6a8aaa')
+    .attr('text-anchor','middle')
+    .attr('dy', d=>getRadius(d)+10)
+    .attr('pointer-events','none');
+
+  // -- SIMULATION --
+  simulation = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(edgesCopy).id(d=>d.id)
+      .distance(d=>Math.max(30, 180 - d.weight*1.5))
+      .strength(d=>Math.min(0.8, 0.015 + d.weight*0.004)))
+    .force('charge', d3.forceManyBody()
+      .strength(d=> -20 - d.degree_centrality*350))
+    .force('center', d3.forceCenter(W/2, H/2))
+    .force('collide', d3.forceCollide().radius(d=>getRadius(d)+3))
+    .force('x', d3.forceX(W/2).strength(0.04))
+    .force('y', d3.forceY(H/2).strength(0.04))
+    .alphaDecay(preservePositions ? 0.06 : 0.02)
+    .alpha(preservePositions ? 0.15 : 0.8)
+    .on('tick', ()=>{
+      if(useCanvas){
+        drawCanvasEdges();
+      } else {
+        linkSel.attr('x1',d=>d.source.x).attr('y1',d=>d.source.y)
+               .attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
+      }
+      nodeAll.attr('transform',d=>`translate(${d.x},${d.y})`);
+      labelAll.attr('x',d=>d.x).attr('y',d=>d.y);
+    });
+
+  // -- DRAG --
+  const drag = d3.drag()
+    .on('start',(ev,d)=>{ if(!ev.active) simulation.alphaTarget(0.3).restart(); d.fx=d.x; d.fy=d.y; })
+    .on('drag',(ev,d)=>{ d.fx=ev.x; d.fy=ev.y; })
+    .on('end',(ev,d)=>{ if(!ev.active) simulation.alphaTarget(0); d.fx=null; d.fy=null; });
+  nodeAll.call(drag);
+
+  // -- INTERACTIONS --
+  const tooltip = document.getElementById('tooltip');
+
+  nodeAll
+    .on('mouseover', function(ev,d){
+      showTooltip(ev,d,edgesCopy);
+      if(!selectedNode && !highlightedFilmFestivals) dimAndHighlight(d, nodeAll, linkSel);
+    })
+    .on('mousemove', moveTooltip)
+    .on('mouseout', function(){
+      tooltip.style.display='none';
+      if(!selectedNode && !highlightedFilmFestivals) resetHighlight(nodeAll, linkSel);
+    })
+    .on('click', function(ev,d){
+      ev.stopPropagation();
+      highlightedFilmFestivals = null;
+      if(selectedNode===d.id){ selectedNode=null; resetHighlight(nodeAll, linkSel); }
+      else { selectedNode=d.id; dimAndHighlight(d, nodeAll, linkSel); }
+    });
+
+  svg.on('click',()=>{
+    selectedNode=null; highlightedFilmFestivals=null;
+    tooltip.style.display='none';
+    resetHighlight(nodeAll, linkSel);
+  });
+}
+
+// ====================================================================
+// STATISTICS
+// ====================================================================
+function updateStats(nodes, edges){
+  document.getElementById('s-nodes').textContent = nodes.length;
+  document.getElementById('s-edges').textContent = edges.length;
+
+  // Average films per festival
+  if(nodes.length > 0){
+    const avg = d3.mean(nodes, d=>d._rangeFilms != null ? d._rangeFilms : d.film_count);
+    document.getElementById('s-avg-films').textContent = avg.toFixed(1);
+  } else {
+    document.getElementById('s-avg-films').textContent = '\u2014';
+  }
+
+  // Most connected in current view
+  if(nodes.length > 0 && edges.length > 0){
+    const degreeCount = new Map();
+    nodes.forEach(n=>degreeCount.set(n.id, 0));
+    edges.forEach(e=>{
+      const s=typeof e.source==='object'?e.source.id:e.source;
+      const t=typeof e.target==='object'?e.target.id:e.target;
+      if(degreeCount.has(s)) degreeCount.set(s, degreeCount.get(s)+1);
+      if(degreeCount.has(t)) degreeCount.set(t, degreeCount.get(t)+1);
+    });
+    let topId='', topDeg=0;
+    degreeCount.forEach((v,k)=>{ if(v>topDeg){topDeg=v;topId=k;} });
+    const display = topId.length > 30 ? topId.slice(0,28)+'...' : topId;
+    document.getElementById('s-top-festival').textContent = `${display} (${topDeg})`;
+  } else {
+    document.getElementById('s-top-festival').textContent = '\u2014';
+  }
+
+  // Show all button state
+  const btn = document.getElementById('btn-show-all');
+  const totalAvail = allNodes.filter(n=> n.first_year <= yearRange[1] && n.last_year >= yearRange[0]).length;
+  if(totalAvail > 100 && !showAll){
+    btn.textContent = `Show all (${totalAvail})`;
+    btn.style.display = '';
+  } else if(showAll && totalAvail > 100){
+    btn.textContent = 'Top 50';
+    btn.classList.add('active');
+    btn.style.display = '';
+  } else {
+    btn.style.display = 'none';
+  }
+}
+
+// ====================================================================
+// TOOLTIP
+// ====================================================================
+function showTooltip(ev,d,edgesCopy){
+  const tooltip = document.getElementById('tooltip');
+  const neighbours = adjacency.get(d.id)||new Set();
+
+  const topEdges = edgesCopy
+    .filter(e=>{
+      const s=typeof e.source==='object'?e.source.id:e.source;
+      const t=typeof e.target==='object'?e.target.id:e.target;
+      return s===d.id||t===d.id;
+    })
+    .sort((a,b)=>b.weight-a.weight).slice(0,5);
+
+  const topConnHTML = topEdges.map(e=>{
+    const s=typeof e.source==='object'?e.source.id:e.source;
+    const t=typeof e.target==='object'?e.target.id:e.target;
+    const other = s===d.id?t:s;
+    return `${other.length>32?other.slice(0,30)+'...':other}: ${e.weight}`;
+  }).join('<br>');
+
+  const tierLabel = d.tier==='a-list'?'A-List':d.tier.charAt(0).toUpperCase()+d.tier.slice(1);
+  const tierCol = tierColours[d.tier]||'#6b7a8d';
+  const regionLabel = regionLabels[d.region]||'Other';
+  const films = d._rangeFilms != null ? d._rangeFilms : d.film_count;
+
+  tooltip.innerHTML = `
+    <div class="tt-name">${d.id}</div>
+    <div class="tt-tier" style="color:${tierCol}">${tierLabel} ${d.event_type||''} &middot; ${regionLabel}</div>
+    <div class="tt-row"><span class="tt-label">Films (in range)</span><span class="tt-value">${films}</span></div>
+    <div class="tt-row"><span class="tt-label">Films (total)</span><span class="tt-value">${d.film_count}</span></div>
+    <div class="tt-row"><span class="tt-label">Connections</span><span class="tt-value">${neighbours.size}</span></div>
+    <div class="tt-row"><span class="tt-label">Countries</span><span class="tt-value">${d.countries_represented}</span></div>
+    <div class="tt-row"><span class="tt-label">Active</span><span class="tt-value">${d.first_year}\u2013${d.last_year}</span></div>
+    <div class="tt-row"><span class="tt-label">Degree</span><span class="tt-value">${d.degree_centrality.toFixed(3)}</span></div>
+    <div class="tt-row"><span class="tt-label">Community</span><span class="tt-value">${d.community}</span></div>
+    <div class="tt-row"><span class="tt-label">Circuit</span><span class="tt-value">${d.genre_circuit}</span></div>
+    <div class="tt-bar tt-connections">Top connections:<br>${topConnHTML}</div>
+  `;
+  tooltip.style.display='block';
+}
+
+function moveTooltip(ev){
+  const tt=document.getElementById('tooltip');
+  const x=ev.clientX+16, y=ev.clientY-10;
+  tt.style.left=(x+tt.offsetWidth>window.innerWidth?ev.clientX-tt.offsetWidth-16:x)+'px';
+  tt.style.top=(y+tt.offsetHeight>window.innerHeight?ev.clientY-tt.offsetHeight-10:y)+'px';
+}
+
+// ====================================================================
+// HIGHLIGHT
+// ====================================================================
+function dimAndHighlight(d, nodeAll, linkSel){
+  const neighbours = adjacency.get(d.id)||new Set();
+  nodeAll.attr('opacity', n=>n.id===d.id||neighbours.has(n.id)?1:0.06);
+  nodeAll.selectAll('path,circle,rect').attr('stroke', function(){
+    const nd = d3.select(this.parentNode).datum();
+    return nd && nd.id===d.id?'#fff':'#080c14';
+  }).attr('stroke-width', function(){
+    const nd = d3.select(this.parentNode).datum();
+    return nd && nd.id===d.id?2:0.5;
+  });
+  if(!useCanvas){
+    linkSel.attr('stroke-opacity',e=>{
+      const s=typeof e.source==='object'?e.source.id:e.source;
+      const t=typeof e.target==='object'?e.target.id:e.target;
+      return(s===d.id||t===d.id)?0.6:0.015;
+    }).attr('stroke',e=>{
+      const s=typeof e.source==='object'?e.source.id:e.source;
+      const t=typeof e.target==='object'?e.target.id:e.target;
+      return(s===d.id||t===d.id)?'#4a9eff':'#1e3a5f';
+    });
+  }
+}
+
+function resetHighlight(nodeAll, linkSel){
+  nodeAll.attr('opacity',1);
+  nodeAll.selectAll('path,circle,rect')
+    .attr('stroke','#080c14').attr('stroke-width',0.5);
+  if(!useCanvas){
+    linkSel.attr('stroke','#1e3a5f')
+      .attr('stroke-opacity',d=>edgeOpacityScale(d.weight));
+  }
+}
+
+// ====================================================================
+// LEGEND
+// ====================================================================
+function buildLegend(){
+  const el = document.getElementById('legend-panel');
+  let html = '';
+
+  // Colour legend
+  if(colourMode==='region'){
+    html += '<h3>Region</h3>';
+    [['uk','UK'],['europe','European'],['other','International']].forEach(([k,label])=>{
+      const cnt = allNodes.filter(n=>n.region===k).length;
+      html += `<div class="leg-item"><div class="leg-swatch" style="background:${regionColours[k]}"></div><span class="leg-label">${label}</span><span class="leg-count">${cnt}</span></div>`;
+    });
+  } else if(colourMode==='community'){
+    html += '<h3>Communities</h3>';
+    communityColours.forEach((c,i)=>{
+      const cnt = allNodes.filter(n=>n.community===i).length;
+      if(cnt>0) html += `<div class="leg-item"><div class="leg-swatch" style="background:${c}"></div><span class="leg-label">Community ${i}</span><span class="leg-count">${cnt}</span></div>`;
+    });
+  } else if(colourMode==='genre_circuit'){
+    html += '<h3>Genre circuits</h3>';
+    Object.entries(genreCircuitColours).forEach(([k,c])=>{
+      const cnt = allNodes.filter(n=>n.genre_circuit===k).length;
+      if(cnt>0) html += `<div class="leg-item"><div class="leg-swatch" style="background:${c}"></div><span class="leg-label">${k}</span><span class="leg-count">${cnt}</span></div>`;
+    });
+  } else if(colourMode==='tier'){
+    html += '<h3>Festival tiers</h3>';
+    [['a-list','A-List','diamond'],['regional','Regional',''],['specialist','Specialist','square'],['emerging','Emerging','']].forEach(([k,label,shape])=>{
+      const cnt = allNodes.filter(n=>n.tier===k).length;
+      html += `<div class="leg-item"><div class="leg-swatch ${shape}" style="background:${tierColours[k]}"></div><span class="leg-label">${label}</span><span class="leg-count">${cnt}</span></div>`;
+    });
+  }
+
+  // Node size explanation
+  html += '<div class="leg-divider"></div>';
+  html += '<h3>Node size = unique films</h3>';
+  html += '<div class="leg-size-row"><div class="leg-size-circle" style="width:6px;height:6px"></div><span class="leg-label">Few films</span></div>';
+  html += '<div class="leg-size-row"><div class="leg-size-circle" style="width:16px;height:16px"></div><span class="leg-label">Many films</span></div>';
+
+  // Edge thickness explanation
+  html += '<div class="leg-divider"></div>';
+  html += '<h3>Edge thickness = shared films</h3>';
+  html += '<div class="leg-edge-row"><div class="leg-edge-line" style="width:30px;border-top-width:1px"></div><span class="leg-label">Few shared</span></div>';
+  html += '<div class="leg-edge-row"><div class="leg-edge-line" style="width:30px;border-top-width:4px"></div><span class="leg-label">Many shared</span></div>';
+
+  // Tier shapes key
+  html += '<div class="leg-divider"></div><h3>Node shape = tier</h3>';
+  html += '<div class="leg-item"><div class="leg-swatch diamond" style="background:#999"></div><span class="leg-label">A-List</span></div>';
+  html += '<div class="leg-item"><div class="leg-swatch" style="background:#999"></div><span class="leg-label">Regional</span></div>';
+  html += '<div class="leg-item"><div class="leg-swatch square" style="background:#999"></div><span class="leg-label">Specialist</span></div>';
+
+  el.innerHTML = html;
+}
+
+// ====================================================================
+// SEARCH
+// ====================================================================
+const searchInput = document.getElementById('search-input');
+const dropdown = document.getElementById('search-dropdown');
+
+searchInput.addEventListener('input', function(){
+  const q = this.value.trim().toLowerCase();
+  if(q.length < 2){ dropdown.style.display='none'; return; }
+
+  const festMatches = allNodes
+    .filter(n=>n.id.toLowerCase().includes(q))
+    .sort((a,b)=>b.film_count-a.film_count)
+    .slice(0,8);
+
+  const filmMatches = filmIndex
+    .filter(f=>f.title.toLowerCase().includes(q) || (f.directors&&f.directors.toLowerCase().includes(q)))
+    .slice(0,8);
+
+  if(festMatches.length===0 && filmMatches.length===0){ dropdown.style.display='none'; return; }
+
+  let html = '';
+  festMatches.forEach(n=>{
+    html += `<div class="sr" data-type="festival" data-id="${n.id}">
+      <span class="sr-type sr-type-festival">Festival</span>
+      <span class="sr-title">${n.id}</span><br>
+      <span class="sr-sub">${n.film_count} films &middot; ${n.tier} &middot; ${regionLabels[n.region]||'Other'}</span>
+    </div>`;
+  });
+  filmMatches.forEach(f=>{
+    html += `<div class="sr" data-type="film" data-title="${f.title.replace(/"/g,'&quot;')}">
+      <span class="sr-type sr-type-film">Film</span>
+      <span class="sr-title">${f.title}</span> <span class="sr-sub">(${f.year})</span><br>
+      <span class="sr-sub">${f.directors} &middot; ${f.festivals.length} festivals</span>
+    </div>`;
+  });
+
+  dropdown.innerHTML = html;
+  const rect = searchInput.getBoundingClientRect();
+  dropdown.style.left = rect.left+'px';
+  dropdown.style.top = (rect.bottom+4)+'px';
+  dropdown.style.minWidth = rect.width+'px';
+  dropdown.style.display = 'block';
+
+  dropdown.querySelectorAll('.sr').forEach(el=>{
+    el.addEventListener('click', function(){
+      const type = this.dataset.type;
+      if(type==='festival'){
+        const id = this.dataset.id;
+        selectedNode = id;
+        highlightedFilmFestivals = null;
+        render(true);
+        const nd = allNodes.find(n=>n.id===id);
+        if(nd && nd.x){
+          svg.transition().duration(600).call(
+            zoom.transform,
+            d3.zoomIdentity.translate(W/2-nd.x*1.5, H/2-nd.y*1.5).scale(1.5)
+          );
+        }
+      } else {
+        const title = this.dataset.title;
+        const film = filmIndex.find(f=>f.title===title);
+        if(film){
+          highlightedFilmFestivals = new Set(film.festivals);
+          selectedNode = null;
+          render(true);
+        }
+      }
+      dropdown.style.display='none';
+      searchInput.value='';
+    });
+  });
+});
+
+document.addEventListener('click', e=>{
+  if(!dropdown.contains(e.target) && e.target!==searchInput) dropdown.style.display='none';
+});
+
+// ====================================================================
+// YEAR RANGE CONTROLS (DUAL SLIDER)
+// ====================================================================
+const rangeMin = document.getElementById('range-min');
+const rangeMax = document.getElementById('range-max');
+const rangeFill = document.getElementById('range-fill');
+const yearLabel = document.getElementById('year-label');
+const playBtn = document.getElementById('play-btn');
+
+function updateRangeUI(){
+  let mn = +rangeMin.value, mx = +rangeMax.value;
+  // Enforce min <= max
+  if(mn > mx){ const tmp=mn; mn=mx; mx=tmp; rangeMin.value=mn; rangeMax.value=mx; }
+
+  const pctMin = (mn - MIN_YEAR) / (MAX_YEAR - MIN_YEAR) * 100;
+  const pctMax = (mx - MIN_YEAR) / (MAX_YEAR - MIN_YEAR) * 100;
+  rangeFill.style.left = pctMin + '%';
+  rangeFill.style.width = (pctMax - pctMin) + '%';
+
+  yearRange = [mn, mx];
+  if(mn === MIN_YEAR && mx === MAX_YEAR){
+    yearLabel.textContent = `${MIN_YEAR} \u2014 ${MAX_YEAR}`;
+  } else if(mn === mx){
+    yearLabel.textContent = String(mn);
+  } else {
+    yearLabel.textContent = `${mn} \u2014 ${mx}`;
+  }
+}
+
+rangeMin.addEventListener('input', function(){
+  if(+this.value > +rangeMax.value) this.value = rangeMax.value;
+  updateRangeUI();
+  render(true);
+});
+rangeMax.addEventListener('input', function(){
+  if(+this.value < +rangeMin.value) this.value = rangeMin.value;
+  updateRangeUI();
+  render(true);
+});
+
+// Play animation: advance year by year
+playBtn.addEventListener('click', function(){
+  if(playing){ stopPlay(); return; }
+  playing = true;
+  playBtn.innerHTML = '&#9646;&#9646;';
+  let yr = +rangeMin.value;
+  rangeMax.value = yr;
+  updateRangeUI();
+  render(true);
+
+  playTimer = setInterval(()=>{
+    yr++;
+    if(yr > MAX_YEAR){ stopPlay(); return; }
+    rangeMax.value = yr;
+    updateRangeUI();
+    render(true);
+  }, 1400);
+});
+
+function stopPlay(){
+  playing = false;
+  clearInterval(playTimer);
+  playBtn.innerHTML = '&#9654;';
+}
+
+// ====================================================================
+// CONTROL BINDINGS
+// ====================================================================
+document.getElementById('slider-weight').addEventListener('input', function(){
+  minWeight = +this.value;
+  document.getElementById('val-weight').textContent = minWeight;
+  render(true);
+});
+
+document.getElementById('select-colour').addEventListener('change', function(){
+  colourMode = this.value;
+  buildLegend();
+  render(true);
+});
+
+document.getElementById('btn-show-all').addEventListener('click', function(){
+  showAll = !showAll;
+  this.classList.toggle('active', showAll);
+  render(true);
+});
+
+document.getElementById('btn-reset').addEventListener('click', ()=>{
+  selectedNode=null; highlightedFilmFestivals=null;
+  minWeight=2; colourMode='region'; showAll=false;
+  document.getElementById('slider-weight').value=2;
+  document.getElementById('val-weight').textContent='2';
+  document.getElementById('select-colour').value='region';
+  document.getElementById('search-input').value='';
+  document.getElementById('btn-show-all').classList.remove('active');
+  rangeMin.value=MIN_YEAR; rangeMax.value=MAX_YEAR;
+  updateRangeUI();
+  stopPlay();
+  svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity);
+  buildLegend();
+  render(false);
+});
+
+// ====================================================================
+// EXPORTS
+// ====================================================================
+
+// -- PNG (2400 x 1800, 300 DPI) --
+document.getElementById('btn-export-png').addEventListener('click', ()=>{
+  const PW=2400, PH=1800;
+  const exportCanvas = document.createElement('canvas');
+  exportCanvas.width = PW;
+  exportCanvas.height = PH;
+  const ctx = exportCanvas.getContext('2d');
+
+  // Background
+  ctx.fillStyle = '#080c14';
+  ctx.fillRect(0, 0, PW, PH);
+
+  // Calculate transform to fit the graph
+  const bounds = getGraphBounds();
+  if(!bounds){ alert('No nodes to export'); return; }
+  const padding = 80;
+  const scaleX = (PW - padding*2) / bounds.width;
+  const scaleY = (PH - padding*2) / bounds.height;
+  const scale = Math.min(scaleX, scaleY);
+  const tx = PW/2 - (bounds.cx * scale);
+  const ty = PH/2 - (bounds.cy * scale);
+
+  ctx.save();
+  ctx.translate(tx, ty);
+  ctx.scale(scale, scale);
+
+  // Draw edges
+  currentEdges.forEach(e=>{
+    if(!e.source.x) return;
+    ctx.beginPath();
+    ctx.moveTo(e.source.x, e.source.y);
+    ctx.lineTo(e.target.x, e.target.y);
+    ctx.strokeStyle = `rgba(30,58,95,${edgeOpacityScale(e.weight)})`;
+    ctx.lineWidth = edgeWidthScale(e.weight) / scale * 1.5;
+    ctx.stroke();
+  });
+
+  // Draw nodes
+  nodeG.selectAll('g.node').each(function(d){
+    const r = getRadius(d);
+    const col = getColour(d);
+    ctx.beginPath();
+    if(d.tier==='a-list'){
+      const s = r*1.1;
+      ctx.moveTo(d.x, d.y-s);
+      ctx.lineTo(d.x+s, d.y);
+      ctx.lineTo(d.x, d.y+s);
+      ctx.lineTo(d.x-s, d.y);
+      ctx.closePath();
+    } else if(d.tier==='specialist'){
+      const s = r*0.85;
+      ctx.rect(d.x-s, d.y-s, s*2, s*2);
+    } else {
+      const er = d.tier==='emerging' ? r*0.7 : r;
+      ctx.arc(d.x, d.y, er, 0, Math.PI*2);
+    }
+    ctx.fillStyle = col;
+    if(d.tier==='emerging') ctx.globalAlpha=0.6;
+    ctx.fill();
+    ctx.globalAlpha=1;
+    ctx.strokeStyle='#080c14';
+    ctx.lineWidth=0.5/scale;
+    ctx.stroke();
+  });
+
+  // Draw labels
+  labelG.selectAll('text').each(function(d){
+    const fontSize = Math.max(7, getRadius(d)*0.6);
+    ctx.font = `${fontSize}px 'Segoe UI', system-ui, sans-serif`;
+    ctx.fillStyle = '#6a8aaa';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'top';
+    const label = d.id.length>28 ? d.id.slice(0,26)+'...' : d.id;
+    ctx.fillText(label, d.x, d.y + getRadius(d) + 4);
+  });
+
+  ctx.restore();
+
+  // Title
+  ctx.font = '600 24px "Segoe UI", system-ui, sans-serif';
+  ctx.fillStyle = '#e2e8f0';
+  ctx.textAlign = 'left';
+  ctx.fillText('Network Effects \u2014 Festival Circulation Network', 40, 40);
+
+  // Year range subtitle
+  ctx.font = '14px "Segoe UI", system-ui, sans-serif';
+  ctx.fillStyle = '#5a6a7e';
+  const [yf,yt] = yearRange;
+  const rangeText = (yf<=MIN_YEAR && yt>=MAX_YEAR) ? 'All years' : `${yf}\u2013${yt}`;
+  ctx.fillText(rangeText, 40, 68);
+
+  // Download
+  exportCanvas.toBlob(blob=>{
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = `network_effects_${yf}-${yt}.png`;
+    a.click();
+  }, 'image/png');
+});
+
+// -- SVG --
+document.getElementById('btn-export-svg').addEventListener('click', ()=>{
+  // Build a clean SVG with all elements
+  const bounds = getGraphBounds();
+  if(!bounds) return;
+
+  const padding = 60;
+  const vw = bounds.width + padding*2;
+  const vh = bounds.height + padding*2;
+  const ox = bounds.minX - padding;
+  const oy = bounds.minY - padding;
+
+  let svgStr = `<svg xmlns="http://www.w3.org/2000/svg" width="${vw}" height="${vh}" viewBox="${ox} ${oy} ${vw} ${vh}">`;
+  svgStr += `<rect x="${ox}" y="${oy}" width="${vw}" height="${vh}" fill="#080c14"/>`;
+
+  // Edges
+  currentEdges.forEach(e=>{
+    if(!e.source.x) return;
+    const w = edgeWidthScale(e.weight);
+    const o = edgeOpacityScale(e.weight);
+    svgStr += `<line x1="${e.source.x}" y1="${e.source.y}" x2="${e.target.x}" y2="${e.target.y}" stroke="#1e3a5f" stroke-width="${w}" stroke-opacity="${o}"/>`;
+  });
+
+  // Nodes
+  nodeG.selectAll('g.node').each(function(d){
+    const r = getRadius(d);
+    const col = getColour(d);
+    if(d.tier==='a-list'){
+      const s=r*1.1;
+      svgStr += `<path d="M${d.x},${d.y-s} L${d.x+s},${d.y} L${d.x},${d.y+s} L${d.x-s},${d.y} Z" fill="${col}" stroke="#080c14" stroke-width="0.6"/>`;
+    } else if(d.tier==='specialist'){
+      const s=r*0.85;
+      svgStr += `<rect x="${d.x-s}" y="${d.y-s}" width="${s*2}" height="${s*2}" rx="2" fill="${col}" stroke="#080c14" stroke-width="0.5"/>`;
+    } else if(d.tier==='emerging'){
+      svgStr += `<circle cx="${d.x}" cy="${d.y}" r="${r*0.7}" fill="${col}" opacity="0.6" stroke="#080c14" stroke-width="0.3"/>`;
+    } else {
+      svgStr += `<circle cx="${d.x}" cy="${d.y}" r="${r}" fill="${col}" stroke="#080c14" stroke-width="0.5"/>`;
+    }
+  });
+
+  // Labels
+  labelG.selectAll('text').each(function(d){
+    const fontSize = Math.max(7, getRadius(d)*0.6);
+    const label = d.id.length>28 ? d.id.slice(0,26)+'...' : d.id;
+    const escaped = label.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    svgStr += `<text x="${d.x}" y="${d.y + getRadius(d)+10}" font-size="${fontSize}" fill="#6a8aaa" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif">${escaped}</text>`;
+  });
+
+  svgStr += '</svg>';
+
+  const blob = new Blob([svgStr], {type:'image/svg+xml'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  const [yf,yt] = yearRange;
+  a.download = `network_effects_${yf}-${yt}.svg`;
+  a.click();
+});
+
+// -- JSON (current filtered data) --
+document.getElementById('btn-export-json').addEventListener('click', ()=>{
+  const { nodes, edges } = getVisibleData();
+  const exportData = {
+    nodes: nodes.map(n=>({
+      id: n.id,
+      region: n.region,
+      tier: n.tier,
+      film_count: n.film_count,
+      range_films: n._rangeFilms,
+      degree_centrality: n.degree_centrality,
+      community: n.community,
+      genre_circuit: n.genre_circuit,
+      first_year: n.first_year,
+      last_year: n.last_year
+    })),
+    edges: edges.map(e=>({
+      source: typeof e.source==='object'?e.source.id:e.source,
+      target: typeof e.target==='object'?e.target.id:e.target,
+      weight: e.weight
+    })),
+    metadata: {
+      year_range: yearRange,
+      min_weight: minWeight,
+      exported: new Date().toISOString()
+    }
+  };
+  const blob = new Blob([JSON.stringify(exportData, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  const [yf,yt] = yearRange;
+  a.download = `network_effects_${yf}-${yt}.json`;
+  a.click();
+});
+
+// Helper: compute bounding box of current nodes
+function getGraphBounds(){
+  const nodes = [];
+  nodeG.selectAll('g.node').each(function(d){ if(d.x!=null) nodes.push(d); });
+  if(nodes.length===0) return null;
+  const xs = nodes.map(d=>d.x), ys = nodes.map(d=>d.y);
+  const minX = d3.min(xs), maxX = d3.max(xs);
+  const minY = d3.min(ys), maxY = d3.max(ys);
+  return { minX, minY, maxX, maxY, width:maxX-minX||1, height:maxY-minY||1, cx:(minX+maxX)/2, cy:(minY+maxY)/2 };
+}
+
+// ====================================================================
+// WINDOW RESIZE
+// ====================================================================
+window.addEventListener('resize', ()=>{
+  const dpr = window.devicePixelRatio||1;
+  const rw = window.innerWidth, rh = window.innerHeight - 80;
+  edgeCanvas.width = rw * dpr;
+  edgeCanvas.height = rh * dpr;
+  edgeCanvas.style.width = rw+'px';
+  edgeCanvas.style.height = rh+'px';
+  edgeCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+});
+
+// ====================================================================
+// INIT
+// ====================================================================
+updateRangeUI();
+buildLegend();
+render(false);
+
+} catch(err) {
+  console.error('Network viz error:', err);
+  document.getElementById('loading-msg').style.display='none';
+  const errEl = document.getElementById('load-error');
+  errEl.style.display='block';
+  errEl.textContent = 'Error: ' + err.message;
+}
+})();
+</script>
+</body>
+</html>

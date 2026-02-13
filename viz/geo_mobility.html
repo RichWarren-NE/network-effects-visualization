@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geographic Film Mobility — Short Film Festival Network</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:#fff;color:#1e293b;line-height:1.5}
+.app{max-width:1600px;margin:0 auto;padding:1rem 1.5rem}
+header{text-align:center;margin-bottom:1rem}
+header h1{font-size:1.8rem;font-weight:700;color:#1e3a5f;margin-bottom:.25rem}
+.subtitle{color:#64748b;font-size:.9rem}
+
+.tab-nav{display:flex;gap:.5rem;justify-content:center;margin-bottom:1rem;border-bottom:2px solid #e2e8f0;padding-bottom:.5rem}
+.tab-btn{padding:.5rem 1.25rem;border:none;background:#f1f5f9;color:#475569;border-radius:6px 6px 0 0;cursor:pointer;font-size:.85rem;font-weight:500;transition:all .2s}
+.tab-btn:hover{background:#e2e8f0}
+.tab-btn.active{background:#1e40af;color:#fff}
+
+.controls{display:flex;gap:1.5rem;align-items:flex-end;justify-content:center;padding:.75rem 1rem;background:#f8fafc;border-radius:8px;margin-bottom:1rem;flex-wrap:wrap}
+.ctrl{display:flex;flex-direction:column;gap:.25rem}
+.ctrl label{font-size:.75rem;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.05em}
+.ctrl select{padding:.35rem .5rem;border:1px solid #cbd5e1;border-radius:4px;font-size:.85rem;background:#fff}
+.ctrl input[type=range]{width:140px;accent-color:#3b82f6}
+.range-row{display:flex;gap:.5rem}
+
+.main{display:flex;gap:1rem;min-height:500px}
+.map-area{flex:1;min-width:0}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+/* Stats panel */
+.stats{width:320px;flex-shrink:0;background:#f8fafc;border-radius:8px;padding:1rem;overflow-y:auto;max-height:650px;border:1px solid #e2e8f0}
+.stats h3{font-size:.95rem;color:#1e3a5f;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:2px solid #3b82f6}
+.si{margin-bottom:.75rem}
+.sl{font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:#94a3b8;font-weight:600}
+.sv{font-size:1.1rem;font-weight:700;color:#1e40af}
+.ss{font-size:.8rem;color:#64748b}
+
+.route-list{list-style:none;margin-top:.5rem}
+.route-list li{display:flex;justify-content:space-between;padding:.3rem 0;font-size:.8rem;border-bottom:1px solid #e2e8f0}
+.rn{color:#334155}.rc{font-weight:600;color:#1e40af}
+
+.rb{margin-bottom:.4rem}
+.rbl{font-size:.75rem;color:#475569;display:flex;justify-content:space-between}
+.rbt{height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden;margin-top:2px}
+.rbf{height:100%;background:#3b82f6;border-radius:3px}
+
+/* Country detail */
+.cd{background:#fff;border:1px solid #3b82f6;border-radius:8px;padding:1rem;margin-bottom:1rem}
+.cd h4{font-size:.95rem;color:#1e40af;margin-bottom:.5rem}
+.cd .close{float:right;background:none;border:none;font-size:1.2rem;cursor:pointer;color:#94a3b8;padding:0;line-height:1}
+.cd .close:hover{color:#1e40af}
+.fl{list-style:none;max-height:150px;overflow-y:auto}
+.fl li{font-size:.78rem;padding:.15rem 0;color:#475569;border-bottom:1px solid #f1f5f9}
+
+/* Comparison */
+.comp-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.comp-panel{border:1px solid #e2e8f0;border-radius:8px;overflow:hidden}
+.comp-panel h3{text-align:center;padding:.5rem;background:#f1f5f9;font-size:.85rem;color:#1e3a5f;margin:0;border-bottom:none}
+.change-grid{margin-top:1rem;display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.cg-inc{background:#f0fdf4;padding:.75rem;border-radius:8px;border:1px solid #bbf7d0}
+.cg-dec{background:#fef2f2;padding:.75rem;border-radius:8px;border:1px solid #fecaca}
+.cg-inc h4{font-size:.85rem;color:#166534;margin-bottom:.5rem}
+.cg-dec h4{font-size:.85rem;color:#991b1b;margin-bottom:.5rem}
+.cg-row{display:flex;justify-content:space-between;font-size:.8rem;padding:.15rem 0}
+
+footer{margin-top:1rem;padding-top:.75rem;border-top:1px solid #e2e8f0}
+.notice{font-size:.75rem;color:#94a3b8;text-align:center;font-style:italic}
+
+@media(max-width:1000px){.main{flex-direction:column}.stats{width:100%;max-height:none}.comp-grid,.change-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>Geographic Film Mobility</h1>
+    <p class="subtitle">Short Film Festival Network &mdash; Where films are produced and where they screen</p>
+  </header>
+
+  <nav class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('production')">Production Heat Map</button>
+    <button class="tab-btn" onclick="switchTab('screening')">Screening Heat Map</button>
+    <button class="tab-btn" onclick="switchTab('flow')">Flow Map</button>
+    <button class="tab-btn" onclick="switchTab('compare')">Compare Periods</button>
+  </nav>
+
+  <div class="controls">
+    <div class="ctrl">
+      <label>Year Range: <span id="yr-label">1998–2026</span></label>
+      <div class="range-row">
+        <input type="range" id="yr-start" min="1998" max="2026" value="1998" oninput="updateYears()">
+        <input type="range" id="yr-end" min="1998" max="2026" value="2026" oninput="updateYears()">
+      </div>
+    </div>
+    <div class="ctrl" id="flow-ctrl" style="display:none">
+      <label>Min Films: <span id="thresh-label">3</span></label>
+      <input type="range" id="threshold" min="1" max="30" value="3" oninput="updateFlow()">
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="map-area">
+      <div id="tab-production" class="tab-content active"><div id="map-production"></div></div>
+      <div id="tab-screening" class="tab-content"><div id="map-screening"></div></div>
+      <div id="tab-flow" class="tab-content"><div id="map-flow"></div></div>
+      <div id="tab-compare" class="tab-content">
+        <div class="comp-grid">
+          <div class="comp-panel"><h3>Pre-COVID: 2015&ndash;2019</h3><div id="map-pre"></div></div>
+          <div class="comp-panel"><h3>COVID Era &amp; Recovery: 2020&ndash;2025</h3><div id="map-post"></div></div>
+        </div>
+        <div class="change-grid">
+          <div class="cg-inc"><h4>Increased Activity</h4><div id="inc-list"></div></div>
+          <div class="cg-dec"><h4>Decreased Activity</h4><div id="dec-list"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stats" id="stats-panel"></div>
+  </div>
+
+  <footer>
+    <p class="notice" id="footer-notice"></p>
+  </footer>
+</div>
+
+<script>
+const A2_A3={GB:'GBR',FR:'FRA',US:'USA',DE:'DEU',CH:'CHE',IE:'IRL',CA:'CAN',NL:'NLD',ES:'ESP',IT:'ITA',BE:'BEL',AT:'AUT',SE:'SWE',NO:'NOR',FI:'FIN',DK:'DNK',IS:'ISL',PL:'POL',CZ:'CZE',BA:'BIH',HR:'HRV',SI:'SVN',RO:'ROU',BG:'BGR',TR:'TUR',GE:'GEO',LT:'LTU',LV:'LVA',EE:'EST',HU:'HUN',UA:'UKR',RU:'RUS',PT:'PRT',GR:'GRC',KR:'KOR',JP:'JPN',HK:'HKG',CN:'CHN',SG:'SGP',TW:'TWN',IN:'IND',IR:'IRN',AE:'ARE',IL:'ISR',ZA:'ZAF',BF:'BFA',AU:'AUS',NZ:'NZL',CU:'CUB',MX:'MEX',BR:'BRA',CO:'COL',AR:'ARG',CL:'CHL',PE:'PER',RS:'SRB',SK:'SVK',LB:'LBN'};
+const A3_A2=Object.fromEntries(Object.entries(A2_A3).map(([k,v])=>[v,k]));
+const CENTROIDS={GB:[54,-2],FR:[46.6,2.3],US:[39,-98],DE:[51,10],CH:[47,8],IE:[53.4,-8],CA:[56,-96],NL:[52.3,5.3],ES:[40,-3.7],IT:[42.5,12.5],BE:[50.8,4.3],AT:[47.5,13.3],SE:[62,15],NO:[64,12],FI:[64,26],DK:[56,10],IS:[65,-18],PL:[52,20],CZ:[49.8,15.5],BA:[44,17.7],HR:[45.2,15.5],SI:[46.1,14.8],RO:[46,25],BG:[42.7,25.5],GR:[39.1,21.8],PT:[39.4,-8.2],HU:[47.2,19.5],LT:[55.2,24],LV:[57,24.7],EE:[58.6,25],TR:[39,35.2],GE:[42.3,43.4],UA:[49,31.4],RU:[61,105],KR:[36,128],JP:[36.2,138.3],CN:[35,105],HK:[22.3,114.2],SG:[1.4,103.8],TW:[23.7,121],IN:[20.6,79],IR:[32.4,53.7],AE:[24,54],IL:[31.5,34.8],ZA:[-28.5,24.5],BF:[12.4,-1.6],AU:[-25.3,133.8],NZ:[-40.9,174.9],CU:[21.5,-80],MX:[23.6,-102.6],BR:[-14.2,-51.9],CO:[4.6,-74.3],AR:[-38.4,-63.6],CL:[-35.7,-71.5],PE:[-9.2,-75],RS:[44.2,20.9],SK:[48.7,19.7],LB:[33.9,35.8]};
+
+let DATA=null, currentTab='production', selectedCountry=null;
+
+const colorscale=[[0,'#dbeafe'],[0.15,'#93c5fd'],[0.4,'#3b82f6'],[1,'#1e40af']];
+const geoEurope={showframe:false,showcoastlines:true,coastlinecolor:'#cbd5e1',showland:true,landcolor:'#f8fafc',showocean:true,oceancolor:'#f0f9ff',showcountries:true,countrycolor:'#e2e8f0',projection:{type:'natural earth'},lonaxis:{range:[-30,60]},lataxis:{range:[25,72]}};
+const geoWorld={...geoEurope,lonaxis:undefined,lataxis:undefined};
+
+function switchTab(id){
+  currentTab=id;
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',['production','screening','flow','compare'][i]===id));
+  document.querySelectorAll('.tab-content').forEach(d=>d.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  document.getElementById('flow-ctrl').style.display=id==='flow'?'flex':'none';
+  selectedCountry=null;
+  renderStats();
+}
+
+function updateYears(){
+  let s=+document.getElementById('yr-start').value,e=+document.getElementById('yr-end').value;
+  if(s>e){let t=s;s=e;e=t}
+  document.getElementById('yr-label').textContent=s+'–'+e;
+}
+
+function updateFlow(){
+  const t=+document.getElementById('threshold').value;
+  document.getElementById('thresh-label').textContent=t;
+  renderFlowMap(t);
+}
+
+function renderChoropleth(divId,source,mode,geo,height){
+  const locs=[],vals=[],texts=[];
+  for(const[code,info]of Object.entries(source)){
+    const a3=A2_A3[code];if(!a3)continue;
+    const val=mode==='production'?info.film_count:(info.screenings||info.film_count);
+    const label=mode==='production'
+      ?`${info.country}<br>Films: ${info.film_count}<br>Screenings: ${info.total_screenings}<br>Festivals: ${info.festivals_reached}`
+      :`${info.country}<br>Screenings: ${info.screenings}<br>Films: ${info.unique_films}<br>Festivals: ${info.festivals}`;
+    const top=(info.top_festivals||info.top_films||[]).slice(0,3);
+    locs.push(a3);vals.push(val);texts.push(label+(top.length?'<br>Top: '+top.join(', '):''));
+  }
+  const title=mode==='production'?'Film Production by Country':'Festival Screenings by Country';
+  Plotly.newPlot(divId,[{type:'choropleth',locationmode:'ISO-3',locations:locs,z:vals,text:texts,hoverinfo:'text',colorscale,colorbar:{title:{text:mode==='production'?'Films':'Screenings',font:{size:12}},thickness:15,len:0.5,tickfont:{size:10}},marker:{line:{color:'#cbd5e1',width:0.5}}}],{title:{text:title,font:{size:16,color:'#1e3a5f'},x:0.5},geo,margin:{t:40,b:10,l:10,r:10},height:height||500,paper_bgcolor:'white'},{responsive:true});
+  document.getElementById(divId).on('plotly_click',function(e){
+    if(e.points&&e.points[0]){
+      const code=A3_A2[e.points[0].location];
+      if(code){selectedCountry=code;renderStats()}
+    }
+  });
+}
+
+function renderFlowMap(threshold){
+  const flows=DATA.flows.filter(f=>f.film_count>=threshold);
+  if(!flows.length){Plotly.newPlot('map-flow',[],{height:500,paper_bgcolor:'white'},{responsive:true});return}
+  const maxF=Math.max(...flows.map(f=>f.film_count));
+  const traces=[];
+  const cFilms={};
+
+  for(const f of flows){
+    const s=CENTROIDS[f.source],d=CENTROIDS[f.target];if(!s||!d)continue;
+    const w=Math.max(0.5,(f.film_count/maxF)*5);
+    const op=Math.min(0.8,0.15+(f.film_count/maxF)*0.65);
+    cFilms[f.source]=(cFilms[f.source]||0)+f.film_count;
+    cFilms[f.target]=(cFilms[f.target]||0)+f.film_count;
+    traces.push({type:'scattergeo',mode:'lines',lon:[s[1],d[1]],lat:[s[0],d[0]],line:{width:w,color:`rgba(30,64,175,${op})`},hoverinfo:'text',text:`${f.source_name} \u2192 ${f.target_name}<br>${f.film_count} films (${f.screening_count} screenings)`,showlegend:false});
+  }
+  const mLon=[],mLat=[],mTxt=[],mSz=[];
+  for(const[code,count]of Object.entries(cFilms)){
+    const c=CENTROIDS[code];if(!c)continue;
+    mLat.push(c[0]);mLon.push(c[1]);
+    mTxt.push(`${(DATA.production[code]||{}).country||code}: ${count} film connections`);
+    mSz.push(Math.max(5,Math.min(20,Math.sqrt(count)*2)));
+  }
+  traces.push({type:'scattergeo',mode:'markers+text',lon:mLon,lat:mLat,text:Object.keys(cFilms).map(c=>(DATA.production[c]||{}).country?.substring(0,3)||c),textposition:'top center',textfont:{size:8,color:'#475569'},hoverinfo:'text',hovertext:mTxt,marker:{size:mSz,color:'#3b82f6',line:{width:1,color:'white'},opacity:0.8},showlegend:false});
+
+  Plotly.newPlot('map-flow',traces,{title:{text:`Film Mobility Flows (${threshold}+ films)`,font:{size:16,color:'#1e3a5f'},x:0.5},geo:geoWorld,margin:{t:40,b:10,l:10,r:10},height:500,paper_bgcolor:'white',showlegend:false},{responsive:true});
+}
+
+function renderComparison(){
+  const agg=(start,end)=>{
+    const cd={};
+    for(const[y,snap]of Object.entries(DATA.year_snapshots)){
+      const yr=parseInt(y);if(yr<start||yr>end)continue;
+      for(const[code,d]of Object.entries(snap.screening||{})){
+        if(!cd[code])cd[code]={films:0,screenings:0};
+        cd[code].films+=d.films;cd[code].screenings+=d.screenings;
+      }
+    }return cd;
+  };
+  const p1=agg(2015,2019),p2=agg(2020,2025);
+
+  const mk=(src)=>{const l=[],v=[],t=[];for(const[c,d]of Object.entries(src)){const a=A2_A3[c];if(!a)continue;l.push(a);v.push(d.screenings);t.push(`${(DATA.production[c]||DATA.screening[c]||{}).country||c}<br>Screenings: ${d.screenings}<br>Films: ${d.films}`)}return{l,v,t}};
+  const t1=mk(p1),t2=mk(p2);
+
+  Plotly.newPlot('map-pre',[{type:'choropleth',locationmode:'ISO-3',locations:t1.l,z:t1.v,text:t1.t,hoverinfo:'text',colorscale,showscale:false,marker:{line:{color:'#cbd5e1',width:0.5}}}],{geo:geoEurope,margin:{t:5,b:5,l:5,r:5},height:280,paper_bgcolor:'white'},{responsive:true,displayModeBar:false});
+  Plotly.newPlot('map-post',[{type:'choropleth',locationmode:'ISO-3',locations:t2.l,z:t2.v,text:t2.t,hoverinfo:'text',colorscale,showscale:false,marker:{line:{color:'#cbd5e1',width:0.5}}}],{geo:geoEurope,margin:{t:5,b:5,l:5,r:5},height:280,paper_bgcolor:'white'},{responsive:true,displayModeBar:false});
+
+  // Changes
+  const allC=new Set([...Object.keys(p1),...Object.keys(p2)]);
+  const changes=[];
+  for(const c of allC){
+    const b=(p1[c]||{}).screenings||0,a=(p2[c]||{}).screenings||0;
+    changes.push({code:c,name:(DATA.production[c]||DATA.screening[c]||{}).country||c,diff:a-b,before:b,after:a});
+  }
+  const inc=changes.filter(c=>c.diff>0).sort((a,b)=>b.diff-a.diff).slice(0,8);
+  const dec=changes.filter(c=>c.diff<0).sort((a,b)=>a.diff-b.diff).slice(0,5);
+
+  document.getElementById('inc-list').innerHTML=inc.map(c=>`<div class="cg-row"><span>${c.name}</span><span style="color:#166534;font-weight:600">+${c.diff} screenings</span></div>`).join('');
+  document.getElementById('dec-list').innerHTML=dec.length?dec.map(c=>`<div class="cg-row"><span>${c.name}</span><span style="color:#991b1b;font-weight:600">${c.diff} screenings</span></div>`).join(''):'<p style="font-size:.8rem;color:#991b1b">No significant decreases</p>';
+}
+
+function renderStats(){
+  const s=DATA.statistics;
+  let html='';
+
+  if(selectedCountry){
+    const p=DATA.production[selectedCountry],sc=DATA.screening[selectedCountry];
+    const ob=DATA.flows.filter(f=>f.source===selectedCountry).slice(0,10);
+    const ib=DATA.flows.filter(f=>f.target===selectedCountry).slice(0,10);
+    const name=(p||sc||{}).country||selectedCountry;
+
+    html+=`<div class="cd"><button class="close" onclick="selectedCountry=null;renderStats()">&times;</button><h4>${name}</h4>`;
+    if(p)html+=`<div class="si"><div class="sl">Production</div><div class="ss">${p.film_count} films &middot; ${p.total_screenings} screenings &middot; ${p.festivals_reached} festivals &middot; ${p.awards} awards</div></div>`;
+    if(sc)html+=`<div class="si"><div class="sl">As Screening Destination</div><div class="ss">${sc.screenings} screenings &middot; ${sc.unique_films} films &middot; ${sc.festivals} festivals</div></div>`;
+    if(ob.length){html+=`<div class="si"><div class="sl">Films Travel To</div><ul class="fl">${ob.map(f=>`<li>${f.target_name}: ${f.film_count} films</li>`).join('')}</ul></div>`}
+    if(ib.length){html+=`<div class="si"><div class="sl">Films Arrive From</div><ul class="fl">${ib.map(f=>`<li>${f.source_name}: ${f.film_count} films</li>`).join('')}</ul></div>`}
+    if(sc&&sc.top_films&&sc.top_films.length){html+=`<div class="si"><div class="sl">Sample Films</div><ul class="fl">${sc.top_films.slice(0,8).map(f=>`<li>${f}</li>`).join('')}</ul></div>`}
+    html+='</div>';
+  }
+
+  html+=`<h3>Key Statistics</h3>
+    <div class="si"><div class="sl">Most Productive Country</div><div class="sv">${s.most_productive_country.country}</div><div class="ss">${s.most_productive_country.film_count} films produced</div></div>
+    <div class="si"><div class="sl">Most Active Screening Country</div><div class="sv">${s.most_active_screening_country.country}</div><div class="ss">${s.most_active_screening_country.screenings} screenings</div></div>
+    <div class="si"><div class="sl">Top Mobility Routes</div><ul class="route-list">${s.top_mobility_routes.slice(0,5).map(r=>`<li><span class="rn">${r.route}</span><span class="rc">${r.films}</span></li>`).join('')}</ul></div>
+    <div class="si"><div class="sl">Regional Circulation</div><div style="margin-top:.5rem">
+      ${[['Within Europe','within_europe'],['Europe \u2194 N. America','europe_north_america'],['Europe \u2194 Asia','europe_asia'],['Other routes','other']].map(([l,k])=>`<div class="rb"><div class="rbl"><span>${l}</span><span>${s.regional_circulation[k]}%</span></div><div class="rbt"><div class="rbf" style="width:${s.regional_circulation[k]}%"></div></div></div>`).join('')}
+    </div></div>
+    <div class="si"><div class="sl">Network Summary</div><div class="ss">${s.total_production_countries} production countries &middot; ${s.total_screening_countries} screening countries &middot; ${s.total_cross_border_flows} cross-border flows</div></div>`;
+
+  document.getElementById('stats-panel').innerHTML=html;
+}
+
+async function init(){
+  try{
+    const r=await fetch('geo_data.json');
+    DATA=await r.json();
+  }catch(e){
+    document.getElementById('stats-panel').innerHTML='<p style="color:red">Failed to load geo_data.json. Ensure it is in the same directory.</p>';
+    return;
+  }
+
+  document.getElementById('footer-notice').textContent=
+    `Festival locations based on known major festivals. Coverage: ${DATA.data_completeness.festivals_mapped}/${DATA.data_completeness.festivals_total} festivals mapped (${DATA.data_completeness.coverage_pct}%). Some festivals may have inferred locations.`;
+
+  renderChoropleth('map-production',DATA.production,'production',geoEurope);
+  renderChoropleth('map-screening',DATA.screening,'screening',geoEurope);
+  renderFlowMap(3);
+  renderComparison();
+  renderStats();
+}
+
+init();
+</script>
+</body>
+</html>

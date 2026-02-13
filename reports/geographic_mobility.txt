@@ -1,0 +1,169 @@
+======================================================================
+GEOGRAPHIC MOBILITY ANALYSIS
+Short Film Festival Network - Encounters Dataset
+Generated: 2026-02-07
+======================================================================
+
+1. MOST CENTRAL COUNTRIES IN THE FESTIVAL NETWORK
+--------------------------------------------------
+
+By Production (films produced):
+   1. United Kingdom                  297 films   1221 screenings  233 festivals
+   2. France                           66 films    704 screenings  184 festivals
+   3. United States                    59 films    305 screenings  114 festivals
+   4. Germany                          56 films    400 screenings  117 festivals
+   5. Switzerland                      35 films    277 screenings   97 festivals
+   6. Canada                           26 films    204 screenings   84 festivals
+   7. Belgium                          21 films    142 screenings   70 festivals
+   8. Poland                           18 films     92 screenings   34 festivals
+   9. Norway                           16 films     59 screenings   29 festivals
+  10. China                            15 films     74 screenings   43 festivals
+  11. Ireland                          14 films    194 screenings   76 festivals
+  12. Greece                           13 films     95 screenings   53 festivals
+  13. Austria                          12 films    138 screenings   70 festivals
+  14. Finland                          12 films     74 screenings   43 festivals
+  15. Netherlands                      11 films     58 screenings   40 festivals
+
+By Screening (festival screenings hosted):
+   1. United Kingdom                  1432 screenings   754 films   32 festivals
+   2. United States                    731 screenings   271 films   38 festivals
+   3. France                           324 screenings   181 films   10 festivals
+   4. Germany                          250 screenings   128 films   12 festivals
+   5. Canada                           203 screenings   109 films    9 festivals
+   6. Estonia                          181 screenings   140 films    1 festivals
+   7. Portugal                         148 screenings    87 films    3 festivals
+   8. Greece                           112 screenings    69 films    6 festivals
+   9. Poland                           109 screenings    68 films    4 festivals
+  10. Spain                             90 screenings    64 films    3 festivals
+  11. Finland                           82 screenings    57 films    3 festivals
+  12. Australia                         73 screenings    49 films    2 festivals
+  13. Belgium                           66 screenings    40 films    5 festivals
+  14. Netherlands                       56 screenings    39 films    4 festivals
+  15. Austria                           56 screenings    28 films    4 festivals
+
+
+2. REGIONAL CIRCULATION PATTERNS
+--------------------------------------------------
+
+  Within Europe:               52.6%
+  Europe <-> North America:    19.1%
+  Europe <-> Asia:             10.8%
+  Other routes:                17.5%
+
+  Interpretation:
+  Films circulate predominantly within Europe, confirming a strong
+  intra-European festival circuit. The UK-centric dataset (Encounters)
+  naturally biases toward European connections, but the pattern is
+  consistent with known festival network structures.
+
+
+3. TOP INTERNATIONAL MOBILITY ROUTES
+--------------------------------------------------
+   1. United Kingdom            -> United States               66 films  (  135 screenings) *
+   2. France                    -> United Kingdom              66 films  (  102 screenings)
+   3. United States             -> United Kingdom              59 films  (   75 screenings) *
+   4. Germany                   -> United Kingdom              56 films  (   81 screenings)
+   5. United Kingdom            -> Estonia                     36 films  (   37 screenings)
+   6. France                    -> United States               36 films  (   78 screenings) *
+   7. Switzerland               -> United Kingdom              35 films  (   51 screenings)
+   8. United Kingdom            -> France                      28 films  (   35 screenings)
+   9. France                    -> Estonia                     26 films  (   26 screenings)
+  10. Canada                    -> United Kingdom              26 films  (   37 screenings) *
+  11. United Kingdom            -> Canada                      25 films  (   36 screenings) *
+  12. United Kingdom            -> Germany                     24 films  (   31 screenings)
+  13. France                    -> Portugal                    22 films  (   29 screenings)
+  14. Belgium                   -> United Kingdom              21 films  (   24 screenings)
+  15. Germany                   -> United States               21 films  (   34 screenings) *
+  16. France                    -> Germany                     20 films  (   33 screenings)
+  17. Switzerland               -> France                      19 films  (   21 screenings)
+  18. France                    -> Canada                      19 films  (   26 screenings) *
+  19. Germany                   -> Estonia                     19 films  (   19 screenings)
+  20. United Kingdom            -> Portugal                    18 films  (   26 screenings)
+  (* = cross-regional)
+
+  Domestic circulation (films screening in home country):
+    United Kingdom                  297 films    549 screenings
+    France                           43 films     70 screenings
+    United States                    33 films     87 screenings
+    Germany                          27 films     48 screenings
+    Poland                           13 films     23 screenings
+    Canada                           12 films     22 screenings
+    Switzerland                      11 films     11 screenings
+    Belgium                           9 films     10 screenings
+    Austria                           9 films     17 screenings
+    Finland                           8 films      9 screenings
+
+
+4. GEOGRAPHIC MOBILITY OVER TIME (PRE/POST COVID)
+--------------------------------------------------
+
+  Pre-COVID (2015-2019):
+    Production countries active: 58
+    Cross-border flows:          407
+    Total screenings:            967
+
+  COVID Era & Recovery (2020-2025):
+    Production countries active: 72
+    Cross-border flows:          1539
+    Total screenings:            3600
+
+  Post-COVID screening volume is 3.7x pre-COVID levels.
+
+
+5. UK-SPECIFIC ANALYSIS
+--------------------------------------------------
+
+  UK Production:
+    Films produced:         297
+    Total screenings:       1221
+    Festivals reached:      233
+    Awards won:             114
+
+  Where UK Films Travel (top destinations):
+     1. United States                    66 films
+     2. Estonia                          36 films
+     3. France                           28 films
+     4. Canada                           25 films
+     5. Germany                          24 films
+     6. Portugal                         18 films
+     7. Greece                           14 films
+     8. Spain                            12 films
+     9. Netherlands                      11 films
+    10. Finland                          11 films
+    11. Ireland                           9 films
+    12. Australia                         8 films
+    13. Poland                            7 films
+    14. Austria                           6 films
+    15. Belgium                           6 films
+
+  Which Countries' Films Come to UK Festivals:
+     1. France                           66 films
+     2. United States                    59 films
+     3. Germany                          56 films
+     4. Switzerland                      35 films
+     5. Canada                           26 films
+     6. Belgium                          21 films
+     7. Poland                           18 films
+     8. Norway                           16 films
+     9. China                            15 films
+    10. Ireland                          14 films
+    11. Greece                           13 films
+    12. Finland                          12 films
+    13. Austria                          12 films
+    14. Netherlands                      11 films
+    15. Australia                        10 films
+
+  UK as Screening Destination:
+    Total screenings:       1432
+    Unique films screened:   754
+    Festivals in UK:        32
+
+
+======================================================================
+DATA NOTES
+======================================================================
+  Festival location coverage: 202/393 (51.4%)
+  Festival locations based on known major festivals and city/country
+  keyword matching. Some smaller festivals may have inferred locations.
+  All 754 films screened at Encounters (Bristol, UK) as the anchor festival.
+  Production country data from film metadata (ISO 3166-1 alpha-2 codes).

@@ -1,0 +1,223 @@
+NETWORK EFFECTS - FILM CIRCULATION PATTERNS REPORT
+Companion analysis to the festival network graph
+
+======================================================================
+1. CIRCULATION DURATION
+======================================================================
+  Total films analysed: 754
+  Average circulation span: 1.19 years
+  Median circulation span: 1.0 years
+  Average festivals per film: 5.5
+  Median festivals per film: 3.0
+  Average screenings per film: 5.9
+
+  Span distribution (years -> number of films):
+     0y: ██████████████████████████████████████████████████ 329
+     1y: ███████████████████████████████ 206
+     2y: ██████████████████ 123
+     3y: █████ 35
+     4y: ███ 24
+     5y: ██ 14
+     6y: ██ 15
+     7y:  2
+     8y:  3
+     9y:  2
+    27y:  1
+
+  Interpretation:
+    - Most films (329) circulate within a single year.
+    - 44% have a span of 0 (all screenings in the same year).
+    - 425 films (56%) span multiple years.
+    - 96 films have 3+ year circulation spans.
+
+======================================================================
+2. AWARD EFFECT ON CIRCULATION
+======================================================================
+  Films with at least one award: 140 (18.6%)
+  Films without awards: 614
+
+  Comparison:
+    Metric                              Awarded  Non-awarded
+    ------------------------------ ------------ ------------
+    Avg circulation span (years)           2.16         0.97
+    Avg festival count                     13.4          3.7
+    Median circulation span                 2.0          0.0
+    Median festival count                  12.0          2.0
+
+  Interpretation:
+    - Award-winning films visit 3.6x more festivals on average.
+    - Awards extend circulation by ~1.2 years on average.
+
+======================================================================
+3. MOST TRAVELED FILMS (20+ festivals)
+======================================================================
+  29 films screened at 20 or more festivals:
+
+    1. The Favourite
+       Director(s): Yorgos Lanthimos
+       47 festivals, 135 screenings, span 2y (2018-2020) [★ 51 wins]
+    2. Ice Merchants
+       Director(s): João Gonzalez
+       36 festivals, 39 screenings, span 2y (2022-2024) [★ 9 wins]
+    3. Neon Phantom
+       Director(s): Leonardo Martinelli
+       34 festivals, 36 screenings, span 4y (2021-2025) [★ 5 wins]
+    4. Hardly Working
+       Director(s): Leonhard Müllner, Michael Stumpf, Robin Klengel, Susanna Flock
+       31 festivals, 35 screenings, span 4y (2022-2026) [★ 1 wins]
+    5. Warsha
+       Director(s): Dania Bdeir
+       31 festivals, 33 screenings, span 3y (2022-2025) [★ 5 wins]
+    6. Lesbian Space Princess
+       Director(s): Emma Hough Hobbs, Leela Varghese
+       30 festivals, 31 screenings, span 1y (2025-2026) [★ 4 wins]
+    7. Razeh-del
+       Director(s): Maryam Tafakory
+       30 festivals, 30 screenings, span 2y (2024-2026) [★ 6 wins]
+    8. Dustin
+       Director(s): Naïla Guiguet
+       29 festivals, 30 screenings, span 2y (2020-2022) [★ 3 wins]
+    9. Flores del otro patio
+       Director(s): Jorge Cadena
+       28 festivals, 30 screenings, span 3y (2022-2025)
+   10. Mast-Del
+       Director(s): Maryam Tafakory
+       27 festivals, 29 screenings, span 2y (2023-2025) [★ 2 wins]
+   11. Nimic
+       Director(s): Yorgos Lanthimos
+       27 festivals, 27 screenings, span 5y (2019-2024)
+   12. Percebes
+       Director(s): Alexandra Ramires, Laura Gonçalves
+       27 festivals, 28 screenings, span 1y (2024-2025) [★ 2 wins]
+   13. Love, Dad
+       Director(s): Diana Cam Van Nguyen
+       26 festivals, 28 screenings, span 3y (2021-2024) [★ 6 wins]
+   14. Hurikán
+       Director(s): Jan Saska
+       24 festivals, 24 screenings, span 2y (2024-2026) [★ 1 wins]
+   15. I Promise You Paradise
+       Director(s): Mostafa Morad
+       24 festivals, 24 screenings, span 1y (2023-2024) [★ 1 wins]
+   16. Anxious Body
+       Director(s): Yoriko Mizushiri
+       23 festivals, 23 screenings, span 4y (2021-2025) [★ 2 wins]
+   17. Train Again
+       Director(s): Peter Tscherkassky
+       23 festivals, 23 screenings, span 2y (2021-2023) [★ 1 wins]
+   18. Zoon
+       Director(s): Jonatan Schwenk
+       23 festivals, 24 screenings, span 2y (2022-2024) [★ 2 wins]
+   19. Backflip
+       Director(s): Nikita Diakur
+       22 festivals, 25 screenings, span 4y (2022-2026) [★ 3 wins]
+   20. Steakhouse
+       Director(s): Špela Čadež
+       22 festivals, 23 screenings, span 3y (2021-2024) [★ 2 wins]
+   21. The Orphan
+       Director(s): Carolina Markowicz
+       22 festivals, 23 screenings, span 1y (2018-2019) [★ 5 wins]
+   22. Two Black Boys in Paradise
+       Director(s): Baz Sells
+       22 festivals, 22 screenings, span 1y (2025-2026) [★ 1 wins]
+   23. The Flowers Stand, Silently Witnessing
+       Director(s): Theo Panagopoulos
+       21 festivals, 21 screenings, span 2y (2024-2026) [★ 2 wins]
+   24. Watermelon Juice
+       Director(s): Irene Moray
+       21 festivals, 21 screenings, span 1y (2019-2020) [★ 3 wins]
+   25. 45th Parallel
+       Director(s): Lawrence Abu Hamdan
+       20 festivals, 21 screenings, span 3y (2022-2025)
+   26. Being John Smith
+       Director(s): John Smith
+       20 festivals, 20 screenings, span 2y (2024-2026) [★ 1 wins]
+   27. I Am Afraid to Forget Your Face
+       Director(s): Sameh Alaa
+       20 festivals, 20 screenings, span 5y (2020-2025) [★ 2 wins]
+   28. Maalbeek
+       Director(s): Ismaël Joffroy-Chandoutis
+       20 festivals, 22 screenings, span 3y (2020-2023) [★ 6 wins]
+   29. Nazarbazi
+       Director(s): Maryam Tafakory
+       20 festivals, 20 screenings, span 3y (2022-2025) [★ 2 wins]
+
+======================================================================
+4. YEARLY PATTERNS
+======================================================================
+
+  Screenings per year:
+    1998:  2
+    1999:  1
+    2009:  1
+    2014:  2
+    2015: ██ 33
+    2016: ████ 63
+    2017: ███ 52
+    2018: ███████ 121
+    2019: █████████████████████████████████████████ 647
+    2020: ██████████████████████████████████████ 598
+    2021: ██████████████████████████████████████████████ 720
+    2022: ██████████████████████████████████████████████████ 778
+    2023: ██████████████████████████████████ 536
+    2024: █████████████████ 270
+    2025: ██████████████████████████████████████ 599
+    2026: █ 22
+
+  Cohort analysis (by production year, avg festivals per film):
+    2014: ██████████████ 5.7 avg (3 films)
+    2015: ██████████████ 5.7 avg (12 films)
+    2016: ███████████ 4.6 avg (11 films)
+    2017: █████████████ 5.4 avg (9 films)
+    2018: █████████████████████████████ 11.8 avg (15 films)
+    2019: █████████ 3.8 avg (216 films)
+    2020: ██████████ 4.2 avg (185 films)
+    2021: ███████████████ 6.3 avg (90 films)
+    2022: ███████████████████ 7.8 avg (81 films)
+    2023: ████████████████ 6.6 avg (55 films)
+    2024: █████████████████████████████████████ 14.9 avg (20 films)
+    2025: █████████████ 5.6 avg (56 films)
+
+======================================================================
+5. UK FILMS & ENCOUNTERS AS LAUNCHPAD
+======================================================================
+  UK films (country_code contains GB): 297
+  UK films avg festivals: 3.44
+  UK films avg span: 0.89 years
+  Overall avg festivals: 5.51
+  Overall avg span: 1.19 years
+
+  Films premiering at Encounters (first screening year): 646 (85.7%)
+  Encounters-premiere avg festivals: 4.4
+  Encounters-premiere avg span: 0.98 years
+  Non-Encounters-premiere avg festivals: 12.0
+  Non-Encounters-premiere avg span: 2.42 years
+
+  Top 20 first festivals (most common first screening venue):
+     646x  Encounters Short Film and Animation Festival
+     118x  Tallinn Black Nights Film Festival
+      76x  Palm Springs International ShortFest
+      66x  Annecy International Animation Festival
+      56x  Guanajuato International Film Festival
+      51x  Festival du Nouveau Cinéma
+      39x  BFI London Film Festival
+      36x  DOK Leipzig
+      34x  Edinburgh International Film Festival
+      33x  Cannes Film Festival
+      30x  AFI Fest
+      29x  Toronto International Film Festival
+      29x  Bilbao International Festival of Documentary and Short Films
+      28x  Vancouver International Film Festival
+      28x  Internationale Kurzfilmtage Winterthur
+      26x  Melbourne International Film Festival
+      26x  Locarno International Film Festival
+      26x  Krakow Film Festival
+      25x  Sitges - Catalonian International Film Festival
+      24x  Chicago International Film Festival
+
+  Note: All 754 films screen at Encounters by definition (it is the anchor
+  festival for this dataset). 'Premiered at Encounters' means Encounters was
+  among the earliest screening venues (same year as first screening).
+
+======================================================================
+END OF REPORT
+======================================================================

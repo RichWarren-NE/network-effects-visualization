@@ -1,0 +1,154 @@
+NETWORK EFFECTS - DATA QUALITY REPORT
+Generated: 2026-02-06 05:26:38
+Source: Encounters_Data.xlsx
+
+======================================================================
+1. RECORD COUNTS
+======================================================================
+  films               : 754
+  festivals           : 393
+  screenings          : 4,445
+  directors           : 813
+  countries           : 80
+  genres              : 22
+  film_directors      : 871
+  film_countries      : 890
+  film_genres         : 1,391
+
+======================================================================
+2. DATE RANGE COVERAGE
+======================================================================
+  Film production years: 1998 - 2025
+  Screening event years: 1998 - 2026
+
+  Screenings per year:
+    1998:    2 
+    1999:    1 
+    2009:    1 
+    2014:    2 
+    2015:   33 ###
+    2016:   63 ######
+    2017:   52 #####
+    2018:  121 ############
+    2019:  647 ################################################################
+    2020:  598 ###########################################################
+    2021:  720 ########################################################################
+    2022:  778 #############################################################################
+    2023:  536 #####################################################
+    2024:  270 ###########################
+    2025:  599 ###########################################################
+    2026:   22 ##
+
+======================================================================
+3. FILMS WITH INCOMPLETE METADATA
+======================================================================
+  Total films with missing data: 4
+
+    "Coffee with Friends" (2020): missing duration
+    "Sink or Swim" (2020): missing duration
+    "The Bridge" (2020): missing duration
+    "We All Just Want to Be Mad" (2020): missing duration
+
+======================================================================
+4. TOP 10 COUNTRIES BY FILM PRODUCTION
+======================================================================
+  United Kingdom (GB) :  297 films
+  France (FR) :   66 films
+  United States (US) :   59 films
+  Germany (DE) :   56 films
+  Switzerland (CH) :   35 films
+  Canada (CA) :   26 films
+  Belgium (BE) :   21 films
+  Poland (PL) :   18 films
+  Norway (NO) :   16 films
+  China (CN) :   15 films
+
+======================================================================
+5. TOP 10 FESTIVALS BY UNIQUE FILM COUNT
+======================================================================
+  Encounters Short Film and Animation Festival [festival] (2015-2025): 754 films
+  Palm Springs International ShortFest [festival] (2015-2025): 142 films
+  Tallinn Black Nights Film Festival [festival] (2017-2025): 140 films
+  Annecy International Animation Festival [festival] (2015-2025): 89 films
+  Clermont-Ferrand International Short Film Festival [festival] (1999-2026): 85 films
+  Guanajuato International Film Festival [festival] (2015-2025): 78 films
+  Festival du Nouveau Cinéma [festival] (2016-2025): 57 films
+  Athens International Film and Video Festival [festival] (2019-2025): 50 films
+  Helsinki International Film Festival - Love & Anarchy [festival] (2015-2025): 50 films
+  IndieLisboa International Independent Film Festival [festival] (2016-2025): 50 films
+
+======================================================================
+6. TOP 20 FILMS BY FESTIVAL SCREENINGS
+======================================================================
+   1. "Hardly Working" (2022) - 140 screenings at 31 festivals dir: Leonhard Müllner, Michael Stumpf, Robin Klengel, Susanna Flock
+   2. "The Favourite" (2018) - 135 screenings at 47 festivals dir: Yorgos Lanthimos
+   3. "Lesbian Space Princess" (2025) - 62 screenings at 30 festivals dir: Emma Hough Hobbs, Leela Varghese
+   4. "Percebes" (2024) - 56 screenings at 27 festivals dir: Alexandra Ramires, Laura Gonçalves
+   5. "Pipes" (2022) - 48 screenings at 16 festivals dir: Jessica Meier, Kilian Feusi, Sujanth Ravichandran
+   6. "Urban Solutions" (2022) - 48 screenings at 11 festivals dir: Arne Hector, Luciana Mazeto, Minze Tummescheit, Vinícius Lopes
+   7. "Granny's Sexual Life" (2021) - 42 screenings at 19 festivals dir: Emilie Pigeard, Urška Djukic
+   8. "Ice Merchants" (2022) - 39 screenings at 36 festivals dir: João Gonzalez
+   9. "A Tiny Tale" (2020) - 36 screenings at 6 festivals dir: Chloé Bourdic, Maylis Mosny, Noémie Halberstam, Sylvain Cuvillier, Théophile Coursimault, Ye Zijing
+  10. "Neon Phantom" (2021) - 36 screenings at 34 festivals dir: Leonardo Martinelli
+  11. "Migrants" (2020) - 35 screenings at 7 festivals dir: Antoine Dupriez, Aubin Kubiak, Hugo Caby, Lucas Lermytte, Zoé Devise
+  12. "Sixty-Seven Milliseconds" (2025) - 34 screenings at 17 festivals dir: Antoine Fontaine, Galdric Fleury
+  13. "Warsha" (2022) - 33 screenings at 31 festivals dir: Dania Bdeir
+  14. "The Golden Legend" (2019) - 32 screenings at 15 festivals dir: Chema García Ibarra, Ion de Sosa
+  15. "Happiness Machine" (2019) - 30 screenings at 3 festivals dir: Ana Nedeljkovic, Andrea Schneider, Elizabeth Hobbs, Eni Brandner, Joanna Kożuch, Michelle Kranot, Rebecca Blöcher, Samantha Moore, Susanne Jirkuff, Vessela Dantcheva
+  16. "Razeh-del" (2024) - 30 screenings at 30 festivals dir: Maryam Tafakory
+  17. "Flores del otro patio" (2022) - 30 screenings at 28 festivals dir: Jorge Cadena
+  18. "Coffin" (2020) - 30 screenings at 5 festivals dir: Cai Yuanqing, Huang Houzhi, Mandimby Lebon, Mikolaj Janiw, Nathan Crabot, Théo Tran Ngoc
+  19. "Dustin" (2020) - 30 screenings at 29 festivals dir: Naïla Guiguet
+  20. "Mast-Del" (2023) - 29 screenings at 27 festivals dir: Maryam Tafakory
+
+======================================================================
+7. SCREENING STATUS DISTRIBUTION
+======================================================================
+  screening                : 3912
+  won                      :  334
+  nominated                :  131
+  special_mention          :   52
+  honorable_mention        :   11
+  second_place             :    3
+  third_place              :    2
+
+======================================================================
+8. GENRE DISTRIBUTION
+======================================================================
+  Short                         :  742 films
+  Animation                     :  330 films
+  Drama                         :   78 films
+  Documentary                   :   72 films
+  Comedy                        :   39 films
+  Avant-Garde                   :   35 films
+  LGBTQ+                        :   27 films
+  Horror                        :   22 films
+  Fantasy                       :   12 films
+  Sci-Fi                        :   11 films
+  Thriller                      :    5 films
+  Family                        :    3 films
+  Music                         :    3 films
+  Romance                       :    3 films
+  History                       :    2 films
+  Mystery                       :    1 films
+  Musical                       :    1 films
+  Action                        :    1 films
+  Biography                     :    1 films
+  Crime                         :    1 films
+  Silent                        :    1 films
+  Adventure                     :    1 films
+
+======================================================================
+9. POTENTIAL DUPLICATE FILMS (for manual review)
+======================================================================
+  No potential duplicates detected.
+
+======================================================================
+10. EVENT TYPE DISTRIBUTION
+======================================================================
+  festival       :  354 festivals, 4248 screenings
+  award          :   39 festivals,  197 screenings
+
+======================================================================
+END OF REPORT
+======================================================================

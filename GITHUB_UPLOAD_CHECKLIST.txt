@@ -1,0 +1,47 @@
+GitHub Upload Checklist
+======================
+
+Pre-Upload Verification
+-----------------------
+[ ] .env is listed in .gitignore (contains Supabase password)
+[ ] Run "git status" to confirm .env does NOT appear in tracked files
+[ ] Production builds completed successfully (docs/network, docs/timeline, docs/geo)
+[ ] Landing page works (docs/index.html)
+[ ] All three visualizations load correctly from docs/ folder
+[ ] README.md is complete and accurate
+[ ] .env.example shows credential structure without real values
+
+GitHub Repository Setup
+-----------------------
+[ ] Created repository on GitHub (github.com > New repository)
+[ ] Repository name: network-effects-viz
+[ ] Set visibility (public for academic sharing, private for restricted access)
+[ ] Do NOT initialize with README (already have one locally)
+
+Push to GitHub
+--------------
+[ ] Add remote: git remote add origin https://github.com/YOUR_USERNAME/network-effects-viz.git
+[ ] Push: git push -u origin main
+[ ] Verify files on GitHub — confirm .env is NOT present
+
+Enable GitHub Pages
+-------------------
+[ ] Go to repository Settings > Pages
+[ ] Source: Deploy from a branch
+[ ] Branch: main, Folder: /docs
+[ ] Save and wait for deployment (may take 1-2 minutes)
+[ ] Note the live URL: https://YOUR_USERNAME.github.io/network-effects-viz/
+
+Post-Deployment Testing
+-----------------------
+[ ] Landing page loads at the GitHub Pages URL
+[ ] Network Graph visualization loads and is interactive
+[ ] Timeline visualization loads and filters work
+[ ] Geographic Map visualization loads and displays data
+[ ] All links between pages work correctly
+[ ] Test on mobile device or narrow browser window
+
+Share
+-----
+[ ] Update README.md with the live GitHub Pages URL
+[ ] Send link to colleagues for review
