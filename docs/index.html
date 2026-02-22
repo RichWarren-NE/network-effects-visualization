@@ -7,251 +7,89 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f8f9fb;
-    --surface: #ffffff;
-    --border: #e2e6ec;
-    --text-primary: #1a1f2e;
-    --text-secondary: #5a6275;
-    --text-tertiary: #8b93a5;
-    --uk-blue: #1e40af;
-    --blue-light: #dbeafe;
-    --blue-mid: #60a5fa;
+    --bg: #f8f9fb; --surface: #ffffff; --border: #e2e6ec;
+    --text-primary: #1a1f2e; --text-secondary: #5a6275; --text-tertiary: #8b93a5;
+    --uk-blue: #1e40af; --blue-light: #dbeafe;
   }
-
   * { margin: 0; padding: 0; box-sizing: border-box; }
-
   body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text-primary);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 24px;
+    font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text-primary);
+    min-height: 100vh; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; padding: 40px 24px;
   }
-
-  .container {
-    max-width: 720px;
-    width: 100%;
-  }
-
-  .brand {
-    text-align: center;
-    margin-bottom: 48px;
-  }
-
-  .brand h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 36px;
-    font-weight: 400;
-    color: var(--uk-blue);
-    letter-spacing: -0.5px;
-    margin-bottom: 8px;
-  }
-
-  .brand .subtitle {
-    font-size: 15px;
-    color: var(--text-secondary);
-    font-weight: 300;
-    line-height: 1.6;
-  }
-
-  .stats-row {
-    display: flex;
-    justify-content: center;
-    gap: 32px;
-    margin: 24px 0 40px;
-  }
-
-  .stat-item {
-    text-align: center;
-  }
-
-  .stat-item .number {
-    font-family: 'DM Serif Display', serif;
-    font-size: 28px;
-    color: var(--uk-blue);
-  }
-
-  .stat-item .label {
-    font-size: 11px;
-    color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-top: 2px;
-  }
-
-  .viz-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    margin-bottom: 48px;
-  }
-
-  .viz-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 28px 24px;
-    text-decoration: none;
-    color: inherit;
-    transition: all 0.25s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .viz-card:hover {
-    border-color: var(--uk-blue);
-    box-shadow: 0 8px 30px rgba(30, 64, 175, 0.08);
-    transform: translateY(-2px);
-  }
-
-  .viz-icon {
-    width: 56px;
-    height: 56px;
-    border-radius: 12px;
-    background: var(--blue-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 16px;
-    font-size: 24px;
-  }
-
-  .viz-card h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 17px;
-    font-weight: 400;
-    margin-bottom: 8px;
-    color: var(--text-primary);
-  }
-
-  .viz-card p {
-    font-size: 12px;
-    color: var(--text-secondary);
-    line-height: 1.5;
-  }
-
-  .viz-card .arrow {
-    margin-top: 16px;
-    font-size: 13px;
-    color: var(--uk-blue);
-    font-weight: 500;
-    opacity: 0;
-    transition: opacity 0.2s;
-  }
-
+  .container { max-width: 720px; width: 100%; }
+  .brand { text-align: center; margin-bottom: 48px; }
+  .brand h1 { font-family: 'DM Serif Display', serif; font-size: 36px; font-weight: 400; color: var(--uk-blue); letter-spacing: -0.5px; margin-bottom: 8px; }
+  .brand .subtitle { font-size: 15px; color: var(--text-secondary); font-weight: 300; line-height: 1.6; }
+  .db-status { text-align: center; margin-bottom: 24px; font-size: 11px; color: var(--text-tertiary); display: flex; align-items: center; justify-content: center; gap: 6px; }
+  .db-dot { width: 6px; height: 6px; border-radius: 50%; background: #94a3b8; transition: background 0.3s; }
+  .db-dot.ok { background: #22c55e; } .db-dot.err { background: #ef4444; }
+  .stats-row { display: flex; justify-content: center; gap: 32px; margin: 24px 0 40px; }
+  .stat-item { text-align: center; }
+  .stat-item .number { font-family: 'DM Serif Display', serif; font-size: 28px; color: var(--uk-blue); transition: opacity 0.3s; }
+  .stat-item .number.ld { opacity: 0.3; }
+  .stat-item .label { font-size: 11px; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+  .viz-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 48px; }
+  .viz-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 28px 24px; text-decoration: none; color: inherit; transition: all 0.25s; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .viz-card:hover { border-color: var(--uk-blue); box-shadow: 0 8px 30px rgba(30,64,175,0.08); transform: translateY(-2px); }
+  .viz-icon { width: 56px; height: 56px; border-radius: 12px; background: var(--blue-light); display: flex; align-items: center; justify-content: center; margin-bottom: 16px; font-size: 24px; }
+  .viz-card h2 { font-family: 'DM Serif Display', serif; font-size: 17px; font-weight: 400; margin-bottom: 8px; }
+  .viz-card p { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+  .viz-card .arrow { margin-top: 16px; font-size: 13px; color: var(--uk-blue); font-weight: 500; opacity: 0; transition: opacity 0.2s; }
   .viz-card:hover .arrow { opacity: 1; }
-
-  footer {
-    text-align: center;
-    padding-top: 24px;
-    border-top: 1px solid var(--border);
-    width: 100%;
-    max-width: 720px;
-  }
-
-  footer p {
-    font-size: 12px;
-    color: var(--text-tertiary);
-    line-height: 1.8;
-  }
-
-  footer a {
-    color: var(--uk-blue);
-    text-decoration: none;
-  }
-  footer a:hover { text-decoration: underline; }
-
-  .methodology-note {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 20px 24px;
-    margin-bottom: 32px;
-    font-size: 13px;
-    color: var(--text-secondary);
-    line-height: 1.7;
-  }
-
-  .methodology-note strong {
-    color: var(--text-primary);
-    font-weight: 500;
-  }
-
-  @media (max-width: 640px) {
-    .viz-cards { grid-template-columns: 1fr; }
-    .stats-row { gap: 20px; }
-    .brand h1 { font-size: 28px; }
-  }
+  .note { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 32px; font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+  .note strong { color: var(--text-primary); font-weight: 500; }
+  footer { text-align: center; padding-top: 24px; border-top: 1px solid var(--border); width: 100%; max-width: 720px; }
+  footer p { font-size: 12px; color: var(--text-tertiary); line-height: 1.8; }
+  footer a { color: var(--uk-blue); text-decoration: none; }
+  @media (max-width: 640px) { .viz-cards { grid-template-columns: 1fr; } .stats-row { gap: 20px; } .brand h1 { font-size: 28px; } }
 </style>
 </head>
 <body>
-
 <div class="container">
   <div class="brand">
     <h1>Network Effects</h1>
     <p class="subtitle">Mapping how short films circulate through international festival networks</p>
   </div>
-
+  <div class="db-status"><div class="db-dot" id="dot"></div><span id="db-msg">Connecting to database…</span></div>
   <div class="stats-row">
-    <div class="stat-item">
-      <div class="number">749</div>
-      <div class="label">Films</div>
-    </div>
-    <div class="stat-item">
-      <div class="number">393</div>
-      <div class="label">Festivals</div>
-    </div>
-    <div class="stat-item">
-      <div class="number">4,445</div>
-      <div class="label">Screenings</div>
-    </div>
-    <div class="stat-item">
-      <div class="number">80</div>
-      <div class="label">Countries</div>
-    </div>
+    <div class="stat-item"><div class="number ld" id="s-films">—</div><div class="label">Films</div></div>
+    <div class="stat-item"><div class="number ld" id="s-fests">—</div><div class="label">Festivals</div></div>
+    <div class="stat-item"><div class="number ld" id="s-scrns">—</div><div class="label">Screenings</div></div>
+    <div class="stat-item"><div class="number ld" id="s-ctry">—</div><div class="label">Countries</div></div>
   </div>
-
   <div class="viz-cards">
-    <a href="network/" class="viz-card">
-      <div class="viz-icon">⬡</div>
-      <h2>Festival Network</h2>
-      <p>Force-directed graph showing how festivals connect through shared programming. Explore subcircuits and clustering patterns.</p>
-      <span class="arrow">Explore →</span>
-    </a>
-    <a href="timeline/" class="viz-card">
-      <div class="viz-icon">⏤</div>
-      <h2>Film Timelines</h2>
-      <p>Track individual films as they travel through festival circuits over time. See circulation duration and award patterns.</p>
-      <span class="arrow">Explore →</span>
-    </a>
-    <a href="geo/" class="viz-card">
-      <div class="viz-icon">◉</div>
-      <h2>Geographic Mobility</h2>
-      <p>Visualise where films are produced and screened, with mobility flow maps showing international circulation routes.</p>
-      <span class="arrow">Explore →</span>
-    </a>
+    <a href="network/" class="viz-card"><div class="viz-icon">⬡</div><h2>Festival Network</h2><p>Force-directed graph showing how festivals connect through shared programming. Explore subcircuits and clustering.</p><span class="arrow">Explore →</span></a>
+    <a href="timeline/" class="viz-card"><div class="viz-icon">⏤</div><h2>Film Timelines</h2><p>Track individual films as they travel through festival circuits over time. Circulation duration and award patterns.</p><span class="arrow">Explore →</span></a>
+    <a href="geo/" class="viz-card"><div class="viz-icon">◉</div><h2>Geographic Mobility</h2><p>Visualise where films are produced and screened, with mobility flow maps showing international circulation routes.</p><span class="arrow">Explore →</span></a>
   </div>
-
-  <div class="methodology-note">
-    <strong>About this tool:</strong> Built as part of the Network Effects research project examining film festival networks as talent development pathways. Data sourced from Encounters Film Festival (Bristol) via Miralot, spanning 1998–2026. Analysis follows the subcircuit methodology developed by Loist &amp; Samoilova (2023).
+  <div class="note">
+    <strong>About this tool:</strong> Built as part of the Network Effects research project examining film festival networks as talent development pathways. Data sourced via Encounters Film Festival (Bristol) and Miralot. Analysis follows the subcircuit methodology developed by Loist &amp; Samoilova (2023). Connected live to a PostgreSQL database — visualisations always reflect the latest data.
   </div>
-
-  <footer>
-    <p>
-      Network Effects Research Project<br>
-      <a href="https://www.bathspa.ac.uk" target="_blank">Bath Spa University</a> · School of Art, Film and Media<br>
-      Rich Warren · 2025–2026<br>
-      <br>
-      <em>Work in progress — feedback welcome</em>
-    </p>
-  </footer>
+  <footer><p>Network Effects Research Project<br><a href="https://www.bathspa.ac.uk" target="_blank">Bath Spa University</a> · School of Art, Film and Media<br>Rich Warren · 2025–2026<br><br><em>Work in progress — feedback welcome</em></p></footer>
 </div>
-
+<script src="config.js"></script>
+<script>
+(async function() {
+  const dot = document.getElementById('dot'), msg = document.getElementById('db-msg');
+  try {
+    const [f, fe, s, c] = await Promise.all([
+      supabaseQuery('films','select=film_id&limit=1'),
+      supabaseQuery('festivals','select=festival_id&limit=1'),
+      supabaseQuery('screenings','select=screening_id&limit=1'),
+      supabaseQuery('countries','select=country_id&limit=1'),
+    ]);
+    document.getElementById('s-films').textContent = f.totalCount.toLocaleString();
+    document.getElementById('s-fests').textContent = fe.totalCount.toLocaleString();
+    document.getElementById('s-scrns').textContent = s.totalCount.toLocaleString();
+    document.getElementById('s-ctry').textContent = c.totalCount.toLocaleString();
+    document.querySelectorAll('.number').forEach(el => el.classList.remove('ld'));
+    dot.classList.add('ok'); msg.textContent = 'Live database connected';
+  } catch(e) {
+    dot.classList.add('err'); msg.textContent = 'Database unavailable';
+    console.error(e);
+  }
+})();
+</script>
 </body>
 </html>
