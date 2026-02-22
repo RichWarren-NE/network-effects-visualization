@@ -13,6 +13,7 @@
     --text-primary: #1a1f2e; --text-secondary: #5a6275; --text-tertiary: #8b93a5;
     --uk-blue: #1e40af; --blue-1: #dbeafe; --blue-2: #93c5fd; --blue-3: #3b82f6; --blue-4: #1e40af;
     --land-default: #f0f2f5; --land-stroke: #dde1e8;
+    --flow-color: rgba(30,64,175,0.3); --flow-hover: rgba(30,64,175,0.7);
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text-primary); height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
@@ -54,7 +55,7 @@
   }
   .top-countries h3 { font-family: 'DM Serif Display', serif; font-size: 13px; color: var(--uk-blue); margin-bottom: 8px; }
   .country-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; font-size: 11px; }
-  .country-bar .name { width: 130px; color: var(--text-secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .country-bar .name { width: 140px; color: var(--text-secondary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .country-bar .bar { flex: 1; height: 6px; background: var(--blue-1); border-radius: 3px; overflow: hidden; }
   .country-bar .bar-fill { height: 100%; background: var(--uk-blue); border-radius: 3px; transition: width 0.4s; }
   .country-bar .value { font-weight: 600; color: var(--text-primary); min-width: 28px; text-align: right; }
@@ -78,8 +79,9 @@
   <div class="mode-buttons">
     <button class="mode-btn active" data-mode="production">Production</button>
     <button class="mode-btn" data-mode="screening">Screening</button>
+    <button class="mode-btn" data-mode="flows">Mobility Flows</button>
   </div>
-  <div class="legend-bar">
+  <div class="legend-bar" id="legend-bar">
     <span>Low</span>
     <div class="swatch" style="background:var(--blue-1)"></div>
     <div class="swatch" style="background:var(--blue-2)"></div>
@@ -101,48 +103,39 @@
   const loadMsg = document.getElementById('load-msg');
   const statsPanel = document.getElementById('stats-panel');
   const topCountriesEl = document.getElementById('top-countries');
+  const legendBar = document.getElementById('legend-bar');
 
-  // Name aliases for matching TopoJSON country names to our data
   const NAME_MAP = {
-    'United States of America': 'United States',
-    'Czechia': 'Czechia',
-    'Czech Republic': 'Czechia',
-    'Republic of Korea': 'South Korea',
-    'Korea': 'South Korea',
-    'Russian Federation': 'Russia',
-    'Dem. Rep. Congo': 'Democratic Republic of the Congo',
-    'Bosnia and Herz.': 'Bosnia and Herzegovina',
-    'Dominican Rep.': 'Dominican Republic',
-    'Central African Rep.': 'Central African Republic',
-    'S. Sudan': 'South Sudan',
-    'Côte d\'Ivoire': 'Ivory Coast',
-    'eSwatini': 'Eswatini',
-    'Republic of the Congo': 'Republic of the Congo',
+    'United States of America': 'United States', 'Czechia': 'Czechia', 'Czech Republic': 'Czechia',
+    'Republic of Korea': 'South Korea', 'Korea': 'South Korea', 'Russian Federation': 'Russia',
+    'Dem. Rep. Congo': 'Democratic Republic of the Congo', 'Bosnia and Herz.': 'Bosnia and Herzegovina',
+    'Dominican Rep.': 'Dominican Republic', 'Central African Rep.': 'Central African Republic',
+    'S. Sudan': 'South Sudan', "Côte d'Ivoire": 'Ivory Coast', 'eSwatini': 'Eswatini',
     'Kosovo': 'Republic of Kosovo',
   };
 
-  let geoData, world;
+  let geoData, flowData, world;
   try {
-    loadMsg.textContent = 'Loading geographic mobility data…';
-    const [geoRes, worldRes] = await Promise.all([
+    loadMsg.textContent = 'Loading geographic data…';
+    const [geoRes, flowRes, worldRes] = await Promise.all([
       supabaseQuery('vw_geographic_mobility', 'select=*&limit=200'),
+      supabaseQuery('vw_mobility_flows', 'select=*&limit=500'),
       fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(r => r.json()),
     ]);
     geoData = geoRes.data;
+    flowData = flowRes.data;
     world = worldRes;
-    loadMsg.textContent = `Loaded ${geoData.length} countries`;
+    loadMsg.textContent = `Loaded ${geoData.length} countries, ${flowData.length} mobility routes`;
   } catch(e) {
     loadMsg.textContent = 'Error loading data.'; console.error(e); return;
   }
 
-  // Build lookup by country name
   const countryLookup = {};
   geoData.forEach(c => { countryLookup[c.production_country] = c; });
 
   function matchName(topoName) {
     if (countryLookup[topoName]) return topoName;
     if (NAME_MAP[topoName] && countryLookup[NAME_MAP[topoName]]) return NAME_MAP[topoName];
-    // Fuzzy
     for (const name of Object.keys(countryLookup)) {
       if (topoName.includes(name) || name.includes(topoName)) return name;
     }
@@ -159,20 +152,30 @@
   const zoom = d3.zoom().scaleExtent([0.5, 12]).on('zoom', e => g.attr('transform', e.transform));
   svg.call(zoom);
 
+  // Precompute centroids for flow arcs
+  const centroids = {};
+  countries.features.forEach(f => {
+    const c = path.centroid(f);
+    if (c[0] && c[1] && !isNaN(c[0])) {
+      const matched = matchName(f.properties.name);
+      if (matched) centroids[matched] = c;
+    }
+  });
+
   let currentMode = 'production';
 
   function render() {
     g.selectAll('*').remove();
-    const sorted = [...geoData].sort((a, b) => b.film_count - a.film_count);
 
+    // Draw base map
     g.append('g').selectAll('path').data(countries.features).join('path')
       .attr('d', path).attr('stroke', 'var(--land-stroke)').attr('stroke-width', 0.5)
       .each(function(d) {
-        const matched = matchName(d.properties.name);
-        d._matched = matched;
-        d._data = matched ? countryLookup[matched] : null;
+        d._matched = matchName(d.properties.name);
+        d._data = d._matched ? countryLookup[d._matched] : null;
       })
       .attr('fill', d => {
+        if (currentMode === 'flows') return d._data ? '#eef2ff' : 'var(--land-default)';
         if (!d._data) return 'var(--land-default)';
         const v = currentMode === 'production' ? d._data.film_count : d._data.total_screenings;
         if (v <= 5) return '#dbeafe';
@@ -185,14 +188,25 @@
         d3.select(this).attr('stroke', 'var(--uk-blue)').attr('stroke-width', 2);
         if (d._data) {
           const c = d._data;
-          tooltip.innerHTML = `<h3>${c.production_country}</h3>
-            <div class="stat"><span>Films produced</span><strong>${c.film_count}</strong></div>
-            <div class="stat"><span>Total screenings</span><strong>${c.total_screenings}</strong></div>
-            <div class="stat"><span>Festivals reached</span><strong>${c.festivals_reached}</strong></div>
-            <div class="stat"><span>Avg screenings/film</span><strong>${c.avg_screenings_per_film}</strong></div>
-            <div class="stat"><span>Awards won</span><strong>${c.total_awards_won}</strong></div>
-            <div class="stat"><span>Active years</span><strong>${c.first_screening_year}–${c.last_screening_year}</strong></div>
-            ${c.top_5_festivals ? `<div class="top-fests"><strong>Top festivals:</strong><br>${c.top_5_festivals.slice(0,3).join('<br>')}</div>` : ''}`;
+          if (currentMode === 'flows') {
+            // Show flows to/from this country
+            const outFlows = flowData.filter(f => f.production_country === d._matched).slice(0, 3);
+            const inFlows = flowData.filter(f => f.screening_country === d._matched).slice(0, 3);
+            tooltip.innerHTML = `<h3>${c.production_country}</h3>
+              <div class="stat"><span>Films produced</span><strong>${c.film_count}</strong></div>
+              <div class="stat"><span>Total screenings</span><strong>${c.total_screenings}</strong></div>
+              ${outFlows.length ? `<div class="top-fests"><strong>Films travel to:</strong><br>${outFlows.map(f => `${f.screening_country} (${f.film_count} films)`).join('<br>')}</div>` : ''}
+              ${inFlows.length ? `<div class="top-fests"><strong>Films arrive from:</strong><br>${inFlows.map(f => `${f.production_country} (${f.film_count} films)`).join('<br>')}</div>` : ''}`;
+          } else {
+            tooltip.innerHTML = `<h3>${c.production_country}</h3>
+              <div class="stat"><span>Films produced</span><strong>${c.film_count}</strong></div>
+              <div class="stat"><span>Total screenings</span><strong>${c.total_screenings}</strong></div>
+              <div class="stat"><span>Festivals reached</span><strong>${c.festivals_reached}</strong></div>
+              <div class="stat"><span>Avg screenings/film</span><strong>${c.avg_screenings_per_film}</strong></div>
+              <div class="stat"><span>Awards won</span><strong>${c.total_awards_won}</strong></div>
+              <div class="stat"><span>Active years</span><strong>${c.first_screening_year}–${c.last_screening_year}</strong></div>
+              ${c.top_5_festivals ? `<div class="top-fests"><strong>Top festivals:</strong><br>${c.top_5_festivals.slice(0,3).join('<br>')}</div>` : ''}`;
+          }
           tooltip.classList.add('active');
         }
       })
@@ -204,24 +218,88 @@
         tooltip.classList.remove('active');
       });
 
-    // Stats panel
+    // Draw flow arcs
+    if (currentMode === 'flows') {
+      const topFlows = flowData.slice(0, 60);
+      const maxFlow = topFlows.length ? topFlows[0].film_count : 1;
+
+      const flowG = g.append('g');
+      topFlows.forEach(flow => {
+        const src = centroids[flow.production_country];
+        const tgt = centroids[flow.screening_country];
+        if (!src || !tgt) return;
+
+        const dx = tgt[0] - src[0], dy = tgt[1] - src[1];
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const midX = (src[0] + tgt[0]) / 2 - dy * 0.2;
+        const midY = (src[1] + tgt[1]) / 2 + dx * 0.2;
+
+        flowG.append('path')
+          .attr('d', `M ${src[0]} ${src[1]} Q ${midX} ${midY} ${tgt[0]} ${tgt[1]}`)
+          .attr('fill', 'none')
+          .attr('stroke', 'var(--flow-color)')
+          .attr('stroke-width', Math.max(1, (flow.film_count / maxFlow) * 5))
+          .attr('opacity', 0.7)
+          .style('cursor', 'pointer')
+          .on('mouseenter', function(ev) {
+            d3.select(this).attr('stroke', 'var(--flow-hover)').attr('opacity', 1);
+            tooltip.innerHTML = `<h3>${flow.production_country} → ${flow.screening_country}</h3>
+              <div class="stat"><span>Films travelling</span><strong>${flow.film_count}</strong></div>
+              <div class="stat"><span>Screenings</span><strong>${flow.screening_count}</strong></div>`;
+            tooltip.classList.add('active');
+          })
+          .on('mousemove', ev => {
+            tooltip.style.left = (ev.clientX + 14) + 'px'; tooltip.style.top = (ev.clientY - 10) + 'px';
+          })
+          .on('mouseleave', function() {
+            d3.select(this).attr('stroke', 'var(--flow-color)').attr('opacity', 0.7);
+            tooltip.classList.remove('active');
+          });
+      });
+    }
+
+    updatePanels();
+  }
+
+  function updatePanels() {
     const totalFilms = geoData.reduce((s, c) => s + c.film_count, 0);
     const totalScreenings = geoData.reduce((s, c) => s + c.total_screenings, 0);
     const totalAwards = geoData.reduce((s, c) => s + c.total_awards_won, 0);
-    statsPanel.innerHTML = `<h3>${currentMode === 'production' ? 'Film Production' : 'Festival Screenings'}</h3>
-      <div class="stat-row"><span>Countries</span><strong>${geoData.length}</strong></div>
-      <div class="stat-row"><span>Total films</span><strong>${totalFilms.toLocaleString()}</strong></div>
-      <div class="stat-row"><span>Total screenings</span><strong>${totalScreenings.toLocaleString()}</strong></div>
-      <div class="stat-row"><span>Awards won</span><strong>${totalAwards.toLocaleString()}</strong></div>`;
 
-    // Top countries bar chart
-    const top10 = sorted.slice(0, 10);
-    const maxVal = currentMode === 'production' ? top10[0].film_count : top10[0].total_screenings;
-    topCountriesEl.innerHTML = `<h3>Top ${currentMode === 'production' ? 'Production' : 'Screening'} Countries</h3>` +
-      top10.map(c => {
-        const v = currentMode === 'production' ? c.film_count : c.total_screenings;
-        return `<div class="country-bar"><span class="name">${c.production_country}</span><div class="bar"><div class="bar-fill" style="width:${(v/maxVal)*100}%"></div></div><span class="value">${v}</span></div>`;
-      }).join('');
+    if (currentMode === 'flows') {
+      legendBar.innerHTML = '<span style="font-size:10px;color:var(--text-tertiary)">Line thickness = number of films travelling between countries</span>';
+      statsPanel.innerHTML = `<h3>Mobility Flows</h3>
+        <div class="stat-row"><span>Production countries</span><strong>${geoData.length}</strong></div>
+        <div class="stat-row"><span>Mobility routes</span><strong>${flowData.length}</strong></div>
+        <div class="stat-row"><span>Total screenings</span><strong>${totalScreenings.toLocaleString()}</strong></div>
+        <div class="stat-row"><span>Awards won</span><strong>${totalAwards.toLocaleString()}</strong></div>`;
+
+      const topFlows = flowData.slice(0, 8);
+      const fMax = topFlows.length ? topFlows[0].film_count : 1;
+      topCountriesEl.innerHTML = `<h3>Top Mobility Routes</h3>` +
+        topFlows.map(f => `<div class="country-bar"><span class="name">${f.production_country} → ${f.screening_country}</span><div class="bar"><div class="bar-fill" style="width:${(f.film_count/fMax)*100}%"></div></div><span class="value">${f.film_count}</span></div>`).join('');
+    } else {
+      legendBar.innerHTML = '<span>Low</span><div class="swatch" style="background:var(--blue-1)"></div><div class="swatch" style="background:var(--blue-2)"></div><div class="swatch" style="background:var(--blue-3)"></div><div class="swatch" style="background:var(--blue-4)"></div><span>High</span>';
+      const label = currentMode === 'production' ? 'Film Production' : 'Festival Screenings';
+      statsPanel.innerHTML = `<h3>${label}</h3>
+        <div class="stat-row"><span>Countries</span><strong>${geoData.length}</strong></div>
+        <div class="stat-row"><span>Total films</span><strong>${totalFilms.toLocaleString()}</strong></div>
+        <div class="stat-row"><span>Total screenings</span><strong>${totalScreenings.toLocaleString()}</strong></div>
+        <div class="stat-row"><span>Awards won</span><strong>${totalAwards.toLocaleString()}</strong></div>`;
+
+      const sorted = [...geoData].sort((a, b) => {
+        const av = currentMode === 'production' ? a.film_count : a.total_screenings;
+        const bv = currentMode === 'production' ? b.film_count : b.total_screenings;
+        return bv - av;
+      });
+      const top10 = sorted.slice(0, 10);
+      const maxVal = currentMode === 'production' ? top10[0].film_count : top10[0].total_screenings;
+      topCountriesEl.innerHTML = `<h3>Top ${currentMode === 'production' ? 'Production' : 'Screening'} Countries</h3>` +
+        top10.map(c => {
+          const v = currentMode === 'production' ? c.film_count : c.total_screenings;
+          return `<div class="country-bar"><span class="name">${c.production_country}</span><div class="bar"><div class="bar-fill" style="width:${(v/maxVal)*100}%"></div></div><span class="value">${v}</span></div>`;
+        }).join('');
+    }
   }
 
   document.querySelectorAll('.mode-btn').forEach(btn => {
