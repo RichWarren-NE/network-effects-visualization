@@ -10,14 +10,13 @@
   :root {
     --bg: #f8f9fb; --surface: #ffffff; --border: #e2e6ec;
     --text-primary: #1a1f2e; --text-secondary: #5a6275; --text-tertiary: #8b93a5;
-    --uk-blue: #1e40af; --eu-blue: #60a5fa; --other-grey: #94a3b8; --highlight: #f59e0b;
+    --uk-blue: #1e40af; --eu-blue: #60a5fa; --highlight: #f59e0b;
     --edge-default: rgba(148,163,184,0.15); --edge-hover: rgba(30,64,175,0.5);
     --focus-color: #dc2626;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text-primary); overflow: hidden; height: 100vh; display: flex; flex-direction: column; }
 
-  /* HEADER */
   header {
     position: relative; z-index: 100;
     background: rgba(248,249,251,0.92); backdrop-filter: blur(12px);
@@ -37,26 +36,51 @@
   .back-link { font-size: 12px; color: var(--text-tertiary); text-decoration: none; white-space: nowrap; }
   .back-link:hover { color: var(--uk-blue); }
 
-  /* MAIN LAYOUT */
   .main-area { flex: 1; display: flex; overflow: hidden; }
   #graph-container { flex: 1; position: relative; }
   #graph-container svg { width: 100%; height: 100%; cursor: grab; }
   #graph-container svg:active { cursor: grabbing; }
 
-  /* FILTERS PANEL */
+  /* FILTERS */
   .filters-panel {
     width: 300px; flex-shrink: 0; background: var(--surface);
     border-left: 1px solid var(--border); overflow-y: auto;
     display: flex; flex-direction: column;
   }
-  .fp-header {
-    padding: 16px 18px 12px; border-bottom: 1px solid var(--border);
-  }
+  .fp-header { padding: 16px 18px 12px; border-bottom: 1px solid var(--border); }
   .fp-header h2 { font-family: 'DM Serif Display', serif; font-size: 15px; font-weight: 400; color: var(--uk-blue); }
   .fp-section { padding: 14px 18px; border-bottom: 1px solid var(--border); }
   .fp-section-title { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--text-tertiary); margin-bottom: 10px; }
+  .slider-row { display: flex; align-items: center; gap: 8px; }
+  .slider-row input[type="range"] { flex: 1; accent-color: var(--uk-blue); }
+  .slider-row .rv { font-size: 12px; font-weight: 600; color: var(--text-primary); min-width: 20px; text-align: center; }
 
-  /* FOCUS MODE TOGGLE */
+  /* DURATION */
+  .dur-presets { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .dur-preset {
+    padding: 4px 10px; font-size: 10px; font-family: 'DM Sans', sans-serif; font-weight: 500;
+    border: 1px solid var(--border); border-radius: 5px; background: var(--surface);
+    color: var(--text-secondary); cursor: pointer; transition: all 0.15s;
+  }
+  .dur-preset:hover { border-color: var(--uk-blue); color: var(--uk-blue); }
+  .dur-preset.active { background: var(--uk-blue); color: white; border-color: var(--uk-blue); }
+  .duration-row { display: flex; align-items: center; gap: 8px; }
+  .duration-input {
+    width: 54px; padding: 5px 6px; border: 1px solid var(--border); border-radius: 6px;
+    font-family: 'DM Sans', sans-serif; font-size: 12px; text-align: center;
+    outline: none; background: var(--surface);
+  }
+  .duration-input:focus { border-color: var(--uk-blue); }
+  .duration-label { font-size: 11px; color: var(--text-tertiary); }
+  .duration-sep { font-size: 12px; color: var(--text-tertiary); }
+  .duration-info {
+    margin-top: 8px; font-size: 10px; color: var(--text-tertiary); line-height: 1.5;
+    padding: 6px 8px; background: var(--bg); border-radius: 4px;
+  }
+  .duration-info strong { color: var(--text-secondary); font-weight: 600; }
+  .duration-info.computing { opacity: 0.5; }
+
+  /* FOCUS */
   .mode-toggle { display: flex; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; margin-bottom: 12px; }
   .mode-toggle button {
     flex: 1; padding: 6px 8px; font-size: 11px; font-family: 'DM Sans', sans-serif;
@@ -65,48 +89,11 @@
   }
   .mode-toggle button:last-child { border-right: none; }
   .mode-toggle button.active { background: var(--uk-blue); color: white; }
-
-  /* SLIDER */
-  .slider-row { display: flex; align-items: center; gap: 8px; margin-top: 4px; }
-  .slider-row input[type="range"] { flex: 1; accent-color: var(--uk-blue); }
-  .slider-row .rv { font-size: 12px; font-weight: 600; color: var(--text-primary); min-width: 20px; text-align: center; }
-
-  /* FESTIVAL TREE */
-  .festival-tree { flex: 1; overflow-y: auto; padding: 0 0 16px; }
-  .tree-continent {
-    border-bottom: 1px solid var(--border);
+  .focus-label {
+    display: none; font-size: 11px; color: var(--uk-blue); font-weight: 500;
+    padding: 6px 10px; background: #dbeafe; border-radius: 6px; margin-bottom: 8px; line-height: 1.4;
   }
-  .tree-continent-header {
-    padding: 8px 18px; font-size: 11px; font-weight: 600; color: var(--text-primary);
-    cursor: pointer; display: flex; align-items: center; gap: 6px;
-    transition: background 0.15s; user-select: none;
-  }
-  .tree-continent-header:hover { background: var(--bg); }
-  .tree-continent-header .arrow { font-size: 9px; color: var(--text-tertiary); transition: transform 0.2s; width: 12px; }
-  .tree-continent-header .arrow.open { transform: rotate(90deg); }
-  .tree-continent-header .count { font-weight: 400; color: var(--text-tertiary); margin-left: auto; font-size: 10px; }
-  .tree-country-group { display: none; }
-  .tree-country-group.open { display: block; }
-  .tree-country-header {
-    padding: 5px 18px 5px 32px; font-size: 11px; font-weight: 500; color: var(--text-secondary);
-    cursor: pointer; display: flex; align-items: center; gap: 6px;
-    transition: background 0.15s; user-select: none;
-  }
-  .tree-country-header:hover { background: var(--bg); }
-  .tree-country-header .arrow { font-size: 8px; color: var(--text-tertiary); transition: transform 0.2s; width: 10px; }
-  .tree-country-header .arrow.open { transform: rotate(90deg); }
-  .tree-country-header .count { font-weight: 400; color: var(--text-tertiary); margin-left: auto; font-size: 10px; }
-  .tree-festivals { display: none; }
-  .tree-festivals.open { display: block; }
-  .tree-festival-item {
-    padding: 4px 18px 4px 48px; font-size: 11px; color: var(--text-secondary);
-    cursor: pointer; transition: all 0.15s; white-space: nowrap;
-    overflow: hidden; text-overflow: ellipsis;
-  }
-  .tree-festival-item:hover { background: var(--bg); color: var(--text-primary); }
-  .tree-festival-item.selected { background: var(--blue-1); color: var(--uk-blue); font-weight: 600; border-left: 3px solid var(--uk-blue); padding-left: 45px; }
-
-  /* CLEAR BUTTON */
+  .focus-label.visible { display: block; }
   .clear-btn {
     display: none; padding: 6px 12px; font-size: 11px; font-family: 'DM Sans', sans-serif;
     font-weight: 500; border: 1px solid var(--border); border-radius: 6px;
@@ -115,12 +102,34 @@
   }
   .clear-btn:hover { border-color: var(--uk-blue); color: var(--uk-blue); }
   .clear-btn.visible { display: block; }
-  .focus-label {
-    display: none; font-size: 11px; color: var(--uk-blue); font-weight: 500;
-    padding: 6px 10px; background: var(--blue-1); border-radius: 6px;
-    margin-bottom: 8px; line-height: 1.4;
+
+  /* TREE */
+  .festival-tree { flex: 1; overflow-y: auto; padding: 0 0 16px; }
+  .tree-continent { border-bottom: 1px solid var(--border); }
+  .tree-continent-header {
+    padding: 8px 18px; font-size: 11px; font-weight: 600; color: var(--text-primary);
+    cursor: pointer; display: flex; align-items: center; gap: 6px; transition: background 0.15s; user-select: none;
   }
-  .focus-label.visible { display: block; }
+  .tree-continent-header:hover { background: var(--bg); }
+  .tree-continent-header .arrow { font-size: 9px; color: var(--text-tertiary); transition: transform 0.2s; width: 12px; }
+  .tree-continent-header .arrow.open { transform: rotate(90deg); }
+  .tree-continent-header .count { font-weight: 400; color: var(--text-tertiary); margin-left: auto; font-size: 10px; }
+  .tree-country-group { display: none; } .tree-country-group.open { display: block; }
+  .tree-country-header {
+    padding: 5px 18px 5px 32px; font-size: 11px; font-weight: 500; color: var(--text-secondary);
+    cursor: pointer; display: flex; align-items: center; gap: 6px; transition: background 0.15s; user-select: none;
+  }
+  .tree-country-header:hover { background: var(--bg); }
+  .tree-country-header .arrow { font-size: 8px; color: var(--text-tertiary); transition: transform 0.2s; width: 10px; }
+  .tree-country-header .arrow.open { transform: rotate(90deg); }
+  .tree-country-header .count { font-weight: 400; color: var(--text-tertiary); margin-left: auto; font-size: 10px; }
+  .tree-festivals { display: none; } .tree-festivals.open { display: block; }
+  .tree-festival-item {
+    padding: 4px 18px 4px 48px; font-size: 11px; color: var(--text-secondary);
+    cursor: pointer; transition: all 0.15s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .tree-festival-item:hover { background: var(--bg); color: var(--text-primary); }
+  .tree-festival-item.selected { background: #dbeafe; color: var(--uk-blue); font-weight: 600; border-left: 3px solid var(--uk-blue); padding-left: 45px; }
 
   /* TOOLTIP */
   .tooltip {
@@ -135,7 +144,6 @@
   .tooltip .stat strong { color: var(--text-primary); font-weight: 500; }
   .tooltip .shared-list { margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--border); font-size: 11px; color: var(--text-tertiary); line-height: 1.5; }
 
-  /* INFO PANEL */
   .info-panel {
     position: fixed; bottom: 20px; left: 20px;
     background: rgba(255,255,255,0.92); backdrop-filter: blur(12px);
@@ -144,7 +152,6 @@
   }
   .info-panel strong { color: var(--text-secondary); font-weight: 500; }
 
-  /* LOADING */
   .loading-screen {
     position: fixed; inset: 0; display: flex; flex-direction: column;
     align-items: center; justify-content: center; background: var(--bg); z-index: 500; transition: opacity 0.5s;
@@ -181,6 +188,7 @@
   <div class="filters-panel">
     <div class="fp-header"><h2>Filters</h2></div>
 
+    <!-- MIN SHARED -->
     <div class="fp-section">
       <div class="fp-section-title">Min shared films</div>
       <div class="slider-row">
@@ -189,6 +197,30 @@
       </div>
     </div>
 
+    <!-- DURATION -->
+    <div class="fp-section">
+      <div class="fp-section-title">Film duration (minutes)</div>
+      <div class="dur-presets" id="dur-presets">
+        <button class="dur-preset active" data-min="0" data-max="45">All</button>
+        <button class="dur-preset" data-min="1" data-max="5">Micro (1–5)</button>
+        <button class="dur-preset" data-min="5" data-max="15">Standard (5–15)</button>
+        <button class="dur-preset" data-min="15" data-max="30">Medium (15–30)</button>
+        <button class="dur-preset" data-min="30" data-max="45">Long (30–45)</button>
+      </div>
+      <div class="duration-row">
+        <span class="duration-label">Min</span>
+        <input type="number" class="duration-input" id="dur-min" min="0" max="45" value="0" step="1">
+        <span class="duration-sep">—</span>
+        <span class="duration-label">Max</span>
+        <input type="number" class="duration-input" id="dur-max" min="0" max="45" value="45" step="1">
+        <span class="duration-label">min</span>
+      </div>
+      <div class="duration-info" id="dur-info">
+        Computing…
+      </div>
+    </div>
+
+    <!-- FOCUS -->
     <div class="fp-section">
       <div class="fp-section-title">Focus festival</div>
       <div class="focus-label" id="focus-label"></div>
@@ -199,10 +231,10 @@
       <button class="clear-btn" id="clear-focus">✕ Clear focus</button>
     </div>
 
+    <!-- TREE -->
     <div class="fp-section" style="padding-bottom:0;">
       <div class="fp-section-title">Select festival</div>
     </div>
-
     <div class="festival-tree" id="festival-tree"></div>
   </div>
 </div>
@@ -222,10 +254,12 @@
   const minValEl = document.getElementById('min-val');
   const searchInput = document.getElementById('search');
   const treeEl = document.getElementById('festival-tree');
-  const focusLabel = document.getElementById('focus-label');
+  const focusLabelEl = document.getElementById('focus-label');
   const clearBtn = document.getElementById('clear-focus');
+  const durMinInput = document.getElementById('dur-min');
+  const durMaxInput = document.getElementById('dur-max');
+  const durInfoEl = document.getElementById('dur-info');
 
-  // ── Continent mapping ──
   const CONTINENT_MAP = {
     'AL':'Europe','AT':'Europe','BA':'Europe','BE':'Europe','CH':'Europe','CZ':'Europe','DE':'Europe',
     'DK':'Europe','EE':'Europe','ES':'Europe','FI':'Europe','FR':'Europe','GB':'Europe','GR':'Europe',
@@ -239,183 +273,203 @@
     'EG':'Africa','ZA':'Africa',
   };
   const CONTINENT_ORDER = ['Europe','North America','South America','Asia','Africa','Oceania','Other / Unmapped'];
-
   const UK_KEYWORDS = ['British','London','Edinburgh','Glasgow','Bristol','Encounters','BAFTA','Sheffield','Leeds','Manchester','Cardiff','Belfast','Cambridge','Bath','LSFF','Iris Prize','Aesthetica','Raindance','BFI'];
   function isUK(name) { return UK_KEYWORDS.some(k => name.toLowerCase().includes(k.toLowerCase())); }
 
-  // ── Load data ──
-  let edges, festivals, festivalList;
-  try {
-    loadMsg.textContent = 'Loading festival statistics…';
-    const festRes = await supabaseQuery('vw_festival_statistics', 'select=festival_name,event_type,first_year,last_year,unique_film_count&limit=1000');
-    festivals = festRes.data;
-
-    loadMsg.textContent = 'Loading festival locations…';
-    const locRes = await supabaseQuery('festivals', 'select=festival_name,country_name,country_code&limit=500');
-    festivalList = locRes.data;
-
-    loadMsg.textContent = 'Loading network edges…';
-    const edgeRes = await supabaseQuery('vw_network_edges', 'select=festival_a,festival_b,festival_a_type,festival_b_type,shared_film_count,shared_film_titles&limit=5000');
-    edges = edgeRes.data;
-
-    loadMsg.textContent = 'Building network…';
-  } catch(e) {
-    loadMsg.textContent = 'Error loading data. Check console.';
-    console.error(e);
-    return;
-  }
-
-  // ── Build lookups ──
-  const festCountryMap = {};
-  festivalList.forEach(f => {
-    festCountryMap[f.festival_name] = { country: f.country_name, code: f.country_code };
-  });
-
-  const nodeMap = {};
-  festivals.forEach(f => {
-    const loc = festCountryMap[f.festival_name] || {};
-    nodeMap[f.festival_name] = {
-      id: f.festival_name, name: f.festival_name,
-      film_count: f.unique_film_count, event_type: f.event_type,
-      first_year: f.first_year, last_year: f.last_year,
-      is_uk: isUK(f.festival_name),
-      country: loc.country, country_code: loc.code,
-      continent: loc.code ? (CONTINENT_MAP[loc.code] || 'Other / Unmapped') : 'Other / Unmapped',
-    };
-  });
-
-  // ── Build hierarchy for tree ──
-  const hierarchy = {};
-  CONTINENT_ORDER.forEach(c => { hierarchy[c] = {}; });
-
-  Object.values(nodeMap).forEach(f => {
-    const cont = f.continent || 'Other / Unmapped';
-    const country = f.country || 'Unmapped';
-    if (!hierarchy[cont]) hierarchy[cont] = {};
-    if (!hierarchy[cont][country]) hierarchy[cont][country] = [];
-    hierarchy[cont][country].push(f.name);
-  });
-
-  // Sort countries and festivals within each
-  CONTINENT_ORDER.forEach(cont => {
-    if (!hierarchy[cont]) return;
-    const countries = Object.keys(hierarchy[cont]).sort();
-    const sorted = {};
-    countries.forEach(c => { sorted[c] = hierarchy[cont][c].sort(); });
-    hierarchy[cont] = sorted;
-  });
-
-  // ── Render tree ──
-  function buildTree() {
-    treeEl.innerHTML = '';
-    CONTINENT_ORDER.forEach(cont => {
-      const countries = hierarchy[cont];
-      if (!countries || Object.keys(countries).length === 0) return;
-      const totalFests = Object.values(countries).reduce((s, arr) => s + arr.length, 0);
-
-      const contDiv = document.createElement('div');
-      contDiv.className = 'tree-continent';
-
-      const contHeader = document.createElement('div');
-      contHeader.className = 'tree-continent-header';
-      contHeader.innerHTML = `<span class="arrow">▶</span>${cont}<span class="count">${totalFests}</span>`;
-      contDiv.appendChild(contHeader);
-
-      const countryGroup = document.createElement('div');
-      countryGroup.className = 'tree-country-group';
-
-      Object.entries(countries).forEach(([country, fests]) => {
-        const countryHeader = document.createElement('div');
-        countryHeader.className = 'tree-country-header';
-        countryHeader.innerHTML = `<span class="arrow">▶</span>${country}<span class="count">${fests.length}</span>`;
-
-        const festsDiv = document.createElement('div');
-        festsDiv.className = 'tree-festivals';
-
-        fests.forEach(name => {
-          const item = document.createElement('div');
-          item.className = 'tree-festival-item';
-          item.textContent = name;
-          item.title = name;
-          item.dataset.festival = name;
-          item.onclick = () => selectFocusFestival(name);
-          festsDiv.appendChild(item);
-        });
-
-        countryHeader.onclick = (e) => {
-          e.stopPropagation();
-          const arrow = countryHeader.querySelector('.arrow');
-          const isOpen = festsDiv.classList.toggle('open');
-          arrow.classList.toggle('open', isOpen);
-        };
-
-        countryGroup.appendChild(countryHeader);
-        countryGroup.appendChild(festsDiv);
-      });
-
-      contHeader.onclick = () => {
-        const arrow = contHeader.querySelector('.arrow');
-        const isOpen = countryGroup.classList.toggle('open');
-        arrow.classList.toggle('open', isOpen);
-      };
-
-      contDiv.appendChild(countryGroup);
-      treeEl.appendChild(contDiv);
+  // ── RPC helper ──
+  async function rpc(fnName, params = {}) {
+    const url = `${SUPABASE_URL}/rest/v1/rpc/${fnName}`;
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(params),
     });
+    if (!res.ok) throw new Error(`RPC ${fnName} failed: ${res.status}`);
+    return res.json();
   }
-  buildTree();
 
   // ── State ──
   let minShared = 5;
   let searchTerm = '';
   let focusFestival = null;
-  let focusMode = 'ego'; // 'ego' or 'highlight'
+  let focusMode = 'ego';
   let currentSim = null;
+  let durMin = 0;
+  let durMax = 45;
+  let cachedEdges = null;
+  let cachedNodes = null;
+  let isLoading = false;
 
-  // ── Focus festival selection ──
-  function selectFocusFestival(name) {
-    if (focusFestival === name) {
-      clearFocus();
-      return;
+  // ── Load initial data ──
+  async function loadNetworkData() {
+    isLoading = true;
+    durInfoEl.classList.add('computing');
+    durInfoEl.innerHTML = 'Computing edges on server…';
+
+    try {
+      const [edgeData, nodeData] = await Promise.all([
+        rpc('compute_network_edges', { dur_min: durMin, dur_max: durMax }),
+        rpc('compute_festival_nodes', { dur_min: durMin, dur_max: durMax }),
+      ]);
+      cachedEdges = edgeData;
+      cachedNodes = {};
+      let totalInRange = 0;
+      nodeData.forEach(n => {
+        totalInRange = n.total_films_in_range; // same for all rows
+        cachedNodes[n.festival_name] = {
+          id: n.festival_name, name: n.festival_name,
+          film_count: n.film_count, event_type: n.event_type || 'festival',
+          first_year: n.first_year, last_year: n.last_year,
+          is_uk: isUK(n.festival_name),
+          country: n.country_name, country_code: n.country_code,
+          continent: n.country_code ? (CONTINENT_MAP[n.country_code] || 'Other / Unmapped') : 'Other / Unmapped',
+        };
+      });
+      durInfoEl.innerHTML = `<strong>${totalInRange}</strong> films in range · <strong>${cachedEdges.length}</strong> edges computed`;
+      durInfoEl.classList.remove('computing');
+    } catch(e) {
+      durInfoEl.innerHTML = 'Error loading data';
+      durInfoEl.classList.remove('computing');
+      console.error(e);
     }
-    focusFestival = name;
-    focusLabel.textContent = name;
-    focusLabel.classList.add('visible');
-    clearBtn.classList.add('visible');
-    treeEl.querySelectorAll('.tree-festival-item').forEach(el => {
-      el.classList.toggle('selected', el.dataset.festival === name);
+    isLoading = false;
+  }
+
+  // ── Build tree (one-time from all festivals) ──
+  let allFestivals;
+  try {
+    loadMsg.textContent = 'Loading festival list…';
+    const res = await supabaseQuery('festivals', 'select=festival_name,event_type,country_name,country_code,first_year,last_year&order=festival_name&limit=1000');
+    allFestivals = res.data;
+  } catch(e) {
+    loadMsg.textContent = 'Error loading festivals.';
+    console.error(e);
+    return;
+  }
+
+  const festMetaByName = {};
+  const hierarchy = {};
+  CONTINENT_ORDER.forEach(c => { hierarchy[c] = {}; });
+  allFestivals.forEach(f => {
+    const cont = f.country_code ? (CONTINENT_MAP[f.country_code] || 'Other / Unmapped') : 'Other / Unmapped';
+    const country = f.country_name || 'Unmapped';
+    if (!hierarchy[cont]) hierarchy[cont] = {};
+    if (!hierarchy[cont][country]) hierarchy[cont][country] = [];
+    hierarchy[cont][country].push(f.festival_name);
+    festMetaByName[f.festival_name] = {
+      id: f.festival_name, name: f.festival_name, event_type: f.event_type || 'festival',
+      first_year: f.first_year, last_year: f.last_year, is_uk: isUK(f.festival_name),
+      country: f.country_name, country_code: f.country_code,
+      continent: cont,
+    };
+  });
+  CONTINENT_ORDER.forEach(cont => {
+    if (!hierarchy[cont]) return;
+    const sorted = {};
+    Object.keys(hierarchy[cont]).sort().forEach(c => { sorted[c] = hierarchy[cont][c].sort(); });
+    hierarchy[cont] = sorted;
+  });
+
+  function buildTree() {
+    treeEl.innerHTML = '';
+    CONTINENT_ORDER.forEach(cont => {
+      const countries = hierarchy[cont];
+      if (!countries || Object.keys(countries).length === 0) return;
+      const total = Object.values(countries).reduce((s, a) => s + a.length, 0);
+      const contDiv = document.createElement('div'); contDiv.className = 'tree-continent';
+      const contHdr = document.createElement('div'); contHdr.className = 'tree-continent-header';
+      contHdr.innerHTML = `<span class="arrow">▶</span>${cont}<span class="count">${total}</span>`;
+      contDiv.appendChild(contHdr);
+      const cGroup = document.createElement('div'); cGroup.className = 'tree-country-group';
+      Object.entries(countries).forEach(([country, fests]) => {
+        const cHdr = document.createElement('div'); cHdr.className = 'tree-country-header';
+        cHdr.innerHTML = `<span class="arrow">▶</span>${country}<span class="count">${fests.length}</span>`;
+        const fDiv = document.createElement('div'); fDiv.className = 'tree-festivals';
+        fests.forEach(name => {
+          const item = document.createElement('div'); item.className = 'tree-festival-item';
+          item.textContent = name; item.title = name; item.dataset.festival = name;
+          item.onclick = () => selectFocusFestival(name);
+          fDiv.appendChild(item);
+        });
+        cHdr.onclick = e => { e.stopPropagation(); fDiv.classList.toggle('open'); cHdr.querySelector('.arrow').classList.toggle('open'); };
+        cGroup.appendChild(cHdr); cGroup.appendChild(fDiv);
+      });
+      contHdr.onclick = () => { cGroup.classList.toggle('open'); contHdr.querySelector('.arrow').classList.toggle('open'); };
+      contDiv.appendChild(cGroup); treeEl.appendChild(contDiv);
     });
-    render();
   }
+  buildTree();
 
+  // ── Focus festival ──
+  function selectFocusFestival(name) {
+    if (focusFestival === name) { clearFocus(); return; }
+    focusFestival = name;
+    focusLabelEl.textContent = name; focusLabelEl.classList.add('visible');
+    clearBtn.classList.add('visible');
+    treeEl.querySelectorAll('.tree-festival-item').forEach(el => el.classList.toggle('selected', el.dataset.festival === name));
+    renderGraph();
+  }
   function clearFocus() {
-    focusFestival = null;
-    focusLabel.classList.remove('visible');
-    clearBtn.classList.remove('visible');
+    focusFestival = null; focusLabelEl.classList.remove('visible'); clearBtn.classList.remove('visible');
     treeEl.querySelectorAll('.tree-festival-item').forEach(el => el.classList.remove('selected'));
-    render();
+    renderGraph();
   }
-
   clearBtn.onclick = clearFocus;
-
-  // ── Focus mode toggle ──
   document.querySelectorAll('#focus-mode-toggle button').forEach(btn => {
     btn.onclick = () => {
       document.querySelectorAll('#focus-mode-toggle button').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      focusMode = btn.dataset.mode;
-      if (focusFestival) render();
+      btn.classList.add('active'); focusMode = btn.dataset.mode;
+      if (focusFestival) renderGraph();
     };
   });
 
-  // ── Graph rendering ──
+  // ── Duration controls ──
+  document.querySelectorAll('.dur-preset').forEach(btn => {
+    btn.onclick = () => {
+      document.querySelectorAll('.dur-preset').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      durMin = parseInt(btn.dataset.min); durMax = parseInt(btn.dataset.max);
+      durMinInput.value = durMin; durMaxInput.value = durMax;
+      reloadAndRender();
+    };
+  });
+
+  let durDebounce = null;
+  function onDurInput() {
+    clearTimeout(durDebounce);
+    durDebounce = setTimeout(() => {
+      const newMin = Math.max(0, parseInt(durMinInput.value) || 0);
+      const newMax = Math.min(45, parseInt(durMaxInput.value) || 45);
+      if (newMin === durMin && newMax === durMax) return;
+      durMin = newMin; durMax = Math.max(durMin, newMax);
+      durMaxInput.value = durMax;
+      // Update preset highlighting
+      document.querySelectorAll('.dur-preset').forEach(b => {
+        b.classList.toggle('active', parseInt(b.dataset.min) === durMin && parseInt(b.dataset.max) === durMax);
+      });
+      reloadAndRender();
+    }, 600);
+  }
+  durMinInput.addEventListener('input', onDurInput);
+  durMaxInput.addEventListener('input', onDurInput);
+
+  async function reloadAndRender() {
+    await loadNetworkData();
+    renderGraph();
+  }
+
+  // ── Graph ──
   const graphContainer = document.getElementById('graph-container');
   const svgEl = d3.select(graphContainer).append('svg');
   const g = svgEl.append('g');
-  const zoom = d3.zoom().scaleExtent([0.1, 8]).on('zoom', e => g.attr('transform', e.transform));
-  svgEl.call(zoom);
+  svgEl.call(d3.zoom().scaleExtent([0.1, 8]).on('zoom', e => g.attr('transform', e.transform)));
 
-  function render() {
+  function renderGraph() {
+    if (!cachedEdges || !cachedNodes) return;
     if (currentSim) currentSim.stop();
     g.selectAll('*').remove();
 
@@ -423,10 +477,10 @@
     const height = graphContainer.clientHeight;
     svgEl.attr('width', width).attr('height', height);
 
-    // Filter edges by min shared
-    let filteredEdges = edges.filter(e => e.shared_film_count >= minShared);
+    // Filter by min shared
+    let filteredEdges = cachedEdges.filter(e => e.shared_film_count >= minShared);
 
-    // If focus festival in ego mode, filter to only connected edges
+    // Focus
     let focusConnected = null;
     if (focusFestival && focusMode === 'ego') {
       filteredEdges = filteredEdges.filter(e => e.festival_a === focusFestival || e.festival_b === focusFestival);
@@ -441,143 +495,116 @@
       });
     }
 
-    const connectedNames = new Set();
-    filteredEdges.forEach(e => { connectedNames.add(e.festival_a); connectedNames.add(e.festival_b); });
-    const nodes = [...connectedNames].map(n => nodeMap[n] || {
-      id: n, name: n, film_count: 1, event_type: 'festival', is_uk: isUK(n),
-      country: null, country_code: null, continent: 'Other / Unmapped'
-    }).map(n => ({...n}));
-    const links = filteredEdges.map(e => ({
-      source: e.festival_a, target: e.festival_b,
-      shared_films: e.shared_film_count, titles: e.shared_film_titles || []
-    }));
+    const connNames = new Set();
+    filteredEdges.forEach(e => { connNames.add(e.festival_a); connNames.add(e.festival_b); });
+    const nodes = [...connNames].map(n => {
+      const base = cachedNodes[n] || festMetaByName[n] || { id: n, name: n, film_count: 1, event_type: 'festival', is_uk: isUK(n), country: null, continent: 'Other / Unmapped' };
+      return { ...base, id: n, name: n, film_count: base.film_count || 1 };
+    });
+    const links = filteredEdges.map(e => ({ source: e.festival_a, target: e.festival_b, shared_films: e.shared_film_count, titles: e.shared_film_titles || [] }));
 
-    const focusLabel2 = focusFestival
-      ? `${nodes.length} festivals · ${focusMode === 'ego' ? 'Ego network' : 'Highlight'}: ${focusFestival.length > 30 ? focusFestival.substring(0,28) + '…' : focusFestival}`
+    document.getElementById('subtitle').textContent = focusFestival
+      ? `${nodes.length} festivals · ${focusMode === 'ego' ? 'Ego' : 'Highlight'}: ${focusFestival.length > 28 ? focusFestival.substring(0,26)+'…' : focusFestival}`
       : `${nodes.length} festivals · ${minShared}+ shared films`;
-    document.getElementById('subtitle').textContent = focusLabel2;
 
-    if (nodes.length === 0) { loading.classList.add('hidden'); return; }
+    if (nodes.length === 0) return;
 
     const maxFilms = d3.max(nodes, d => d.film_count) || 1;
     const nodeScale = d3.scaleSqrt().domain([1, maxFilms]).range([3, 28]);
     const maxShared = d3.max(links, d => d.shared_films) || 1;
     const edgeScale = d3.scaleLinear().domain([minShared, maxShared]).range([0.5, 4]);
 
-    const simulation = d3.forceSimulation(nodes)
-      .force('link', d3.forceLink(links).id(d => d.id)
-        .distance(d => 120 / Math.sqrt(d.shared_films))
-        .strength(d => Math.min(d.shared_films / 15, 0.7)))
+    const sim = d3.forceSimulation(nodes)
+      .force('link', d3.forceLink(links).id(d => d.id).distance(d => 120 / Math.sqrt(d.shared_films)).strength(d => Math.min(d.shared_films / 15, 0.7)))
       .force('charge', d3.forceManyBody().strength(d => -nodeScale(d.film_count) * 8))
       .force('center', d3.forceCenter(width / 2, height / 2))
       .force('collision', d3.forceCollide(d => nodeScale(d.film_count) + 2));
-    currentSim = simulation;
+    currentSim = sim;
 
-    function getNodeColor(d) {
+    function nColor(d) {
       if (focusFestival && d.id === focusFestival) return 'var(--focus-color)';
       if (searchTerm && d.name.toLowerCase().includes(searchTerm.toLowerCase())) return 'var(--highlight)';
       return d.is_uk ? 'var(--uk-blue)' : 'var(--eu-blue)';
     }
-
-    function getNodeOpacity(d) {
+    function nOpacity(d) {
       if (!focusFestival || focusMode === 'ego') return 0.85;
-      // Highlight mode
-      if (d.id === focusFestival || focusConnected.has(d.id)) return 1;
-      return 0.1;
+      return (d.id === focusFestival || focusConnected.has(d.id)) ? 1 : 0.1;
     }
-
-    function getEdgeStroke(e) {
+    function eStroke(e) {
       if (!focusFestival || focusMode === 'ego') return 'var(--edge-default)';
-      const sid = typeof e.source === 'object' ? e.source.id : e.source;
-      const tid = typeof e.target === 'object' ? e.target.id : e.target;
-      return (sid === focusFestival || tid === focusFestival) ? 'var(--edge-hover)' : 'var(--edge-default)';
+      const s = typeof e.source === 'object' ? e.source.id : e.source;
+      const t = typeof e.target === 'object' ? e.target.id : e.target;
+      return (s === focusFestival || t === focusFestival) ? 'var(--edge-hover)' : 'var(--edge-default)';
     }
-
-    function getEdgeOpacity(e) {
+    function eOpacity(e) {
       if (!focusFestival || focusMode === 'ego') return 1;
-      const sid = typeof e.source === 'object' ? e.source.id : e.source;
-      const tid = typeof e.target === 'object' ? e.target.id : e.target;
-      return (sid === focusFestival || tid === focusFestival) ? 1 : 0.05;
+      const s = typeof e.source === 'object' ? e.source.id : e.source;
+      const t = typeof e.target === 'object' ? e.target.id : e.target;
+      return (s === focusFestival || t === focusFestival) ? 1 : 0.05;
     }
 
     const linkEls = g.append('g').selectAll('line').data(links).join('line')
-      .attr('stroke', getEdgeStroke)
-      .attr('stroke-width', d => edgeScale(d.shared_films))
-      .attr('opacity', getEdgeOpacity);
+      .attr('stroke', eStroke).attr('stroke-width', d => edgeScale(d.shared_films)).attr('opacity', eOpacity);
 
     const nodeEls = g.append('g').selectAll('circle').data(nodes).join('circle')
-      .attr('r', d => nodeScale(d.film_count))
-      .attr('fill', getNodeColor)
-      .attr('stroke', d => d.id === focusFestival ? '#fff' : '#fff')
-      .attr('stroke-width', d => d.id === focusFestival ? 2.5 : 1.5)
-      .attr('opacity', getNodeOpacity)
-      .style('cursor', 'pointer')
+      .attr('r', d => nodeScale(d.film_count)).attr('fill', nColor)
+      .attr('stroke', '#fff').attr('stroke-width', d => d.id === focusFestival ? 2.5 : 1.5)
+      .attr('opacity', nOpacity).style('cursor', 'pointer')
       .call(d3.drag()
-        .on('start', (ev, d) => { if (!ev.active) simulation.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+        .on('start', (ev, d) => { if (!ev.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
         .on('drag', (ev, d) => { d.fx = ev.x; d.fy = ev.y; })
-        .on('end', (ev, d) => { if (!ev.active) simulation.alphaTarget(0); d.fx = null; d.fy = null; })
+        .on('end', (ev, d) => { if (!ev.active) sim.alphaTarget(0); d.fx = null; d.fy = null; })
       );
 
-    const labelThreshold = focusFestival && focusMode === 'ego' ? 1 : 20;
-    const labelNodes = nodes.filter(d => {
-      if (d.id === focusFestival) return true;
-      if (focusFestival && focusMode === 'ego') return d.film_count >= 5;
-      return d.film_count >= labelThreshold;
-    });
-
-    const labelEls = g.append('g').selectAll('text').data(labelNodes).join('text')
-      .text(d => d.name.length > 30 ? d.name.substring(0, 28) + '…' : d.name)
+    const lblThreshold = focusFestival && focusMode === 'ego' ? 5 : 20;
+    const lblNodes = nodes.filter(d => d.id === focusFestival || d.film_count >= lblThreshold);
+    const labelEls = g.append('g').selectAll('text').data(lblNodes).join('text')
+      .text(d => d.name.length > 30 ? d.name.substring(0,28)+'…' : d.name)
       .attr('font-size', d => d.id === focusFestival ? '11px' : '9px')
       .attr('font-family', 'DM Sans, sans-serif')
       .attr('font-weight', d => d.id === focusFestival ? '700' : '500')
       .attr('fill', d => d.id === focusFestival ? 'var(--focus-color)' : 'var(--text-secondary)')
-      .attr('text-anchor', 'middle')
-      .attr('dy', d => nodeScale(d.film_count) + 12)
+      .attr('text-anchor', 'middle').attr('dy', d => nodeScale(d.film_count) + 12)
       .attr('pointer-events', 'none')
       .attr('opacity', d => {
         if (!focusFestival || focusMode === 'ego') return 1;
         return (d.id === focusFestival || focusConnected.has(d.id)) ? 1 : 0.1;
       });
 
-    // Hover interactions
+    // Hover
     nodeEls.on('mouseenter', function(ev, d) {
-      // Only do hover-dim if not in focus highlight mode
       if (!focusFestival || focusMode === 'ego') {
-        const connected = new Set();
+        const conn = new Set();
         links.forEach(e => {
-          const sid = typeof e.source === 'object' ? e.source.id : e.source;
-          const tid = typeof e.target === 'object' ? e.target.id : e.target;
-          if (sid === d.id) connected.add(tid);
-          if (tid === d.id) connected.add(sid);
+          const s = typeof e.source === 'object' ? e.source.id : e.source;
+          const t = typeof e.target === 'object' ? e.target.id : e.target;
+          if (s === d.id) conn.add(t); if (t === d.id) conn.add(s);
         });
-        nodeEls.attr('opacity', n => n.id === d.id || connected.has(n.id) ? 1 : 0.12);
+        nodeEls.attr('opacity', n => n.id === d.id || conn.has(n.id) ? 1 : 0.12);
         linkEls.attr('stroke', e => {
-          const sid = typeof e.source === 'object' ? e.source.id : e.source;
-          const tid = typeof e.target === 'object' ? e.target.id : e.target;
-          return (sid === d.id || tid === d.id) ? 'var(--edge-hover)' : 'var(--edge-default)';
+          const s = typeof e.source === 'object' ? e.source.id : e.source;
+          const t = typeof e.target === 'object' ? e.target.id : e.target;
+          return (s === d.id || t === d.id) ? 'var(--edge-hover)' : 'var(--edge-default)';
         }).attr('opacity', e => {
-          const sid = typeof e.source === 'object' ? e.source.id : e.source;
-          const tid = typeof e.target === 'object' ? e.target.id : e.target;
-          return (sid === d.id || tid === d.id) ? 1 : 0.15;
+          const s = typeof e.source === 'object' ? e.source.id : e.source;
+          const t = typeof e.target === 'object' ? e.target.id : e.target;
+          return (s === d.id || t === d.id) ? 1 : 0.15;
         });
-        labelEls.attr('opacity', n => n.id === d.id || connected.has(n.id) ? 1 : 0.12);
+        labelEls.attr('opacity', n => n.id === d.id || conn.has(n.id) ? 1 : 0.12);
       }
-
-      // Tooltip
       const connEdges = links.filter(e => {
-        const sid = typeof e.source === 'object' ? e.source.id : e.source;
-        const tid = typeof e.target === 'object' ? e.target.id : e.target;
-        return sid === d.id || tid === d.id;
+        const s = typeof e.source === 'object' ? e.source.id : e.source;
+        const t = typeof e.target === 'object' ? e.target.id : e.target;
+        return s === d.id || t === d.id;
       }).sort((a, b) => b.shared_films - a.shared_films);
       const top5 = connEdges.slice(0, 5).map(e => {
-        const sid = typeof e.source === 'object' ? e.source.id : e.source;
-        const other = sid === d.id ? (typeof e.target === 'object' ? e.target.id : e.target) : sid;
+        const s = typeof e.source === 'object' ? e.source.id : e.source;
+        const other = s === d.id ? (typeof e.target === 'object' ? e.target.id : e.target) : s;
         return `${other} (${e.shared_films})`;
       });
-      const loc = d.country ? `${d.country}` : 'Unmapped';
       tooltip.innerHTML = `<h3>${d.name}</h3>
-        <div class="stat"><span>Location</span><strong>${loc}</strong></div>
-        <div class="stat"><span>Films programmed</span><strong>${d.film_count}</strong></div>
+        <div class="stat"><span>Location</span><strong>${d.country || 'Unmapped'}</strong></div>
+        <div class="stat"><span>Films (in range)</span><strong>${d.film_count}</strong></div>
         <div class="stat"><span>Connections</span><strong>${connEdges.length}</strong></div>
         <div class="stat"><span>Type</span><strong>${d.event_type}</strong></div>
         <div class="stat"><span>Active</span><strong>${d.first_year || '?'}–${d.last_year || '?'}</strong></div>
@@ -585,75 +612,59 @@
       tooltip.classList.add('active');
     })
     .on('mousemove', ev => {
-      const x = ev.clientX + 16;
-      const maxX = window.innerWidth - 320; // account for filters panel
-      tooltip.style.left = (x + 280 > maxX ? x - 300 : x) + 'px';
+      tooltip.style.left = Math.min(ev.clientX + 16, window.innerWidth - 600) + 'px';
       tooltip.style.top = Math.min(ev.clientY - 10, window.innerHeight - 200) + 'px';
     })
     .on('mouseleave', () => {
       if (!focusFestival || focusMode === 'ego') {
-        nodeEls.attr('opacity', 0.85);
-        linkEls.attr('stroke', 'var(--edge-default)').attr('opacity', 1);
-        labelEls.attr('opacity', 1);
+        nodeEls.attr('opacity', 0.85); linkEls.attr('stroke', 'var(--edge-default)').attr('opacity', 1); labelEls.attr('opacity', 1);
       } else {
-        nodeEls.attr('opacity', getNodeOpacity);
-        linkEls.attr('stroke', getEdgeStroke).attr('opacity', getEdgeOpacity);
+        nodeEls.attr('opacity', nOpacity); linkEls.attr('stroke', eStroke).attr('opacity', eOpacity);
         labelEls.attr('opacity', d => (d.id === focusFestival || focusConnected.has(d.id)) ? 1 : 0.1);
       }
       tooltip.classList.remove('active');
     });
 
-    // Double-click to focus
-    nodeEls.on('dblclick', (ev, d) => {
-      ev.stopPropagation();
-      selectFocusFestival(d.id);
-    });
+    nodeEls.on('dblclick', (ev, d) => { ev.stopPropagation(); selectFocusFestival(d.id); });
 
-    // Search highlighting
-    function applySearch() {
-      if (!searchTerm || focusFestival) return;
+    if (searchTerm && !focusFestival) {
       const t = searchTerm.toLowerCase();
-      nodeEls.attr('fill', d => d.name.toLowerCase().includes(t) ? 'var(--highlight)' : getNodeColor(d))
+      nodeEls.attr('fill', d => d.name.toLowerCase().includes(t) ? 'var(--highlight)' : nColor(d))
         .attr('opacity', d => d.name.toLowerCase().includes(t) ? 1 : 0.25);
       labelEls.attr('opacity', d => d.name.toLowerCase().includes(t) ? 1 : 0.15);
     }
-    if (searchTerm && !focusFestival) applySearch();
 
-    simulation.on('tick', () => {
-      linkEls.attr('x1', d => d.source.x).attr('y1', d => d.source.y)
-        .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+    sim.on('tick', () => {
+      linkEls.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y);
       nodeEls.attr('cx', d => d.x).attr('cy', d => d.y);
       labelEls.attr('x', d => d.x).attr('y', d => d.y);
     });
   }
 
-  // ── Event bindings ──
-  minSlider.oninput = () => {
-    minShared = +minSlider.value;
-    minValEl.textContent = minShared;
-    render();
-  };
+  // ── Bindings ──
+  minSlider.oninput = () => { minShared = +minSlider.value; minValEl.textContent = minShared; renderGraph(); };
 
   searchInput.oninput = () => {
     searchTerm = searchInput.value;
-    // Don't re-render full graph, just update colors if no focus
     if (!focusFestival) {
-      const svgNodes = g.selectAll('circle');
-      const svgLabels = g.selectAll('text');
+      const nodes = g.selectAll('circle'); const labels = g.selectAll('text');
       if (searchTerm) {
         const t = searchTerm.toLowerCase();
-        svgNodes.attr('fill', d => d.name.toLowerCase().includes(t) ? 'var(--highlight)' : (d.is_uk ? 'var(--uk-blue)' : 'var(--eu-blue)'))
+        nodes.attr('fill', d => d.name.toLowerCase().includes(t) ? 'var(--highlight)' : (d.is_uk ? 'var(--uk-blue)' : 'var(--eu-blue)'))
           .attr('opacity', d => d.name.toLowerCase().includes(t) ? 1 : 0.25);
-        svgLabels.attr('opacity', d => d.name.toLowerCase().includes(t) ? 1 : 0.15);
+        labels.attr('opacity', d => d.name.toLowerCase().includes(t) ? 1 : 0.15);
       } else {
-        svgNodes.attr('fill', d => d.is_uk ? 'var(--uk-blue)' : 'var(--eu-blue)').attr('opacity', 0.85);
-        svgLabels.attr('opacity', 1);
+        nodes.attr('fill', d => d.is_uk ? 'var(--uk-blue)' : 'var(--eu-blue)').attr('opacity', 0.85);
+        labels.attr('opacity', 1);
       }
     }
   };
 
-  render();
-  setTimeout(() => loading.classList.add('hidden'), 800);
+  // ── Initial load ──
+  loadMsg.textContent = 'Computing network edges…';
+  await loadNetworkData();
+  renderGraph();
+  setTimeout(() => loading.classList.add('hidden'), 600);
 })();
 </script>
 </body>
